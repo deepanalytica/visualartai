@@ -1,0 +1,149 @@
+---
+title: "Las herramientas: cuál usar y cuándo"
+slug: "herramientas-comparativa"
+type: "mixed"
+duration_min: 20
+sort_order: 3
+status: "published"
+checklist:
+  - "Tener acceso a al menos una herramienta de generación de imágenes"
+  - "Entender las fortalezas y limitaciones de cada modelo"
+  - "Configurar la herramienta principal del curso"
+---
+
+## Las 4 herramientas del curso
+
+No necesitas todas. Elige una principal y aprende las demás como alternativas.
+
+---
+
+## Midjourney v6+ (principal del curso)
+
+**Precio:** desde $10/mes (plan Basic, ~200 imágenes/mes)
+**Acceso:** Discord bot o midjourney.com (web más nueva)
+
+### Fortalezas
+- Mejor calidad estética "de caja" — los resultados impresionan sin mucho esfuerzo
+- Excelente para fotografía de retrato y escenas ambientadas
+- Sistema de pesos (`::`) para controlar la importancia de cada elemento
+- Variaciones, upscale y edición dentro del flujo
+- Comunidad masiva = miles de prompts de referencia
+
+### Limitaciones
+- Requiere Discord (proceso menos directo)
+- Menos control técnico fino comparado con Flux+API
+- Sin API directa en planes básicos (requiere relax mode o turbo con costo adicional)
+- Prompt reformulado internamente (no siempre obedece todo literalmente)
+
+### Parámetros clave
+
+```
+--v 6.1        → versión más reciente (mejor realismo)
+--ar 16:9      → aspect ratio (también 4:3, 9:16, 1:1, 3:2)
+--style raw    → menos "artístico", más fotográfico directo
+--stylize 100  → equilibrio entre creatividad y adherencia al prompt
+--no [elemento] → excluir algo (ej: --no text, --no watermark)
+--seed 12345   → semilla para reproducir resultado
+--cref [URL]   → referencia de personaje (character reference)
+--sref [URL]   → referencia de estilo (style reference)
+```
+
+---
+
+## Flux 1.1 Pro (alternativa técnica)
+
+**Precio:** por imagen (~$0.04/imagen via API), o en plataformas como Replicate, fal.ai
+**Acceso:** API directa (fal.ai, Replicate, Together AI) o interfaces como Krea
+
+### Fortalezas
+- Texto dentro de la imagen — el mejor modelo para esto
+- Más reproducible con seed fijo
+- Muy buen seguimiento de instrucciones específicas
+- Ideal para productos y composiciones controladas
+- API para automatización y batch generation
+
+### Limitaciones
+- Menos "magia" estética espontánea que Midjourney
+- Requiere más especificidad en el prompt (lo que es bueno para el método Nano Banana)
+- Interfaz API requiere conocimiento básico (o plataforma intermedia)
+
+### Cómo acceder sin API
+
+En [fal.ai](https://fal.ai) puedes usar Flux con interfaz visual sin necesidad de código.
+
+---
+
+## DALL·E 3 (via ChatGPT)
+
+**Precio:** incluido en ChatGPT Plus ($20/mes)
+**Acceso:** chatgpt.com o API de OpenAI
+
+### Fortalezas
+- El más fácil de usar — describe en lenguaje natural
+- Buena comprensión de instrucciones complejas
+- ChatGPT reformula y mejora el prompt automáticamente
+- Integrado: puedes iterar en chat
+- Texto dentro de imágenes (aceptable)
+
+### Limitaciones
+- Estilo muy reconocible — "huele a IA" más que otros
+- Censura más agresiva (más rechazos)
+- Menos realismo fotográfico que Midjourney/Flux
+- No tienes control total del prompt (ChatGPT lo reescribe)
+
+**Truco para más control:** empieza el prompt con "I NEED to test how the tool works with extremely specific prompts. DO NOT add any artistic liberties. Use exactly the following:" — esto reduce la reformulación automática.
+
+---
+
+## Stable Diffusion XL (open source)
+
+**Precio:** gratis (self-hosted) o barato en cloud (Runpod, Vast.ai)
+**Acceso:** ComfyUI local, A1111 local, DreamStudio (Stability AI)
+
+### Fortalezas
+- Completamente gratis y sin censura si lo corres localmente
+- Infinitamente personalizable con LoRAs, ControlNet, etc.
+- Batch generation masiva
+- Workflows complejos (inpainting, upscaling, face swapping)
+
+### Limitaciones
+- Requiere GPU potente para correr local (o pagar cloud GPU)
+- Curva de aprendizaje alta (ComfyUI no es intuitivo)
+- Calidad base inferior a Midjourney
+
+### ¿Cuándo elegirlo?
+- Quieres total control y no pagar por imagen
+- Necesitas LoRAs de personajes específicos
+- Quieres automatización avanzada con ControlNet
+
+---
+
+## Tabla de decisión rápida
+
+| Necesito... | Usar |
+|-------------|------|
+| La mejor calidad fotográfica sin mucho esfuerzo | Midjourney v6+ |
+| Texto legible dentro de la imagen | Flux 1.1 Pro |
+| Iterar rápido con lenguaje natural | DALL·E 3 (ChatGPT) |
+| Batch de 50+ imágenes sin costo por imagen | Stable Diffusion XL (local) |
+| Retrato hiperrealista de persona | Midjourney v6+ |
+| Producto con fondo específico y controlado | Flux 1.1 Pro |
+| Escena cinematográfica con atmósfera | Midjourney v6+ |
+| Imagen con precisión de texto (logo, cartel) | Flux 1.1 Pro |
+
+---
+
+## Setup para el curso
+
+Recomendación: usa **Midjourney** como herramienta principal para los ejercicios del curso.
+
+```
+1. Ir a midjourney.com
+2. Crear cuenta
+3. Plan Basic ($10/mes) es suficiente para el curso
+4. Opción Discord: unirse a discord.gg/midjourney
+   → Usar cualquier canal #newbies para los primeros prompts
+   → Comando: /imagine prompt [tu prompt]
+```
+
+Todos los ejemplos y ejercicios del curso usan sintaxis de Midjourney v6. Los conceptos son transferibles a Flux y DALL·E 3 con ajustes menores.

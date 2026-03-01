@@ -1,0 +1,168 @@
+---
+title: "Skills y MCP servers: Claude conectado a todo"
+slug: "skills-mcp-servers-desarrollo"
+type: "mixed"
+duration_min: 35
+sort_order: 2
+status: "published"
+checklist:
+  - "Entender qué son los MCP servers y cuándo usarlos"
+  - "Instalar y configurar el MCP de Supabase"
+  - "Instalar y configurar el MCP de Vercel"
+  - "Instalar y configurar el MCP de GitHub"
+  - "Crear tu primera skill de Claude Code"
+---
+
+## Qué son los MCP servers
+
+MCP (Model Context Protocol) es el protocolo de Anthropic que permite a Claude conectarse directamente a herramientas externas. En lugar de copiar y pegar información entre herramientas, Claude puede:
+
+- **Leer y escribir en Notion** directamente durante la sesión
+- **Consultar el estado de Supabase** sin salir del editor
+- **Ver deployments de Vercel** y sus logs
+- **Revisar PRs y issues de GitHub** mientras codifica
+- **Ejecutar queries a la DB** para verificar datos
+
+La diferencia práctica: en lugar de "Claude, los datos de la tabla son los siguientes..." simplemente le dices "consulta la tabla projects en mi Supabase" y lo hace.
+
+---
+
+## Configuración de MCPs en Claude Code
+
+Los MCPs se configuran en `~/.claude/settings.json` (global) o `.claude/settings.json` (por proyecto).
+
+```json
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server-supabase@latest", "--access-token", "YOUR_TOKEN"],
+      "env": {}
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_xxx"
+      }
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/mcp"],
+      "env": {
+        "NOTION_API_KEY": "secret_xxx"
+      }
+    }
+  }
+}
+```
+
+---
+
+## MCP de Supabase: lo que puedes hacer
+
+Con el MCP de Supabase conectado, Claude puede:
+
+```
+# Lo que puedes pedirle directamente
+"Lista todas las tablas de mi proyecto Supabase"
+"Muéstrame el schema de la tabla projects"
+"Crea una nueva tabla para guardar comentarios con RLS"
+"Aplica esta migración al proyecto de staging"
+"¿Cuántos usuarios se registraron esta semana?"
+```
+
+**Cómo obtener el token:**
+1. Supabase Dashboard → Account → Access Tokens
+2. Crear un nuevo token con los permisos necesarios
+3. Pegar en la configuración del MCP
+
+---
+
+## MCP de Notion: tu gestor de proyecto conectado
+
+El MCP de Notion es especialmente potente para el workflow de desarrollo porque conecta las tareas y la documentación directamente con el código.
+
+```
+# Casos de uso prácticos
+"Revisa las tareas pendientes de hoy en mi Notion"
+"Marca como completada la tarea 'Implementar login'"
+"Busca en mi base de conocimiento de Notion cómo manejamos los pagos"
+"Crea una nueva tarea para el bug que acabamos de encontrar"
+"Actualiza la documentación de la API en Notion con los nuevos endpoints"
+```
+
+**Cómo obtener la API key:**
+1. [notion.so/my-integrations](https://www.notion.so/my-integrations)
+2. Crear una nueva integración
+3. Darle acceso a las páginas/bases de datos necesarias
+4. Copiar el "Internal Integration Token"
+
+**Configurar acceso a páginas específicas:**
+En cada página de Notion que Claude debe poder leer/escribir → tres puntos → Connections → agregar tu integración.
+
+---
+
+## MCP de Vercel: deployments sin salir del editor
+
+```
+# Lo que puedes pedirle
+"¿Cuál es el estado del último deployment?"
+"Muéstrame los logs del deployment que falló"
+"¿Qué variables de entorno están configuradas en producción?"
+"Lista los últimos 10 deployments del proyecto X"
+```
+
+---
+
+## Skills de Claude Code
+
+Las Skills son scripts reutilizables que Claude puede ejecutar con un comando. Viven en `.claude/commands/` de tu proyecto.
+
+**Ejemplo: skill para ejecutar migraciones**
+
+```markdown
+<!-- .claude/commands/migrate.md -->
+Ejecuta el siguiente proceso de migración:
+
+1. Verifica que no hay cambios sin commitear en src/db/schema.ts
+2. Ejecuta: npx drizzle-kit generate
+3. Revisa el archivo de migración generado y confirma que tiene sentido
+4. Ejecuta: npx drizzle-kit push
+5. Verifica que la migración se aplicó correctamente con una query simple
+6. Si hay errores, reviértelos y reporta qué salió mal
+```
+
+**Ejemplo: skill para code review antes de commit**
+
+```markdown
+<!-- .claude/commands/review.md -->
+Haz un code review de los cambios actuales (git diff):
+
+1. Lee todos los archivos modificados
+2. Verifica:
+   - No hay 'any' en TypeScript
+   - Las API routes retornan el formato correcto { data } | { error }
+   - Los Server Components no importan código de 'use client'
+   - No hay console.log sin comentario de intención
+   - Los inputs de usuario están validados con Zod
+3. Lista los problemas encontrados con el archivo y la línea
+4. Sugiere las correcciones específicas
+```
+
+Usar la skill: `claude review` o `claude migrate` desde la terminal.
+
+---
+
+## Las Skills más útiles para el workflow de desarrollo
+
+| Skill | Qué hace |
+|-------|----------|
+| `review` | Code review antes de commit |
+| `migrate` | Generar y aplicar migraciones de DB |
+| `test` | Generar tests para el último cambio |
+| `docs` | Actualizar CLAUDE.md con los cambios del día |
+| `debug` | Analizar logs y errores del último deployment |
+| `seed` | Llenar la DB con datos de prueba |
+
+En la siguiente lección construimos el MCP de Notion con el caso de uso completo.

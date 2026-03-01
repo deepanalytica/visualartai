@@ -1,0 +1,195 @@
+---
+title: "El estilo cinematográfico: fotografía que parece película"
+slug: "estilo-cinematografico-profundo"
+type: "mixed"
+duration_min: 22
+sort_order: 3
+status: "published"
+checklist:
+  - "Dominar el vocabulario técnico del cine aplicado a prompts"
+  - "Referenciar directores de fotografía para activar estilos específicos"
+  - "Crear escenas con narrativa implícita"
+---
+
+## Por qué el estilo cinematográfico funciona tan bien
+
+Las películas tienen décadas de datos en el training de los modelos: frames, análisis, debates de cinematografía. Cuando referencias un director o película específica, activas un vocabulario visual muy rico y coherente.
+
+"Blade Runner color grading" es más preciso que "neon city at night" — activa exactamente el look de Roger Deakins: teal dominante, naranja y rojo de neón como acentos, profundidad de campo media, humo y vapor.
+
+---
+
+## Los directores de fotografía como referentes
+
+Cada cinematógrafo tiene un estilo reconocible. Usarlos como referencia activa ese estilo:
+
+### Roger Deakins (Blade Runner 2049, Sicario, 1917)
+```
+Roger Deakins style, desaturated tones, controlled lighting,
+motivating practical sources, depth in compositions,
+natural color palette with occasional dramatic accent
+
+// Para películas específicas:
+Blade Runner 2049 aesthetic → neon dark city, teal and orange, rain and fog
+Sicario style → harsh desert light, tactical feel, documentary edge
+1917 look → overcast natural light, war aesthetics, documentary realism
+```
+
+### Emmanuel Lubezki "Chivo" (Gravity, The Revenant, Birdman)
+```
+Emmanuel Lubezki cinematography, natural light extreme,
+long takes aesthetic, available light only, handheld intimacy,
+organic and raw, nature cinematography
+The Revenant look → cold blue wilderness, overcast natural light, breath visible
+```
+
+### Hoyte van Hoytema (Interstellar, Dunkirk, Oppenheimer)
+```
+Hoyte van Hoytema style, IMAX format composition,
+natural and practical light, epic scale with intimate emotion,
+Interstellar look → warm amber and cold blue, vast space, loneliness
+Oppenheimer style → stark black and white, dramatic contrast, historic weight
+```
+
+### Christopher Doyle (In the Mood for Love, Hero, 2046)
+```
+Christopher Doyle cinematography, Wong Kar-wai aesthetic,
+rich saturated colors, slow motion implication,
+deep reds and greens, intimate romance, Hong Kong nights
+```
+
+---
+
+## El vocabulario técnico de cine en prompts
+
+### Lentes anamórficos
+
+Los lentes anamórficos son los que dan el look "de Hollywood":
+- Bokeh horizontal (oval, no circular)
+- Lens flares horizontales (streaks de luz)
+- Ligera distorsión de barril
+- "Squeezing" vertical
+
+```
+anamorphic lens flare, oval bokeh, anamorphic cinematography,
+horizontal lens streaks, anamorphic format, 2.39:1 aspect ratio
+```
+
+### Color science de cámaras de cine
+
+```
+ARRI Alexa color science   → "ARRI Alexa skin tones, organic colors"
+RED Digital Cinema          → "RED camera footage, high dynamic range"
+Panavision Millennium XL2  → "Panavision aesthetic, classic Hollywood"
+Sony Venice 2              → "Sony Venice color, film-like rendering"
+```
+
+### Relación de aspecto
+
+El aspect ratio comunica inmediatamente el formato cinematográfico:
+
+```
+--ar 16:9    → TV / streaming estándar
+--ar 2.39:1  → CinemaScope, formato anamórfico (21:9 en Midjourney)
+--ar 1.85:1  → Flat format americano (muy cercano a 16:9)
+--ar 4:3     → Old Hollywood, formato cuadrado clásico
+--ar 1:1     → Square format, Rooney Mara era
+```
+
+---
+
+## Géneros cinematográficos como estilos
+
+### Film Noir
+```
+film noir aesthetic, 1940s Hollywood, heavy shadows and highlights,
+venetian blind shadow patterns, femme fatale atmosphere,
+black and white with deep contrast, single overhead lamp,
+smoke-filled room, rain on windows
+```
+
+### Neo-Noir moderno
+```
+neo-noir cinematography, modern dark city, neon reflections on wet street,
+crime drama atmosphere, desaturated with vivid accents,
+Blade Runner meets Drive
+```
+
+### Thriller europeo
+```
+European thriller cinematography, muted color palette,
+cold institutional lighting, modern paranoia aesthetic,
+Michael Haneke style, clinical distance
+```
+
+### Drama íntimo (Sundance aesthetic)
+```
+indie drama cinematography, natural available light,
+handheld camera work, authentic locations,
+A24 film aesthetic, intimate character study,
+warm practical lights, lived-in spaces
+```
+
+### Ciencia ficción dystópica
+```
+dystopian sci-fi cinematography, cold desaturated palette,
+industrial spaces, harsh institutional lighting,
+Blade Runner-influenced, technological isolation
+```
+
+---
+
+## La escena con narrativa implícita
+
+Las mejores imágenes cinematográficas cuentan una historia sin necesitar texto. Tienen **narrativa implícita**: algo sucedió antes, algo va a suceder después, o algo está sucediendo que no se puede ver.
+
+Técnicas para crear narrativa implícita:
+
+### El momento "entre"
+```
+person standing still, clearly having just stopped mid-movement,
+a split second after something happened,
+expressive face mid-reaction, one eyebrow slightly raised
+```
+
+### El detalle que habla
+```
+single candle burning low, half-empty wine glass,
+abandoned book face-down, cold cup of coffee forgotten
+```
+
+### El personaje en el umbral
+```
+figure standing in doorway, neither fully inside nor outside,
+decision moment, threshold symbolism, dramatic backlighting
+```
+
+### La espera
+```
+person waiting, checking phone, slight impatience,
+clock on wall barely visible, empty table across from them
+```
+
+---
+
+## Prompt cinematográfico completo de ejemplo
+
+```
+[L1] solitary figure, gender neutral, dark coat, hood up,
+face partially obscured, only eyes visible, tense posture
+
+[L2] empty rain-soaked elevated train platform at 3am,
+industrial city visible below, few distant lights,
+single broken overhead light flickering, graffiti walls,
+no other people, vast empty space
+
+[L3] anamorphic lens, 35mm equivalent, available practical lights only,
+rain visible in light beams, handheld documentary feel,
+anamorphic horizontal lens flare from distant street light
+
+[L4] cold neo-noir color grading, desaturated blues and grays,
+single warm amber practical light as color contrast,
+deep grain, Blade Runner 2049 mood --ar 21:9
+```
+
+Este prompt produce una imagen que tiene historia antes y después — que hace preguntarte quién es esta persona y por qué está aquí a las 3am. Eso es narrativa cinematográfica.

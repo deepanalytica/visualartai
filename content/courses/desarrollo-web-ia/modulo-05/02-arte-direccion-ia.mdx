@@ -1,0 +1,190 @@
+---
+title: "Dirección de arte con IA: de la referencia al código"
+slug: "arte-direccion-ia"
+type: "mixed"
+duration_min: 25
+sort_order: 2
+status: "published"
+checklist:
+  - "Describir una estética visual de forma precisa para Claude"
+  - "Extraer design tokens desde una referencia visual"
+  - "Pasar de moodboard a código en una sesión"
+---
+
+## El problema de "hazlo bonito"
+
+Cuando le dices a Claude "hazlo más moderno" o "que se vea premium", obtienes lo mismo que todos los demás. Claude tiene gustos promedio porque fue entrenado en promedios.
+
+La dirección de arte es el arte de ser específico sobre lo que quieres visualmente — y eso es completamente learnable.
+
+---
+
+## Vocabulario de dirección de arte
+
+Para dar instrucciones precisas, necesitas este vocabulario:
+
+### Atmósfera y mood
+- **High contrast** — diferencias fuertes entre claro y oscuro, impacto visual intenso
+- **Airy / light** — mucho espacio negativo, sensación de respirar
+- **Dense / layered** — mucha información, capas superpuestas, complejidad visual
+- **Muted** — colores desaturados, tonos apagados, sofisticado y tranquilo
+- **Saturated / vivid** — colores intensos, energía, atención inmediata
+
+### Referentes visuales (úsalos en prompts)
+- **Apple** — minimalismo funcional, espacio negativo, tipografía como héroe
+- **Linear** — dark mode premium, verde neon, developer aesthetic
+- **Stripe** — gradientes sutiles, blanco limpio, tipografía custom
+- **Vercel** — dark mode total, monospace, austero, técnico
+- **Notion** — neutral, funcional, sin pretensiones visuales
+- **Figma** — violeta como acento, dark/light cuidado, UI muy pulida
+
+### Técnicas CSS / Tailwind
+- **Glassmorphism** — `backdrop-blur + bg-white/10 + border border-white/20`
+- **Bento grid** — cuadrícula irregular de tarjetas de distintos tamaños
+- **Gradient text** — `bg-gradient-to-r bg-clip-text text-transparent`
+- **Floating labels** — labels que se mueven al hacer focus en el input
+- **Scroll animations** — elementos que aparecen al hacer scroll (Framer Motion)
+- **Noise texture** — grain SVG como overlay para calidez
+
+---
+
+## Método: de referencia a tokens
+
+### Paso 1: Identifica las referencias
+
+Elige 2-3 sitios/apps que tengan la estética que buscas. Sé específico sobre _qué_ te gusta de cada uno.
+
+Ejemplo:
+```
+Me gusta:
+- El dark mode de Vercel (contraste extremo, casi todo negro o blanco)
+- Los gradients de Linear (cyan/violeta sobre dark, sutil)
+- La tipografía de Stripe (su tipo custom, pero con Inter queda parecido)
+```
+
+### Paso 2: Prompt de extracción de tokens
+
+```
+Analiza la estética visual de estos referentes y propón un design system:
+
+Referentes:
+- Vercel (vercel.com): dark mode extremo, alto contraste, minimalista
+- Linear (linear.app): dark mode, acentos en violeta/cyan, gradients sutiles
+- La app es un [tipo de producto] para [audiencia]
+
+Genera:
+1. Paleta de colores completa como CSS custom properties:
+   - backgrounds (3-4 niveles de oscuridad)
+   - texto (3 niveles: primary, secondary, muted)
+   - acentos de marca (máximo 2 colores + sus versiones dim)
+   - borders (2-3 niveles)
+   - estados (success, error, warning)
+
+2. Escala tipográfica:
+   - Font families (Google Fonts disponibles)
+   - Font sizes con sus line-heights correspondientes
+   - Font weights usados
+
+3. Spacing y radii system
+
+4. Sombras y glows si aplican
+
+Formato: CSS custom properties en :root {}
+```
+
+### Paso 3: Del token al componente
+
+Una vez tienes los tokens, pídele a Claude que construya componentes respetándolos:
+
+```
+Usando estos CSS tokens:
+[pega los tokens generados]
+
+Construye una tarjeta de producto con:
+- Título, descripción, precio, CTA
+- Usa los tokens, no valores hardcodeados
+- Estilo [bento / glassmorphism / minimal / etc]
+- Debe verse profesional con este mood: [oscuro y técnico / cálido y amigable / etc]
+```
+
+---
+
+## De Figma a código (cuando tienes diseño)
+
+Si tienes un diseño en Figma y necesitas convertirlo a código:
+
+### Con Figma MCP (si está configurado)
+
+Si tienes el Figma MCP activo, Claude puede leer el diseño directamente:
+
+```
+Lee el diseño de este frame de Figma: [ID del frame]
+Convierte el componente a un componente React con Tailwind.
+Respeta los exactos colores, tamaños y espaciados del diseño.
+Usa CSS custom properties para los valores de color del design system.
+```
+
+### Sin acceso directo a Figma
+
+Haz un screenshot del componente y pásalo a Claude:
+
+```
+[Imagen del diseño]
+
+Convierte este diseño a un componente React con Tailwind.
+Identifica:
+1. La paleta de colores aproximada y conviértela a CSS custom properties
+2. Los tamaños de fuente en la escala de Tailwind equivalente
+3. El espaciado usando la escala de Tailwind
+
+No inventes funcionalidad — solo el UI exacto que ves.
+```
+
+---
+
+## Dirección de arte para dark mode
+
+El dark mode hecho mal es "cambiar el fondo a negro". El dark mode bien hecho es un sistema visual completo.
+
+Reglas del dark mode profesional:
+
+| Regla | Mal | Bien |
+|-------|-----|------|
+| Background | `#000000` puro | `#09090b` o `#0a0c12` (casi negro) |
+| Superficies | Un solo tono | 3-4 niveles de oscuridad progresiva |
+| Texto primario | `#ffffff` puro | `#f0f4ff` o `#ededed` (off-white) |
+| Acentos | Mismos que light mode | Más brillantes y saturados (mejor en dark) |
+| Borders | Invisible o muy sutil | `border-white/10` o `border-[#1e2235]` |
+| Sombras | `shadow-black` opaco | Sombras con opacidad: `shadow-black/60` |
+
+Prompt para dark mode:
+```
+Convierte este componente a dark mode siguiendo estas reglas:
+1. No usar negro puro (#000) — usar #09090b o similar
+2. Texto con #f0f4ff (no blanco puro)
+3. Superficies con 3 niveles: surface (#0a0c12), elevated (#0f1118), overlay (#141720)
+4. Borders sutiles: border-white/10
+5. El acento principal es [color] — hazlo más vibrante para dark mode
+```
+
+---
+
+## El stack de dirección de arte con IA
+
+| Herramienta | Para qué |
+|-------------|---------|
+| **Claude** | Generar tokens, código de componentes, revisar decisiones visuales |
+| **v0.dev** | Prototipar layouts rápido con shadcn/ui |
+| **Midjourney / DALL·E** | Referencias visuales, moodboards, explorar estilos |
+| **Figma** (Community) | Templates de design systems gratuitos como referencia |
+| **Coolors.co** | Validar paletas de color, verificar contraste |
+| **Fontpair.co** | Combinaciones de fuentes que funcionan juntas |
+
+El flujo recomendado:
+```
+1. Genera moodboard con Midjourney (estilo, atmósfera)
+2. Extrae tokens con Claude (paleta, tipografía, spacing)
+3. Prototipa layout con v0.dev (velocidad)
+4. Refina componentes con Claude Code (producción)
+5. Valida contraste y accesibilidad
+```

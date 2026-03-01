@@ -1,0 +1,112 @@
+---
+title: "El sistema de documentación del equipo"
+slug: "sistema-documentacion-equipo"
+type: "mixed"
+duration_min: 18
+sort_order: 3
+status: "published"
+checklist:
+  - "Definir la estructura de tu biblioteca de SOPs"
+  - "Crear el naming convention y sistema de versiones"
+  - "Establecer cómo el equipo accede y actualiza los SOPs"
+---
+
+## El problema de los SOPs que nadie usa
+
+Un SOP que vive en una carpeta de Google Drive sin nombre claro, mezclado con otros documentos, sin actualización hace 8 meses — ese SOP no existe para el equipo.
+
+La documentación tiene que ser:
+- **Encontrable:** en menos de 30 segundos
+- **Actualizada:** con fecha visible
+- **Accesible:** para quien lo necesita, cuando lo necesita
+
+---
+
+## Estructura de la biblioteca de SOPs
+
+Organiza por la pregunta "¿cómo buscaría alguien esto?"
+
+### Por área funcional (recomendado para equipos pequeños):
+```
+📁 Operaciones/
+  ├── SOP-OPS-001 Onboarding cliente.md
+  ├── SOP-OPS-002 Entrega de proyecto.md
+  └── SOP-OPS-003 Cierre de contrato.md
+
+📁 Marketing/
+  ├── SOP-MKT-001 Producción semanal de contenido.md
+  └── SOP-MKT-002 Reporte mensual.md
+
+📁 Administración/
+  └── SOP-ADM-001 Facturación mensual.md
+```
+
+### Por frecuencia (para uso personal o solopreneur):
+```
+📁 Diarios/
+📁 Semanales/
+📁 Mensuales/
+📁 Por proyecto/
+```
+
+---
+
+## Naming convention
+
+Un nombre de archivo claro evita confusión. Usa este formato:
+
+```
+[AREA]-[NÚMERO]-[nombre-del-proceso]-v[versión].md
+```
+
+Ejemplos:
+- `OPS-001-onboarding-cliente-v1.2.md`
+- `MKT-003-reporte-semanal-v2.0.md`
+
+**El número** permite mencionar el SOP sin dar el nombre completo ("actualiza el OPS-001")
+**La versión** indica si hay cambios desde la última vez que lo leyeron
+
+---
+
+## Control de versiones simple
+
+Al inicio de cada SOP, agrega un bloque de historial:
+
+```markdown
+## Historial de versiones
+
+| Versión | Fecha | Cambio |
+|---------|-------|--------|
+| 1.0 | 2024-01-15 | Versión inicial |
+| 1.1 | 2024-03-20 | Actualizado paso 4 con nueva herramienta |
+| 2.0 | 2024-07-01 | Proceso rediseñado completamente |
+```
+
+---
+
+## Hacer que el equipo realmente use los SOPs
+
+El problema no es que los SOPs sean malos — es que nadie los lee antes de ejecutar.
+
+**Estrategias que funcionan:**
+
+1. **El SOP como checklist** — en lugar de documento de lectura, es una lista que tachen mientras hacen el proceso
+2. **El onboarding por SOP** — cuando llega alguien nuevo, su onboarding es seguir el SOP del proceso que hará
+3. **El SOP como referencia, no como tutorial** — el SOP dice qué hacer, no explica desde cero; para explicar desde cero, existe el video o la sesión con un colega
+4. **Revisión semestral** — cada 6 meses, revisar los SOPs más usados y actualizarlos si el proceso cambió
+
+---
+
+## Generar el índice de SOPs con IA
+
+Una vez que tienes varios SOPs, genera un índice:
+
+```
+Tengo estos SOPs en mi biblioteca:
+[lista de nombres y áreas]
+
+Genera:
+1. Un índice organizado con descripción de una línea por SOP
+2. Sugerencias de SOPs adicionales que probablemente necesito según los que ya tengo
+3. Los 3 SOPs que deberían tener mayor prioridad para crear primero
+```

@@ -1,0 +1,178 @@
+---
+title: "Los errores más comunes y cómo el loop de IA los resuelve"
+slug: "errores-comunes-loop-ia"
+type: "mixed"
+duration_min: 20
+sort_order: 3
+status: "published"
+checklist:
+  - "Conocer los 5 errores más frecuentes al usar IA para desarrollo"
+  - "Aplicar el protocolo de debugging con Claude"
+  - "Entender por qué la IA genera código que no funciona (y cómo evitarlo)"
+---
+
+## Por qué la IA genera código que no funciona
+
+Ocurre más de lo que debería, y siempre por una de estas razones:
+
+### 1. Contexto insuficiente
+Claude no sabe que ya tienes un middleware de auth, que usas Drizzle y no Prisma, o que tu Supabase client está en un archivo específico.
+
+**Solución:** CLAUDE.md + siempre indicar qué archivos relacionados existen.
+
+### 2. Versión incorrecta
+Next.js 15, Supabase SSR, y Drizzle tienen APIs que cambiaron recientemente. Si el modelo fue entrenado con código de versiones anteriores, puede generar APIs deprecadas.
+
+**Solución:** especifica las versiones en el prompt: "Next.js 15 App Router (no Pages Router)", "@supabase/ssr (no @supabase/auth-helpers)".
+
+### 3. El problema real es diferente al que pediste
+Pediste "implementar el login" pero el problema real es que el middleware no está redirigiendo correctamente después del login. Claude implementó lo que pediste, no lo que necesitabas.
+
+**Solución:** describe el comportamiento esperado, no solo la tarea: "cuando el usuario hace login exitoso, debería ser redirigido al dashboard pero actualmente se queda en /login".
+
+### 4. Hallucination de APIs
+Claude inventa métodos que no existen en la librería. Ocurre más con librerías menos populares.
+
+**Solución:** pide a Claude que cite la documentación o que verifique si la API existe.
+
+---
+
+## El protocolo de debugging con Claude
+
+Cuando algo no funciona, no pegues solo el error. Da el contexto completo:
+
+```
+Tengo este error:
+[copia el error completo, incluyendo el stack trace]
+
+El archivo que genera el error es:
+[pega el contenido del archivo]
+
+Lo que intenté hacer:
+[describe qué comportamiento esperabas]
+
+Lo que ocurre realmente:
+[describe qué pasa]
+
+Archivos relacionados que pueden ser relevantes:
+- [archivo 1]: [descripción de qué hace]
+- [archivo 2]: [descripción de qué hace]
+
+¿Qué causa este error y cómo lo resuelvo?
+```
+
+---
+
+## Los 5 errores más frecuentes y sus soluciones
+
+### Error 1: Hydration mismatch
+
+```
+Error: Hydration failed because the initial UI does not match what was rendered on the server.
+```
+
+**Causa:** Un Client Component renderiza algo diferente en el servidor vs el cliente (por ejemplo, usando `new Date()` o `Math.random()` sin `useMemo`).
+
+**Prompt de solución:**
+```
+Tengo este hydration error: [error completo]
+Este es el componente afectado: [código]
+¿Qué causa la diferencia entre servidor y cliente, y cómo lo resuelvo?
+```
+
+---
+
+### Error 2: Supabase auth no persiste
+
+```
+El usuario se desloguea al refrescar la página
+```
+
+**Causa:** El middleware no está configurado para refrescar la sesión.
+
+**Prompt de solución:**
+```
+Mi app con Supabase SSR pierde la sesión al refrescar.
+Stack: Next.js 15, @supabase/ssr (no auth-helpers).
+Este es mi middleware.ts actual: [código]
+¿Qué falta para que la sesión persista correctamente entre navegaciones?
+```
+
+---
+
+### Error 3: Server Component importa código de client
+
+```
+Error: You're importing a component that needs useState. Only Client Components can use hooks...
+```
+
+**Causa:** Un Server Component importa directamente un componente con `'use client'` que a su vez importa otros módulos solo de cliente.
+
+**Prompt de solución:**
+```
+Tengo este error de Server/Client boundary: [error]
+El árbol de importaciones es:
+- ServerComponent importa ComponenteA
+- ComponenteA importa librería X que usa window
+
+¿Cómo reestructuro las importaciones sin mover todo a Client?
+```
+
+---
+
+### Error 4: Drizzle query con tipos incorrectos
+
+```
+Type 'string' is not assignable to type 'UUID'
+```
+
+**Causa:** Supabase devuelve los IDs como strings, pero el schema de Drizzle los tipea como UUID.
+
+**Prompt de solución:**
+```
+Tengo este error de tipos con Drizzle: [error]
+Mi schema tiene: id: uuid('id')
+El ID que recibo de Supabase Auth es: user.id (string)
+¿Cómo lo manejo correctamente?
+```
+
+---
+
+### Error 5: Variables de entorno undefined en producción
+
+```
+Error: Missing env variable: SUPABASE_SERVICE_ROLE_KEY
+```
+
+**Causa:** La variable existe en `.env.local` pero no se agregó a Vercel.
+
+**Prompt de solución:**
+```
+En local funciona pero en Vercel produce este error: [error]
+Variables que uso: [lista]
+¿Cuáles deben tener el prefijo NEXT_PUBLIC_ y cuáles deben estar solo en servidor?
+```
+
+---
+
+## El loop de depuración eficiente
+
+```
+1. REPRODUCE el error de forma mínima
+   → El ejemplo más pequeño que genera el mismo error
+
+2. DA CONTEXTO a Claude
+   → Error completo + código relevante + comportamiento esperado
+
+3. APLICA la sugerencia
+   → Haz solo el cambio sugerido, no más
+
+4. SI NO FUNCIONA, describe el nuevo estado
+   → "Apliqué X, ahora el error es Y"
+   → No empieces una conversación nueva — continúa la misma
+
+5. CUANDO FUNCIONE, entiende el por qué
+   → Pide a Claude que explique por qué la solución funciona
+```
+
+No saltes al paso 3 sin el paso 2. El mayor consumidor de tiempo en debugging con IA es no dar suficiente contexto desde el inicio.

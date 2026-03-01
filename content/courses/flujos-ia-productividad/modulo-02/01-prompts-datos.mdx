@@ -1,0 +1,106 @@
+---
+title: "Prompts para analizar datos y generar insights"
+slug: "prompts-datos-insights"
+type: "mixed"
+duration_min: 22
+sort_order: 1
+status: "published"
+checklist:
+  - "Identificar el dataset que quieres analizar"
+  - "Usar el prompt de análisis descriptivo"
+  - "Usar el prompt de generación de insights"
+  - "Guardar los prompts en tu biblioteca personal"
+---
+
+## El tiempo que pierdes analizando datos
+
+En promedio, un profesional pasa **3-4 horas semanales** convirtiendo datos en reportes y presentaciones. Con IA, ese tiempo se reduce a 30-45 minutos.
+
+La clave no es que la IA analice por ti — es que la IA te ayuda a ver patrones más rápido y a comunicarlos mejor.
+
+---
+
+## Tipos de análisis que puedes automatizar
+
+| Tipo | Tiempo manual | Tiempo con IA |
+|------|--------------|---------------|
+| Resumen de datos crudos | 60 min | 5 min |
+| Identificación de tendencias | 45 min | 10 min |
+| Generación de insights | 90 min | 15 min |
+| Redacción del reporte | 120 min | 20 min |
+
+---
+
+## Los 4 prompts esenciales
+
+### 1. Análisis descriptivo
+
+```
+Tengo estos datos de [período]:
+[pega los datos en formato tabla o CSV]
+
+Analiza y dame:
+1. Los 3 números más importantes
+2. Qué cambió respecto al período anterior
+3. Qué llama la atención (positivo y negativo)
+4. Una frase resumen de máximo 20 palabras
+```
+
+### 2. Generación de insights accionables
+
+```
+Basándote en estos datos de [período]:
+[datos]
+
+Genera 3 insights accionables siguiendo este formato:
+- Observación: [qué está pasando]
+- Implicación: [qué significa para el negocio]
+- Acción recomendada: [qué hacer]
+```
+
+### 3. Detección de anomalías
+
+```
+Revisa estos datos y señala:
+1. Valores inusuales (muy altos o muy bajos)
+2. Patrones que no encajan con la tendencia general
+3. Datos que podrían ser errores
+
+Datos: [pega aquí]
+```
+
+### 4. Comparativa y benchmarking
+
+```
+Compara estos dos conjuntos de datos:
+PERÍODO A: [datos]
+PERÍODO B: [datos]
+
+Identifica:
+- Qué mejoró y cuánto (%)
+- Qué empeoró y cuánto (%)
+- La diferencia más significativa
+- Una hipótesis sobre la causa principal
+```
+
+---
+
+## Formatos de datos que acepta la IA
+
+La IA puede procesar:
+- **Tablas** (copiadas directamente de Excel/Google Sheets)
+- **CSV** (pegado como texto plano)
+- **JSON** (para datos de APIs)
+- **Descripción en texto** ("vendimos 150 unidades en enero vs 120 en diciembre")
+
+> **Límite importante:** Los LLMs no son calculadoras exactas. Para cálculos críticos, verifica los números. Úsalos para interpretación, no para operaciones matemáticas complejas.
+
+---
+
+## Caso práctico: análisis de ventas mensuales
+
+1. Exporta tu reporte de ventas de los últimos 3 meses
+2. Cópialo como tabla de texto plano
+3. Usa el prompt de análisis descriptivo
+4. Usa el prompt de insights accionables
+5. Tienes la base de tu reporte mensual en 15 minutos

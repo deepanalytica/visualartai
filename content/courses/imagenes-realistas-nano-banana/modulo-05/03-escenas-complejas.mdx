@@ -1,0 +1,195 @@
+---
+title: "Escenas complejas: múltiples sujetos y narrativa"
+slug: "escenas-complejas-narrativa"
+type: "mixed"
+duration_min: 22
+sort_order: 3
+status: "published"
+checklist:
+  - "Generar escenas con múltiples personas de forma coherente"
+  - "Crear narrativa visual sin palabras"
+  - "Manejar las limitaciones actuales de los modelos en escenas complejas"
+---
+
+## El problema de la complejidad
+
+Cuanto más compleja es la escena — más personas, más interacciones, más elementos específicos — mayor es la probabilidad de que el modelo genere algo incoherente.
+
+Las escenas complejas requieren una estrategia diferente: simplificar la descripción y ser extremadamente selectivo sobre qué especificar.
+
+---
+
+## Múltiples personas: la estrategia correcta
+
+### El error: intentar controlar todo
+
+```
+# No hagas esto (demasiado control para el modelo):
+"A 35-year-old brunette woman on the left wearing a red dress
+is talking to a 40-year-old bald man on the right in a blue suit
+while a 20-year-old Asian woman in the background..."
+```
+
+Con 3 personas y atributos específicos para cada una, el modelo falla en el 80% de las generaciones.
+
+### La estrategia correcta: roles, no individuos
+
+En lugar de describir personas específicas, describe **roles y relaciones**:
+
+```
+two people in animated conversation, facing each other,
+engaged connection between them, genuine exchange,
+one listening intently, the other gesturing expressively
+```
+
+Esto da libertad al modelo para interpretar los "individuos" pero mantiene la narrativa de la relación.
+
+### Para 2-3 personas:
+
+```
+[Rol 1] and [Rol 2] [tipo de interacción],
+[dinámica entre ellos], [contexto emocional]
+
+Ejemplo:
+mentor and student, leaning over a shared document,
+pointing out something of interest, collaborative learning moment,
+warmth between generations, professional yet personal connection
+```
+
+### Para grupos:
+
+```
+small group of [número] people, [dinámica general],
+[tipo de momento], diverse group (implica diversidad sin sobre-especificar),
+natural candid group interaction, authentic social moment
+```
+
+---
+
+## La jerarquía visual en escenas complejas
+
+En una escena con múltiples elementos, el modelo necesita saber qué es lo más importante. Sin jerarquía explícita, distribuye la atención equitativamente — y la imagen se ve sin foco.
+
+**Establece la jerarquía con composición:**
+
+```
+# Sujeto principal claro:
+one person in sharp focus in the foreground,
+other people slightly blurred in background,
+clear subject-background separation,
+one face as the clear emotional center
+
+# Elemento principal de producto:
+product as clear hero in center, people as lifestyle context,
+sharp product, slightly defocused humans,
+product-first commercial composition
+```
+
+---
+
+## Narrativa sin texto: el momento decisivo
+
+El fotógrafo Henri Cartier-Bresson habló del "momento decisivo" — el instante exacto en que todos los elementos de la imagen se alinean para contar la historia más poderosa.
+
+Con IA, puedes describir momentos decisivos:
+
+### El punto de conexión
+```
+the exact moment of genuine connection,
+eyes meeting with recognition,
+a shared understanding just achieved
+```
+
+### El momento de transición
+```
+mid-action, between two states,
+movement frozen at its most expressive point,
+transition moment captured
+```
+
+### El momento de emoción pura
+```
+unguarded emotional moment, defenses down,
+authentic vulnerability in the expression,
+private emotion made public by the camera
+```
+
+### El momento de descubrimiento
+```
+face mid-reaction to unexpected news,
+the expression just before processing,
+wonder and disbelief simultaneously
+```
+
+---
+
+## Escenas complejas que funcionan bien
+
+### La reunión de trabajo
+
+```
+[L1] three professionals around a table, one standing and presenting,
+two others engaged listening, authentic workplace energy,
+diverse team (different ethnicities, ages, genders)
+
+[L2] modern conference room with large windows,
+city view background, laptops and notebooks on table,
+afternoon golden light streaming in
+
+[L3] Canon EOS R5, 35mm f/2, available window light,
+journalistic workplace photography, candid documentary style
+
+[L4] clean professional color grading, bright and clear,
+corporate photography with human warmth
+```
+
+### La conexión entre personas
+
+```
+[L1] two old friends, genuine reunion hug,
+happiness and surprise in their faces,
+authentic human connection
+
+[L2] city street, people walking past blurred,
+urban backdrop, ordinary day made extraordinary
+
+[L3] 50mm f/1.4, street photography approach,
+golden afternoon light catching their faces,
+photojournalism moment
+
+[L4] warm documentary color grading, slight film grain
+```
+
+### La escena urbana con protagonista
+
+```
+[L1] lone figure, young professional, headphones in,
+absorbed in their world within the city chaos
+
+[L2] busy commuter street in rush hour,
+crowds blurred moving past, city energy,
+one still person in moving stream
+
+[L3] 85mm f/1.8 from across the street,
+shallow depth of field separating subject from background,
+urban documentary photography
+
+[L4] slightly desaturated street photography color,
+slight grain, blue-gray urban palette
+```
+
+---
+
+## Las limitaciones que debes aceptar
+
+Con el nivel tecnológico actual (2025-2026), hay cosas que los modelos hacen mal consistentemente:
+
+| Limitación | Workaround |
+|------------|-----------|
+| Manos de más de 2 personas | Encuadra para no mostrar manos, o usa ángulos que las ocultan |
+| 3+ personas con características específicas | Reduce a 2 o usa roles genéricos |
+| Interacción física precisa (abrazo específico) | Describe la emoción, no los movimientos exactos |
+| Texto legible en carteles/libros | Usa Flux 1.1 Pro o acepta que el texto será ilegible |
+| La misma persona en diferentes imágenes | --cref en Midjourney, acepta ~70% de consistencia |
+
+No son fallas de tu prompt — son limitaciones del estado del arte. Diseña tus prompts trabajando con las fortalezas del modelo, no contra sus debilidades.

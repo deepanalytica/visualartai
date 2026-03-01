@@ -1,0 +1,108 @@
+---
+title: "La mentalidad del dev asistido por IA"
+slug: "mentalidad-dev-ia"
+type: "text"
+duration_min: 20
+sort_order: 1
+status: "published"
+checklist:
+  - "Entender qué cambia y qué no cambia con IA"
+  - "Identificar tu nivel actual y lo que quieres mejorar"
+  - "Configurar la carpeta del proyecto con estructura base"
+---
+
+## Lo que realmente cambia
+
+El dev asistido por IA no es un dev que ya no piensa — es un dev que piensa a una capa más alta.
+
+**Lo que cambia:**
+- La **velocidad de implementación** de código conocido se multiplica por 5-10x
+- La **amplitud de habilidades** — puedes hacer cosas que antes requerirían 3 especialistas
+- El **ciclo de iteración** — probar ideas tarda minutos, no días
+- El **costo de explorar** — probar una arquitectura alternativa ya no toma una semana
+
+**Lo que NO cambia:**
+- La **arquitectura** sigue siendo decisión tuya. Claude no sabe si esta app necesita real-time, qué escala, ni cuáles son las restricciones del negocio.
+- El **criterio** para juzgar si el código es correcto, seguro, y mantenible
+- La **responsabilidad** de lo que sale a producción
+- La **depuración profunda** — cuando algo falla de forma inesperada, la IA puede ayudar pero el diagnóstico es tuyo
+- El **contexto del cliente o producto** — la IA no sabe lo que sabes tú sobre el problema
+
+---
+
+## El cambio de mentalidad más importante
+
+El dev tradicional va de requisito → código. El dev con IA va de requisito → **conversación sobre el problema** → código.
+
+Antes de pedir código, piensa en voz alta con Claude:
+
+```
+"Estoy construyendo un sistema de autenticación para una app SaaS.
+Los usuarios pueden tener múltiples organizaciones.
+Cada organización tiene su propio espacio de datos.
+¿Cuáles son las consideraciones de arquitectura que debería tener en cuenta antes de escribir el schema?"
+```
+
+Este tipo de conversación antes de codificar evita arquitecturas que parecen funcionar y luego requieren refactorización total.
+
+---
+
+## El dev que usa IA de forma reactiva vs. proactiva
+
+| Dev reactivo | Dev proactivo |
+|---|---|
+| Copia código sin entenderlo | Pide explicación + código |
+| Usa prompts genéricos | Tiene sistema de prompts por tipo de tarea |
+| Empieza a codificar y luego pregunta | Diseña la arquitectura con IA primero |
+| Ignora el contexto del proyecto | Construye y mantiene CLAUDE.md |
+| Usa IA solo para código | Usa IA para arquitectura, docs, debugging, tests |
+
+---
+
+## El stack del curso
+
+No elegimos este stack por moda. Lo elegimos porque cada herramienta:
+
+```
+Next.js 15      → Framework full-stack con Server Components + App Router
+                   La forma más rápida de ir de cero a producción en TypeScript
+
+TypeScript      → Tipado estático = la IA puede hacer sugerencias con contexto completo
+                   Claude trabaja mucho mejor con tipos definidos
+
+Supabase        → PostgreSQL hosted + Auth + Storage + Edge Functions
+                   Backend completo en 30 minutos, escala a millones de usuarios
+
+Drizzle ORM     → Schema-as-code + type-safe queries + migraciones
+                   La IA puede leer el schema y hacer queries correctos desde el primer intento
+
+Vercel          → Deploy automático desde Git + edge network + preview environments
+                   Del commit al staging en 60 segundos
+
+Claude Code     → CLI que lee tu codebase, ejecuta comandos, razona sobre cambios
+                   La diferencia entre "asistente de código" y "dev en tu equipo"
+```
+
+---
+
+## El primer setup
+
+Antes de la siguiente lección, ten esto instalado:
+
+```bash
+# Node.js 20+ (si no lo tienes)
+# Verificar: node --version
+
+# Claude Code CLI
+npm install -g @anthropic-ai/claude-code
+
+# Autenticarse con Anthropic
+claude login
+```
+
+Y crea cuentas (todas tienen plan gratuito):
+- [github.com](https://github.com) — control de versiones
+- [supabase.com](https://supabase.com) — base de datos + auth
+- [vercel.com](https://vercel.com) — deploy
+
+En la siguiente lección: el scaffold completo del proyecto en 10 minutos.

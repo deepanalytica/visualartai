@@ -1,0 +1,107 @@
+---
+title: "Actas, resúmenes y documentos en 5 minutos"
+slug: "documentos-rapidos-ia"
+type: "mixed"
+duration_min: 18
+sort_order: 3
+status: "published"
+checklist:
+  - "Generar un acta de reunión con el prompt del módulo"
+  - "Resumir un documento largo con IA"
+  - "Probar el prompt de transformación de email a documento"
+---
+
+## Los documentos que se repiten
+
+Además de los reportes semanales, hay una categoría de documentos que aparecen constantemente pero no suelen tener sistema:
+
+- **Actas de reunión** — resumen de lo que se discutió y los compromisos
+- **Resúmenes ejecutivos** — versión corta de un informe largo
+- **Notas de llamada** — puntos clave + próximos pasos
+- **Propuestas base** — primer borrador de propuesta para un cliente
+- **Comunicados internos** — anuncios o actualizaciones de equipo
+
+---
+
+## Prompt de acta de reunión
+
+```
+Genera el acta de esta reunión.
+
+INFORMACIÓN DE LA REUNIÓN:
+- Participantes: [nombres o roles]
+- Fecha: [fecha]
+- Tema: [tema principal]
+
+PUNTOS DISCUTIDOS:
+[Anota los puntos principales en viñetas, sin formato — como si hablaras]
+
+Estructura del acta:
+1. Resumen (3 oraciones)
+2. Puntos discutidos (bullets)
+3. Decisiones tomadas
+4. Compromisos y responsables (tabla: quién / qué / para cuándo)
+5. Próxima reunión: [fecha si se definió]
+
+Tono: profesional, breve, enfocado en acciones
+```
+
+---
+
+## Prompt para resumir documentos largos
+
+Para PDFs, reportes, artículos, o cualquier texto extenso:
+
+```
+Resume este documento de forma ejecutiva:
+[pega el texto o la parte más relevante]
+
+Dame:
+1. El mensaje central en 2 oraciones
+2. Los 5 puntos más importantes
+3. Las conclusiones o recomendaciones
+4. Lo que NO menciona pero probablemente debería (si aplica)
+
+Extensión del resumen: máximo [1 página / 500 palabras / 10 bullets]
+```
+
+---
+
+## Prompt para convertir email a documento
+
+Cuando necesitas formalizar algo que llegó por email:
+
+```
+Convierte este email en un documento formal:
+[pega el email]
+
+Tipo de documento: [propuesta / brief / acuerdo de alcance / resumen ejecutivo]
+Audiencia del documento: [para quién es]
+Agrega lo que falta para que sea un documento completo.
+Mantén los hechos del email sin distorsionar.
+```
+
+---
+
+## El workflow completo para actas
+
+El proceso más rápido que funciona en la práctica:
+
+1. **Durante la reunión:** escribe bullets rápidos en una nota (no actas completas)
+2. **Inmediatamente después (5 min):** pega esos bullets en el prompt de acta
+3. **Genera y revisa (5 min):** ajusta si algo no está correcto
+4. **Envía o archiva (2 min)**
+
+Tiempo total: 12 minutos vs 30-45 que toma hacerlo desde cero.
+
+---
+
+## Una variante: grabar la reunión
+
+Si usas Google Meet, Zoom, o Teams, activa la transcripción automática. Después de la reunión:
+
+1. Descarga la transcripción
+2. Pégala en el prompt de acta
+3. La IA hace el trabajo de síntesis
+
+La transcripción es mejor que los bullets si la reunión tuvo muchos detalles técnicos o compromisos específicos.

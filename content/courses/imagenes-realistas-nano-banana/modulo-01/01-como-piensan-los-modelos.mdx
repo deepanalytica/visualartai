@@ -1,0 +1,107 @@
+---
+title: "Cómo piensan los modelos de imagen"
+slug: "como-piensan-modelos-imagen"
+type: "text"
+duration_min: 18
+sort_order: 1
+status: "published"
+checklist:
+  - "Entender la diferencia entre difusión y autoregresivo"
+  - "Saber qué elementos del prompt tienen más peso"
+  - "Identificar por qué el mismo prompt da resultados distintos"
+---
+
+## El modelo no "ve" lo que describes
+
+El error más común al empezar con generación de imágenes es asumir que el modelo entiende el texto como un humano. No es así.
+
+Un modelo de difusión como Midjourney o Stable Diffusion funciona así:
+1. Convierte tu texto en un vector matemático (embedding)
+2. Genera ruido aleatorio
+3. Progresivamente "desruida" esa imagen guiándose por tu embedding
+4. El resultado es la imagen que más probablemente correspondería a ese vector en el espacio de imágenes en que fue entrenado
+
+Lo que significa esto para ti:
+- **El orden importa**: lo que pones primero tiene más peso
+- **La frecuencia en el training importa**: conceptos que aparecen millones de veces en internet se generan mejor
+- **Las relaciones espaciales son difíciles**: "la persona a la izquierda del árbol" es más difícil que "persona en un bosque"
+- **Los atributos se mezclan**: si dices "perro rojo pequeño", puede que el rojo y el pequeño se apliquen mal
+
+---
+
+## Difusión vs Autoregresivo
+
+Los dos tipos de modelos que vas a usar funcionan diferente:
+
+### Modelos de difusión
+*Midjourney, Stable Diffusion, Flux, DALL·E 3*
+
+- Generan la imagen completa "de una vez" (iterativamente desde ruido)
+- Muy buenos para composición general, atmósfera, estilos
+- Menos predictivos — mismos prompts dan resultados distintos
+- El `--seed` fija el resultado (Midjourney) pero no garantiza exactitud
+
+### Modelos autoregresivos
+*DALL·E 3 con descripción expandida, algunos de Google*
+
+- Generan píxel por píxel (o parche por parche)
+- Mejor comprensión de texto e instrucciones específicas
+- DALL·E 3 reformula internamente tu prompt — a veces ayuda, a veces perjudica
+- Más predecibles pero con menos "magia estética" espontánea
+
+**¿Cuándo usar cada uno?**
+
+| Tarea | Modelo recomendado |
+|-------|-------------------|
+| Fotografía realista con atmósfera | Midjourney v6+, Flux 1.1 Pro |
+| Seguir instrucciones textuales precisas | DALL·E 3 |
+| Retrato hiperrealista de persona | Midjourney v6+, Flux |
+| Producto sobre fondo específico | Flux 1.1 Pro, DALL·E 3 |
+| Escena cinematográfica | Midjourney v6+ |
+| Batch de variaciones coherentes | Flux (más reproducible) |
+
+---
+
+## Por qué el mismo prompt da resultados distintos
+
+Tres razones:
+
+### 1. Semilla aleatoria (seed)
+Cada generación empieza con ruido diferente. Para reproducir exactamente un resultado, necesitas el seed.
+
+En Midjourney: `/imagine prompt [tu prompt] --seed 12345`
+En Flux via API: `seed: 12345` en el parámetro
+
+### 2. Temperatura / guidance scale
+El parámetro `--stylize` en Midjourney (o `cfg_scale` en SD) controla cuánto "sigue" el prompt vs cuánto "improvisa":
+
+- Bajo: más fiel al prompt, menos interesante estéticamente
+- Alto: más creativo, puede alejarse del prompt
+
+Para realismo, usa valores medios-altos (70-100 en Midjourney).
+
+### 3. El contexto de training
+El modelo "sabe" cosas que no están en tu prompt. Si dices "fotógrafo" y el modelo vio millones de fotos de hombres con cámaras en training, va a generar eso incluso si no lo especificaste.
+
+Usa el método Nano Banana para especificar exactamente lo que quieres y dejar poco espacio para la interpretación.
+
+---
+
+## Lo que el modelo puede y no puede hacer bien
+
+### Hace bien:
+- Texturas y materiales (piel, tela, metal, agua)
+- Iluminación atmosférica (dorado, neon, crepúsculo)
+- Composiciones clásicas fotográficas
+- Estilos fotográficos conocidos (editorial, documental, producto)
+- Profundidad de campo y bokeh
+
+### Hace mal:
+- Texto legible dentro de la imagen
+- Manos (siempre, en todos los modelos — mejorando lentamente)
+- Contar objetos específicos ("3 manzanas exactamente")
+- Relaciones espaciales precisas
+- Consistencia entre generaciones (mismo personaje, distintas poses)
+- Lógica física compleja
+
+Cuando sabes esto, diseñas tus prompts evitando las debilidades.

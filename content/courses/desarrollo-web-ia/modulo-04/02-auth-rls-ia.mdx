@@ -1,0 +1,210 @@
+---
+title: "Auth y RLS: seguridad real generada con IA"
+slug: "auth-rls-supabase-ia"
+type: "mixed"
+duration_min: 32
+sort_order: 2
+status: "published"
+checklist:
+  - "Implementar el flujo completo de autenticación con Supabase"
+  - "Entender RLS y por qué es crítico"
+  - "Generar las políticas RLS de tu schema con IA"
+---
+
+## El flujo completo de autenticación
+
+Supabase maneja la autenticación. Tu trabajo es:
+1. Crear las páginas de login/register/forgot-password
+2. Conectar los formularios con Supabase Auth
+3. Configurar el middleware para proteger rutas
+4. Manejar el estado del usuario en la UI
+
+---
+
+## Supabase Auth en Next.js App Router
+
+```typescript
+// src/lib/supabase/client.ts (navegador)
+import { createBrowserClient } from '@supabase/ssr'
+
+export function createClient() {
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+}
+
+// src/lib/supabase/server.ts (servidor)
+import { createServerClient } from '@supabase/ssr'
+import { cookies } from 'next/headers'
+
+export async function createClient() {
+  const cookieStore = await cookies()
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() { return cookieStore.getAll() },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options))
+          } catch {}
+        },
+      },
+    }
+  )
+}
+```
+
+---
+
+## Middleware de auth
+
+```typescript
+// middleware.ts (raíz del proyecto)
+import { createServerClient } from '@supabase/ssr'
+import { NextResponse, type NextRequest } from 'next/server'
+
+export async function middleware(request: NextRequest) {
+  let supabaseResponse = NextResponse.next({ request })
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() { return request.cookies.getAll() },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value))
+          supabaseResponse = NextResponse.next({ request })
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options))
+        },
+      },
+    }
+  )
+
+  // IMPORTANTE: siempre llamar getUser() en el middleware para refrescar la sesión
+  const { data: { user } } = await supabase.auth.getUser()
+
+  // Rutas protegidas: redirigir a login si no hay sesión
+  if (!user && request.nextUrl.pathname.startsWith('/app')) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/login'
+    return NextResponse.redirect(url)
+  }
+
+  // Rutas de auth: redirigir al dashboard si ya hay sesión
+  if (user && (
+    request.nextUrl.pathname === '/login' ||
+    request.nextUrl.pathname === '/register'
+  )) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/app/dashboard'
+    return NextResponse.redirect(url)
+  }
+
+  return supabaseResponse
+}
+
+export const config = {
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+}
+```
+
+---
+
+## Row Level Security (RLS): por qué no es opcional
+
+Sin RLS, cualquier usuario autenticado puede hacer:
+```sql
+SELECT * FROM projects  -- ← ve los proyectos de TODOS los usuarios
+DELETE FROM projects WHERE id = 'uuid-de-otro-usuario'  -- ← borra datos de otros
+```
+
+Con RLS activado, las policies definen qué puede ver/hacer cada usuario. El anon key solo accede a lo que las policies permiten.
+
+**RLS es la diferencia entre una app segura y una brecha de datos.**
+
+---
+
+## Generar policies RLS con IA
+
+```
+Mi schema de Drizzle tiene estas tablas:
+- profiles (id, email, role)
+- projects (id, user_id, name, status)
+- tasks (id, project_id, user_id, title, is_completed)
+
+Reglas de acceso:
+- Un usuario solo puede ver y modificar sus propios projects y tasks
+- Los profiles son readable por todos los usuarios autenticados (para avatares/nombres)
+- Los profiles solo pueden ser editados por su propio usuario
+
+Genera las políticas RLS para PostgreSQL/Supabase que implementen estas reglas.
+Usa el formato de Supabase SQL Editor.
+```
+
+Resultado esperado:
+
+```sql
+-- Activar RLS en todas las tablas
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
+ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
+
+-- Profiles: ver todos (autenticados), editar solo el propio
+CREATE POLICY "profiles_select_authenticated"
+  ON profiles FOR SELECT TO authenticated
+  USING (true);
+
+CREATE POLICY "profiles_update_own"
+  ON profiles FOR UPDATE TO authenticated
+  USING (auth.uid() = id)
+  WITH CHECK (auth.uid() = id);
+
+-- Projects: CRUD solo del propio usuario
+CREATE POLICY "projects_select_own"
+  ON projects FOR SELECT TO authenticated
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "projects_insert_own"
+  ON projects FOR INSERT TO authenticated
+  WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "projects_update_own"
+  ON projects FOR UPDATE TO authenticated
+  USING (auth.uid() = user_id)
+  WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "projects_delete_own"
+  ON projects FOR DELETE TO authenticated
+  USING (auth.uid() = user_id);
+
+-- Tasks: similar a projects
+CREATE POLICY "tasks_select_own_project"
+  ON tasks FOR SELECT TO authenticated
+  USING (
+    EXISTS (
+      SELECT 1 FROM projects
+      WHERE projects.id = tasks.project_id
+      AND projects.user_id = auth.uid()
+    )
+  );
+```
+
+---
+
+## Verificar que RLS funciona
+
+```sql
+-- En Supabase SQL Editor, probar como usuario específico
+SET LOCAL role TO authenticated;
+SET LOCAL "request.jwt.claims" TO '{"sub": "uuid-del-usuario"}';
+
+SELECT * FROM projects;
+-- Solo debería mostrar los proyectos de ese usuario
+```

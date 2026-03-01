@@ -1,0 +1,170 @@
+---
+title: "Composición: cómo dirigir el ojo dentro de la imagen"
+slug: "composicion-imagen-ia"
+type: "text"
+duration_min: 18
+sort_order: 3
+status: "published"
+checklist:
+  - "Aplicar la regla de tercios en los prompts"
+  - "Usar espacio negativo para crear respiro visual"
+  - "Especificar el plano de la toma (close-up, medio, general)"
+---
+
+## La composición se puede pedir, no solo esperar
+
+La mayoría de los usuarios espera que el modelo "componga bien". El resultado es composición promedio: sujeto centrado, fondo neutro, nada interesante.
+
+La composición se especifica. Con las palabras correctas, puedes obtener exactamente el encuadre que quieres.
+
+---
+
+## Los planos de la toma
+
+El primer elemento de composición que siempre debes especificar es el plano:
+
+| Plano | Descripción | Palabras clave |
+|-------|-------------|----------------|
+| **Extreme close-up (ECU)** | Solo un detalle: ojo, labios, mano | `extreme close-up, macro shot, isolated detail` |
+| **Close-up (CU)** | Cara y hombros | `close-up portrait, tight framing, face and shoulders` |
+| **Medium close-up (MCU)** | Cintura hacia arriba | `medium close-up, waist up, three-quarter portrait` |
+| **Medium shot (MS)** | De la cintura a la cabeza | `medium shot, hip level framing` |
+| **Full shot (FS)** | Cuerpo completo | `full body shot, head to toe, full length portrait` |
+| **Long shot (LS)** | Persona pequeña en el ambiente | `long shot, environmental portrait, wide establishing shot` |
+| **Aerial / bird's eye** | Vista desde arriba | `aerial view, bird's eye view, top-down perspective` |
+
+**Siempre especifica el plano.** Sin especificar, el modelo elige el más común para ese tipo de imagen.
+
+---
+
+## La regla de tercios
+
+Divide la imagen en una cuadrícula de 3×3. Los puntos de intersección son los puntos fuertes donde el ojo naturalmente va.
+
+En palabras de prompt:
+```
+# Sujeto a la izquierda con espacio a la derecha:
+subject positioned on the left third, negative space on the right,
+rule of thirds composition
+
+# Horizonte en el tercio superior (cielo dominante):
+horizon line on lower third, vast sky above
+
+# Horizonte en el tercio inferior (tierra dominante):
+horizon line on upper third, ground and foreground dominant
+```
+
+---
+
+## Espacio negativo
+
+El espacio vacío es tan importante como el sujeto. Le da "aire" a la imagen y crea elegancia.
+
+```
+# Para retratos minimalistas:
+minimal composition, generous negative space, subject off-center,
+clean background, breathing room around subject
+
+# Para producto:
+product with generous white space, minimal composition,
+isolated subject, clean negative space
+```
+
+El espacio negativo también es útil para imágenes que van a tener texto superpuesto — como portadas de cursos, thumbnails o anuncios.
+
+---
+
+## Ángulos que cambian la historia
+
+El ángulo de la cámara comunica relaciones de poder y atmósfera:
+
+| Ángulo | Efecto | Cómo pedirlo |
+|--------|--------|-------------|
+| **Eye level** | Neutro, igualitario, documental | `eye level shot, direct gaze` |
+| **Low angle** | Sujeto poderoso, imponente | `low angle shot, looking up at subject, hero angle` |
+| **High angle** | Sujeto vulnerable, intimidad | `high angle shot, looking down, aerial perspective` |
+| **Dutch angle** | Tensión, inquietud, cinematográfico | `dutch angle, tilted camera, dramatic composition` |
+| **Over shoulder** | Perspectiva narrativa, presencia | `over shoulder shot, POV perspective, two-shot` |
+
+---
+
+## Profundidad y layers
+
+Las mejores fotos tienen múltiples planos: primer plano, sujeto principal, fondo. Esto crea profundidad y hace la imagen más rica.
+
+```
+# Foreground element:
+blurred foreground element framing the shot,
+foreground bokeh, layered composition, depth of field layers
+
+# Three-plane composition:
+sharp foreground, focused subject in middle ground,
+soft blurred background, three-layer composition
+
+# Sujeto entre elementos:
+subject framed by [elementos], natural frame within frame,
+environmental context
+```
+
+---
+
+## Frame within frame (encuadre dentro del encuadre)
+
+Una técnica poderosa: usar elementos del ambiente para enmarcar al sujeto.
+
+```
+subject framed by doorway, natural frame within frame
+subject visible through window, looking in
+person framed by tree branches, forest frame
+portrait through archway, architectural framing
+```
+
+---
+
+## Prompts de composición para casos frecuentes
+
+### Retrato editorial con espacio para texto
+```
+close-up portrait, subject positioned left third,
+generous negative space on right side,
+clean minimal background, rule of thirds composition,
+space for text overlay
+```
+
+### Producto para e-commerce premium
+```
+product centered, top-down flat lay composition,
+negative space around product, clean minimal background,
+perfect symmetry, commercial photography composition
+```
+
+### Lifestyle ambiental con narrativa
+```
+medium shot, person in foreground right third,
+meaningful background telling a story,
+environmental context visible, layered composition,
+natural frame within frame
+```
+
+### Thumbnail de video / curso
+```
+person on left third of frame, bold negative space on right,
+high contrast background, dynamic composition,
+eye-catching thumbnail format, 16:9 ratio
+```
+
+---
+
+## La composición en Midjourney: el aspect ratio
+
+```
+--ar 1:1    → cuadrado (Instagram feed)
+--ar 4:3    → ligeramente horizontal
+--ar 16:9   → wide screen, YouTube, presentaciones
+--ar 9:16   → vertical, Stories, Reels, TikTok
+--ar 2:3    → retrato clásico fotográfico
+--ar 3:2    → landscape fotográfico clásico
+--ar 21:9   → ultra-wide, cinematográfico
+```
+
+El aspect ratio también influye en la composición que el modelo genera — un 9:16 tenderá a dar retratos verticales, un 16:9 a dar escenas más horizontales y ambientadas.

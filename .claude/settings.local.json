@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \":*)",
+      "Bash(node -e \":*)",
+      "Bash(ls \"C:\\\\Users\\\\Ale\\\\Desktop\\\\vaai\\\\content\\\\courses\\\\sistema-ia-contenido-semanal\"\" 2>/dev/null || echo \"DIR_NOT_FOUND\":*)",
+      "Bash(ls \"C:\\\\Users\\\\Ale\\\\Desktop\\\\vaai\\\\content\\\\courses\"\" 2>/dev/null || echo \"NO_COURSES_DIR\":*)",
+      "Bash(ls \"C:\\\\Users\\\\Ale\\\\Desktop\\\\vaai\\\\content\"\" 2>/dev/null || echo \"NO_CONTENT_DIR\":*)",
+      "Bash(dir \"C:\\\\Users\\\\Ale\\\\Desktop\\\\vaai\" /b)",
+      "Bash(sort find /c/Users/Ale/Desktop/vaai/scripts -type f)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/sistema-ia-contenido-semanal/modulo-02/03-banco-ideas.mdx\":*)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/sistema-ia-contenido-semanal/modulo-03/02-generacion-lote.mdx\":*)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/sistema-ia-contenido-semanal/modulo-03/03-edicion-minima.mdx\":*)",
+      "Bash(__NEW_LINE_5e84a51e3f47678e__ cat)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/sistema-ia-contenido-semanal/modulo-04/02-carruseles.mdx\":*)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/sistema-ia-contenido-semanal/modulo-04/03-reels.mdx\":*)",
+      "Bash(__NEW_LINE_8585d5628a0b0531__ cat)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/sistema-ia-contenido-semanal/modulo-05/02-metricas.mdx\":*)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/sistema-ia-contenido-semanal/modulo-05/03-iterar.mdx\":*)",
+      "Bash(__NEW_LINE_f076fb4cf5fee20a__ cat)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/sistema-ia-contenido-semanal/modulo-06/03-cierre.mdx\":*)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/flujos-ia-productividad/modulo-01/02-cinco-tareas.mdx\":*)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/flujos-ia-productividad/modulo-01/03-mapa-automatizacion.mdx\":*)",
+      "Bash(__NEW_LINE_d3e6baf460cdbab7__ cat)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/flujos-ia-productividad/modulo-02/03-documentos-rapidos.mdx\":*)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/flujos-ia-productividad/modulo-03/02-briefs.mdx\":*)",
+      "Bash(__NEW_LINE_a9ea631ac1b3db94__ cat)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/flujos-ia-productividad/modulo-03/03-respuestas-dificiles.mdx\":*)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/flujos-ia-productividad/modulo-04/02-slides-automaticos.mdx\":*)",
+      "Bash(__NEW_LINE_b6ff4f94aa2a222e__ cat)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/flujos-ia-productividad/modulo-04/03-narrativa.mdx\":*)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/flujos-ia-productividad/modulo-05/03-sistema-documentacion.mdx\":*)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/flujos-ia-productividad/modulo-06/02-politicas-ia.mdx\":*)",
+      "Bash(__NEW_LINE_f26ea6dec1a1c1ef__ cat)",
+      "Bash(\"/c/Users/Ale/Desktop/vaai/content/courses/flujos-ia-productividad/modulo-06/03-flujo-seguro.mdx\":*)",
+      "Bash(dir \"C:\\\\Users\\\\Ale\\\\Desktop\\\\vaai\\\\content\\\\courses\\\\desarrollo-web-ia\" /s /b *.mdx)",
+      "Bash(findstr /v \"index.mdx\")"
+    ]
+  }
+}

@@ -1,0 +1,232 @@
+---
+title: "Deploy, monetización y primeros usuarios"
+slug: "deploy-produccion"
+type: "mixed"
+duration_min: 28
+sort_order: 3
+status: "published"
+checklist:
+  - "Hacer el deploy final a Vercel con todas las variables de entorno"
+  - "Configurar un dominio personalizado"
+  - "Tener la app lista para primeros usuarios reales"
+---
+
+## De local a producción: el checklist
+
+Antes del primer deploy real, verifica:
+
+```markdown
+### Build
+- [ ] `npm run build` pasa sin errores TypeScript
+- [ ] No hay `any` types
+- [ ] Todas las variables de entorno están documentadas
+
+### Supabase producción
+- [ ] Row Level Security habilitado en todas las tablas
+- [ ] Trigger de creación de profile activo
+- [ ] Buckets de Storage configurados (si aplica)
+- [ ] Migraciones aplicadas a la DB de producción
+
+### Auth
+- [ ] Redirect URLs configuradas en Supabase para el dominio de producción
+- [ ] Email templates personalizados (opcional pero recomendado)
+- [ ] Rate limiting habilitado en Auth settings
+
+### Vercel
+- [ ] Todas las env vars cargadas (NEXT_PUBLIC y privadas)
+- [ ] Framework preset: Next.js (se detecta automático)
+- [ ] Build command: next build (por defecto)
+
+### Performance básica
+- [ ] Imágenes usando next/image
+- [ ] No hay waterfalls de datos en Server Components críticos
+- [ ] Loading UI con Suspense en las secciones lentas
+```
+
+---
+
+## Variables de entorno en Vercel
+
+```bash
+# Las NEXT_PUBLIC_* van en Environment: Production + Preview + Development
+NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+
+# Las privadas van solo en Production (nunca en Preview si son llaves reales)
+SUPABASE_SERVICE_ROLE_KEY=eyJ...
+DATABASE_URL=postgresql://...
+
+# App
+NEXT_PUBLIC_APP_URL=https://tudominio.com
+```
+
+**Regla:** si una variable empieza con `NEXT_PUBLIC_`, el cliente puede verla. Si tiene datos sensibles, NO pongas `NEXT_PUBLIC_`.
+
+---
+
+## Dominio personalizado en Vercel (5 minutos)
+
+```
+1. Comprar dominio (Namecheap, GoDaddy, o directamente en Vercel)
+2. En Vercel Dashboard → tu proyecto → Settings → Domains
+3. Agregar tu dominio → Vercel muestra los DNS records
+4. Ir al panel de tu registrador → agregar los A/CNAME records
+5. Esperar 5-30 minutos para propagación DNS
+6. Vercel emite el certificado SSL automáticamente
+```
+
+Si usas Vercel como registrador, el proceso es de 2 clicks.
+
+---
+
+## Supabase: configurar para producción
+
+### 1. Actualizar Redirect URLs
+
+En Supabase → Authentication → URL Configuration:
+
+```
+# Agregar el dominio de producción
+Site URL: https://tudominio.com
+Additional Redirect URLs:
+  https://tudominio.com/**
+  https://tudominio.com/auth/callback
+```
+
+Sin esto, los magic links y OAuth redirigen al localhost.
+
+### 2. Aplicar migraciones a producción
+
+```bash
+# Verificar que apunta a la DB de producción (no local)
+cat .env.local  # debe tener DATABASE_URL de producción
+
+# Aplicar
+npx drizzle-kit push
+
+# Verificar en Supabase SQL Editor
+SELECT table_name FROM information_schema.tables
+WHERE table_schema = 'public';
+```
+
+### 3. Poblar datos iniciales (si necesitas)
+
+```typescript
+// scripts/seed-prod.ts
+// CUIDADO: ejecutar solo una vez en producción
+// Crear el usuario admin, datos de ejemplo, etc.
+
+import { db } from '../src/db'
+import { profiles } from '../src/db/schema'
+
+async function seedProd() {
+  console.log('Seeding production...')
+  // Ejemplo: verificar que las tablas existen
+  const count = await db.select().from(profiles).limit(1)
+  console.log('Tables OK. Profiles:', count.length)
+}
+
+seedProd().catch(console.error)
+```
+
+---
+
+## Agregar pagos en producción
+
+Si tu app necesita cobrar, el flujo con Transbank o MercadoPago está diseñado para habilitarse con un env var:
+
+```bash
+# En Vercel → Environment Variables
+PAYMENT_PROVIDER=transbank  # o mercadopago
+
+# Credenciales de producción (distintas a las de integración/sandbox)
+TRANSBANK_COMMERCE_CODE=xxxxxx  # código real de producción
+TRANSBANK_API_KEY_SECRET=xxxxxx
+TRANSBANK_ENVIRONMENT=production  # cambiar de 'integration' a 'production'
+```
+
+**Importante:** en integración/sandbox puedes usar tarjetas de prueba. En producción se cobra dinero real. Verifica el flujo completo en sandbox antes de activar producción.
+
+---
+
+## Monitoreo básico: lo que debes tener desde el día 1
+
+### Vercel Analytics (gratis en el plan Hobby)
+
+```typescript
+// src/app/layout.tsx
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html>
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
+  )
+}
+```
+
+Con esto tienes: vistas de página, países, navegadores, Core Web Vitals.
+
+### Logging de errores (Sentry — opcional pero recomendado)
+
+```bash
+npx @sentry/wizard@latest -i nextjs
+```
+
+Sentry captura automáticamente errores de Server Components, Client Components y Edge Functions.
+
+---
+
+## Del deploy a los primeros usuarios
+
+### Estrategia de beta cerrada (recomendado para MVP)
+
+```
+1. Deploy → URL de producción lista
+2. Lista de 10-20 personas de confianza (beta testers)
+3. Onboardear en vivo (por videollamada) al menos a los primeros 3
+4. Feedback estructurado: ¿qué confundió? ¿qué faltó? ¿qué les gustó?
+5. Iterar antes de abrir al público
+```
+
+Los onboardings en vivo valen más que cualquier encuesta — ves exactamente dónde se atoran.
+
+### El loop de mejora con IA
+
+Cada bug o pedido de feature sigue el mismo loop:
+
+```
+1. Describir el problema / feature en Notion (u otra herramienta)
+2. Abrir Claude Code con CLAUDE.md actualizado
+3. "Lee el CLAUDE.md. Hoy trabajamos en: [issue]"
+4. Implementar → revisar → commit → deploy automático
+5. Notificar al beta tester que está resuelto
+```
+
+Con Vercel, desde el commit hasta que el beta tester puede probar el fix son menos de 2 minutos.
+
+---
+
+## Cierre del curso
+
+Construiste una app web completa con:
+
+- **Claude Code** como copiloto de desarrollo
+- **Supabase** como backend (DB + Auth + Storage)
+- **Drizzle** para queries type-safe
+- **Next.js 15** con Server Components y Server Actions
+- **Vercel** para deploy continuo
+- **MCP Servers** para conectar tu workflow
+- **Design system** con tokens CSS y componentes
+
+El stack no es lo importante. Lo importante es el workflow: brief → arquitectura → schema → implementación → deploy → usuarios → iteración.
+
+Ese ciclo, asistido por IA, puede tomar días en lugar de semanas. La diferencia entre el dev que usa IA de forma reactiva y el que la usa de forma proactiva no es la herramienta — es el sistema.
+
+**El siguiente paso es tuyo:** define el brief de tu próximo proyecto y empieza la conversación con Claude.

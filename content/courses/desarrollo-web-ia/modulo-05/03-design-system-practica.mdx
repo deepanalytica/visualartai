@@ -1,0 +1,291 @@
+---
+title: "Construir un design system con IA en una tarde"
+slug: "design-system-practica"
+type: "mixed"
+duration_min: 30
+sort_order: 3
+status: "published"
+checklist:
+  - "Definir los CSS tokens base de tu proyecto"
+  - "Configurar Tailwind con tu design system"
+  - "Crear los primeros 3 componentes de marca"
+---
+
+## Qué es un design system (y cuál es el mínimo viable)
+
+Un design system completo (como el de Airbnb o Atlassian) tarda meses y tiene cientos de componentes. El tuyo no necesita eso.
+
+**Design system mínimo viable para un proyecto con IA:**
+
+1. **Tokens** — colores, tipografía, espaciado, radios (en CSS custom properties)
+2. **3-5 componentes base** — los que uses en todo el proyecto
+3. **Patrones de layout** — cómo organizas secciones y páginas
+4. **Documentación en CLAUDE.md** — para que Claude los respete
+
+Eso es todo. Con esto, Claude mantiene consistencia visual en todo el proyecto.
+
+---
+
+## Fase 1: Definir los tokens (30 min con IA)
+
+### Prompt inicial
+
+```
+Voy a construir un design system para [descripción de tu app].
+
+Audiencia: [quién lo usa]
+Personalidad visual: [3-5 adjetivos: moderno, oscuro, técnico, cálido, etc]
+Referentes: [2-3 productos/sitios con estética similar]
+
+Genera los design tokens completos:
+
+1. Colores (CSS custom properties en :root):
+   - Backgrounds: 4 niveles (page, surface, elevated, overlay)
+   - Texto: 3 niveles (primary, secondary, muted/disabled)
+   - Acento primario: color principal + dim version (20% opacidad)
+   - Acento secundario: color secundario + dim version
+   - Borders: subtle, default, focus
+   - Estados: success, warning, destructive (con sus foregrounds)
+
+2. Tipografía:
+   - Font family: máximo 2 familias (display + body)
+   - Size scale: xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5xl
+   - Weight: regular (400), medium (500), semibold (600), bold (700)
+   - Line height pairs por tamaño
+
+3. Spacing scale (base 4px)
+
+4. Border radius scale: sm, md, lg, xl, full
+
+5. Shadows: sm, md, lg, glow (si aplica para dark mode)
+
+Formato: CSS custom properties en :root {}
+Añade comentarios descriptivos.
+```
+
+### Resultado esperado
+
+```css
+:root {
+  /* === BACKGROUNDS === */
+  --bg-page: #05060a;        /* void negro, fondo de página */
+  --bg-surface: #0a0c12;     /* superficies principales */
+  --bg-elevated: #0f1118;    /* cards, modales */
+  --bg-overlay: #141720;     /* tooltips, dropdowns */
+
+  /* === TEXTO === */
+  --text-primary: #f0f4ff;   /* texto principal */
+  --text-secondary: #8b95b0; /* texto secundario */
+  --text-muted: #4a5270;     /* placeholder, deshabilitado */
+
+  /* === ACENTOS === */
+  --accent-primary: #00e5ff;
+  --accent-primary-dim: #00e5ff20;
+  --accent-secondary: #7c4dff;
+  --accent-secondary-dim: #7c4dff20;
+
+  /* === BORDERS === */
+  --border-subtle: #1e2235;
+  --border-default: #252a3d;
+  --border-focus: var(--accent-primary);
+
+  /* === ESTADOS === */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --destructive: #ef4444;
+
+  /* === TYPOGRAPHY === */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'GeistMono', 'Courier New', monospace;
+
+  /* === RADIUS === */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+}
+```
+
+---
+
+## Fase 2: Configurar Tailwind (15 min)
+
+```typescript
+// tailwind.config.ts
+import type { Config } from 'tailwindcss'
+
+export default {
+  content: ['./src/**/*.{ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        // Backgrounds
+        'bg-page': 'var(--bg-page)',
+        'bg-surface': 'var(--bg-surface)',
+        'bg-elevated': 'var(--bg-elevated)',
+        'bg-overlay': 'var(--bg-overlay)',
+
+        // Texto
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-muted': 'var(--text-muted)',
+
+        // Acentos
+        'accent-primary': 'var(--accent-primary)',
+        'accent-secondary': 'var(--accent-secondary)',
+
+        // Borders
+        'border-subtle': 'var(--border-subtle)',
+        'border-default': 'var(--border-default)',
+      },
+      fontFamily: {
+        sans: ['var(--font-sans)'],
+        display: ['var(--font-display)'],
+        mono: ['var(--font-mono)'],
+      },
+      borderRadius: {
+        sm: 'var(--radius-sm)',
+        md: 'var(--radius-md)',
+        lg: 'var(--radius-lg)',
+        xl: 'var(--radius-xl)',
+      },
+    },
+  },
+} satisfies Config
+```
+
+Prompt para este paso:
+```
+Tengo estos CSS custom properties:
+[pega los tokens]
+
+Genera el tailwind.config.ts que mapea estas variables a tokens de Tailwind.
+Usa el patrón 'color-name': 'var(--css-var)'.
+```
+
+---
+
+## Fase 3: Los 3 componentes base (1 hora)
+
+Elige los 3 componentes que más vas a reutilizar. Para un SaaS típico:
+
+1. **Card** — el contenedor universal
+2. **Button** — con variantes para todos los contextos
+3. **Badge** — para estados, categorías, etiquetas
+
+### Prompt por componente
+
+```
+Usando estos design tokens:
+[CSS custom properties]
+
+Y esta configuración de Tailwind:
+[tailwind.config.ts]
+
+Crea el componente [nombre] con estas variantes:
+[lista de variantes]
+
+Requisitos:
+- Props con TypeScript types estrictos (no any, no genéricos sin typar)
+- Usar `cva` (class-variance-authority) para las variantes
+- Incluir variante 'disabled' con los estilos apropiados
+- Compatible con dark mode (usa los tokens, no valores hardcodeados)
+- Exportar los types de las props
+- Accesibilidad: atributos aria correctos, focus visible
+```
+
+### Ejemplo: NeonCard
+
+```typescript
+// src/components/brand/NeonCard.tsx
+import { type HTMLAttributes } from 'react'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '@/lib/utils'
+
+const neonCardVariants = cva(
+  // Base
+  'rounded-lg border bg-bg-elevated transition-all duration-300',
+  {
+    variants: {
+      glow: {
+        none: 'border-border-default',
+        cyan: 'border-accent-primary/20 hover:border-accent-primary/50 hover:shadow-[0_0_20px_var(--accent-primary-dim)]',
+        violet: 'border-accent-secondary/20 hover:border-accent-secondary/50 hover:shadow-[0_0_20px_var(--accent-secondary-dim)]',
+      },
+      glass: {
+        true: 'backdrop-blur-md bg-bg-elevated/70',
+        false: 'bg-bg-elevated',
+      },
+      padding: {
+        sm: 'p-4',
+        md: 'p-6',
+        lg: 'p-8',
+      },
+    },
+    defaultVariants: {
+      glow: 'none',
+      glass: false,
+      padding: 'md',
+    },
+  }
+)
+
+type NeonCardProps = HTMLAttributes<HTMLDivElement> &
+  VariantProps<typeof neonCardVariants>
+
+export function NeonCard({ className, glow, glass, padding, ...props }: NeonCardProps) {
+  return (
+    <div
+      className={cn(neonCardVariants({ glow, glass, padding }), className)}
+      {...props}
+    />
+  )
+}
+```
+
+---
+
+## Fase 4: Documentar en CLAUDE.md
+
+Esta es la parte que más se olvida y la más importante:
+
+```markdown
+## Design System
+
+### Tokens
+Los tokens están en `src/app/globals.css` como CSS custom properties.
+En Tailwind están mapeados como: bg-page, bg-surface, text-primary, accent-primary, etc.
+
+### Componentes de marca (src/components/brand/)
+- `NeonCard` — tarjeta base. Props: glow (none|cyan|violet), glass, padding (sm|md|lg)
+- `NeonButton` — botón base. Variantes: default, ghost, neon, destructive
+- `Badge` — etiqueta. Variantes: default, secondary, success, warning, destructive
+
+### Reglas de diseño
+1. SIEMPRE usar tokens de color, nunca valores hardcodeados (ej: text-primary, no text-[#f0f4ff])
+2. Usar cva para variantes, no ternarios de className
+3. Máximo 2 colores de acento visibles en la misma pantalla
+4. Espaciado: usar la escala de Tailwind (gap-4, gap-6, gap-8, gap-12)
+5. NO modificar archivos en src/components/ui/ (son de shadcn/ui)
+
+### Stack visual
+- Dark mode exclusivo, sin toggle light/dark
+- Personalidad: [tus adjetivos]
+- Referentes: [tus referentes]
+```
+
+Con esto en CLAUDE.md, cada vez que Claude genera un componente nuevo respeta tu sistema visual.
+
+---
+
+## El resultado de tener un design system
+
+**Antes:** "Claude, crea una card para mostrar el precio de un plan"
+→ Resultado: cualquier cosa, con colores inventados, espaciado inconsistente
+
+**Después:** Claude lee CLAUDE.md, sabe que debe usar `NeonCard` con `glow="cyan"`, `text-primary`, `accent-primary`, espaciado `p-6`.
+→ Resultado: componente visualmente consistente con el resto de la app desde el primer intento.
+
+El design system es el contrato visual entre tú y Claude.

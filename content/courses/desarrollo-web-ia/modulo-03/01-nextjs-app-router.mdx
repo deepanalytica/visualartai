@@ -1,0 +1,155 @@
+---
+title: "Next.js App Router: la estructura que funciona con IA"
+slug: "nextjs-app-router-ia"
+type: "mixed"
+duration_min: 30
+sort_order: 1
+status: "published"
+checklist:
+  - "Entender la diferencia entre Server y Client Components"
+  - "Saber cuándo usar cada uno y cómo le explico la diferencia a Claude"
+  - "Construir el layout autenticado completo"
+---
+
+## Por qué el App Router funciona especialmente bien con IA
+
+El App Router de Next.js 15 tiene una convención clara y predecible: la estructura de carpetas es el routing. Esto lo hace ideal para trabajar con IA porque:
+
+1. Los prompts son específicos: "agrega una ruta /dashboard/settings" → Claude sabe exactamente qué archivo crear
+2. Los Server Components eliminan la ambigüedad de dónde ejecutar el código
+3. Los layouts resuelven el problema de "qué se comparte entre páginas" sin estado global
+
+---
+
+## La regla central: Server Component por defecto
+
+**Server Component** (por defecto, sin `'use client'`):
+- Se ejecuta en el servidor
+- Puede hacer queries a la DB directamente
+- No puede usar hooks de React (`useState`, `useEffect`)
+- No puede manejar eventos de usuario (`onClick`, `onChange`)
+- Puede ser `async` — puede hacer `await` directamente
+
+**Client Component** (solo cuando agregas `'use client'`):
+- Se ejecuta en el navegador
+- Puede usar hooks de React y estado local
+- Puede manejar eventos
+- NO puede hacer queries a la DB directamente
+- Se vuelve un "bundle" de JavaScript que se envía al cliente
+
+**La pregunta correcta:**
+> ¿Necesita este componente interactividad del usuario o estado local?
+
+- Sí → Client Component
+- No → Server Component
+
+---
+
+## Estructura de rutas del proyecto
+
+```
+src/app/
+├── layout.tsx              ← Layout raíz (html, body, providers)
+├── page.tsx                ← Landing page (/)
+│
+├── (auth)/                 ← Grupo: rutas de autenticación (sin auth)
+│   ├── layout.tsx          ← Layout de auth (solo centrado)
+│   ├── login/page.tsx
+│   ├── register/page.tsx
+│   └── reset-password/page.tsx
+│
+├── (app)/                  ← Grupo: rutas protegidas (requieren auth)
+│   ├── layout.tsx          ← Layout de app (sidebar, navbar)
+│   ├── dashboard/page.tsx
+│   ├── settings/
+│   │   ├── page.tsx        ← /settings
+│   │   └── billing/page.tsx ← /settings/billing
+│   └── [recurso]/
+│       ├── page.tsx        ← Lista de recursos
+│       ├── [id]/page.tsx   ← Detalle de recurso
+│       └── new/page.tsx    ← Crear nuevo recurso
+│
+└── api/                    ← API routes
+    └── [recurso]/
+        ├── route.ts        ← GET (list) + POST (create)
+        └── [id]/route.ts   ← GET + PUT + DELETE
+```
+
+---
+
+## El layout de app autenticado
+
+```typescript
+// src/app/(app)/layout.tsx
+import { createServerClient } from '@/lib/supabase/server'
+import { redirect } from 'next/navigation'
+import { Sidebar } from '@/components/app/Sidebar'
+
+export default async function AppLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const supabase = createServerClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    redirect('/login')
+  }
+
+  return (
+    <div className="flex h-screen">
+      <Sidebar user={user} />
+      <main className="flex-1 overflow-auto">
+        {children}
+      </main>
+    </div>
+  )
+}
+```
+
+Este layout verifica auth en el servidor antes de renderizar cualquier página del grupo `(app)`. Sin estados de loading, sin flash de contenido no autorizado.
+
+---
+
+## Prompt para generar páginas con App Router
+
+```
+Stack: Next.js 15, App Router, TypeScript, Tailwind CSS, shadcn/ui
+Supabase Auth ya configurado. createServerClient en src/lib/supabase/server.ts
+
+Genera la página src/app/(app)/[nombre-ruta]/page.tsx con:
+- Server Component async
+- Obtiene el usuario autenticado de Supabase (si no hay usuario, redirect a /login)
+- Query a la tabla [tabla] con Drizzle para los datos del usuario
+- Renderiza los datos con un layout clean usando Tailwind y componentes de shadcn
+- Maneja el estado empty (cuando no hay datos)
+
+Componentes de shadcn disponibles: Card, Badge, Button, Table (ya instalados)
+```
+
+---
+
+## Loading states y Suspense
+
+Next.js App Router tiene soporte nativo para streaming con `loading.tsx`:
+
+```typescript
+// src/app/(app)/dashboard/loading.tsx
+import { Skeleton } from '@/components/ui/skeleton'
+
+export default function DashboardLoading() {
+  return (
+    <div className="p-6 space-y-4">
+      <Skeleton className="h-8 w-48" />
+      <div className="grid grid-cols-3 gap-4">
+        {[1, 2, 3].map(i => (
+          <Skeleton key={i} className="h-32" />
+        ))}
+      </div>
+    </div>
+  )
+}
+```
+
+Mientras el Server Component `page.tsx` hace sus queries, Next.js muestra este loading automáticamente. No necesitas `useState` para esto.

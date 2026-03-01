@@ -1,0 +1,181 @@
+---
+title: "Batch prompting: producir 50 imágenes en una tarde"
+slug: "batch-prompting-produccion-masiva"
+type: "mixed"
+duration_min: 22
+sort_order: 1
+status: "published"
+checklist:
+  - "Construir un sistema de variaciones para batch generation"
+  - "Usar Claude para escalar los prompts Nano Banana"
+  - "Organizar el workflow de producción masiva"
+---
+
+## De la imagen a la producción
+
+Las habilidades que aprendiste sirven para generar imágenes individuales de alta calidad. Pero el verdadero poder está en producir grandes volúmenes manteniendo coherencia visual.
+
+Un feed de Instagram para un mes: 30 imágenes.
+Un banco de imágenes para un curso: 50-100 imágenes.
+Un set de creatividades para una campaña: 20-40 variaciones.
+
+Hacer esto una por una es lento e ineficiente. El batch prompting es el sistema.
+
+---
+
+## El framework de variaciones Nano Banana
+
+La idea central: tienes un **prompt base** con L3 y L4 fijos (técnica y post constantes = coherencia visual), y varías L1 y L2 (sujeto y ambiente = contenido diferente).
+
+```
+BASE FIJO (la identidad visual del proyecto):
+L3: shot on Canon EOS R5, 85mm f/1.4, golden hour light, bokeh background
+L4: warm Kodak Portra color grading, slight film grain, lifted shadows
+
+VARIABLES (el contenido de cada imagen):
+L1: [cambia el sujeto o actividad]
+L2: [cambia el ambiente o contexto]
+```
+
+### Ejemplo: banco de imágenes de curso de productividad
+
+```
+# Imagen 1
+L1: person typing on laptop, focused expression, professional
+L2: home office, morning light, plants in background
++ BASE FIJO
+
+# Imagen 2
+L1: person reading documents, highlighting key points
+L2: café, afternoon, window light, cappuccino nearby
++ BASE FIJO
+
+# Imagen 3
+L1: person in video call, engaged presentation gesture
+L2: modern home office, bookshelf background, ring light
++ BASE FIJO
+
+# Imagen 4
+L1: person writing in notebook, planning session
+L2: outdoor café terrace, spring light, city background
++ BASE FIJO
+```
+
+Mismo look visual (L3+L4 iguales), contenido diferente en cada imagen. El resultado es un banco visualmente cohesivo.
+
+---
+
+## Usar Claude para escalar los prompts
+
+En lugar de escribir cada variación a mano, Claude puede generar el batch completo:
+
+```
+Tengo este prompt base para un banco de imágenes de [tema del proyecto]:
+
+L3 (fijo): shot on Canon EOS R5, 85mm f/1.4, warm natural light,
+shallow depth of field, lifestyle photography
+L4 (fijo): warm Kodak Portra color grading, slight film grain,
+lifted shadows, natural color palette
+
+Necesito 20 variaciones con diferentes L1 y L2.
+El tema es: [descripción del proyecto, ej: "profesionales trabajando en tech"]
+
+Para cada variación:
+- L1 diferente (actividad, expresión, características del sujeto)
+- L2 diferente (ambiente, hora del día, contexto)
+- Mantener el L3 y L4 exactamente iguales
+
+Formato:
+[NÚMERO]. L1: [descripción] | L2: [descripción]
+```
+
+Claude puede generar las 20 variaciones en segundos, y tú solo copias cada L1+L2 con el L3+L4 fijo para generar la imagen.
+
+---
+
+## Workflow de producción masiva
+
+### Fase 1: Definir el proyecto (30 min)
+
+```markdown
+## Proyecto: [Nombre]
+
+### Objetivo
+[Para qué se usan las imágenes]
+
+### Cantidad necesaria
+[N imágenes]
+
+### Base visual (L3+L4 fijos)
+L3: [técnica base]
+L4: [post base]
+
+### Categorías de contenido
+- Categoría A: [X imágenes de este tipo]
+- Categoría B: [X imágenes de este tipo]
+- Categoría C: [X imágenes de este tipo]
+```
+
+### Fase 2: Generar las variaciones con Claude (15 min)
+
+Para cada categoría, usa el prompt de Claude de arriba para generar 10-20 variaciones.
+
+### Fase 3: Generación en batch (2-3 horas)
+
+**En Midjourney:**
+- Genera todas las imágenes en modo relax (más barato, más lento)
+- O usa modo fast si necesitas velocidad
+- Puedes enviar múltiples /imagine al mismo tiempo
+
+**Tip de flujo:** abre un documento con todas las variaciones listas, cópialas una por una a Midjourney mientras otras se procesan.
+
+### Fase 4: Selección (45 min)
+
+Por cada generación de 4 imágenes (la cuadrícula de Midjourney):
+- Guarda las mejores con `U1`, `U2`, `U3`, `U4` (upscale)
+- Descarta las que no cumplen el estándar
+- Regenera si ninguna funciona (a veces un mismo prompt da resultados muy diferentes)
+
+**Criterios de selección:**
+- [ ] No tiene artefactos obvios (manos raras, fondos incoherentes)
+- [ ] La expresión/momento es auténtico y no genérico
+- [ ] La iluminación es coherente con L3 especificado
+- [ ] El color grading se ve consistente con el resto del batch
+- [ ] Composición interesante, no simplemente centrada
+
+---
+
+## El ratio de aceptación
+
+Realidad: no todas las generaciones son buenas. Un ratio típico es:
+
+- 1 de cada 4 imágenes de una cuadrícula es excelente
+- 1-2 son aceptables
+- 0-1 son descartables
+
+Si quieres 50 imágenes de alta calidad, necesitas generar aproximadamente:
+- 50 prompts × 4 imágenes = 200 generaciones
+- De esas, seleccionas ~50 excelentes + tienes 50-100 de reserva
+
+**En Midjourney:** 200 generaciones en modo fast consumen ~200 "images" del plan. El plan Basic tiene ~200/mes. Para proyectos grandes, usa el plan Standard (~15 USD/mes con unlimited relax mode).
+
+---
+
+## Batch con Flux (via API)
+
+Si usas Flux a través de la API (fal.ai o similar), puedes automatizar el batch con código:
+
+```python
+# Pseudocódigo — concepto del workflow
+prompts = [
+    "L1: person typing, focused | L2: home office, morning + BASE",
+    "L1: person reading | L2: café, afternoon + BASE",
+    # ... 48 más
+]
+
+for prompt in prompts:
+    imagen = generar_imagen(prompt, seed=random.randint(0, 99999))
+    guardar(imagen, f"batch_{i}.jpg")
+```
+
+Esta automatización permite generar 50 imágenes sin intervención manual. Los resultados son más variables que Midjourney, pero el control técnico y la escalabilidad son superiores.

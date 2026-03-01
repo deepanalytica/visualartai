@@ -1,0 +1,97 @@
+---
+title: "Midjourney / DALL-E para contenido de marca"
+slug: "midjourney-dalle-marca"
+type: "mixed"
+video_url: ""
+duration_min: 30
+sort_order: 1
+status: "published"
+checklist:
+  - "Definir la paleta de colores de tu marca (hex o descripción)"
+  - "Crear tu primer prompt de imagen de marca"
+  - "Generar 4 variaciones y elegir la mejor"
+  - "Guardar el prompt en tu banco de prompts visuales"
+---
+
+## El reto de la consistencia visual
+
+Las imágenes generadas con IA tienen un problema: son increíbles pero inconsistentes. Post a post, las personas, colores y estilos cambian.
+
+La solución es construir un **sistema de prompts visuales de marca** que repitas con variaciones mínimas.
+
+---
+
+## Estructura de un prompt de imagen de marca
+
+```
+[Descripción del sujeto/escena], [estilo fotográfico o artístico],
+[paleta de colores: #hex o descripción], [iluminación],
+[composición], [ángulo de cámara], [textura/ambiente]
+--ar 1:1 (o 4:5 para Instagram, 16:9 para YouTube/LinkedIn)
+--style raw (para Midjourney, más fiel al prompt)
+```
+
+---
+
+## Ejemplos por industria
+
+### Marca personal (coach/consultor)
+
+```
+Professional portrait, woman in modern office,
+warm amber and cream tones, soft window light,
+shallow depth of field, confident expression,
+minimalist background, professional photography style
+--ar 4:5
+```
+
+### Producto físico (ecommerce)
+
+```
+[Nombre del producto] on marble surface,
+flat lay, sage green and white color palette,
+natural daylight, clean minimalist composition,
+product photography, high-end commercial look
+--ar 1:1
+```
+
+### Contenido educativo/IA (para Visual Art AI)
+
+```
+Abstract concept visualization, futuristic data visualization,
+dark background with neon cyan accents, glowing geometric shapes,
+digital art, cinematic lighting, 8k resolution
+--ar 16:9
+```
+
+---
+
+## Construir consistencia con "seed" y "style reference"
+
+**En Midjourney:**
+- `--sref [URL de imagen anterior]` — mantiene el estilo visual de una imagen tuya
+- `--seed [número]` — reproduce resultados similares variando solo el prompt
+
+**En DALL-E (ChatGPT):**
+- Genera una imagen base y luego pide "variaciones manteniendo el mismo estilo y paleta de colores"
+
+---
+
+## Flujo de trabajo de 15 minutos
+
+1. **Lunes:** Genera 4 imágenes con tu prompt base, variando el sujeto
+2. Elige las 2 mejores
+3. Úsalas durante la semana como base para carruseles y posts
+
+---
+
+## Herramientas alternativas gratuitas
+
+| Herramienta | Fortaleza | Precio |
+|-------------|-----------|--------|
+| Adobe Firefly | Legalmente segura para uso comercial | Gratis con Adobe |
+| Canva IA | Fácil, integrado con diseño | Freemium |
+| Leonardo.ai | Control de estilos avanzado | Freemium |
+| Stable Diffusion | Máximo control, local | Gratis (requiere GPU) |
+
+> **Recomendación:** Empieza con Canva IA si ya usas Canva. Para resultados más avanzados, Midjourney (desde $10/mes) o Leonardo.ai en su plan gratuito.

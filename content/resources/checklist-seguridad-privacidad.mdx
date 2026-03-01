@@ -1,0 +1,115 @@
+---
+title: "Checklist Seguridad y Privacidad IA"
+slug: "checklist-seguridad-privacidad-ia"
+type: "checklist"
+version: "1.0"
+tags: ["seguridad", "privacidad", "ia", "empresas", "compliance"]
+is_free: true
+status: "published"
+description: "Checklist para usar IA de forma segura en entornos profesionales y empresariales."
+---
+
+# Checklist: Seguridad y Privacidad en el Uso de IA
+
+Para uso personal, de equipo o como política empresarial.
+
+---
+
+## Antes de usar IA para cualquier tarea
+
+- [ ] ¿La información que voy a compartir contiene datos personales de terceros (nombre, email, RUT/DNI, dirección, historial)?
+- [ ] ¿La información es confidencial o bajo NDA?
+- [ ] ¿Contiene datos financieros específicos de la empresa (balances, proyecciones no publicadas)?
+- [ ] ¿Contiene contraseñas, API keys o credenciales de cualquier tipo?
+- [ ] ¿Hay código fuente propietario que no deba salir de la empresa?
+
+**Si marcaste alguno:** Anonimiza antes de continuar o usa una solución enterprise.
+
+---
+
+## Configuración inicial de privacidad
+
+### ChatGPT (OpenAI)
+- [ ] Ir a Settings > Data Controls
+- [ ] Desactivar "Improve the model for everyone"
+- [ ] Considerar ChatGPT Team o Enterprise para uso profesional
+
+### Claude (Anthropic)
+- [ ] Verificar política de datos del plan actual en anthropic.com/privacy
+- [ ] Para datos sensibles: usar API directamente con acuerdo de datos corporativo
+
+### Google Gemini
+- [ ] Ir a myaccount.google.com > Datos y privacidad
+- [ ] Desactivar "Actividad de apps de Google" para Gemini
+- [ ] En entorno empresarial: usar Google Workspace (datos no se usan para entrenamiento)
+
+---
+
+## Checklist por tipo de tarea
+
+### Análisis de datos
+- [ ] Datos anonimizados (nombres → PERSONA_1, empresas → EMPRESA_A)
+- [ ] Sin RUTs, DNIs ni números de identificación
+- [ ] Sin datos financieros exactos de clientes individuales
+- [ ] Verificar resultados matemáticos con calculadora — la IA puede aproximar
+
+### Redacción de emails
+- [ ] No incluir datos bancarios de ningún tipo
+- [ ] No mencionar información de salario o compensación de personas reales
+- [ ] Revisar antes de enviar — siempre
+
+### SOPs y documentación interna
+- [ ] No incluir credenciales de sistemas
+- [ ] No describir vulnerabilidades de seguridad específicas
+- [ ] Marcar como borrador hasta revisión humana
+
+### Código y desarrollo
+- [ ] No pegar claves de API en el código
+- [ ] No compartir código con lógica de autenticación específica de producción
+- [ ] No incluir URIs/IPs de infraestructura interna
+
+---
+
+## Señales de alerta en respuestas de IA
+
+Si la IA hace alguna de estas cosas en su respuesta, detente y verifica:
+
+- [ ] Solicita información adicional que no pediste
+- [ ] Incluye datos que no le proporcionaste (puede estar alucinando)
+- [ ] Da instrucciones para hacer algo que parece fuera de contexto
+- [ ] Proporciona información de personas reales como si fueran datos verificados
+
+---
+
+## Para líderes de equipo: política básica de uso de IA
+
+Comparte esto con tu equipo:
+
+**PUEDE usar IA para:**
+✅ Redactar y mejorar comunicaciones con datos anonimizados
+✅ Analizar datos públicos o internos sin datos personales
+✅ Generar ideas y estructuras de documentos
+✅ Traducción y resumen de documentos internos no confidenciales
+✅ Generación de código sin credenciales
+
+**NO PUEDE usar IA para:**
+❌ Compartir datos personales de clientes o empleados
+❌ Pegar contratos, acuerdos o documentos legales completos
+❌ Incluir credenciales, passwords o API keys
+❌ Datos financieros detallados de la empresa
+❌ Información marcada como "Confidencial" o bajo NDA
+
+---
+
+## Revisión trimestral
+
+Cada 3 meses, revisar:
+
+- [ ] ¿Las herramientas de IA usadas actualizaron sus políticas de privacidad?
+- [ ] ¿Hay nuevas herramientas enterprise disponibles que sean más seguras?
+- [ ] ¿El equipo tiene dudas sobre qué puede o no puede compartir?
+- [ ] ¿Se produjo algún incidente de privacidad relacionado con IA?
+
+---
+
+> **Regla de oro:** Si tienes duda de si es seguro compartir algo con la IA, no lo compartas. Anonimiza primero, siempre.

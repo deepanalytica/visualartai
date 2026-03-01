@@ -1,0 +1,107 @@
+---
+title: "Datos que nunca debes darle a la IA"
+slug: "datos-privados-ia"
+type: "text"
+duration_min: 20
+sort_order: 1
+status: "published"
+is_free_preview: false
+checklist:
+  - "Revisar tu uso actual de IA con el checklist de privacidad"
+  - "Configurar las opciones de privacidad en ChatGPT y Claude"
+  - "Crear una lista de información restringida para tu equipo"
+---
+
+## El riesgo que nadie te explica
+
+Usar IA para automatizar trabajo es poderoso. Pero hacerlo sin entender los riesgos puede exponerte (y a tus clientes) a problemas legales y de seguridad.
+
+Esta no es una lección para asustarte — es para que tomes decisiones informadas.
+
+---
+
+## Qué pasa con los datos que le das a la IA
+
+Los principales LLMs (ChatGPT, Claude, Gemini) tienen diferentes políticas de datos:
+
+| Plataforma | ¿Usa conversaciones para entrenamiento? | ¿Cómo desactivarlo? |
+|---|---|---|
+| ChatGPT (OpenAI) | Sí (por defecto) | Settings > Data Controls > Improve model |
+| Claude (Anthropic) | No usa chats de producción para entrenar | — |
+| Gemini (Google) | Sí (por defecto en cuentas personales) | Settings > Privacy |
+
+**Con planes de pago (Pro/Business/Teams):** La mayoría ofrece "opt out" del entrenamiento.
+
+---
+
+## Información que NUNCA debes pegar en un chat de IA
+
+### Datos personales de terceros
+- Nombres completos + RUT/DNI + dirección
+- Historial médico o financiero de personas
+- Datos de empleados o clientes sin anonimizar
+
+### Información confidencial de la empresa
+- Estrategias no publicadas
+- Datos financieros internos (balances, proyecciones)
+- Contratos y acuerdos bajo NDA
+- Código fuente propietario
+
+### Credenciales y accesos
+- Contraseñas (nunca, jamás, bajo ninguna circunstancia)
+- API keys y tokens
+- Datos bancarios
+
+---
+
+## Cómo anonimizar antes de usar IA
+
+Antes de pegar cualquier dato real:
+
+```
+Original: "El cliente Juan González (RUT 12.345.678-9) compró $450.000
+en marzo..."
+
+Anonimizado: "El cliente CLIENTE_A (ID: 001) compró $450.000
+en marzo..."
+```
+
+La IA puede hacer el análisis perfectamente con datos anonimizados.
+
+**Prompt de anonimización:**
+```
+Antes de analizar, anonimiza estos datos reemplazando:
+- Nombres propios → "PERSONA_[número]"
+- RUTs/IDs → "ID_[número]"
+- Empresas → "EMPRESA_[letra]"
+
+Datos a anonimizar:
+[tus datos]
+
+Primero muéstrame la versión anonimizada. Luego procede con el análisis.
+```
+
+---
+
+## Herramientas enterprise con mayor privacidad
+
+Si trabajas con datos sensibles regularmente, considera:
+
+- **ChatGPT Enterprise** — datos no se usan para entrenamiento
+- **Azure OpenAI** — datos en tu infraestructura de Microsoft
+- **Claude para empresas** — políticas de privacidad más estrictas
+- **Modelos locales (Llama, Mistral)** — datos nunca salen de tu máquina
+
+---
+
+## Checklist de privacidad
+
+Antes de pegar algo en la IA, pregúntate:
+
+- [ ] ¿Hay datos personales de otras personas?
+- [ ] ¿Hay información financiera específica de la empresa?
+- [ ] ¿Hay contraseñas o credenciales?
+- [ ] ¿Firmé un NDA que cubra esta información?
+- [ ] ¿Le molestaría a mi empresa o a un cliente saber que usé IA para esto?
+
+Si alguna respuesta es "sí", anonimiza o usa una alternativa enterprise.

@@ -1,0 +1,13 @@
+Progress: resolved 1, reused 0, downloaded 0, added 0
+ WARN  deprecated next@14.2.18: This version has a security vulnerability. Please upgrade to a patched version. See https://nextjs.org/blog/security-update-2025-12-11 for more details.
+ WARN  deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+Progress: resolved 18, reused 15, downloaded 0, added 0
+Progress: resolved 43, reused 33, downloaded 0, added 0
+Progress: resolved 54, reused 51, downloaded 0, added 0
+ ERR_PNPM_FETCH_404  GET https://registry.npmjs.org/@radix-ui%2Freact-sheet: Not Found - 404
+
+This error happened while installing a direct dependency of C:\Users\Ale\Desktop\vaai
+
+@radix-ui/react-sheet is not in the npm registry, or you have no permission to fetch it.
+
+No authorization header was set for the request.

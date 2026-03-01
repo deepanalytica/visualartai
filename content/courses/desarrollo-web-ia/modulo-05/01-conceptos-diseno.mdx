@@ -1,0 +1,198 @@
+---
+title: "Los 5 conceptos de diseño que todo dev debe saber"
+slug: "conceptos-diseno-dev"
+type: "text"
+duration_min: 22
+sort_order: 1
+status: "published"
+checklist:
+  - "Entender jerarquía visual y cómo aplicarla con Tailwind"
+  - "Usar espaciado sistemático en lugar de valores arbitrarios"
+  - "Elegir tipografía con criterio de diseñador"
+---
+
+## Por qué importa el diseño si eres dev
+
+No necesitas ser diseñador. Pero si no entiendes los principios básicos, vas a hacer cosas que _funcionan_ pero que nadie quiere usar. Y cuando le pidas ayuda a Claude con el diseño, vas a obtener resultados genéricos porque no sabrás especificar lo que quieres.
+
+Con estos 5 conceptos puedes:
+- Hacer interfaces que se ven profesionales sin un diseñador
+- Darle instrucciones precisas a Claude para el UI
+- Detectar qué está mal en un diseño y cómo arreglarlo
+
+---
+
+## Concepto 1: Jerarquía visual
+
+**El principio:** el ojo necesita saber qué leer primero.
+
+Jerarquía = tamaño + peso + color + espacio. Lo más importante debe destacar más.
+
+Error clásico del dev:
+```
+<h1 className="text-xl font-medium">Título importante</h1>
+<p className="text-lg font-semibold">Subtítulo</p>
+```
+
+Aquí el subtítulo compite con el título. El `font-semibold` en un tamaño casi igual confunde al ojo.
+
+Correcto:
+```
+<h1 className="text-4xl font-bold tracking-tight">Título importante</h1>
+<p className="text-lg text-muted-foreground font-normal">Subtítulo</p>
+```
+
+Regla práctica: **usa máximo 3 niveles jerárquicos por sección**. Si tienes más, algo debe fusionarse.
+
+---
+
+## Concepto 2: Espaciado sistemático
+
+**El principio:** el espacio no es decorativo — comunica relación.
+
+Lo que está relacionado va junto. Lo que no está relacionado va separado.
+
+No hagas esto:
+```
+// Espaciado inventado en cada lugar
+<div className="mt-3 mb-7 px-5">
+  <h2 className="mb-2">Título</h2>
+  <p className="mt-4">Texto</p>
+</div>
+```
+
+Usa la escala de Tailwind de forma consistente:
+
+| Nivel | Uso |
+|-------|-----|
+| `gap-1` / `space-y-1` | Entre elementos muy relacionados (label + input) |
+| `gap-3` / `space-y-3` | Dentro de un componente (card content) |
+| `gap-6` / `space-y-6` | Entre componentes en una sección |
+| `gap-12` / `space-y-12` | Entre secciones |
+| `gap-24` / `space-y-24` | Entre bloques mayores |
+
+Prompt para Claude:
+```
+Revisa este componente y aplica espaciado sistemático
+usando la escala de Tailwind (4px base).
+Elementos relacionados deben estar más juntos que elementos independientes.
+No uses valores arbitrarios como mt-7 o px-11.
+```
+
+---
+
+## Concepto 3: Contraste y legibilidad
+
+**El principio:** si cuesta leerlo, no se lee.
+
+WCAG AA exige contraste mínimo de 4.5:1 para texto normal. No es burocracia — es usabilidad.
+
+Errores comunes:
+- Texto gris claro sobre fondo blanco (muy bajo contraste)
+- Texto pequeño sobre imagen sin overlay
+- Color de acento usando como color de texto principal
+
+Con Tailwind y shadcn, los colores semánticos son seguros:
+```
+text-foreground          → texto principal (alto contraste)
+text-muted-foreground    → texto secundario (contraste adecuado)
+text-primary             → texto de acento (úsalo con moderación)
+```
+
+Prompt para verificar:
+```
+Revisa este componente. ¿Hay texto que podría tener problemas
+de contraste? Identifica pares texto/fondo problemáticos y sugiere
+correcciones usando los tokens semánticos de shadcn/ui.
+```
+
+---
+
+## Concepto 4: Tipografía con intención
+
+**El principio:** la tipografía es el 80% del diseño.
+
+Dos decisiones clave:
+
+### 4a. Tamaño con significado
+No uses tamaños de fuente al azar. Define una escala y respétala:
+
+```typescript
+// En tu CSS o Tailwind config
+// Display: space-grotesk, tamaños grandes
+// Body: inter, tamaños normales
+// Code: geist mono
+
+// En componentes:
+// Headline principal: text-5xl lg:text-7xl font-bold
+// Headline sección: text-3xl font-semibold
+// Subtítulo: text-xl text-muted-foreground
+// Cuerpo: text-base leading-relaxed
+// Caption: text-sm text-muted-foreground
+```
+
+### 4b. Line height (interlineado)
+El interlineado por defecto de Tailwind (`leading-normal` = 1.5) es demasiado apretado para párrafos largos.
+
+```
+// Para cuerpo de texto
+<p className="text-base leading-relaxed">  → 1.625
+<p className="text-base leading-loose">   → 2 (demasiado para texto normal)
+
+// Para titulares grandes
+<h1 className="text-5xl leading-tight">   → 1.25
+<h1 className="text-5xl leading-none">    → 1 (solo para display muy grande)
+```
+
+---
+
+## Concepto 5: Color con propósito
+
+**El principio:** usa color para comunicar, no para decorar.
+
+El dev novato usa color para hacer las cosas "más bonitas". El resultado es ruido visual.
+
+Sistema de 3 roles:
+
+| Rol | Función | Ejemplo |
+|-----|---------|---------|
+| **Neutros** (80%) | Estructura, fondo, texto | `bg-background`, `text-foreground`, bordes |
+| **Marca** (15%) | Identidad, CTAs primarios | El color principal de shadcn |
+| **Estado** (5%) | Feedback al usuario | `text-destructive`, `text-green-500` |
+
+Lo que el color NO debe hacer:
+- Diferenciar elementos que ya tienen forma diferente
+- Decorar secciones sin razón funcional
+- Usar 3+ colores de acento en la misma pantalla
+
+Prompt para paleta:
+```
+Necesito una paleta de colores para [descripción de la app].
+La audiencia es [quién]. La personalidad visual debe ser [3 adjetivos].
+Propón:
+1. Color primario de marca (para CTAs y elementos de identidad)
+2. Color secundario (para elementos de apoyo)
+3. Paleta de neutros (backgrounds, bordes, texto en 3 tonos)
+4. Colores de estado (success, warning, error)
+Todo en formato HSL compatible con CSS custom properties.
+```
+
+---
+
+## Cómo usar estos conceptos con Claude
+
+Ahora que entiendes los principios, puedes ser específico:
+
+**En lugar de:** "Mejora el diseño de este componente"
+
+**Di:**
+```
+Mejora este componente con estos criterios:
+1. Jerarquía: el título debe destacar más que el subtítulo
+2. Espaciado: usa la escala de Tailwind, gap-6 entre secciones
+3. Tipografía: cuerpo con leading-relaxed, títulos con leading-tight
+4. Color: solo text-foreground, text-muted-foreground y un acento con moderación
+5. No cambies la estructura del componente, solo el styling
+```
+
+Con este nivel de especificidad, Claude produce resultados que se ven profesionales en el primer intento.

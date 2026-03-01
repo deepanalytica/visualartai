@@ -1,0 +1,187 @@
+---
+title: "Supabase: schema-first development con IA"
+slug: "supabase-schema-ia"
+type: "mixed"
+duration_min: 30
+sort_order: 1
+status: "published"
+checklist:
+  - "Diseñar el schema completo de tu app con IA antes de escribir código"
+  - "Generar el schema de Drizzle y las migraciones"
+  - "Configurar los índices correctos"
+---
+
+## El error más costoso: empezar a codear sin el schema
+
+El schema de la base de datos es la arquitectura de datos de tu app. Si lo cambias a mitad del desarrollo, implica: nuevas migraciones, actualizar todos los queries, actualizar los tipos de TypeScript, potencialmente cambiar la UI.
+
+La regla del curso: **diseña el schema completo antes de escribir una sola línea de código de features**.
+
+Y la IA es especialmente buena en esto — puede ver problemas de diseño que no son obvios.
+
+---
+
+## Prompt de diseño de schema
+
+No le pidas el código todavía. Primero, discute el diseño:
+
+```
+Voy a construir [descripción de la app].
+
+Las entidades principales son:
+- [Entidad 1]: [qué representa, qué atributos tiene]
+- [Entidad 2]: [idem]
+- [Entidad 3]: [idem]
+
+Relaciones:
+- Un [entidad A] puede tener muchos [entidad B]
+- Un [entidad B] pertenece a exactamente un [entidad A]
+- [etc.]
+
+Restricciones de negocio:
+- [regla 1]
+- [regla 2]
+
+Antes de generar el código, dime:
+1. ¿Hay problemas de diseño en estas relaciones?
+2. ¿Falta alguna entidad o campo que necesitaré después?
+3. ¿Qué índices recomiendas?
+4. ¿Hay algún patrón de acceso a datos que debería considerar ahora?
+```
+
+---
+
+## Schema de ejemplo: app de gestión de proyectos
+
+El resultado de la conversación de diseño debería generar algo como:
+
+```typescript
+// src/db/schema.ts
+import {
+  pgTable, pgEnum, uuid, text, timestamp,
+  boolean, integer, index
+} from 'drizzle-orm/pg-core'
+import { relations } from 'drizzle-orm'
+
+// Enums
+export const projectStatusEnum = pgEnum('project_status',
+  ['active', 'completed', 'archived', 'paused'])
+
+export const taskPriorityEnum = pgEnum('task_priority',
+  ['low', 'medium', 'high', 'urgent'])
+
+// Tabla: profiles (extensión de auth.users)
+export const profiles = pgTable('profiles', {
+  id: uuid('id').primaryKey(),  // mismo ID que auth.users
+  email: text('email').notNull(),
+  fullName: text('full_name'),
+  avatarUrl: text('avatar_url'),
+  role: text('role').notNull().default('user'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
+// Tabla: projects
+export const projects = pgTable('projects', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => profiles.id, { onDelete: 'cascade' }),
+  name: text('name').notNull(),
+  description: text('description'),
+  status: projectStatusEnum('status').notNull().default('active'),
+  color: text('color').default('#00e5ff'),
+  dueDate: timestamp('due_date'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+}, (table) => ({
+  userIdx: index('projects_user_id_idx').on(table.userId),
+  statusIdx: index('projects_status_idx').on(table.status),
+}))
+
+// Tabla: tasks
+export const tasks = pgTable('tasks', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  projectId: uuid('project_id').notNull().references(() => projects.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').notNull().references(() => profiles.id),
+  title: text('title').notNull(),
+  description: text('description'),
+  priority: taskPriorityEnum('priority').notNull().default('medium'),
+  isCompleted: boolean('is_completed').notNull().default(false),
+  dueDate: timestamp('due_date'),
+  sortOrder: integer('sort_order').notNull().default(0),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+}, (table) => ({
+  projectIdx: index('tasks_project_id_idx').on(table.projectId),
+  userIdx: index('tasks_user_id_idx').on(table.userId),
+  completedIdx: index('tasks_is_completed_idx').on(table.isCompleted),
+}))
+
+// Relations
+export const projectRelations = relations(projects, ({ one, many }) => ({
+  user: one(profiles, { fields: [projects.userId], references: [profiles.id] }),
+  tasks: many(tasks),
+}))
+
+export const taskRelations = relations(tasks, ({ one }) => ({
+  project: one(projects, { fields: [tasks.projectId], references: [projects.id] }),
+  user: one(profiles, { fields: [tasks.userId], references: [profiles.id] }),
+}))
+
+// Tipos inferidos de TypeScript
+export type Profile = typeof profiles.$inferSelect
+export type Project = typeof projects.$inferSelect
+export type NewProject = typeof projects.$inferInsert
+export type Task = typeof tasks.$inferSelect
+export type NewTask = typeof tasks.$inferInsert
+```
+
+---
+
+## Aplicar el schema
+
+```bash
+# Generar la migración SQL
+npx drizzle-kit generate
+
+# Aplicar al proyecto de Supabase
+npx drizzle-kit push
+
+# Ver los cambios en Drizzle Studio
+npx drizzle-kit studio
+```
+
+---
+
+## El trigger de Supabase para profiles
+
+Cada vez que un usuario se registra, crea automáticamente su perfil:
+
+```sql
+-- Ejecutar en Supabase SQL Editor
+CREATE OR REPLACE FUNCTION handle_new_user()
+RETURNS TRIGGER LANGUAGE plpgsql SECURITY DEFINER
+SET search_path = public AS $$
+BEGIN
+  INSERT INTO public.profiles (id, email, full_name, avatar_url)
+  VALUES (
+    NEW.id,
+    NEW.email,
+    NEW.raw_user_meta_data->>'full_name',
+    NEW.raw_user_meta_data->>'avatar_url'
+  )
+  ON CONFLICT (id) DO NOTHING;
+  RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION handle_new_user();
+```
+
+Prompt para generar este trigger para tu schema:
+```
+Mi tabla profiles tiene: [tus campos]
+Los datos que llegan en raw_user_meta_data de Supabase Auth son: [campos que configuras]
+Genera el trigger para poblar profiles automáticamente al crear usuarios.
+```

@@ -1,0 +1,130 @@
+---
+title: "Post-producción: de bueno a excelente"
+slug: "postproduccion-imagen-ia"
+type: "mixed"
+duration_min: 20
+sort_order: 2
+status: "published"
+checklist:
+  - "Saber qué arreglar en Lightroom/Photoshop después de generar"
+  - "Usar upscaling para aumentar la resolución"
+  - "Eliminar artefactos comunes con inpainting"
+---
+
+## Por qué la post-producción importa
+
+Las imágenes generadas por IA raramente salen perfectas del primer intento. Incluso con prompts excelentes, hay problemas frecuentes:
+
+- Color ligeramente incorrecto respecto al prompt
+- Artefactos en bordes o transiciones
+- Baja resolución para uso en print o grandes formatos
+- Detalles menores incorrectos (texto ilegible, objeto con forma rara)
+- Composición casi perfecta pero con un elemento que sobra
+
+La post-producción cierra esa brecha entre "bueno generado" y "excelente final".
+
+---
+
+## Las 3 herramientas de post-producción
+
+### 1. Lightroom / Camera Raw (color y tono)
+
+Para ajuste de color, contraste, y aplicar el look final correctamente.
+
+**Flujo básico en Lightroom:**
+
+```
+1. Exposure: ajusta si la imagen está sobre/sub-expuesta
+2. White Balance: si el color es levemente incorrecto
+3. HSL/Color: ajusta colores específicos (piel, cielo, etc.)
+4. Tone Curve: añade el S-curve para contraste
+5. Film Grain: agrega grano si el modelo no lo aplicó bien
+6. Vignette: añade viñeta sutil en lens corrections
+7. Sharpening: solo si la imagen parece ligeramente blanda
+```
+
+**Presets de Lightroom:** si tienes presets de emulación de película (VSCO, o los presets nativos de Lightroom), aplicarlos a las imágenes IA da resultados muy convincentes.
+
+### 2. Photoshop / Content-Aware (artefactos y composición)
+
+Para eliminar artefactos y ajustes de composición.
+
+**Herramientas más útiles:**
+- **Content-Aware Fill:** para eliminar objetos no deseados
+- **Clone Stamp:** para reparar artefactos en bordes
+- **Generative Fill** (Photoshop AI): para extender la composición o reemplazar elementos
+- **Healing Brush:** para artefactos de piel en retratos
+
+### 3. Upscalers (resolución)
+
+Las imágenes de Midjourney salen en ~1792×1024 o similar — suficiente para web, insuficiente para print o formatos grandes.
+
+**Herramientas de upscaling:**
+- **Midjourney Upscale** — el upscale nativo (2x o 4x)
+- **Topaz Gigapixel AI** — el mejor para print, mantiene detalle
+- **Real-ESRGAN** (open source) — gratuito, muy bueno
+- **Adobe Enhance** — en Lightroom/Bridge, fácil de usar
+
+Para redes sociales: la resolución de salida de Midjourney es suficiente.
+Para uso en print o grandes formatos: usa Topaz Gigapixel o Topaz Photo AI.
+
+---
+
+## Artefactos comunes y cómo arreglarlos
+
+### Manos incorrectas
+
+El artefacto más frecuente. Opciones:
+
+1. **Regenerar con inpainting:** en Midjourney, usa "Vary (Region)" para seleccionar solo las manos y regenerar esa región con el prompt
+2. **Photoshop Generative Fill:** selecciona las manos → Generative Fill → describe las manos correctas
+3. **Composición:** replantea el prompt para que las manos estén fuera de frame o en bokeh
+
+### Texto ilegible en signos/libros
+
+1. Si el texto importa: usa Flux 1.1 Pro (mucho mejor en texto)
+2. Si no importa: acepta el "texto IA" como elemento de atmósfera
+3. En Photoshop: usa el layer de texto real sobre la imagen si necesitas texto específico
+
+### Fondo incoherente (objetos duplicados, perspectiva errónea)
+
+1. **Content-Aware Fill:** selecciona la zona problemática → Content-Aware → rellena
+2. **Blur creativo:** si el fondo tiene artefactos menores, aumenta el blur (esmear deliberado)
+3. **Regenerar L2:** cambia el ambiente a algo más simple y genera de nuevo
+
+### Color grading incorrecto respecto al prompt
+
+Casi siempre arreglable en Lightroom:
+1. Ajusta White Balance si es incorrecto
+2. En el HSL, baja el canal problemático
+3. En Color Grading, ajusta shadows/midtones/highlights para acercar al look correcto
+
+---
+
+## El workflow de post-producción rápida (15 min por imagen)
+
+```
+1. Seleccionar la mejor generación de la cuadrícula (2 min)
+2. Upscale en Midjourney (si es imagen importante) (1 min)
+3. Importar a Lightroom:
+   - Aplicar preset base del proyecto (el L4 que definiste) (1 min)
+   - Ajuste fino de exposición y color si necesario (2-3 min)
+4. Si hay artefactos menores → Photoshop heal (3-5 min)
+5. Exportar: web (1080px, JPG 85%) o print (full res, JPG 95%) (1 min)
+```
+
+Total: 10-15 minutos por imagen de calidad final.
+
+---
+
+## Cuándo NO hacer post-producción
+
+El propósito de la post-producción es mejorar imágenes que son fundamentalmente buenas. No es para salvar imágenes malas.
+
+**Si una imagen tiene estos problemas → descártala y regenera:**
+- El sujeto es incoherente (persona con cara distorsionada, proporciones incorrectas)
+- La perspectiva es físicamente imposible
+- El concepto del prompt no se realizó en la imagen
+- Hay artefactos en el sujeto principal (no en el fondo)
+
+El tiempo de post-producción de una imagen mala supera el tiempo de regenerar con un prompt mejorado. El criterio de selección antes de hacer post es lo más importante.

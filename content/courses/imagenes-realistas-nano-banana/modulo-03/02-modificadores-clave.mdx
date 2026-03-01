@@ -1,0 +1,182 @@
+---
+title: "Modificadores clave: las palabras que multiplican el realismo"
+slug: "modificadores-clave-realismo"
+type: "mixed"
+duration_min: 22
+sort_order: 2
+status: "published"
+checklist:
+  - "Conocer los 20 modificadores de mayor impacto"
+  - "Saber cuáles usar según el tipo de imagen"
+  - "Entender qué modificadores evitar (los que activan lo genérico)"
+---
+
+## Los modificadores no son decoración
+
+Un modificador de prompt no es una palabra que "hace más bonito" al resultado. Es una instrucción que activa un conjunto específico de características en el espacio de embeddings del modelo.
+
+"Cinematic" no significa "me gusta el cine" — activa: aspect ratio wide, teal and orange grading, lens flare, anamorphic compression.
+
+Aprender qué activa cada modificador es más valioso que tener una lista larga de palabras bonitas.
+
+---
+
+## Categoría 1: Modificadores de realismo fotográfico
+
+Estos aumentan la credibilidad de que la imagen es una foto real:
+
+| Modificador | Qué activa |
+|-------------|-----------|
+| `RAW photo` | Sin post-procesado aparente, textura directa de sensor |
+| `DSLR photography` | Características ópticas de cámara réflex profesional |
+| `film grain` | Grano orgánico, no artificial |
+| `natural skin texture` | Poros, microvellos, imperfecciones sutiles |
+| `authentic moment` | Pose no forzada, micro-expresiones reales |
+| `candid photography` | "No posado", como captura de momento real |
+| `slight motion blur` | Movimiento natural implícito |
+| `lens flare` | Artefacto óptico que confirma fuente de luz real |
+| `chromatic aberration` | Distorsión de color en bordes = lente real |
+| `vignette` | Oscurecimiento sutil en bordes = óptica real |
+
+**Úsalos juntos con moderación:**
+```
+RAW photo, natural skin texture, film grain, authentic candid moment
+```
+No los apiles todos — 2-3 es suficiente.
+
+---
+
+## Categoría 2: Modificadores de atmósfera
+
+Definen el "feel" emocional de la imagen:
+
+| Modificador | Mood |
+|-------------|------|
+| `moody` | Oscuro, introspectivo, dramático |
+| `ethereal` | Ligero, soñador, casi irreal |
+| `raw and authentic` | Sin filtros, vulnerable, documental |
+| `melancholic` | Triste pero hermoso, nostalgia |
+| `vibrant and alive` | Energía, color intenso, alegría |
+| `mysterious` | Sombras, parcialmente oculto, intriga |
+| `serene` | Paz, calma, espacio para respirar |
+| `intimate` | Cerca del sujeto, personal, vulnerable |
+| `epic` | Escala, poder, grandiosidad |
+| `nostalgic` | Evoca el pasado, calidad de recuerdo |
+
+---
+
+## Categoría 3: Modificadores de calidad técnica
+
+Aumentan la resolución aparente y el detalle:
+
+| Modificador | Efecto |
+|-------------|--------|
+| `ultra-detailed` | Más detalle en texturas y bordes |
+| `8K resolution` | Alta definición (activado como concepto, no literal) |
+| `sharp focus` | Foco cristalino en el sujeto |
+| `razor-sharp eyes` | Especialmente para retratos — foco en los ojos |
+| `tack sharp` | Todo en foco, sin blur |
+| `fine art photography` | Composición deliberada, print quality |
+| `award-winning photography` | Activa las características de fotos premiadas |
+| `National Geographic style` | Autenticidad documental + composición cuidada |
+
+---
+
+## Categoría 4: Modificadores de post-producción
+
+Definen el look de la edición:
+
+```
+# Para look film orgánico:
+Kodak Portra 400, Fujifilm Pro 400H, Cinestill 800T
+
+# Para look cinematográfico:
+cinematic color grading, teal and orange palette, anamorphic bokeh
+
+# Para look editorial limpio:
+clean commercial photography, neutral color grading, bright and airy
+
+# Para look oscuro y contrastado:
+dark moody edit, deep shadows, high contrast, desaturated tones
+
+# Para look vintage:
+vintage color grading, faded highlights, warm shadows, analog feel
+```
+
+---
+
+## Los modificadores que debes EVITAR
+
+Estos activan lo genérico — el "promedio de internet":
+
+| Evitar | Por qué |
+|--------|---------|
+| `beautiful` | Concepto completamente subjetivo y promediado |
+| `stunning` | Sin información técnica, activa lo común |
+| `amazing` | Igual que stunning |
+| `professional` | Muy vago — ¿qué tipo de profesional? |
+| `high quality` | No es una instrucción técnica |
+| `masterpiece` | Activa el estilo de arte fantástico, no fotografía |
+| `perfect` | Sin significado operacional |
+| `realistic` | Paradójico — lo que activa es el concepto genérico de realismo |
+| `hyperrealistic` | En solitario, sin apoyo técnico, no hace nada útil |
+
+**La regla:** si el modificador no describe algo técnicamente específico, probablemente no está haciendo lo que crees.
+
+En lugar de `beautiful portrait`, usa `editorial portrait, warm golden light, natural expression, intimate framing`.
+
+---
+
+## Tabla de modificadores por tipo de imagen
+
+### Para retrato de persona
+
+```
+Obligatorios:
+- Plano (close-up, medium shot, full body)
+- Lente (85mm f/1.4 para retrato típico)
+- Tipo de luz (golden hour, window light, studio)
+
+Muy útiles:
+- natural skin texture, catchlight in eyes
+- authentic expression, genuine emotion
+- film grain, Kodak Portra look (si quieres cálido)
+```
+
+### Para foto de producto
+
+```
+Obligatorios:
+- Plano (product shot, close-up, flat lay)
+- Fondo (white background, marble surface, lifestyle context)
+- Iluminación (soft box, hard light, natural light)
+
+Muy útiles:
+- product photography, commercial photography
+- ultra-detailed, tack sharp
+- slight depth of field (para contexto lifestyle)
+```
+
+### Para escena urbana / arquitectura
+
+```
+Obligatorios:
+- Hora del día (golden hour, blue hour, midnight, noon)
+- Tipo de lugar (Tokyo alley, New York rooftop, etc.)
+- Ángulo (street level, aerial, wide angle)
+
+Muy útiles:
+- architectural photography, urban photography
+- available light, no flash
+- wide angle lens, 24mm (para contexto amplio)
+```
+
+---
+
+## La regla de los modificadores Nano Banana
+
+**Máximo 20 palabras de modificadores por capa.**
+
+Si tienes más de 20 palabras de modificadores en una capa, algo está mal: o es redundante (estás diciendo lo mismo dos veces) o estás compensando con palabras vacías lo que debería estar en la descripción técnica.
+
+El poder del sistema Nano Banana es la precisión. Un prompt de 30 palabras bien elegidas supera a un prompt de 100 palabras genéricas.

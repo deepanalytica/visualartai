@@ -1,0 +1,224 @@
+---
+title: "Del brief a la arquitectura con Claude"
+slug: "proyecto-brief-arquitectura"
+type: "mixed"
+duration_min: 25
+sort_order: 1
+status: "published"
+checklist:
+  - "Escribir el brief completo del proyecto final"
+  - "Definir el schema de DB con Claude antes de codificar"
+  - "Tener el CLAUDE.md completo del proyecto listo"
+---
+
+## El proyecto final del curso
+
+En las siguientes 3 lecciones construyes una aplicación web completa, desde el brief hasta el deploy en producción. Puedes construir la app que quieras — vamos a usar un **gestor de tareas con proyectos** como ejemplo, pero los principios aplican a cualquier cosa.
+
+La app de ejemplo tendrá:
+- Auth (registro, login, logout)
+- Proyectos (CRUD)
+- Tareas dentro de proyectos (CRUD, marcar completadas)
+- Dashboard con resumen de progreso
+- API completa
+
+Pero tú puedes hacer: un SaaS de facturación, un portfolio admin, un CRM mínimo, un blog con CMS propio — lo que sea relevante para ti.
+
+---
+
+## Paso 1: El brief (no saltarte esto)
+
+Antes de abrir Claude Code, escribe el brief. Es la única forma de que las decisiones de arquitectura tengan coherencia.
+
+**Template de brief:**
+
+```markdown
+# Brief: [Nombre de la App]
+
+## ¿Qué problema resuelve?
+[1-2 oraciones concretas]
+
+## ¿Quién lo usa?
+[Rol del usuario, no "cualquiera"]
+
+## Flujo principal (el 80% del uso)
+1. [Acción 1]
+2. [Acción 2]
+3. [Acción 3]
+
+## Funcionalidades core (MVP)
+- [ ] [Feature 1]
+- [ ] [Feature 2]
+- [ ] [Feature 3]
+
+## Funcionalidades fuera de scope (v1)
+- ~~[Feature que sería bueno pero no ahora]~~
+
+## Restricciones técnicas
+- [Limitaciones de tiempo, skills, presupuesto]
+- [Integraciones requeridas]
+
+## Métricas de éxito
+- [Cómo sabrás si funciona]
+```
+
+---
+
+## Paso 2: Conversación de arquitectura con Claude
+
+**No pidas código todavía.** Pide un análisis arquitectónico primero.
+
+```
+Tengo este brief:
+[pega tu brief completo]
+
+Stack: Next.js 15 App Router, TypeScript, Supabase (PostgreSQL + Auth), Drizzle ORM, shadcn/ui, Vercel.
+
+Antes de escribir código, ayúdame a pensar la arquitectura:
+
+1. ¿Cuáles son las entidades principales y sus relaciones?
+   Propón el schema de DB con las tablas necesarias.
+
+2. ¿Qué rutas necesito?
+   Distingue entre rutas públicas, autenticadas, y API routes.
+
+3. ¿Qué decisiones de arquitectura debo tomar ahora?
+   (server actions vs API routes, real-time vs polling, etc.)
+
+4. ¿Hay algún caso edge que mi brief no cubre y que debería definir?
+
+5. ¿Cuál es el orden de implementación recomendado?
+```
+
+---
+
+## Paso 3: Schema con IA (la conversación, no el código)
+
+Cuando Claude proponga el schema, **no lo aceptes ciegamente**. Pregunta:
+
+```
+Propusiste esta tabla:
+[fragmento del schema]
+
+Algunas preguntas:
+1. ¿Por qué [campo X] es [tipo Y] y no [tipo Z]?
+2. ¿Cómo manejas [edge case específico de tu dominio]?
+3. ¿Esta estructura escala bien si [escenario de crecimiento]?
+4. ¿Hay algún índice que debería agregar para las queries más frecuentes?
+```
+
+Esta conversación antes de codificar evita migraciones dolorosas después.
+
+---
+
+## El schema resultante (ejemplo)
+
+```typescript
+// src/db/schema.ts
+import {
+  pgTable, uuid, text, timestamp, boolean, integer,
+  pgEnum, index, unique
+} from 'drizzle-orm/pg-core'
+
+// Enums
+export const projectStatusEnum = pgEnum('project_status', [
+  'active', 'completed', 'archived'
+])
+
+export const taskPriorityEnum = pgEnum('task_priority', [
+  'low', 'medium', 'high', 'urgent'
+])
+
+// Perfiles (extiende auth.users de Supabase)
+export const profiles = pgTable('profiles', {
+  id: uuid('id').primaryKey(), // = auth.users.id
+  email: text('email').notNull(),
+  fullName: text('full_name'),
+  avatarUrl: text('avatar_url'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
+// Proyectos
+export const projects = pgTable('projects', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => profiles.id, { onDelete: 'cascade' }),
+  name: text('name').notNull(),
+  description: text('description'),
+  status: projectStatusEnum('status').notNull().default('active'),
+  color: text('color').default('#6366f1'), // color de UI
+  sortOrder: integer('sort_order').default(0),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+}, (t) => ({
+  userIdx: index('projects_user_id_idx').on(t.userId),
+}))
+
+// Tareas
+export const tasks = pgTable('tasks', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  projectId: uuid('project_id').notNull().references(() => projects.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').notNull(),
+  title: text('title').notNull(),
+  description: text('description'),
+  isCompleted: boolean('is_completed').notNull().default(false),
+  priority: taskPriorityEnum('priority').notNull().default('medium'),
+  dueDate: timestamp('due_date'),
+  completedAt: timestamp('completed_at'),
+  sortOrder: integer('sort_order').default(0),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+}, (t) => ({
+  projectIdx: index('tasks_project_id_idx').on(t.projectId),
+  userIdx: index('tasks_user_id_idx').on(t.userId),
+  completedIdx: index('tasks_completed_idx').on(t.isCompleted),
+}))
+
+// Types inferidos
+export type Profile = typeof profiles.$inferSelect
+export type Project = typeof projects.$inferSelect
+export type NewProject = typeof projects.$inferInsert
+export type Task = typeof tasks.$inferSelect
+export type NewTask = typeof tasks.$inferInsert
+```
+
+---
+
+## Paso 4: CLAUDE.md completo del proyecto
+
+Con el brief y el schema definidos, escribe el CLAUDE.md:
+
+```
+Tengo este brief y este schema:
+[brief + schema]
+
+Stack: [tu stack]
+
+Genera el CLAUDE.md completo para este proyecto.
+Debe incluir:
+- Descripción del proyecto (2-3 oraciones)
+- Stack técnico completo
+- Estructura de carpetas (App Router)
+- Convenciones de código
+- Reglas de negocio importantes
+- Decisiones de arquitectura ya tomadas
+- Lo que Claude NO debe hacer
+- Estado actual del proyecto
+- Comandos útiles
+```
+
+---
+
+## Checklist antes de empezar a codificar
+
+Antes de la siguiente lección (construcción), debes tener:
+
+- [ ] Brief escrito y revisado
+- [ ] Schema de DB definido (puede ajustarse, pero no puede ser "por definir")
+- [ ] Rutas de la app mapeadas
+- [ ] CLAUDE.md creado en la raíz del proyecto
+- [ ] Decisiones técnicas clave tomadas (server actions vs API routes, etc.)
+- [ ] Proyecto creado en Supabase (aunque esté vacío)
+- [ ] Repositorio en GitHub con el scaffold base
+
+Si falta alguno de estos puntos, es señal de que la arquitectura no está clara, y codificar sin claridad solo genera deuda técnica.

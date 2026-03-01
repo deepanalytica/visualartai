@@ -1,0 +1,140 @@
+---
+title: "Tu portfolio de imágenes IA y los próximos pasos"
+slug: "portfolio-cierre-curso"
+type: "mixed"
+duration_min: 18
+sort_order: 3
+status: "published"
+checklist:
+  - "Crear tu set de 10 imágenes del portfolio"
+  - "Documentar tu biblioteca de prompts Nano Banana"
+  - "Definir el próximo proyecto de imágenes"
+---
+
+## El portfolio: 10 imágenes que demuestran el método
+
+El mejor cierre del curso es un portfolio de 10 imágenes que demuestren tu dominio del método Nano Banana. No tienen que ser perfectas — tienen que demostrar intención, control técnico, y diversidad de estilos.
+
+**La selección de 10:**
+
+| # | Tipo de imagen | Habilidad que demuestra |
+|---|----------------|------------------------|
+| 1 | Retrato lifestyle femenino | L1 para personas, luz natural |
+| 2 | Retrato masculino dramático | Iluminación studio/Rembrandt |
+| 3 | Foto de producto luxury | L2 para producto, fondo limpio |
+| 4 | Escena urbana nocturna | Luz artificial, neo-noir |
+| 5 | Interior lifestyle | Ambiente interior, ventana |
+| 6 | Retrato documental | Estilo candid, autenticidad |
+| 7 | Escena cinematográfica | 21:9, color grading de cine |
+| 8 | Flat lay producto | Top-down, styling |
+| 9 | Landscape/ambiente emocional | Sin personas, solo ambiente |
+| 10 | Escena con narrativa | Historia implícita, momento |
+
+---
+
+## Cómo documentar tus prompts (la biblioteca)
+
+Los mejores prompts no son descartables — son activos. Documenta cada prompt que funcione bien:
+
+### Estructura de la biblioteca
+
+```markdown
+# Biblioteca de Prompts Nano Banana
+
+## [Nombre del prompt / caso de uso]
+
+### Prompt completo
+L1: [sujeto]
+L2: [ambiente]
+L3: [técnica]
+L4: [post]
+Parámetros: --v 6.1 --ar [ratio] --style raw --seed [si tienes]
+
+### Resultado
+[URL o descripción de la imagen generada]
+
+### Notas
+[Qué funcionó, qué cambiarías]
+
+### Variaciones exitosas
+- Variación 1: cambié L2 a [x] → [resultado]
+- Variación 2: cambié L4 a [x] → [resultado]
+```
+
+Con el tiempo, tu biblioteca se convierte en un activo: en lugar de empezar de cero, partes de un prompt que ya sé que funciona.
+
+---
+
+## Los 5 criterios de un buen prompt Nano Banana
+
+Antes de generar, verifica:
+
+**L1 — Sujeto:**
+- [ ] ¿Especifiqué características físicas concretas (no solo "woman")?
+- [ ] ¿Describí la expresión o el estado emocional?
+- [ ] ¿Evité características que el modelo no puede hacer bien (manos complejas)?
+
+**L2 — Ambiente:**
+- [ ] ¿El lugar es específico (no solo "café" sino "small Tokyo side-street café")?
+- [ ] ¿Incluí detalles pequeños que dan autenticidad?
+- [ ] ¿La hora del día está definida?
+
+**L3 — Técnica:**
+- [ ] ¿Especifiqué cámara + lente + apertura?
+- [ ] ¿La dirección de la luz está clara?
+- [ ] ¿El tipo de fotografía (editorial, documental, etc.) está definido?
+
+**L4 — Post:**
+- [ ] ¿El color grading tiene un nombre o referente específico?
+- [ ] ¿Decidí conscientemente si hay grano o no?
+- [ ] ¿El mood final es coherente con L1 y L2?
+
+**General:**
+- [ ] ¿Tiene menos de 150 palabras total? (prompts más largos no siempre son mejores)
+- [ ] ¿Cada parte está en el orden correcto: L1 → L2 → L3 → L4?
+
+---
+
+## Los próximos pasos: dónde ir a partir de aquí
+
+### Nivel 1: Domina los casos de uso clave para ti
+
+No necesitas saber hacer todo. Define los 3 casos de uso que más valor tienen para tu trabajo y domínalos completamente:
+
+- Retrato de personas para redes sociales
+- Fotografía de producto para e-commerce
+- Imágenes de atmósfera para landing pages
+- Escenas de estilo de vida para contenido de marca
+
+### Nivel 2: Explora ControlNet (Stable Diffusion)
+
+Si quieres control de postura y composición más preciso:
+- ControlNet + OpenPose: define exactamente la postura del cuerpo
+- ControlNet + Depth: controla la profundidad de la escena
+- ControlNet + Canny: usa el borde de una imagen de referencia
+
+### Nivel 3: LoRA training (personaje consistente)
+
+Para proyectos que requieren el mismo personaje en muchas imágenes:
+- Train LoRA con 15-20 fotos del personaje/producto
+- El resultado: consistencia del 90%+ entre imágenes
+- Herramientas: Kohya_SS, DreamBooth
+
+### Nivel 4: Video con IA
+
+Los modelos de video (Runway Gen-3, Kling AI, Sora) siguen los mismos principios que las imágenes pero añaden la dimensión temporal:
+- La descripción de movimiento reemplaza la descripción de pose
+- Los primeros 2 segundos definen el setup visual
+- El prompt base de imagen puede convertirse en el primer frame del video
+
+---
+
+## Reflexión final: la foto y la intención
+
+La mejor tecnología de generación de imágenes no reemplaza la dirección de arte — la amplifica. Lo que hace al método Nano Banana valioso no es que sea un truco técnico para engañar a los modelos. Es un framework para pensar visualmente con claridad.
+
+Cuando defines el L1, estás haciendo casting. Cuando defines el L2, estás haciendo scouting de locaciones. Cuando defines el L3, estás siendo el director de fotografía. Cuando defines el L4, estás editando en la sala de color.
+
+Estás haciendo fotografía — con una herramienta nueva.
+
+El método es transferible a cualquier herramienta que aparezca en los próximos años. Porque las herramientas cambian, pero la claridad visual no.

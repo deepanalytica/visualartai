@@ -1,0 +1,151 @@
+---
+title: "Tu primera página con datos reales en 20 minutos"
+slug: "primera-app-datos-reales"
+type: "mixed"
+duration_min: 25
+sort_order: 3
+status: "published"
+checklist:
+  - "Crear la primera tabla en Supabase"
+  - "Conectar Next.js a Supabase con Drizzle"
+  - "Mostrar datos reales en una página del App Router"
+---
+
+## El loop de desarrollo con IA
+
+El flujo de trabajo que usarás en todo el curso:
+
+```
+1. DISEÑAR con IA (Claude)
+   "Necesito una tabla para guardar proyectos de usuario.
+   Cada proyecto tiene nombre, descripción, status, y fecha de creación."
+   → Claude propone el schema
+
+2. IMPLEMENTAR con IA (Claude Code)
+   → Claude escribe la migración, los tipos, y las queries
+
+3. VERIFICAR tú
+   → Leer el código, entender qué hace, ajustar si algo no cuadra
+
+4. ITERAR
+   → "Agrega un campo `is_archived` y actualiza el query de listado"
+```
+
+---
+
+## Paso 1: Schema de la primera tabla
+
+Abre Claude y describe lo que necesitas. **No digas "escribe el código" — describe el problema:**
+
+```
+Estoy construyendo una app de gestión de proyectos.
+Stack: Next.js 15, Drizzle ORM, Supabase (PostgreSQL).
+Schema path: src/db/schema.ts
+
+Necesito una tabla "projects" con:
+- id (UUID, generado por defecto)
+- user_id (UUID, referencia a auth.users de Supabase)
+- name (texto, no nulo)
+- description (texto, opcional)
+- status: 'active' | 'completed' | 'archived'
+- created_at, updated_at
+
+Genera el schema de Drizzle, los tipos de TypeScript, y la migración de Drizzle Kit.
+```
+
+Resultado esperado de Claude:
+
+```typescript
+// src/db/schema.ts
+import { pgTable, uuid, text, timestamp, pgEnum } from 'drizzle-orm/pg-core'
+
+export const projectStatusEnum = pgEnum('project_status', ['active', 'completed', 'archived'])
+
+export const projects = pgTable('projects', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull(),
+  name: text('name').notNull(),
+  description: text('description'),
+  status: projectStatusEnum('status').notNull().default('active'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
+export type Project = typeof projects.$inferSelect
+export type NewProject = typeof projects.$inferInsert
+```
+
+---
+
+## Paso 2: Migración y cliente de DB
+
+```bash
+# Generar migración
+npx drizzle-kit generate
+
+# Aplicar a Supabase
+npx drizzle-kit push
+```
+
+Cliente de DB en `src/db/index.ts`:
+
+```typescript
+import { drizzle } from 'drizzle-orm/postgres-js'
+import postgres from 'postgres'
+import * as schema from './schema'
+
+const client = postgres(process.env.DATABASE_URL!)
+export const db = drizzle(client, { schema })
+```
+
+---
+
+## Paso 3: Server Component que muestra datos reales
+
+```typescript
+// src/app/(app)/projects/page.tsx
+import { db } from '@/db'
+import { projects } from '@/db/schema'
+import { eq } from 'drizzle-orm'
+import { createServerClient } from '@/lib/supabase/server'
+
+export default async function ProjectsPage() {
+  const supabase = createServerClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) return <div>No autenticado</div>
+
+  const userProjects = await db
+    .select()
+    .from(projects)
+    .where(eq(projects.userId, user.id))
+    .orderBy(projects.createdAt)
+
+  return (
+    <main className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Mis proyectos</h1>
+      <ul className="space-y-3">
+        {userProjects.map(project => (
+          <li key={project.id} className="p-4 border rounded-lg">
+            <h2 className="font-semibold">{project.name}</h2>
+            <p className="text-sm text-muted-foreground">{project.description}</p>
+            <span className="text-xs">{project.status}</span>
+          </li>
+        ))}
+      </ul>
+    </main>
+  )
+}
+```
+
+---
+
+## Lo que aprendiste sin darte cuenta
+
+En este ejemplo simple usaste:
+- **Server Component** (sin `'use client'`) — ejecuta en el servidor, accede directo a DB
+- **createServerClient** de Supabase — auth en el lado del servidor
+- **Drizzle query** — type-safe, autocompletado completo
+- **App Router** — estructura de carpetas como routing
+
+Cada uno de estos conceptos los profundizamos en los módulos siguientes. El punto es: con IA, puedes usarlos antes de entenderlos completamente, y entenderlos mientras los usas.

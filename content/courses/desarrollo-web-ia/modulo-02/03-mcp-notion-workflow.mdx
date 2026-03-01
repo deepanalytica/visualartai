@@ -1,0 +1,165 @@
+---
+title: "Notion como cerebro del proyecto con MCP"
+slug: "notion-mcp-workflow-desarrollo"
+type: "mixed"
+duration_min: 28
+sort_order: 3
+status: "published"
+checklist:
+  - "Configurar el MCP de Notion en tu entorno de Claude Code"
+  - "Conectar tu base de tareas de Notion con Claude"
+  - "Crear el flujo de trabajo Notion + Claude + código"
+---
+
+## Por qué Notion + Claude + MCP es una combinación poderosa
+
+Notion es donde vive la intención del proyecto: las tareas, los requisitos, la documentación, las decisiones de diseño. El código es donde vive la implementación.
+
+Sin MCP, hay un gap: tienes que copiar los requisitos de Notion al chat de Claude, hacer la implementación, y volver a actualizar Notion manualmente. Tres lugares, tres acciones.
+
+Con el MCP de Notion, Claude vive en los dos mundos al mismo tiempo:
+- Lee los requisitos directamente desde Notion
+- Entiende el contexto sin que copies nada
+- Actualiza el estado de las tareas cuando termina
+- Crea nuevas tareas para bugs o issues que encuentra
+
+---
+
+## Setup del MCP de Notion paso a paso
+
+### 1. Crear la integración en Notion
+
+1. Ir a [notion.so/profile/integrations](https://www.notion.so/profile/integrations)
+2. Click en "New integration"
+3. Nombre: `claude-dev-[tu-proyecto]`
+4. Tipo: Internal
+5. Permisos mínimos necesarios:
+   - Read content
+   - Update content
+   - Insert content
+6. Copiar el "Internal Integration Token"
+
+### 2. Dar acceso a las páginas
+
+Por cada página de Notion que Claude debe ver:
+- Abrir la página → tres puntos (···) → Connections → agregar tu integración
+
+Páginas recomendadas para conectar:
+- Tu board de tareas del proyecto
+- La documentación técnica
+- El backlog / roadmap
+- La página de decisiones de arquitectura
+
+### 3. Configurar el MCP
+
+```json
+// .claude/settings.json (por proyecto)
+{
+  "mcpServers": {
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/mcp"],
+      "env": {
+        "NOTION_API_KEY": "secret_xxx"
+      }
+    }
+  }
+}
+```
+
+---
+
+## El workflow de desarrollo con Notion + Claude
+
+### Inicio del día
+
+```
+Claude, revisa mi tablero de tareas en Notion.
+¿Qué tareas están en "En progreso" o "Para hacer hoy"?
+Dame el contexto de la tarea de más alta prioridad.
+```
+
+Claude lee tu Notion, muestra las tareas, y ya tiene el contexto de lo que hay que hacer. Sin copiar nada.
+
+---
+
+### Durante el desarrollo
+
+```
+Trabajando en la tarea "Implementar filtros de búsqueda".
+Lee los requisitos completos desde Notion si los tienes.
+Tenemos este schema:
+[Claude ya lo conoce si leyó el CLAUDE.md]
+
+¿Cómo implementarías los filtros en el Server Component?
+```
+
+---
+
+### Al terminar una tarea
+
+```
+Implementación completada. Por favor:
+1. Marca la tarea "Implementar filtros de búsqueda" como completada en Notion
+2. Agrega una nota con lo que se implementó
+3. Crea una nueva tarea para los tests que faltan
+```
+
+Claude actualiza Notion sin que toques el teclado.
+
+---
+
+### Documentar una decisión técnica
+
+```
+Tomamos la decisión de usar Drizzle ORM sobre Prisma por las siguientes razones:
+[tu razonamiento]
+
+Crea una entrada en mi página de "Decisiones de Arquitectura" en Notion con esta información, el contexto, y las alternativas consideradas.
+```
+
+---
+
+## Estructura de Notion recomendada para proyectos de dev
+
+```
+📁 [Nombre del Proyecto]
+├── 📋 Tasks / Backlog
+│   ├── Vista: Board (por estado: Backlog / Doing / Done)
+│   ├── Vista: Timeline (fechas)
+│   └── Propiedades: Status, Priority, Tipo (Feature/Bug/Chore), Sprint
+├── 📖 Documentación Técnica
+│   ├── Stack y arquitectura
+│   ├── Schema de DB
+│   ├── Decisiones de arquitectura
+│   └── API docs
+├── 🐛 Bugs conocidos
+└── 💡 Ideas / Backlog futuro
+```
+
+---
+
+## Skill: sincronizar CLAUDE.md con Notion
+
+Una skill que mantiene el CLAUDE.md actualizado automáticamente:
+
+```markdown
+<!-- .claude/commands/sync-docs.md -->
+Actualiza el archivo CLAUDE.md con el estado actual del proyecto:
+
+1. Lee la sección "Estado actual del proyecto" en mi Notion
+   (busca la página "Estado del Proyecto" en mi integración de Notion)
+2. Actualiza la sección "Estado actual" del CLAUDE.md con las tareas completadas y pendientes
+3. Si hay nuevas convenciones o decisiones en Notion que no están en CLAUDE.md, agrégalas
+4. Commit los cambios: "docs: sync CLAUDE.md with Notion state"
+```
+
+---
+
+## La regla de oro del workflow
+
+**Notion es la fuente de verdad de las intenciones. El código es la fuente de verdad de la implementación.**
+
+No intentes hacer que Notion sea técnico (no pongas SQL en Notion). No intentes hacer que el código sea el gestor de proyecto (no pongas requisitos en comentarios).
+
+Claude es el puente entre los dos mundos.

@@ -1,0 +1,333 @@
+---
+title: "Cheatsheet: MCP Servers para Claude Code"
+slug: "cheatsheet-mcp-servers"
+type: "guide"
+version: "1.0"
+tags: ["mcp", "claude code", "notion", "supabase", "github", "vercel"]
+is_free: true
+status: "published"
+---
+
+# Cheatsheet: MCP Servers para Claude Code
+
+Referencia rápida para configurar los MCP más útiles en proyectos de desarrollo web.
+
+---
+
+## ¿Qué es un MCP?
+
+Model Context Protocol (MCP) es el protocolo de Anthropic que permite a Claude conectarse a herramientas externas. Un MCP server expone herramientas que Claude puede usar directamente durante el trabajo.
+
+**Resultado práctico:** Claude puede leer y escribir en Notion, ejecutar queries en Supabase, crear branches en GitHub, y ver deployments en Vercel — todo dentro de la misma conversación, sin que tú copies y pegues.
+
+---
+
+## Configuración base
+
+Los MCPs se configuran en:
+- **Por proyecto:** `.claude/settings.json` (en la raíz del repo)
+- **Global:** `~/.claude/settings.json` (para todos los proyectos)
+
+```json
+{
+  "mcpServers": {
+    "[nombre]": {
+      "command": "npx",
+      "args": ["-y", "@package/mcp-server"],
+      "env": {
+        "VARIABLE": "valor"
+      }
+    }
+  }
+}
+```
+
+---
+
+## 1. Notion MCP
+
+**Paquete:** `@notionhq/mcp`
+**Para:** gestión de tareas, documentación, context del proyecto
+
+### Configuración
+
+```json
+{
+  "mcpServers": {
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/mcp"],
+      "env": {
+        "NOTION_API_KEY": "secret_xxxxxxxxxxxx"
+      }
+    }
+  }
+}
+```
+
+### Obtener el API key
+
+1. Ir a notion.so/profile/integrations
+2. Click "New integration"
+3. Dar nombre, seleccionar workspace
+4. Copiar "Internal Integration Token"
+5. Conectar las páginas que Claude necesita ver:
+   - Abrir la página en Notion → Click ··· → Add connections → seleccionar tu integración
+
+### Qué puede hacer Claude con Notion
+
+- Leer páginas, bases de datos y tareas
+- Crear y actualizar páginas
+- Marcar tareas como completadas
+- Buscar en el workspace
+- Crear nuevas entradas en databases
+
+### Prompts de uso
+
+```
+# Ver tareas pendientes
+Abre mi database de tareas en Notion y dime qué está pendiente para hoy
+
+# Documentar decisión
+Crea una nueva entrada en mi database de "Architecture Decisions"
+con la decisión que tomamos hoy sobre [X]
+
+# Sincronizar estado
+Actualiza el estado del proyecto en Notion con lo que implementamos hoy
+```
+
+---
+
+## 2. Supabase MCP
+
+**Paquete:** `@supabase/mcp-server-supabase`
+**Para:** consultar la DB, ejecutar queries, ver logs, gestionar el proyecto
+
+### Configuración
+
+```json
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase",
+        "--access-token", "sbp_xxxxxxxxxxxx",
+        "--project-ref", "xxxxxxxxxxxx"
+      ]
+    }
+  }
+}
+```
+
+### Obtener las credenciales
+
+1. **Access Token:** supabase.com → Account → Access tokens → Generate new token
+2. **Project Ref:** supabase.com → tu proyecto → Settings → General → Reference ID
+
+### Qué puede hacer Claude con Supabase MCP
+
+- Ejecutar SQL queries directamente
+- Ver el schema de las tablas
+- Revisar logs de la aplicación (auth, API, DB)
+- Ver las políticas RLS activas
+- Gestionar usuarios de auth
+- Ver Edge Functions
+
+### Prompts de uso
+
+```
+# Debug de datos
+Consulta la tabla profiles y dime si hay usuarios sin el campo full_name
+
+# Ver logs
+Muéstrame los últimos 20 errores en los logs de auth
+
+# Verificar RLS
+Lista todas las RLS policies activas en la tabla projects
+y dime si hay algún gap de seguridad
+```
+
+---
+
+## 3. GitHub MCP
+
+**Paquete:** `@modelcontextprotocol/server-github`
+**Para:** gestionar issues, PRs, branches y código
+
+### Configuración
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_xxxxxxxxxxxx"
+      }
+    }
+  }
+}
+```
+
+### Obtener el token
+
+1. github.com → Settings → Developer settings → Personal access tokens
+2. "Tokens (classic)" → Generate new token
+3. Scopes mínimos: `repo`, `read:org`
+
+### Qué puede hacer Claude con GitHub MCP
+
+- Leer y crear issues
+- Crear y revisar Pull Requests
+- Leer archivos de cualquier branch
+- Crear y gestionar branches
+- Ver el historial de commits
+- Comentar en PRs
+
+### Prompts de uso
+
+```
+# Crear issue
+Crea un issue en el repo con el bug que acabamos de encontrar.
+Título: [X]. Incluye los pasos para reproducir.
+
+# Revisar PR
+Lee el PR #42 y dime si hay algo que revisar antes de hacer merge
+
+# Branch de feature
+Crea una branch "feature/user-profile" desde main
+```
+
+---
+
+## 4. Vercel MCP
+
+**Paquete:** `@vercel/mcp-adapter` o via el MCP de Vercel CLI
+**Para:** ver deployments, logs, variables de entorno
+
+### Configuración
+
+```json
+{
+  "mcpServers": {
+    "vercel": {
+      "command": "npx",
+      "args": ["-y", "vercel-mcp"],
+      "env": {
+        "VERCEL_TOKEN": "xxxxxxxxxxxx"
+      }
+    }
+  }
+}
+```
+
+### Obtener el token
+
+1. vercel.com → Settings → Tokens → Create Token
+
+### Qué puede hacer Claude con Vercel MCP
+
+- Ver el estado de los últimos deployments
+- Leer los logs de build de un deployment fallido
+- Ver las variables de entorno configuradas
+- Ver las Edge Functions deployadas
+
+### Prompts de uso
+
+```
+# Debug de deploy fallido
+Lee los logs del último deployment fallido y dime qué causó el error
+
+# Ver estado
+¿Cuál es el estado del último deploy de producción?
+```
+
+---
+
+## 5. Filesystem MCP
+
+**Paquete:** `@modelcontextprotocol/server-filesystem`
+**Para:** leer archivos locales que Claude Code no puede ver directamente
+
+### Configuración
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/tu-usuario/Desktop/proyecto"
+      ]
+    }
+  }
+}
+```
+
+Reemplaza la ruta con el directorio raíz que quieres exponer.
+
+---
+
+## Configuración completa de ejemplo
+
+`.claude/settings.json` para un proyecto típico:
+
+```json
+{
+  "mcpServers": {
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/mcp"],
+      "env": {
+        "NOTION_API_KEY": "secret_xxx"
+      }
+    },
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase",
+        "--access-token", "sbp_xxx",
+        "--project-ref", "xxx"
+      ]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_xxx"
+      }
+    }
+  }
+}
+```
+
+---
+
+## Cómo verificar que funcionan
+
+Al iniciar Claude Code en el proyecto:
+```
+¿Qué MCP servers tienes disponibles?
+```
+
+Claude listará los servers activos y sus herramientas disponibles.
+
+---
+
+## Seguridad
+
+- Los tokens de MCP son credenciales reales — tratalos como secrets
+- **Nunca** commitees `.claude/settings.json` con tokens reales
+- Agregar al `.gitignore`: `.claude/settings.json`
+- Usar `.claude/settings.json.example` (sin tokens) en el repo para documentar la configuración
+
+```
+# En .gitignore:
+.claude/settings.json
+```

@@ -1,0 +1,134 @@
+---
+title: "Anatomía del prompt: los 4 elementos que controlan todo"
+slug: "anatomia-prompt-imagen"
+type: "mixed"
+duration_min: 22
+sort_order: 1
+status: "published"
+checklist:
+  - "Identificar los 4 elementos en cualquier prompt de imagen"
+  - "Escribir un prompt completo con los 4 elementos"
+  - "Entender por qué los prompts cortos fallan"
+---
+
+## Por qué los prompts cortos fallan
+
+"beautiful woman portrait" — millones de personas han escrito esto exactamente. El modelo interpola entre todas esas imágenes y te da el promedio de lo que espera.
+
+El resultado: algo correcto pero completamente genérico.
+
+Los prompts cortos son instrucciones ambiguas. El modelo "adivina" todo lo que no especificaste, y adivina lo más común.
+
+**La solución no es hacer el prompt más largo por hacerlo más largo.** Es ser específico en los 4 elementos que realmente controlan el resultado.
+
+---
+
+## Los 4 elementos del prompt
+
+### Elemento 1: El Sujeto
+
+**¿Quién o qué es el centro de la imagen?**
+
+Malo: `woman`
+Bueno: `35-year-old Latina woman, natural black curly hair, warm brown eyes, light freckles, confident expression`
+
+La diferencia:
+- Edad → afecta iluminación ideal, expectativas de skin texture
+- Etnicidad → activa features específicos del training
+- Características físicas → reduce ambigüedad
+- Expresión → define el mood de toda la imagen
+
+**Regla:** si el sujeto es una persona, describe al menos: edad aproximada, rasgos físicos clave, expresión.
+
+### Elemento 2: El Ambiente
+
+**¿Dónde está y qué hay alrededor?**
+
+Malo: `in a café`
+Bueno: `sitting at a small marble table in a dimly lit Parisian café, vintage wooden chairs, warm candle light, blurred patrons in background, wet cobblestone visible through the window`
+
+La diferencia:
+- El ambiente específico activa el "vocabulario visual" del lugar
+- La hora del día define la paleta de luz automáticamente
+- El fondo define profundidad de campo y contexto narrativo
+- Los detalles secundarios ("wet cobblestone") enriquecen la autenticidad
+
+### Elemento 3: La Técnica fotográfica
+
+**¿Cómo fue "tomada" la foto?**
+
+Malo: `professional photo`
+Bueno: `shot on Canon EOS R5, 85mm f/1.4 lens, golden hour backlight, shallow depth of field, bokeh background, slight rim light on hair`
+
+La diferencia:
+- El nombre de la cámara activa el "estilo" asociado a ese equipo
+- El lente define la distorsión y compression (85mm = retrato flattering, 35mm = más ambiente)
+- La apertura define la profundidad de campo
+- La dirección de la luz define la atmósfera
+
+### Elemento 4: El Post-procesado
+
+**¿Cómo se "editó" la foto?**
+
+Malo: (no especificado → el modelo decide)
+Bueno: `warm color grading, slight film grain, lifted shadows, muted highlights, Kodak Portra 400 film emulation, slight vignette`
+
+La diferencia:
+- El color grading unifica la paleta emocional
+- El grano añade textura y autenticidad orgánica
+- Lifted shadows / muted highlights = estilo film moderno (Lightroom look)
+- La emulación de película activa toda una estética
+
+---
+
+## El prompt completo: juntando los 4 elementos
+
+```
+[SUJETO] 35-year-old Latina woman with natural black curly hair,
+warm brown eyes, slight freckles, relaxed confident expression
+
+[AMBIENTE] sitting at a small marble table in a dimly lit Parisian café,
+vintage wooden chairs, soft candle light, other patrons blurred in background,
+afternoon light through tall windows
+
+[TÉCNICA] shot on Canon EOS R5, 85mm f/1.4, shallow depth of field,
+warm natural light from window, slight rim light catching the hair,
+authentic candid moment
+
+[POST] warm golden color grading, slight film grain,
+Kodak Portra 400 emulation, lifted shadows, muted highlights
+```
+
+Resultado esperado: imagen que parece una foto editorial auténtica, no generada por IA.
+
+---
+
+## La regla del peso relativo
+
+En Midjourney, los primeros elementos del prompt tienen más peso. Esto significa que el orden importa:
+
+```
+✓ Sujeto → Ambiente → Técnica → Post
+✗ Post → Técnica → Ambiente → Sujeto  (el post contamina toda la imagen)
+```
+
+También puedes usar pesos explícitos en Midjourney:
+```
+woman::2 sitting in café::1 bokeh::1
+```
+El `::2` dobla la importancia relativa de "woman" vs los demás elementos.
+
+---
+
+## Ejercicio: analiza un prompt existente
+
+Toma cualquier imagen que te guste (de internet, Behance, Pinterest) y describe:
+
+1. **Sujeto:** ¿quién/qué es? ¿qué características específicas tiene?
+2. **Ambiente:** ¿dónde está? ¿qué hora del día? ¿qué hay de fondo?
+3. **Técnica:** ¿qué lente parece? ¿cómo es la luz? ¿hay bokeh?
+4. **Post:** ¿qué color grading tiene? ¿hay grano?
+
+Esto es dirección de arte inversa — y es el skill más valioso que puedes desarrollar.
+
+En el próximo módulo aplicamos esto con el método Nano Banana: el sistema de 4 capas que hace todo esto sistemático y reproducible.

@@ -1,0 +1,150 @@
+---
+title: "Vercel: CI/CD automático y preview environments"
+slug: "vercel-cicd-preview"
+type: "mixed"
+duration_min: 22
+sort_order: 2
+status: "published"
+checklist:
+  - "Configurar el proyecto en Vercel con todas las variables de entorno"
+  - "Entender el flujo de preview deployments"
+  - "Configurar dominio personalizado"
+  - "Leer logs de un deployment fallido"
+---
+
+## Por qué Vercel es la pareja perfecta de Next.js
+
+Vercel creó Next.js. La integración entre los dos es nativa:
+
+- Zero-config deploy: conecta el repo y funciona
+- Edge Network global: el sitio se sirve desde el datacenter más cercano al usuario
+- Preview deployments: cada PR tiene su propia URL de staging automáticamente
+- Streaming + React Server Components: soporte nativo, sin configuración
+- Vercel Analytics + Speed Insights: métricas out of the box
+
+---
+
+## El flujo de trabajo con Vercel
+
+```
+Desarrollo local → commit → push a GitHub
+                                    ↓
+              main branch → Deploy a Producción (automático)
+              other branches → Preview Deployment (automático)
+```
+
+Cada PR en GitHub genera una URL del tipo:
+`mi-app-git-feature-auth-tu-usuario.vercel.app`
+
+Comparte esa URL con el cliente para feedback antes de mergear.
+
+---
+
+## Variables de entorno por ambiente
+
+Vercel tiene tres ambientes: **Production**, **Preview**, y **Development**.
+
+En Vercel Dashboard → Settings → Environment Variables:
+
+| Variable | Production | Preview | Development |
+|----------|-----------|---------|-------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | prod URL | staging URL | local URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | prod key | staging key | local key |
+| `PAYMENT_PROVIDER` | `transbank` | `mercadopago_sandbox` | `mercadopago_sandbox` |
+
+**Buena práctica:** tener un proyecto de Supabase separado para staging. Los preview deployments usan los datos de staging, no los de producción.
+
+---
+
+## Configurar el proyecto en Vercel
+
+```bash
+# Via CLI (desde la raíz del proyecto)
+npx vercel
+
+# Seguir el wizard:
+# ¿Configurar proyecto existente? No → crear nuevo
+# Nombre del proyecto: mi-app
+# ¿Detectar configuración automáticamente? Yes
+# ¿Directorio raíz? ./
+
+# O simplemente conectar desde vercel.com/new con tu repo de GitHub
+```
+
+---
+
+## El vercel.json (cuando lo necesitas)
+
+La mayoría de proyectos Next.js no necesitan `vercel.json`. Pero para casos específicos:
+
+```json
+{
+  "rewrites": [
+    { "source": "/api/webhook/(.*)", "destination": "/api/webhook/$1" }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    }
+  ],
+  "functions": {
+    "src/app/api/heavy-task/route.ts": {
+      "maxDuration": 30
+    }
+  }
+}
+```
+
+---
+
+## Debugging con logs de Vercel
+
+Cuando un deployment falla o hay un error en producción:
+
+**Build logs:** Vercel Dashboard → Deployments → click en el deployment → Build Logs
+**Runtime logs:** Vercel Dashboard → Logs (tiempo real) o Functions → Logs
+
+Con el MCP de Vercel puedes hacer esto desde Claude Code:
+
+```
+El último deployment falló. Lee los logs de build y dime qué causó el error.
+```
+
+**Los errores más comunes en build:**
+- Variables de entorno faltantes en Vercel (solo existen en `.env.local`)
+- Imports de `fs` o Node.js modules en Client Components
+- TypeScript errors que el linter local no detectó
+- Dependencias que fallan en el entorno de build
+
+---
+
+## Vercel Analytics y Speed Insights
+
+Una vez en producción, actívalos en Vercel Dashboard → Analytics:
+
+```typescript
+// src/app/layout.tsx
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
+  )
+}
+```
+
+```bash
+npm install @vercel/analytics @vercel/speed-insights
+```
+
+Estos componentes son zero-config y te dan Core Web Vitals, páginas más visitadas, y performance por ruta.

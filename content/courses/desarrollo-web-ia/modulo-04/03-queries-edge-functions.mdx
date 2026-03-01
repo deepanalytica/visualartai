@@ -1,0 +1,203 @@
+---
+title: "Queries con Drizzle y Edge Functions"
+slug: "queries-drizzle-edge-functions"
+type: "mixed"
+duration_min: 28
+sort_order: 3
+status: "published"
+checklist:
+  - "Escribir queries complejas con Drizzle usando IA"
+  - "Crear una Edge Function de Supabase"
+  - "Entender cuándo usar Edge Functions vs API Routes de Next.js"
+---
+
+## Queries frecuentes con Drizzle + IA
+
+La ventaja de Drizzle es el tipado estático: Claude puede generar queries correctos porque conoce el schema completamente. Siempre incluye el schema en el prompt:
+
+```
+Mi schema de Drizzle es:
+[pega el contenido de src/db/schema.ts]
+
+Genera un query para:
+[describe lo que necesitas en lenguaje natural]
+```
+
+---
+
+## Los queries más comunes
+
+### Query 1: Lista con relaciones
+
+```typescript
+// Proyectos del usuario con conteo de tareas
+const projectsWithTaskCount = await db
+  .select({
+    project: projects,
+    taskCount: sql<number>`count(${tasks.id})::int`,
+    completedCount: sql<number>`count(case when ${tasks.isCompleted} then 1 end)::int`,
+  })
+  .from(projects)
+  .leftJoin(tasks, eq(tasks.projectId, projects.id))
+  .where(eq(projects.userId, userId))
+  .groupBy(projects.id)
+  .orderBy(desc(projects.createdAt))
+```
+
+### Query 2: Búsqueda con filtros opcionales
+
+```typescript
+type ProjectFilters = {
+  status?: 'active' | 'completed' | 'archived'
+  search?: string
+}
+
+async function getProjects(userId: string, filters: ProjectFilters) {
+  const conditions = [eq(projects.userId, userId)]
+
+  if (filters.status) {
+    conditions.push(eq(projects.status, filters.status))
+  }
+
+  if (filters.search) {
+    conditions.push(
+      or(
+        ilike(projects.name, `%${filters.search}%`),
+        ilike(projects.description, `%${filters.search}%`)
+      )!
+    )
+  }
+
+  return db
+    .select()
+    .from(projects)
+    .where(and(...conditions))
+    .orderBy(desc(projects.createdAt))
+}
+```
+
+### Query 3: Paginación
+
+```typescript
+async function getPaginatedTasks(projectId: string, page = 1, pageSize = 20) {
+  const offset = (page - 1) * pageSize
+
+  const [items, [{ count }]] = await Promise.all([
+    db.select()
+      .from(tasks)
+      .where(eq(tasks.projectId, projectId))
+      .orderBy(tasks.sortOrder, desc(tasks.createdAt))
+      .limit(pageSize)
+      .offset(offset),
+    db.select({ count: sql<number>`count(*)::int` })
+      .from(tasks)
+      .where(eq(tasks.projectId, projectId))
+  ])
+
+  return {
+    items,
+    total: count,
+    totalPages: Math.ceil(count / pageSize),
+    currentPage: page,
+  }
+}
+```
+
+---
+
+## Prompt para queries complejos
+
+```
+Schema de Drizzle: [pega el schema]
+
+Necesito un query que:
+1. [Qué datos debe retornar]
+2. [Filtros que debe aplicar]
+3. [Cómo debe ordenarse]
+4. [Si hay paginación]
+5. [Si hay algún cálculo agregado]
+
+El query se ejecuta en un Server Component de Next.js.
+Tipea el resultado de forma correcta.
+```
+
+---
+
+## Edge Functions de Supabase
+
+Las Edge Functions son funciones serverless que corren en el edge global de Supabase (usando Deno). Úsalas cuando necesitas:
+
+- **Webhooks** de servicios externos (Stripe, Transbank, GitHub)
+- **Lógica que debe correr con SERVICE_ROLE** (sin restricciones de RLS)
+- **Código que se ejecuta en respuesta a eventos de DB** (via Database Webhooks)
+- **Procesamiento de datos sensibles** fuera del cliente
+
+```typescript
+// supabase/functions/send-welcome-email/index.ts
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+
+serve(async (req: Request) => {
+  const { userId, email } = await req.json()
+
+  // Puede acceder a todas las tablas sin restricción de RLS
+  const supabase = createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+  )
+
+  // Hacer algo que requiere permisos elevados
+  await supabase.from('email_log').insert({
+    user_id: userId,
+    type: 'welcome',
+    sent_at: new Date().toISOString(),
+  })
+
+  // Llamar a un servicio de email
+  // await sendEmail(email, 'Bienvenido a la app')
+
+  return new Response(JSON.stringify({ ok: true }), {
+    headers: { 'Content-Type': 'application/json' },
+  })
+})
+```
+
+---
+
+## API Routes de Next.js vs Edge Functions: cuándo usar cada uno
+
+| Caso | Usar |
+|------|------|
+| CRUD normal de la app | API Routes de Next.js (o Server Actions) |
+| Webhook externo (pago, evento) | Edge Function de Supabase |
+| Lógica que requiere SERVICE_ROLE | Edge Function de Supabase |
+| Trigger de evento de DB | Edge Function + Database Webhook |
+| Procesamiento largo (> 10s) | Edge Function con `maxDuration` |
+| Lógica de negocio estándar | API Route de Next.js |
+
+---
+
+## Deploy de Edge Functions
+
+```bash
+# Instalar Supabase CLI
+npm install -g supabase
+
+# Autenticarse
+supabase login
+
+# Servir localmente
+supabase functions serve send-welcome-email
+
+# Deploy a producción
+supabase functions deploy send-welcome-email
+```
+
+Prompt para crear Edge Functions:
+```
+Necesito una Edge Function de Supabase (Deno runtime) que:
+[describe qué debe hacer]
+
+Debe: [restricciones de seguridad, validaciones, respuesta esperada]
+El payload que recibe es: [estructura del JSON]
+```

@@ -1,0 +1,196 @@
+---
+title: "Personas hiperrealistas: el reto más difícil"
+slug: "personas-hiperrealistas"
+type: "mixed"
+duration_min: 28
+sort_order: 1
+status: "published"
+checklist:
+  - "Dominar el prompt completo para retratos hiperrealistas"
+  - "Evitar los 5 errores más comunes en retratos IA"
+  - "Manejar el detalle de ojos, piel y cabello correctamente"
+---
+
+## Por qué los retratos son lo más difícil
+
+El cerebro humano es un detector ultra-sensible de caras. Evolucionamos para detectar emociones, intenciones y autenticidad en los rostros de otras personas. Podemos detectar algo "raro" en una cara en milisegundos.
+
+Esto significa que los errores en retratos IA se notan inmediatamente: ojos que no tienen vida, asimetría levemente incorrecta, piel que parece plástico, cabello que flota de manera irreal.
+
+El objetivo no es la perfección técnica — es la naturalidad. Un retrato IA que parece natural supera a uno técnicamente perfecto pero artificialmente simétrico.
+
+---
+
+## Los 5 errores más comunes
+
+### Error 1: Ojos sin vida
+
+Los ojos "muertos" son la señal más evidente de una imagen IA. Los ojos reales tienen:
+- Catchlights (reflejos de la fuente de luz)
+- Textura en el iris (no son color sólido)
+- Ligera humedad
+- Micro-vasculatura en el blanco
+
+**Fix:**
+```
+detailed iris texture, catchlight in eyes,
+realistic eye moisture, natural eye whites with subtle veins,
+life-like gaze, expressive eyes
+```
+
+### Error 2: Piel de plástico
+
+Cuando el modelo "suaviza" demasiado la piel, pierde textura y parece plástico o cera.
+
+**Fix:**
+```
+natural skin texture, visible pores, slight skin imperfections,
+human skin authenticity, no skin smoothing,
+realistic skin tones, natural complexion
+```
+
+**En Midjourney:** usa `--style raw` que reduce el procesamiento "beautification" automático.
+
+### Error 3: Cabello artificial
+
+El cabello generado frecuentemente tiene dos problemas: o es demasiado perfecto (cada pelo en su lugar), o tiene segmentos que no tienen lógica física.
+
+**Fix:**
+```
+natural hair movement, individual hair strands visible,
+realistic hair texture, slight flyaways, natural hair volume,
+hair physics realistic, windswept or gravity-affected hair
+```
+
+### Error 4: Composición simétrica y robótica
+
+Las personas en prompts sin indicación de pose tienden a quedar perfectamente centradas, mirando de frente, perfectamente simétricas. Esto se ve inmediatamente artificial.
+
+**Fix:** especifica siempre pose y ángulo:
+```
+three-quarter angle, slight head tilt, weight on one side,
+natural casual stance, mid-conversation gesture,
+looking slightly away from camera, candid moment
+```
+
+### Error 5: Expresión genérica
+
+La "sonrisa de IA" — ligeramente forzada, demasiado perfecta, sin contexto. O la "mirada seria" completamente inexpresiva.
+
+**Fix:** describe emociones específicas y contextuales:
+```
+# En lugar de "happy":
+laughing at something just said, eyes crinkling at corners,
+genuine mid-laugh moment
+
+# En lugar de "serious":
+thoughtful, mid-consideration, slight furrow between brows,
+absorbed in thought
+
+# En lugar de "confident":
+self-assured without effort, relaxed authority,
+comfortable in their own skin
+```
+
+---
+
+## El prompt de retrato hiperrealista
+
+### Estructura L1 para personas
+
+```
+[edad aproximada] [etnicidad/rasgos específicos]
+[forma de cara] [ojos: color, forma]
+[nariz: característica] [labios: descripción]
+[piel: tono, características] [cabello: largo, textura, color, corte]
+[expresión específica y contextualizada]
+```
+
+### Prompt completo: retrato femenino
+
+```
+[L1] 34-year-old East African woman, oval face with high defined cheekbones,
+warm dark brown almond-shaped eyes with gold flecks in the iris,
+broad nose, full lips with natural pigmentation, rich deep brown skin
+with natural luminosity, tight coils natural hair, medium length,
+slight flyaways, genuine half-smile as if amused by something,
+direct but warm gaze, three-quarter angle
+
+[L2] outdoors in early morning light, soft warm diffused light,
+light out-of-focus background of greenery, simple neutral shirt
+
+[L3] shot on Hasselblad X2D, 90mm f/3.5, golden hour soft backlight
+with slight fill from diffuser, catchlights from natural open sky,
+razor-sharp focus on eyes
+
+[L4] warm natural color grading, natural skin tone preservation,
+slight warmth in shadows, no heavy editing, skin-friendly warmth --v 6.1 --style raw
+```
+
+---
+
+## Retratos masculinos: diferencias
+
+Los retratos masculinos tienen consideraciones adicionales:
+- Las texturas de piel (barba, líneas de expresión) son más prominentes
+- La iluminación más dura funciona mejor
+- La jaw line y estructura facial son elementos definitorios
+
+```
+[L1] 50-year-old man of Italian descent, strong jaw with natural asymmetry,
+3-day salt and pepper stubble, small wrinkles at eye corners,
+confident weathered face, deep brown eyes with slight bags underneath
+(authentic aging), silver-streaked dark hair, natural recession at temples,
+slight knowing smile, three-quarter view
+
+[L3] Canon EOS R5, 85mm f/1.4, directional natural window light,
+slight shadow on one side of face, Rembrandt triangle lighting,
+slight rim light from second window
+```
+
+---
+
+## La técnica de "imperfección estratégica"
+
+Los modelos tienden a "corregir" hacia la perfección. Contrarréstalo pidiendo imperfecciones específicas:
+
+```
+# Imperfecciones que aumentan autenticidad:
+slight asymmetry in the face (natural, not disturbing)
+natural skin imperfections (a small mole, light freckles)
+hair that's not perfectly styled
+slightly crooked teeth visible in smile
+tired eyes after a long day
+natural aging signs appropriate to the age
+```
+
+Estas imperfecciones hacen que el cerebro deje de buscar lo que está "mal" y empiece a creer que la persona es real.
+
+---
+
+## Diversidad e inclusión en los prompts
+
+Los modelos tienen sesgos de training — tienden a sobre-representar ciertos tipos de personas si no especificas. Para representación diversa:
+
+**Por etnicidad:**
+```
+Southeast Asian, East Asian, South Asian, East African,
+West African, North African, Latina, Indigenous American,
+Middle Eastern, Pacific Islander, Multiracial
+```
+
+**Por edad:**
+```
+# Para personas mayores (raramente representadas):
+authentic aging, 60-year-old, deep expression lines,
+white hair, dignified mature appearance, life experience visible
+```
+
+**Por características físicas:**
+```
+plus size, athletic build, petite frame, tall and slim,
+with visible disability (wheelchair, prosthetic),
+albinism, vitiligo
+```
+
+Especificar estas características explícitamente es la única forma de asegurar representación en el resultado.

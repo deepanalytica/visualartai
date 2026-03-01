@@ -1,0 +1,142 @@
+---
+title: "El stack completo: scaffold en 10 minutos"
+slug: "stack-scaffold-proyecto"
+type: "mixed"
+duration_min: 25
+sort_order: 2
+status: "published"
+checklist:
+  - "Crear el proyecto Next.js con el comando base"
+  - "Instalar y configurar las dependencias del stack"
+  - "Conectar el proyecto a GitHub"
+  - "Hacer el primer deploy en Vercel"
+---
+
+## Scaffold con Next.js + el stack completo
+
+```bash
+# Crear el proyecto
+npx create-next-app@latest mi-app --typescript --tailwind --eslint --app --src-dir
+
+cd mi-app
+
+# Dependencias del stack
+npm install @supabase/supabase-js @supabase/ssr
+npm install drizzle-orm drizzle-kit postgres
+npm install -D tsx
+
+# shadcn/ui - componentes
+npx shadcn@latest init
+
+# Variables de entorno
+cp .env.example .env.local  # si existe, o crear manualmente
+```
+
+---
+
+## Estructura de carpetas que usamos en el curso
+
+```
+mi-app/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── (auth)/             # Grupo de rutas de auth
+│   │   │   ├── login/
+│   │   │   └── register/
+│   │   ├── (app)/              # Grupo de rutas autenticadas
+│   │   │   └── dashboard/
+│   │   ├── api/                # API routes
+│   │   ├── globals.css
+│   │   └── layout.tsx
+│   ├── components/
+│   │   ├── ui/                 # shadcn/ui (auto-generados)
+│   │   └── [feature]/          # Componentes por feature
+│   ├── db/
+│   │   ├── schema.ts           # Schema de Drizzle
+│   │   └── index.ts            # Cliente de DB
+│   └── lib/
+│       ├── supabase/
+│       │   ├── client.ts       # createBrowserClient
+│       │   └── server.ts       # createServerClient
+│       └── utils.ts
+├── CLAUDE.md                   # El manual de proyecto para Claude
+├── drizzle.config.ts
+├── middleware.ts
+└── package.json
+```
+
+---
+
+## El archivo .env.local base
+
+```bash
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+SUPABASE_SERVICE_ROLE_KEY=eyJ...  # NUNCA en el frontend
+
+# Base de datos (para Drizzle)
+DATABASE_URL=postgresql://postgres:[password]@db.[project].supabase.co:5432/postgres
+
+# App
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+Dónde encontrar estos valores: en tu proyecto de Supabase → Settings → API.
+
+---
+
+## Primer deploy en Vercel (3 minutos)
+
+```bash
+# Subir a GitHub primero
+git init
+git add .
+git commit -m "feat: initial scaffold"
+git remote add origin https://github.com/tu-usuario/mi-app.git
+git push -u origin main
+```
+
+Luego en [vercel.com/new](https://vercel.com/new):
+1. Importar el repositorio
+2. Agregar las variables de entorno
+3. Click en Deploy
+
+Cada push a `main` → deploy automático a producción.
+Cada push a otras branches → preview deployment con URL única.
+
+---
+
+## El CLAUDE.md: el paso más subestimado
+
+El archivo `CLAUDE.md` en la raíz del proyecto es el "onboarding" que Claude lee al inicio de cada sesión. Sin él, tienes que re-explicar el contexto en cada conversación.
+
+Con él, Claude sabe desde el primer mensaje:
+- Qué hace el proyecto
+- Qué stack usas
+- Las convenciones del código
+- Las reglas de negocio importantes
+- Qué no debe hacer (archivos que no tocar, patrones a evitar)
+
+Lo construimos en detalle en el Módulo 2. Por ahora, crea el archivo:
+
+```markdown
+# CLAUDE.md
+
+## Proyecto
+[nombre] — [descripción en 2 líneas]
+
+## Stack
+- Next.js 15, App Router, TypeScript
+- Supabase (PostgreSQL + Auth), Drizzle ORM
+- Tailwind CSS, shadcn/ui
+- Vercel
+
+## Estructura
+[pega la estructura de carpetas de arriba]
+
+## Estado actual
+[lo que esté implementado hoy]
+```
+
+Este archivo crece con el proyecto. En el Módulo 2 lo construimos completo.

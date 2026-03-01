@@ -1,0 +1,323 @@
+---
+title: "Pack de System Prompts para Desarrollo Web con IA"
+slug: "prompts-desarrollo-web"
+type: "prompt"
+version: "1.0"
+tags: ["prompts", "desarrollo web", "claude", "claude code", "debug"]
+is_free: false
+status: "published"
+---
+
+# Pack de System Prompts para Desarrollo Web con IA
+
+**30 prompts categorizados** para usar con Claude Code y Claude en proyectos Next.js + Supabase.
+
+---
+
+## CATEGORÍA 1: INICIO DE SESIÓN
+
+### P01 — Prompt de inicio de día
+```
+Lee el archivo CLAUDE.md del proyecto.
+El estado actual del trabajo está en [Notion / archivo de tareas].
+Hoy voy a trabajar en: [descripción concreta de la tarea].
+Antes de escribir código, dime:
+1. ¿Hay algún archivo que deba revisar antes?
+2. ¿Qué dependencias o código existente es relevante para esta tarea?
+```
+
+### P02 — Onboarding a proyecto nuevo
+```
+Lee el CLAUDE.md de este proyecto.
+Recorre la estructura de carpetas para entender qué ya existe.
+Luego dime:
+1. Qué hace el proyecto en 2-3 oraciones
+2. Qué está implementado y qué falta
+3. Las 3 cosas que más debo tener en cuenta para no romper algo existente
+```
+
+---
+
+## CATEGORÍA 2: DISEÑO Y ARQUITECTURA
+
+### P03 — Diseño de schema de DB
+```
+Voy a construir [descripción de la app/feature].
+Stack: Next.js 15, Drizzle ORM, Supabase (PostgreSQL).
+
+Antes de escribir código, ayúdame a diseñar el schema:
+1. ¿Cuáles son las entidades principales y sus relaciones?
+2. ¿Qué tipos de datos son los correctos para cada campo?
+3. ¿Qué índices necesito para las queries más frecuentes?
+4. ¿Hay algún edge case de negocio que el schema deba manejar?
+
+No escribas código todavía — solo el análisis.
+```
+
+### P04 — Decisión de arquitectura
+```
+Necesito implementar [feature].
+Las opciones que veo son: [opción A] vs [opción B].
+
+Contexto: [stack, escala esperada, restricciones]
+
+Analiza cada opción con:
+- Ventajas y desventajas
+- Complejidad de implementación
+- Impacto en performance
+- Mantenibilidad a largo plazo
+- Tu recomendación con justificación
+```
+
+### P05 — Políticas RLS con IA
+```
+Schema de Drizzle: [pega el schema relevante]
+
+Necesito las RLS policies para estas tablas.
+Reglas de negocio:
+- [regla 1: quién puede ver qué]
+- [regla 2: quién puede editar qué]
+- [regla 3: restricciones especiales]
+
+Genera el SQL de las policies para ejecutar en Supabase SQL Editor.
+Explica cada policy en una línea de comentario.
+```
+
+---
+
+## CATEGORÍA 3: IMPLEMENTACIÓN
+
+### P06 — Server Component con datos
+```
+Contexto: [fragmento relevante del CLAUDE.md]
+
+Crea un Server Component para [página/sección].
+Debe:
+1. Obtener el usuario autenticado via createServerClient
+2. Hacer el query de Drizzle para [qué datos]
+3. Manejar el caso de no autenticado (redirect)
+4. Manejar el caso de datos vacíos
+5. Renderizar [descripción del UI]
+
+Schema relevante: [pega las tablas involucradas]
+```
+
+### P07 — Server Action completa
+```
+Crea una Server Action para [operación: crear/editar/eliminar] [entidad].
+
+Schema: [tabla relevante]
+Reglas de validación: [lista de validaciones]
+Efectos secundarios: [revalidatePath, redirect, email, etc]
+
+Patrón de retorno: { success: boolean, data?: T, error?: string }
+Usa Zod para validación.
+Verifica ownership del recurso si es update/delete.
+```
+
+### P08 — Client Component con form
+```
+Crea un Client Component con formulario para [propósito].
+Campos: [lista de campos con tipos]
+Validación: [reglas de Zod]
+Al submit: llama a la Server Action [nombre]
+Manejo de estados: loading, error, success
+UI: usa componentes de shadcn/ui
+No crear lógica de datos en el cliente — solo UI y llamada a la SA.
+```
+
+### P09 — Query Drizzle complejo
+```
+Schema de Drizzle: [pega el schema]
+
+Necesito un query que:
+1. [Qué datos debe retornar]
+2. [Filtros que debe aplicar]
+3. [Cómo debe ordenarse]
+4. [Si hay paginación: pageSize y offset]
+5. [Si hay cálculos agregados: COUNT, SUM, etc]
+
+El query se ejecuta en un Server Component.
+Tipea el resultado de forma correcta con TypeScript.
+```
+
+### P10 — API Route con validación
+```
+Crea una API Route en src/app/api/[recurso]/route.ts.
+Métodos: [GET | POST | PUT | DELETE]
+Autenticación: requerida (usa createServerClient)
+Validación de body: Zod schema [describe la estructura]
+Respuesta: { data: T } | { error: string }
+Status codes correctos: 200, 201, 400, 401, 403, 404, 500
+```
+
+---
+
+## CATEGORÍA 4: DEBUGGING
+
+### P11 — Debug de error TypeScript
+```
+Tengo este error TypeScript:
+[pega el error completo]
+
+Código donde ocurre:
+[pega el código]
+
+Contexto del archivo:
+[imports relevantes, tipos definidos]
+
+¿Qué causa el error y cómo lo resuelvo sin cambiar la estructura existente?
+```
+
+### P12 — Debug de error en runtime
+```
+Tengo este error en runtime:
+[pega el error completo con stack trace]
+
+El flujo que lo produce:
+1. [paso 1]
+2. [paso 2]
+3. [paso 3 → aquí falla]
+
+Código relevante:
+[pega los archivos involucrados]
+
+¿Qué causa el error? Dame la solución más simple.
+```
+
+### P13 — Hydration mismatch
+```
+Tengo un error de hydration mismatch:
+"Error: Hydration failed because the initial UI does not match..."
+
+El componente es:
+[pega el componente]
+
+¿Qué lo causa y cómo lo corrijo sin convertirlo innecesariamente a Client Component?
+```
+
+### P14 — Debug de query Drizzle
+```
+Este query no está devolviendo los resultados esperados:
+[pega el query]
+
+Schema involucrado:
+[tablas relevantes]
+
+Comportamiento actual: [qué devuelve]
+Comportamiento esperado: [qué debería devolver]
+Datos de prueba: [describe los datos en la DB]
+
+¿Cuál es el problema?
+```
+
+---
+
+## CATEGORÍA 5: CODE REVIEW
+
+### P15 — Review de seguridad
+```
+Revisa este código con foco en seguridad:
+[pega el código]
+
+Específicamente, busca:
+1. ¿El usuario puede acceder a datos de otros usuarios?
+2. ¿Hay inputs sin validar que podrían causar problemas?
+3. ¿Las Server Actions verifican ownership?
+4. ¿Hay secrets o data sensible expuesta al cliente?
+5. ¿Las API routes tienen auth correcta?
+```
+
+### P16 — Review de performance
+```
+Revisa este código con foco en performance:
+[pega el código]
+
+Busca:
+1. ¿Hay N+1 queries (queries dentro de loops)?
+2. ¿Hay data fetching que podría hacerse en paralelo?
+3. ¿Hay renders innecesarios?
+4. ¿El caching está configurado correctamente?
+5. ¿Hay operaciones síncronas que deberían ser asíncronas?
+```
+
+### P17 — Review de TypeScript
+```
+Revisa el tipado de este código:
+[pega el código]
+
+Busca:
+1. Uso de 'any' o 'unknown' sin justificación
+2. Type assertions (as T) que podrían eliminarse
+3. Tipos que faltan en props o retornos de funciones
+4. Posibles null/undefined no manejados
+5. Tipos que podrían inferirse automáticamente
+```
+
+---
+
+## CATEGORÍA 6: TESTING
+
+### P18 — Tests de Server Action
+```
+Stack: Vitest
+Genera tests para esta Server Action:
+[pega la Server Action]
+
+Cubre:
+- Happy path: el caso exitoso
+- Auth check: usuario no autenticado
+- Validation: inputs inválidos (cada campo)
+- Ownership: usuario intentando modificar recurso ajeno
+- DB error: qué pasa si la DB falla
+
+Mockea: createServerClient, la DB de Drizzle
+```
+
+### P19 — Tests de componente React
+```
+Stack: Vitest + React Testing Library
+Genera tests para este componente:
+[pega el componente]
+
+Cubre:
+- Renderizado inicial correcto
+- Interacciones del usuario (clicks, inputs)
+- Estado loading mientras procesa
+- Estado de error
+- Estado de éxito
+
+Mockea las Server Actions que llama.
+```
+
+---
+
+## CATEGORÍA 7: PROMPTS DE TAREA COMPLETA
+
+### P20 — Feature completo
+```
+Contexto: [fragmento de CLAUDE.md]
+
+Implementa el feature: [nombre y descripción]
+
+Entregables:
+1. Schema Drizzle si necesita nuevas tablas
+2. Server Actions para las mutaciones
+3. Server Components para las páginas
+4. Client Components para la interactividad
+5. API Routes si necesita endpoints públicos
+
+Restricciones:
+- No agregar dependencias nuevas sin consultarme
+- Mantener el patrón de retorno { success, data, error } en SA
+- Usar los componentes shadcn/ui existentes
+```
+
+---
+
+## NOTAS DE USO
+
+- Siempre incluye el fragmento de CLAUDE.md relevante al inicio de cada prompt
+- Para Claude Code: usa `@file` references para dar contexto del código existente
+- Los prompts de review son más efectivos en archivos pequeños (< 200 líneas)
+- El prompt P03 (schema) es el más importante — nunca te lo saltes

@@ -1,0 +1,182 @@
+---
+title: "Consistencia entre imágenes: el reto más difícil"
+slug: "consistencia-entre-imagenes"
+type: "mixed"
+duration_min: 20
+sort_order: 3
+status: "published"
+checklist:
+  - "Usar seeds y referencias de personaje para consistencia"
+  - "Construir un 'personaje base' reutilizable"
+  - "Entender las limitaciones actuales y cómo trabajar con ellas"
+---
+
+## El problema de consistencia
+
+Generas 10 imágenes de "la misma persona". Cada una parece una persona diferente. Esto no es un bug — es cómo funcionan los modelos de difusión.
+
+Sin instrucciones específicas, el modelo genera una nueva instancia aleatoria de "mujer de 30 años" cada vez.
+
+**Las 3 técnicas para mantener consistencia:**
+1. Seeds fijos (reproducibilidad exacta)
+2. Character Reference / Style Reference (Midjourney)
+3. Descripción hiperespecífica del personaje (el método Nano Banana)
+
+---
+
+## Técnica 1: Seeds fijos
+
+El seed es el punto de inicio del proceso de generación. El mismo seed + el mismo prompt = el mismo resultado.
+
+**En Midjourney:**
+```
+/imagine prompt [tu prompt] --seed 12345
+```
+
+Para encontrar el seed de una imagen que ya generaste:
+- Haz click en ✉️ (envelope) en el mensaje de Midjourney
+- El bot te envía el seed usado
+
+**Limitaciones del seed:**
+- Solo funciona si el prompt es idéntico
+- Cualquier cambio en el prompt (incluso un espacio) puede cambiar el resultado
+- No garantiza que "el mismo personaje" se vea igual en poses diferentes
+
+**Ideal para:** reproducir exactamente una imagen que ya funciona, crear variantes muy cercanas.
+
+---
+
+## Técnica 2: Character Reference (--cref)
+
+Midjourney v6 tiene `--cref` (character reference) — le das una imagen de referencia y el modelo intenta mantener las características de esa persona.
+
+```
+/imagine prompt [descripción de la escena] --cref [URL de la imagen de referencia]
+```
+
+**Cómo conseguir la URL:**
+1. Genera una imagen de base que te guste
+2. Haz click derecho → "Copiar dirección de imagen"
+3. Usa esa URL como --cref
+
+**Parámetro adicional `--cw` (character weight):**
+```
+--cref [URL] --cw 100   → máxima adherencia al personaje
+--cref [URL] --cw 50    → balance entre personaje y prompt
+--cref [URL] --cw 0     → solo el estilo visual, no el personaje
+```
+
+**Limitaciones:**
+- No es perfecto — las características varían algo entre generaciones
+- Funciona mejor con retratos de frente, buena iluminación
+- No funciona con personas reales (por restricciones éticas de Midjourney)
+
+---
+
+## Técnica 3: Personaje base Nano Banana
+
+Esta es la técnica principal del método. En lugar de depender de referencias técnicas del modelo, describes el personaje con tal precisión que cada generación del mismo prompt genera algo muy similar.
+
+### Componentes de un personaje base
+
+```markdown
+## Personaje: [nombre]
+
+### Descripción L1 (Sujeto)
+[edad] [etnicidad] [estructura facial: oval/square/heart face]
+[ojos: forma, color, distancia]
+[nariz: característica distintiva]
+[cabello: largo, textura, color, corte específico]
+[complexión: tono de piel, características]
+[expresión habitual]
+
+### Variaciones de L2 (Ambientes compatibles)
+- Ambiente A: [descripción del contexto 1]
+- Ambiente B: [descripción del contexto 2]
+- Ambiente C: [descripción del contexto 3]
+
+### L3 base (Técnica preferida)
+shot on [cámara], [lente], [tipo de iluminación preferida]
+
+### L4 base (Post preferido)
+[color grading], [grano], [paleta]
+```
+
+### Ejemplo de personaje base
+
+```markdown
+## Sofia — Fundadora Latina
+
+### L1 Base
+28-year-old Latina woman, oval face, warm brown almond-shaped eyes,
+full eyebrows, small upturned nose, warm olive skin with natural glow,
+shoulder-length wavy dark brown hair with natural texture,
+confident subtle smile, direct engaging gaze
+
+### Variaciones de ambiente
+A: working at a minimalist white desk, MacBook, morning coffee
+B: presenting in a bright modern office, city view behind
+C: in a café, casual, off-duty, natural light
+
+### L3 Base
+Canon EOS R5, 85mm f/1.4, natural window light or soft fill
+
+### L4 Base
+warm natural color grading, slight film grain, skin-friendly warmth
+```
+
+Una vez tienes este personaje base documentado, cada prompt empieza con el L1 completo. El resultado es mucho más consistente que empezar de cero.
+
+---
+
+## Cómo mantener consistencia de estilo (no de persona)
+
+Para marcas y proyectos, muchas veces no necesitas el mismo personaje — necesitas el mismo estilo visual. Esto es más fácil.
+
+### Style Reference (--sref) en Midjourney
+
+```
+/imagine prompt [nueva escena] --sref [URL de imagen con el estilo]
+```
+
+Funciona mucho mejor que `--cref` para consistencia de estilo fotográfico, paleta de colores y atmósfera.
+
+**Para una identidad visual de marca:**
+1. Genera una imagen "maestra" con el estilo correcto
+2. Usa esa imagen como --sref en todas las generaciones
+3. Ajusta el `--sw` (style weight, 0-1000) según cuánto quieres adherirte al estilo
+
+---
+
+## Batch de personaje: el workflow recomendado
+
+Para crear un set de 10 imágenes consistentes del mismo personaje:
+
+```
+1. Construye el personaje base (30 min)
+   → Documenta el L1 completo en tu Notion
+
+2. Genera la imagen "canon" (20 min)
+   → Usa el L1 base + L3 + L4 base
+   → Genera 4-6 variaciones
+   → Elige la mejor → nota el seed
+
+3. Genera el batch (60 min)
+   → Para cada variación de ambiente: [L1 base] + [nuevo L2] + [L3 base] + [L4 base]
+   → Usa --cref de la imagen canon
+   → Ajusta manualmente en v6 si hay variaciones
+
+4. Post-selección (15 min)
+   → Elige las 10 mejores con mayor consistencia visual
+   → Las que no son consistentes se descartan
+```
+
+**Realidad práctica:** con las herramientas actuales, 60-70% de consistencia entre imágenes del mismo personaje es un buen resultado. El 100% solo existe con herramientas avanzadas (ComfyUI + LoRA entrenado en el personaje).
+
+---
+
+## Cuándo NO preocuparte por consistencia
+
+Para redes sociales y marketing de contenido, muchas veces no necesitas el mismo personaje — necesitas la misma estética. Un feed de Instagram puede tener personas diferentes en cada post pero verse visualmente cohesivo si el L4 (post/grading) es consistente.
+
+Esto es más fácil de lograr y frecuentemente más valioso que insistir en el mismo personaje.

@@ -1,0 +1,183 @@
+---
+title: "System prompts que marcan la diferencia"
+slug: "system-prompts-desarrollo"
+type: "mixed"
+duration_min: 30
+sort_order: 1
+status: "published"
+checklist:
+  - "Entender la diferencia entre un prompt mediocre y uno de alta calidad"
+  - "Escribir el system prompt base de tu proyecto"
+  - "Crear el CLAUDE.md completo de tu proyecto"
+---
+
+## Por qué el 90% de los prompts son mediocres
+
+Un prompt mediocre hace esto:
+
+```
+"Escríbeme una función para autenticar usuarios en Next.js"
+```
+
+Claude va a generar algo genérico que probablemente no sigue tus convenciones, usa una librería diferente a la que tienes, o duplica código que ya existe en tu proyecto.
+
+Un prompt de alta calidad hace esto:
+
+```
+"Contexto del proyecto: [link al CLAUDE.md o pega el contenido]
+
+Necesito implementar la función de logout en el componente src/components/UserMenu.tsx.
+El componente es Client Component ('use client').
+Ya tenemos createBrowserClient de @supabase/ssr configurado en src/lib/supabase/client.ts.
+Después del logout, redirigir a /login.
+
+Restricciones:
+- No crear archivos nuevos, solo modificar UserMenu.tsx
+- Usar el hook useRouter de next/navigation para el redirect
+- Mantener el loading state mientras se procesa el logout
+
+¿Qué necesito agregar?"
+```
+
+La diferencia: **contexto** + **restricciones** + **qué ya existe** + **qué quiero exactamente**.
+
+---
+
+## Los 5 componentes de un buen prompt de desarrollo
+
+### 1. Contexto del proyecto
+Qué hace la app, el stack, las convenciones. Esto va en CLAUDE.md (ver abajo).
+
+### 2. Contexto de la tarea específica
+Qué archivo modificar, qué ya existe relacionado, qué estado tiene el código ahora.
+
+### 3. El objetivo claro
+Qué debe hacer la implementación, cuál es el comportamiento esperado.
+
+### 4. Las restricciones
+Qué no debe cambiar, qué patrones seguir, qué dependencias no agregar.
+
+### 5. La pregunta correcta
+No siempre es "escribe el código". A veces es:
+- "¿Cuáles son las consideraciones antes de implementar X?"
+- "Revisa este código y dime qué podría fallar"
+- "Tengo este error — ¿qué lo causa?"
+- "¿Hay una forma más simple de hacer esto?"
+
+---
+
+## El CLAUDE.md completo
+
+```markdown
+# CLAUDE.md — [Nombre del Proyecto]
+Última actualización: [fecha]
+
+## ¿Qué hace este proyecto?
+[2-3 oraciones describiendo el producto]
+
+## Stack técnico
+- Framework: Next.js 15, App Router, TypeScript strict mode
+- Styling: Tailwind CSS + shadcn/ui (tema dark por defecto)
+- Database: Supabase (PostgreSQL) + Drizzle ORM
+- Auth: Supabase Auth (email/password + magic link)
+- Deploy: Vercel (main → producción, PR → preview)
+
+## Estructura de carpetas clave
+src/app/(auth)/     → rutas públicas (login, register, reset-password)
+src/app/(app)/      → rutas protegidas (requieren auth)
+src/components/ui/  → shadcn/ui (no modificar manualmente)
+src/db/schema.ts    → schema completo de Drizzle
+src/lib/supabase/   → client.ts (browser) y server.ts (SSR)
+
+## Convenciones de código
+- Server Components por defecto — añadir 'use client' solo cuando necesario
+- Naming: PascalCase para componentes, camelCase para funciones y variables
+- API routes en src/app/api/[recurso]/route.ts
+- Siempre usar tipos de TypeScript, nunca 'any'
+- Errores: siempre retornar { error: string } | { data: T }, nunca throw en API routes
+- Zod para validación de inputs en API routes y formularios
+
+## Reglas de negocio importantes
+- Un usuario puede tener múltiples [recurso]
+- Los [recurso] son privados por defecto (RLS implementado)
+- [agregar las reglas específicas de tu dominio]
+
+## Lo que NO debe hacer Claude
+- No modificar archivos en src/components/ui/ (son de shadcn/ui)
+- No agregar dependencias sin consultarme
+- No usar 'any' en TypeScript
+- No remover tipos existentes
+
+## Estado actual del proyecto
+- [x] Auth básica (login/register/logout)
+- [x] Schema inicial y migraciones
+- [ ] Dashboard de usuario
+- [ ] [siguiente feature]
+
+## Comandos útiles
+npm run dev          → desarrollo local
+npm run db:push      → aplicar schema a Supabase
+npm run db:studio    → Drizzle Studio (GUI de DB)
+```
+
+---
+
+## System prompts por tipo de tarea
+
+Guarda estos como snippets o en tu editor:
+
+### Para debugging
+
+```
+Contexto del proyecto: [pega CLAUDE.md o el fragmento relevante]
+
+Tengo este error:
+[pega el error completo, incluyendo el stack trace]
+
+Este es el código donde ocurre:
+[pega el código]
+
+¿Qué causa este error y cómo lo resuelvo sin cambiar la estructura existente?
+```
+
+### Para code review
+
+```
+Revisa este código con estos criterios:
+1. ¿Hay race conditions o problemas de concurrencia?
+2. ¿Hay problemas de seguridad (inyección, XSS, CSRF)?
+3. ¿Hay casos edge que no se manejan?
+4. ¿Es la solución más simple posible para este problema?
+
+Código:
+[pega el código]
+```
+
+### Para generar tests
+
+```
+Stack de testing: Vitest + React Testing Library
+Genera tests para esta función/componente:
+[pega el código]
+
+Cubre:
+- El caso happy path
+- Los 3 casos de error más probables
+- Edge cases relevantes
+
+No generes mocks innecesarios — usa los reales cuando sea posible.
+```
+
+---
+
+## El prompt que abre cada sesión de desarrollo
+
+Cuando empiezas Claude Code en un proyecto:
+
+```
+Lee el archivo CLAUDE.md del proyecto.
+El estado actual del trabajo está en [archivo de tareas o Notion].
+Hoy voy a trabajar en: [descripción de la tarea de hoy].
+```
+
+Con esto, Claude tiene el contexto completo antes de escribir una sola línea.

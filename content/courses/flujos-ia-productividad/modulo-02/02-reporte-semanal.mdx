@@ -1,0 +1,118 @@
+---
+title: "Reporte semanal automático con plantilla"
+slug: "reporte-semanal-automatico"
+type: "mixed"
+duration_min: 25
+sort_order: 2
+status: "published"
+checklist:
+  - "Identificar los 3-5 datos que van en tu reporte semanal"
+  - "Crear la plantilla base del reporte con IA"
+  - "Generar tu primer reporte completo con el sistema"
+  - "Configurar el recordatorio semanal para completarlo"
+resources:
+  - { title: "Plantilla Reporte Mensual", slug: "plantilla-reporte-mensual" }
+---
+
+## El problema del reporte recurrente
+
+Muchos profesionales pasan 2-3 horas cada semana escribiendo el mismo tipo de reporte con datos distintos. La estructura no cambia, el análisis sigue el mismo patrón — solo cambian los números.
+
+Este es exactamente el tipo de tarea que se puede automatizar con IA.
+
+---
+
+## El sistema de reporte en 3 partes
+
+### Parte 1: La plantilla fija (se hace una vez)
+
+Define qué incluye tu reporte y en qué orden. Ejemplo:
+
+```
+REPORTE SEMANAL — [Semana del DD al DD de MES]
+
+1. Resumen ejecutivo (3 oraciones)
+2. Métricas clave (tabla)
+3. Logros de la semana (3-5 bullets)
+4. Bloqueadores o riesgos
+5. Plan de la semana siguiente
+```
+
+### Parte 2: Recopilación de datos (5-10 minutos)
+
+Antes de invocar a la IA, recopila los datos reales:
+- Abre las herramientas donde están tus métricas
+- Copia los números relevantes en un documento o nota
+- No necesitas formatearlos — solo tener los datos brutos
+
+### Parte 3: El prompt de generación (15 minutos)
+
+```
+Genera el reporte semanal de [período].
+
+Estructura del reporte:
+[pega tu plantilla]
+
+Datos de la semana:
+[pega tus datos brutos]
+
+Contexto adicional:
+- Objetivos del mes: [cuáles son]
+- Algo relevante que pasó esta semana: [si aplica]
+
+Tono: [profesional y directo] para [mi equipo/mi jefe/mis clientes]
+```
+
+---
+
+## Ejemplo real
+
+**Datos brutos que le das a la IA:**
+```
+Ventas: 47 (meta: 50)
+Leads nuevos: 23
+Reuniones completadas: 8 de 10 agendadas
+Propuestas enviadas: 5 (meta: 4)
+Cierre de propuesta anterior: pendiente respuesta
+Pipeline total: $12.4M
+```
+
+**Resultado del reporte (fragmento):**
+```
+RESUMEN EJECUTIVO
+La semana fue sólida en generación de propuestas y reuniones.
+Quedamos a 3 ventas de la meta, con 5 propuestas activas que pueden
+cerrar en las próximas 2 semanas. El pipeline total crece un 8% vs
+la semana anterior.
+
+MÉTRICAS CLAVE
+| Indicador | Meta | Real | Δ |
+|-----------|------|------|---|
+| Ventas | 50 | 47 | -6% |
+| Leads | 20 | 23 | +15% |
+...
+```
+
+---
+
+## Automatización avanzada: Notion + IA
+
+Si usas Notion para trackear tu trabajo:
+1. Crea una base de datos de reportes semanales
+2. Cada semana, duplica la plantilla
+3. Completa solo los datos brutos en campos simples
+4. Usa la IA para generar el análisis
+
+Con un poco más de configuración, puedes conectar esto a un flujo automatizado.
+
+---
+
+## Cuánto tiempo ahorras
+
+| Antes | Después |
+|-------|---------|
+| 2-3 horas/semana construyendo el reporte | 20-30 minutos compilando datos + generando |
+| Redactar análisis desde cero | Editar y aprobar análisis generado |
+| Olvidar incluir contexto relevante | La plantilla te recuerda qué incluir |
+
+**Ahorro estimado:** 90-150 minutos por semana. En un año: más de 3 semanas de trabajo recuperadas.
