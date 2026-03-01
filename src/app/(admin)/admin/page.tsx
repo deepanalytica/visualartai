@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { db } from "@/db"
 import { courses, enrollments, purchases, profiles } from "@/db/schema"
-import { eq, count, sum, gte } from "drizzle-orm"
+import { eq, count, sum } from "drizzle-orm"
 import { NeonCard } from "@/components/brand/NeonCard"
 import { BookOpen, Users, CreditCard, TrendingUp } from "lucide-react"
 import { formatPriceClp } from "@/lib/utils"
@@ -9,7 +9,6 @@ import { formatPriceClp } from "@/lib/utils"
 export const metadata = { title: "Admin Dashboard" }
 
 export default async function AdminDashboardPage() {
-  const supabase = await createClient()
 
   const [
     [{ totalCourses }],
@@ -111,13 +110,12 @@ export default async function AdminDashboardPage() {
                     </td>
                     <td className="py-3">
                       <span
-                        className={`text-xs px-2 py-0.5 rounded-full ${
-                          p.status === "paid"
+                        className={`text-xs px-2 py-0.5 rounded-full ${p.status === "paid"
                             ? "bg-[var(--neon-cyan-dim)] text-[var(--neon-cyan)]"
                             : p.status === "pending"
                               ? "bg-amber-500/10 text-amber-400"
                               : "bg-[var(--bg-overlay)] text-[var(--text-muted)]"
-                        }`}
+                          }`}
                       >
                         {p.status}
                       </span>

@@ -144,16 +144,15 @@ export default async function CoursePlayerPage({ params }: Props) {
                 </div>
               </summary>
               <div className="border border-t-0 border-[var(--border-subtle)] rounded-b-[var(--radius-md)] overflow-hidden">
-                {mod.lessons.map((lesson, li) => {
+                {mod.lessons.map((lesson, _li) => {
                   const done = completedLessonIds.has(lesson.id)
                   const isNext = lesson.id === nextLesson?.id
                   return (
                     <Link
                       key={lesson.id}
                       href={`/app/cursos/${params.slug}/${lesson.slug}`}
-                      className={`flex items-center gap-4 px-5 py-3.5 border-b border-[var(--border-subtle)] last:border-0 hover:bg-[var(--bg-overlay)] transition-colors ${
-                        isNext ? "bg-[var(--neon-cyan-dim)]" : ""
-                      }`}
+                      className={`flex items-center gap-4 px-5 py-3.5 border-b border-[var(--border-subtle)] last:border-0 hover:bg-[var(--bg-overlay)] transition-colors ${isNext ? "bg-[var(--neon-cyan-dim)]" : ""
+                        }`}
                     >
                       {done ? (
                         <CheckCircle2 className="size-5 text-[var(--neon-cyan)] shrink-0" />
@@ -164,13 +163,12 @@ export default async function CoursePlayerPage({ params }: Props) {
                       )}
                       <div className="flex-1 min-w-0">
                         <p
-                          className={`text-sm ${
-                            done
+                          className={`text-sm ${done
                               ? "text-[var(--text-muted)] line-through"
                               : isNext
                                 ? "text-[var(--neon-cyan)] font-medium"
                                 : "text-[var(--text-secondary)]"
-                          }`}
+                            }`}
                         >
                           {lesson.title}
                         </p>

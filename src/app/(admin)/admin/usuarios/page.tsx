@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { db } from "@/db"
 import { enrollments } from "@/db/schema"
-import { eq, count } from "drizzle-orm"
+import { count } from "drizzle-orm"
 import { NeonCard } from "@/components/brand/NeonCard"
 import { NeonBadge } from "@/components/brand/NeonBadge"
 
@@ -25,9 +25,9 @@ export default async function AdminUsuariosPage() {
 
   const enrollMap = Object.fromEntries(enrollCounts.map((e) => [e.userId, Number(e.count)]))
 
-  const roleVariant: Record<string, "cyan" | "magenta" | "neutral"> = {
+  const roleVariant: Record<string, "cyan" | "magenta" | "neutral" | "violet"> = {
     admin: "magenta",
-    mentor: "violet" as any,
+    mentor: "violet",
     student: "neutral",
   }
 

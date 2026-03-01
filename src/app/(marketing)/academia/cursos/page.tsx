@@ -5,7 +5,7 @@ import { NeonCard } from "@/components/brand/NeonCard"
 import { NeonBadge } from "@/components/brand/NeonBadge"
 import { GlowDivider } from "@/components/brand/GlowDivider"
 import { SITE_NAME } from "@/lib/constants"
-import { Clock, Users, Star, ArrowRight, BookOpen, Skull } from "lucide-react"
+import { Clock, Star, ArrowRight, BookOpen, Skull } from "lucide-react"
 import { ScrollReveal } from "@/components/animations/ScrollReveal"
 
 export const metadata: Metadata = {
@@ -172,7 +172,7 @@ export default function CursosPage() {
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
             <p className="text-xl text-[var(--text-secondary)] max-w-3xl leading-relaxed">
-              En el mundo actual, saber apretar botones ya no es suficiente. Lo que las empresas demandan hoy es <strong>pensamiento crítico, habilidades de conexión humana (Storytelling) y la capacidad de pensar "fuera de la caja" (Creativity)</strong> usando la IA como palanca. Adquiere estas habilidades aquí y no te quedes rezagado.
+              En el mundo actual, saber apretar botones ya no es suficiente. Lo que las empresas demandan hoy es <strong>pensamiento crítico, habilidades de conexión humana (Storytelling) y la capacidad de pensar &ldquo;fuera de la caja&rdquo; (Creativity)</strong> usando la IA como palanca. Adquiere estas habilidades aquí y no te quedes rezagado.
             </p>
           </ScrollReveal>
         </div>

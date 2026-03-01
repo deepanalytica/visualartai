@@ -135,7 +135,7 @@ export default function ProcesoPage() {
 
         <div className="container max-w-5xl mx-auto px-4 relative z-10">
           <div className="flex flex-col gap-16">
-            {pasos.map((p, i) => (
+            {pasos.map((p, _i) => (
               <ScrollReveal key={p.numero} delay={0.1}>
                 <NeonCard glow={p.glow} className="p-8 md:p-12 relative group transform transition-transform duration-500 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(255,255,255,0.05)] border-[rgba(255,255,255,0.02)] hover:border-[rgba(255,255,255,0.1)]">
                   <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-start md:items-center">
@@ -204,7 +204,7 @@ export default function ProcesoPage() {
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
               <p className="text-lg text-[var(--text-secondary)] mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
-                Dejar la adopción de IA para "algún día" es la decisión financiera y profesional más peligrosa que puedes tomar hoy. Agenda una sesión rápida y aprende a pensar fuera de la caja.
+                Dejar la adopción de IA para &ldquo;algún día&rdquo; es la decisión financiera y profesional más peligrosa que puedes tomar hoy. Agenda una sesión rápida y aprende a pensar fuera de la caja.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={0.2}>

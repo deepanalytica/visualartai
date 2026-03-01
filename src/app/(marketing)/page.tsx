@@ -367,11 +367,11 @@ export default function HomePage() {
                 <NeonCard glow="cyan" hoverable className="p-8 h-full flex flex-col justify-between">
                   <div>
                     <Quote className="size-10 text-[var(--neon-cyan-dim)] mb-6 opacity-60" />
-                    <p className="text-[var(--text-secondary)] leading-relaxed mb-8 text-[1.05rem] italic">"{t.quote}"</p>
+                    <p className="text-[var(--text-secondary)] leading-relaxed mb-8 text-[1.05rem] italic">&ldquo;{t.quote}&rdquo;</p>
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5 mb-5">
-                      {Array.from({ length: t.rating }).map((_, i) => (
+                      {Array.from({ length: t.rating }).map((_, _i) => (
                         <Star key={i} className="size-5 text-[var(--neon-amber)] fill-current" />
                       ))}
                     </div>
