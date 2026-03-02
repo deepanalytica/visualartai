@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import Link from "next/link"
 import { Zap } from "lucide-react"
 import { SITE_NAME } from "@/lib/constants"
