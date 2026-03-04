@@ -7,39 +7,8 @@ import { eq, and } from "drizzle-orm"
 import { getPaymentProvider, transbankCreate, mercadopagoCreate } from "@/lib/payments"
 import { SITE_URL } from "@/lib/constants"
 
-// Basic in-memory rate limiting (for production use Redis / Upstash)
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
-
-function checkRateLimit(ip: string, limit = 5, windowMs = 60_000): boolean {
-  const now = Date.now()
-  const entry = rateLimitMap.get(ip)
-
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + windowMs })
-    return true
-  }
-
-  if (entry.count >= limit) return false
-
-  entry.count++
-  return true
-}
-
 export async function POST(request: NextRequest) {
   try {
-    // Rate limit by IP
-    const ip =
-      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
-      request.headers.get("x-real-ip") ??
-      "unknown"
-
-    if (!checkRateLimit(ip)) {
-      return NextResponse.json(
-        { error: "Demasiados intentos. Espera un minuto." },
-        { status: 429 },
-      )
-    }
-
     // Authenticate user
     const cookieStore = await cookies()
     const supabase = createServerClient(
@@ -50,8 +19,8 @@ export async function POST(request: NextRequest) {
           getAll() {
             return cookieStore.getAll()
           },
-          setAll(cookiesToSet) {
-            cookiesToSet.forEach(({ name, value, options }) =>
+          setAll(cookiesToSet: any[]) {
+            cookiesToSet.forEach(({ name, value, options }: any) =>
               cookieStore.set(name, value, options),
             )
           },
@@ -111,7 +80,6 @@ export async function POST(request: NextRequest) {
           amount: 0,
           currency: "CLP",
           status: "paid",
-          description: course.title,
         })
         .onConflictDoNothing()
 
@@ -154,7 +122,6 @@ export async function POST(request: NextRequest) {
         amount,
         currency: "CLP",
         status: "pending",
-        description: course.title,
       })
 
       return NextResponse.json({
@@ -184,7 +151,6 @@ export async function POST(request: NextRequest) {
         amount,
         currency: "CLP",
         status: "pending",
-        description: course.title,
       })
 
       return NextResponse.json({
