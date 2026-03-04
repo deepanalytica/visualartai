@@ -2,8 +2,8 @@ import { redirect } from "next/navigation"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
 import { db } from "@/db"
-import { enrollments, courses, progress, lessons } from "@/db/schema"
-import { eq, and, count } from "drizzle-orm"
+import { enrollments, courses, progress, lessons, modules } from "@/db/schema"
+import { eq, and, count, inArray } from "drizzle-orm"
 import { NeonCard } from "@/components/brand/NeonCard"
 import { NeonBadge } from "@/components/brand/NeonBadge"
 import { NeonButton } from "@/components/brand/NeonButton"
@@ -19,30 +19,66 @@ export default async function MisCursosPage() {
   } = await supabase.auth.getUser()
   if (!user) redirect("/auth/login")
 
+  // Get active enrollments with course data
   const userEnrollments = await db
     .select({
       enrollmentId: enrollments.id,
-      enrolledAt: enrollments.enrolledAt,
+      grantedAt: enrollments.grantedAt,
       courseId: courses.id,
       courseTitle: courses.title,
       courseSlug: courses.slug,
       courseRoute: courses.route,
       courseLevel: courses.level,
       totalLessons: courses.totalLessons,
-      totalDuration: courses.totalDuration,
+      durationMinutes: courses.durationMinutes,
     })
     .from(enrollments)
     .innerJoin(courses, eq(enrollments.courseId, courses.id))
     .where(and(eq(enrollments.userId, user.id), eq(enrollments.status, "active")))
 
-  const completedCounts = await db
-    .select({ courseId: lessons.courseId, count: count() })
-    .from(progress)
-    .innerJoin(lessons, eq(progress.lessonId, lessons.id))
-    .where(and(eq(progress.userId, user.id), eq(progress.completed, true)))
-    .groupBy(lessons.courseId)
+  // Calculate progress per course:
+  // progress table has no `completed` boolean — a row's existence = completed.
+  // lessons don't have courseId — must go via modules.
+  const courseIds = userEnrollments.map((e) => e.courseId)
 
-  const completedMap = Object.fromEntries(completedCounts.map((r) => [r.courseId, Number(r.count)]))
+  // Build courseId → completedCount map
+  const completedMap: Record<string, number> = {}
+
+  if (courseIds.length > 0) {
+    // Get all modules for enrolled courses
+    const courseModules = await db
+      .select({ id: modules.id, courseId: modules.courseId })
+      .from(modules)
+      .where(inArray(modules.courseId, courseIds))
+
+    const moduleIds = courseModules.map((m) => m.id)
+
+    // Get all completed lesson IDs for this user (in these modules)
+    const completedRows =
+      moduleIds.length > 0
+        ? await db
+          .select({ lessonId: progress.lessonId, moduleId: lessons.moduleId })
+          .from(progress)
+          .innerJoin(lessons, eq(progress.lessonId, lessons.id))
+          .where(
+            and(
+              eq(progress.userId, user.id),
+              inArray(lessons.moduleId, moduleIds)
+            )
+          )
+        : []
+
+    // Build moduleId → courseId lookup
+    const moduleCourseMap = Object.fromEntries(courseModules.map((m) => [m.id, m.courseId]))
+
+    // Aggregate per course
+    for (const row of completedRows) {
+      const cId = moduleCourseMap[row.moduleId]
+      if (cId) {
+        completedMap[cId] = (completedMap[cId] ?? 0) + 1
+      }
+    }
+  }
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
@@ -72,7 +108,7 @@ export default async function MisCursosPage() {
           {userEnrollments.map((e) => {
             const completed = completedMap[e.courseId] ?? 0
             const total = e.totalLessons ?? 1
-            const pct = Math.round((completed / total) * 100)
+            const pct = total > 0 ? Math.round((completed / total) * 100) : 0
             const isFinished = pct === 100
 
             return (
@@ -101,8 +137,8 @@ export default async function MisCursosPage() {
                       </span>
                     </div>
                     <p className="text-xs text-[var(--text-muted)]">
-                      {completed} / {total} lecciones · inscrito{" "}
-                      {new Date(e.enrolledAt!).toLocaleDateString("es-CL")}
+                      {completed} / {e.totalLessons ?? "?"} lecciones · inscrito{" "}
+                      {new Date(e.grantedAt).toLocaleDateString("es-CL")}
                     </p>
                   </div>
 

@@ -2,8 +2,8 @@ import { redirect } from "next/navigation"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
 import { db } from "@/db"
-import { enrollments, courses, progress, lessons } from "@/db/schema"
-import { eq, and, count } from "drizzle-orm"
+import { enrollments, courses, progress, lessons, modules } from "@/db/schema"
+import { eq, and, inArray } from "drizzle-orm"
 import { NeonCard } from "@/components/brand/NeonCard"
 import { NeonBadge } from "@/components/brand/NeonBadge"
 import { NeonButton } from "@/components/brand/NeonButton"
@@ -26,10 +26,11 @@ export default async function AppDashboardPage() {
   if (!user) redirect("/auth/login")
 
   // Fetch enrollments with course info
+  // Note: enrollments uses `grantedAt` (not enrolledAt)
   const userEnrollments = await db
     .select({
       enrollmentId: enrollments.id,
-      enrolledAt: enrollments.enrolledAt,
+      grantedAt: enrollments.grantedAt,
       courseId: courses.id,
       courseTitle: courses.title,
       courseSlug: courses.slug,
@@ -40,18 +41,34 @@ export default async function AppDashboardPage() {
     .innerJoin(courses, eq(enrollments.courseId, courses.id))
     .where(and(eq(enrollments.userId, user.id), eq(enrollments.status, "active")))
 
-  // Fetch total completed lessons per course
-  const completedCounts = await db
-    .select({
-      courseId: lessons.courseId,
-      count: count(),
-    })
-    .from(progress)
-    .innerJoin(lessons, eq(progress.lessonId, lessons.id))
-    .where(and(eq(progress.userId, user.id), eq(progress.completed, true)))
-    .groupBy(lessons.courseId)
+  // Calculate completed lessons per course.
+  // progress has no `completed` boolean — row existing = completed.
+  // lessons have no courseId — must join via modules.
+  const courseIds = userEnrollments.map((e) => e.courseId)
+  const completedMap: Record<string, number> = {}
 
-  const completedMap = Object.fromEntries(completedCounts.map((r) => [r.courseId, Number(r.count)]))
+  if (courseIds.length > 0) {
+    const courseModules = await db
+      .select({ id: modules.id, courseId: modules.courseId })
+      .from(modules)
+      .where(inArray(modules.courseId, courseIds))
+
+    const moduleIds = courseModules.map((m) => m.id)
+    const moduleCourseMap = Object.fromEntries(courseModules.map((m) => [m.id, m.courseId]))
+
+    if (moduleIds.length > 0) {
+      const completedRows = await db
+        .select({ moduleId: lessons.moduleId })
+        .from(progress)
+        .innerJoin(lessons, eq(progress.lessonId, lessons.id))
+        .where(and(eq(progress.userId, user.id), inArray(lessons.moduleId, moduleIds)))
+
+      for (const row of completedRows) {
+        const cId = moduleCourseMap[row.moduleId]
+        if (cId) completedMap[cId] = (completedMap[cId] ?? 0) + 1
+      }
+    }
+  }
 
   const profile = await supabase
     .from("profiles")

@@ -2,7 +2,7 @@ import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { db } from "@/db"
 import { resources, enrollments } from "@/db/schema"
-import { eq, inArray } from "drizzle-orm"
+import { eq, and } from "drizzle-orm"
 import { NeonCard } from "@/components/brand/NeonCard"
 import { NeonBadge } from "@/components/brand/NeonBadge"
 import { NeonButton } from "@/components/brand/NeonButton"
@@ -31,27 +31,26 @@ export default async function RecursosAppPage() {
   } = await supabase.auth.getUser()
   if (!user) redirect("/auth/login")
 
-  // Get free resources always available
+  // Get published free resources (always accessible)
   const freeResources = await db
     .select()
     .from(resources)
-    .where(eq(resources.isFree, true))
+    .where(and(eq(resources.isFree, true), eq(resources.status, "published")))
 
-  // Get enrollments to know which paid resources are accessible
-  const userEnrollments = await db
-    .select({ courseId: enrollments.courseId })
+  // Check if user has any active enrollment → unlock paid resources
+  const [activeEnrollment] = await db
+    .select({ id: enrollments.id })
     .from(enrollments)
-    .where(eq(enrollments.userId, user.id))
+    .where(and(eq(enrollments.userId, user.id), eq(enrollments.status, "active")))
+    .limit(1)
 
-  const enrolledCourseIds = userEnrollments.map((e) => e.courseId)
-
-  // Get paid resources for enrolled courses (courseId is null = global resource)
+  // Get published paid resources only if user has at least one active enrollment
   let paidResources: typeof freeResources = []
-  if (enrolledCourseIds.length > 0) {
+  if (activeEnrollment) {
     paidResources = await db
       .select()
       .from(resources)
-      .where(eq(resources.isFree, false))
+      .where(and(eq(resources.isFree, false), eq(resources.status, "published")))
   }
 
   const allAccessible = [...freeResources, ...paidResources]
@@ -95,9 +94,9 @@ export default async function RecursosAppPage() {
               )}
               <div className="flex items-center justify-between mt-auto">
                 <span className="text-xs text-[var(--text-muted)]">v{r.version}</span>
-                {r.fileUrl ? (
+                {r.filePath ? (
                   <a
-                    href={r.fileUrl}
+                    href={r.filePath}
                     target="_blank"
                     rel="noopener noreferrer"
                     download

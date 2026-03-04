@@ -3,7 +3,7 @@ import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
 import { db } from "@/db"
 import { enrollments, courses, modules, lessons, progress } from "@/db/schema"
-import { eq, and, asc } from "drizzle-orm"
+import { eq, and, asc, inArray } from "drizzle-orm"
 import { NeonCard } from "@/components/brand/NeonCard"
 import { NeonBadge } from "@/components/brand/NeonBadge"
 import { NeonButton } from "@/components/brand/NeonButton"
@@ -38,28 +38,43 @@ export default async function CoursePlayerPage({ params }: Props) {
     redirect(`/academia/cursos/${params.slug}`)
   }
 
-  // Get modules + lessons
+  // Get modules ordered correctly (sortOrder, not order)
   const courseModules = await db
     .select()
     .from(modules)
     .where(eq(modules.courseId, course.id))
-    .orderBy(asc(modules.order))
+    .orderBy(asc(modules.sortOrder))
 
-  const courseLessons = await db
-    .select()
-    .from(lessons)
-    .where(eq(lessons.courseId, course.id))
-    .orderBy(asc(lessons.order))
+  const moduleIds = courseModules.map((m) => m.id)
 
-  // Get user progress
-  const userProgress = await db
-    .select()
-    .from(progress)
-    .where(and(eq(progress.userId, user.id)))
+  // Get lessons via inArray on moduleId (lessons have no courseId column)
+  const courseLessons =
+    moduleIds.length > 0
+      ? await db
+        .select()
+        .from(lessons)
+        .where(inArray(lessons.moduleId, moduleIds))
+        .orderBy(asc(lessons.sortOrder))
+      : []
 
-  const completedLessonIds = new Set(
-    userProgress.filter((p) => p.completed).map((p) => p.lessonId)
-  )
+  // Get user progress for these lessons — a row existing = completed
+  const userProgress =
+    courseLessons.length > 0
+      ? await db
+        .select({ lessonId: progress.lessonId })
+        .from(progress)
+        .where(
+          and(
+            eq(progress.userId, user.id),
+            inArray(
+              progress.lessonId,
+              courseLessons.map((l) => l.id)
+            )
+          )
+        )
+      : []
+
+  const completedLessonIds = new Set(userProgress.map((p) => p.lessonId))
 
   const lessonsByModule = courseModules.map((mod) => ({
     ...mod,
@@ -92,7 +107,7 @@ export default async function CoursePlayerPage({ params }: Props) {
           </span>
           <span className="flex items-center gap-1">
             <Clock className="size-4" />
-            {course.totalDuration ?? "~"} min total
+            {course.durationMinutes ?? "~"} min total
           </span>
         </div>
 
@@ -144,7 +159,7 @@ export default async function CoursePlayerPage({ params }: Props) {
                 </div>
               </summary>
               <div className="border border-t-0 border-[var(--border-subtle)] rounded-b-[var(--radius-md)] overflow-hidden">
-                {mod.lessons.map((lesson, _li) => {
+                {mod.lessons.map((lesson) => {
                   const done = completedLessonIds.has(lesson.id)
                   const isNext = lesson.id === nextLesson?.id
                   return (
@@ -164,10 +179,10 @@ export default async function CoursePlayerPage({ params }: Props) {
                       <div className="flex-1 min-w-0">
                         <p
                           className={`text-sm ${done
-                              ? "text-[var(--text-muted)] line-through"
-                              : isNext
-                                ? "text-[var(--neon-cyan)] font-medium"
-                                : "text-[var(--text-secondary)]"
+                            ? "text-[var(--text-muted)] line-through"
+                            : isNext
+                              ? "text-[var(--neon-cyan)] font-medium"
+                              : "text-[var(--text-secondary)]"
                             }`}
                         >
                           {lesson.title}

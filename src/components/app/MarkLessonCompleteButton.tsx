@@ -25,15 +25,17 @@ export function MarkLessonCompleteButton({
   async function toggle() {
     setLoading(true)
     try {
+      const markComplete = !completed
       const res = await fetch("/api/progress", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lessonId, completed: !completed }),
+        // Send `markComplete` (boolean) — matches the fixed API contract
+        body: JSON.stringify({ lessonId, markComplete }),
       })
 
       if (res.ok) {
-        setCompleted(!completed)
-        if (!completed && nextLessonSlug) {
+        setCompleted(markComplete)
+        if (markComplete && nextLessonSlug) {
           router.push(`/app/cursos/${courseSlug}/${nextLessonSlug}`)
         }
         router.refresh()
