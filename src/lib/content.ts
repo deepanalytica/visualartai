@@ -25,15 +25,42 @@ export interface CourseFrontmatter {
   instructor_name?: string
 }
 
+export interface FlashCard {
+  front: string
+  back: string
+  hint?: string
+}
+
+export interface QuizQuestion {
+  question: string
+  options: string[]
+  correct: number      // index of the correct option
+  explanation?: string
+}
+
+export interface LessonQuiz {
+  title: string
+  passing_score?: number
+  questions: QuizQuestion[]
+}
+
 export interface LessonFrontmatter {
   title: string
   slug: string
-  type: "video" | "text" | "mixed"
+  type: "video" | "text" | "mixed" | "rich"
   video_url?: string
+  audio_url?: string          // NotebookLM: audio overview MP3
+  slides_url?: string         // NotebookLM: Google Slides / Canva embed
+  mindmap_url?: string        // NotebookLM: mind map image
+  infographic_url?: string    // NotebookLM: infographic image
   duration_min?: number
   checklist?: string[]
   resources?: Array<{ title: string; path: string }>
   status?: "draft" | "published"
+  flashcards?: FlashCard[]    // NotebookLM: Tarjetas
+  quiz?: LessonQuiz           // NotebookLM: Cuestionario
+  notebooklm_source?: string  // URL of the source notebook
+  generated_at?: string       // ISO date of content generation
 }
 
 export interface ResourceFrontmatter {

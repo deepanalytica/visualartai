@@ -9,6 +9,9 @@ import {
   enrollments,
   progress,
   changelog,
+  quizzes,
+  quizAttempts,
+  flashcardDecks,
 } from "./schema"
 
 // ─── Profiles ─────────────────────────────────────────────────────────────────
@@ -51,6 +54,38 @@ export const lessonsRelations = relations(lessons, ({ one, many }) => ({
     references: [modules.id],
   }),
   progress: many(progress),
+  quiz: many(quizzes),
+  flashcardDeck: many(flashcardDecks),
+}))
+
+// ─── Quizzes ──────────────────────────────────────────────────────────────────
+
+export const quizzesRelations = relations(quizzes, ({ one, many }) => ({
+  lesson: one(lessons, {
+    fields: [quizzes.lessonId],
+    references: [lessons.id],
+  }),
+  attempts: many(quizAttempts),
+}))
+
+export const quizAttemptsRelations = relations(quizAttempts, ({ one }) => ({
+  user: one(profiles, {
+    fields: [quizAttempts.userId],
+    references: [profiles.id],
+  }),
+  quiz: one(quizzes, {
+    fields: [quizAttempts.quizId],
+    references: [quizzes.id],
+  }),
+}))
+
+// ─── Flashcard Decks ──────────────────────────────────────────────────────────
+
+export const flashcardDecksRelations = relations(flashcardDecks, ({ one }) => ({
+  lesson: one(lessons, {
+    fields: [flashcardDecks.lessonId],
+    references: [lessons.id],
+  }),
 }))
 
 // ─── Resources ───────────────────────────────────────────────────────────────

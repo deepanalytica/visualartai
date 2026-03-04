@@ -27,6 +27,7 @@ const navGroups = [
     label: "Contenido",
     items: [
       { href: "/admin/cursos", label: "Cursos", icon: BookOpen },
+      { href: "/admin/contenido", label: "Pipeline MDX", icon: FileText },
       { href: "/admin/recursos", label: "Recursos", icon: FolderOpen },
       { href: "/admin/changelog", label: "Changelog", icon: FileText },
     ],

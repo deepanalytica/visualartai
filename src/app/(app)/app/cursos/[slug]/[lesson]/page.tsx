@@ -2,11 +2,13 @@ import { redirect, notFound } from "next/navigation"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
 import { db } from "@/db"
-import { enrollments, courses, lessons, progress } from "@/db/schema"
-import { eq, and, asc } from "drizzle-orm"
+import { enrollments, courses, modules, lessons, progress } from "@/db/schema"
+import { eq, and, asc, inArray } from "drizzle-orm"
 import { NeonButton } from "@/components/brand/NeonButton"
 import { NeonCard } from "@/components/brand/NeonCard"
 import { MarkLessonCompleteButton } from "@/components/app/MarkLessonCompleteButton"
+import { LessonRichContent } from "@/components/lesson/LessonRichContent"
+import { getLessonContent } from "@/lib/content"
 import { CheckCircle2, ArrowLeft, ArrowRight, Layers } from "lucide-react"
 
 interface Props {
@@ -28,26 +30,41 @@ export default async function LessonPage({ params }: Props) {
   const [enrollment] = await db
     .select()
     .from(enrollments)
-    .where(and(eq(enrollments.userId, user.id), eq(enrollments.courseId, course.id), eq(enrollments.status, "active")))
+    .where(
+      and(
+        eq(enrollments.userId, user.id),
+        eq(enrollments.courseId, course.id),
+        eq(enrollments.status, "active"),
+      ),
+    )
     .limit(1)
 
   if (!enrollment) redirect(`/academia/cursos/${params.slug}`)
 
-  // Get lesson
+  // Get all modules for this course
+  const courseModules = await db
+    .select({ id: modules.id })
+    .from(modules)
+    .where(eq(modules.courseId, course.id))
+
+  const moduleIds = courseModules.map((m) => m.id)
+  if (moduleIds.length === 0) notFound()
+
+  // Get lesson via its module (lessons don't have courseId directly)
   const [lesson] = await db
     .select()
     .from(lessons)
-    .where(and(eq(lessons.slug, params.lesson), eq(lessons.courseId, course.id)))
+    .where(and(eq(lessons.slug, params.lesson), inArray(lessons.moduleId, moduleIds)))
     .limit(1)
 
   if (!lesson) notFound()
 
   // Get all lessons in order for prev/next navigation
   const allLessons = await db
-    .select({ id: lessons.id, slug: lessons.slug, title: lessons.title, order: lessons.order })
+    .select({ id: lessons.id, slug: lessons.slug, title: lessons.title, sortOrder: lessons.sortOrder })
     .from(lessons)
-    .where(eq(lessons.courseId, course.id))
-    .orderBy(asc(lessons.order))
+    .where(inArray(lessons.moduleId, moduleIds))
+    .orderBy(asc(lessons.sortOrder))
 
   const currentIndex = allLessons.findIndex((l) => l.id === lesson.id)
   const prevLesson = currentIndex > 0 ? allLessons[currentIndex - 1] : null
@@ -60,7 +77,31 @@ export default async function LessonPage({ params }: Props) {
     .where(and(eq(progress.userId, user.id), eq(progress.lessonId, lesson.id)))
     .limit(1)
 
-  const isCompleted = lessonProgress?.completed ?? false
+  const isCompleted = !!lessonProgress
+
+  // Read rich content from MDX file (contentPath: "courses/[slug]/[module]/[lesson].mdx")
+  let mdxData = null
+  if (lesson.contentPath) {
+    const parts = lesson.contentPath.split("/")
+    // contentPath format: "courses/[courseSlug]/[moduleId]/[lesson].mdx"
+    if (parts.length === 4) {
+      const [, courseSlug, moduleId, lessonFile] = parts
+      const lessonSlug = lessonFile.replace(".mdx", "")
+      mdxData = getLessonContent(courseSlug, moduleId, lessonSlug)
+    }
+  }
+
+  const frontmatter = mdxData?.frontmatter
+  const mdxContent = mdxData?.content ?? ""
+
+  // Merge DB fields with frontmatter (DB takes precedence for URLs)
+  const audioUrl = lesson.audioUrl ?? frontmatter?.audio_url
+  const slidesUrl = lesson.slidesUrl ?? frontmatter?.slides_url
+  const mindmapUrl = lesson.mindmapUrl ?? frontmatter?.mindmap_url
+  const infographicUrl = lesson.infographicUrl ?? frontmatter?.infographic_url
+  const flashcards = frontmatter?.flashcards
+  const quiz = frontmatter?.quiz
+  const checklist = frontmatter?.checklist
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -115,15 +156,18 @@ export default async function LessonPage({ params }: Props) {
         />
       </div>
 
-      {/* MDX content */}
-      {lesson.mdxContent && (
-        <NeonCard glow="none" className="p-8">
-          <div
-            className="prose-neon"
-            dangerouslySetInnerHTML={{ __html: lesson.mdxContent }}
-          />
-        </NeonCard>
-      )}
+      {/* Rich lesson content: audio, MDX body, mindmap, slides, flashcards, quiz */}
+      <LessonRichContent
+        content={mdxContent}
+        audioUrl={audioUrl ?? undefined}
+        slidesUrl={slidesUrl ?? undefined}
+        mindmapUrl={mindmapUrl ?? undefined}
+        infographicUrl={infographicUrl ?? undefined}
+        flashcards={flashcards}
+        quiz={quiz}
+        checklist={checklist}
+        lessonId={lesson.id}
+      />
 
       {/* Navigation */}
       <div className="flex items-center justify-between pt-4 border-t border-[var(--border-subtle)]">

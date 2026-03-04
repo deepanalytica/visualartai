@@ -39,7 +39,7 @@ export const courseLevelEnum = pgEnum("course_level", [
   "avanzado",
 ])
 
-export const lessonTypeEnum = pgEnum("lesson_type", ["video", "text", "mixed"])
+export const lessonTypeEnum = pgEnum("lesson_type", ["video", "text", "mixed", "rich"])
 
 export const lessonStatusEnum = pgEnum("lesson_status", [
   "draft",
@@ -189,6 +189,11 @@ export const lessons = pgTable(
     durationMin: integer("duration_min").default(0),
     sortOrder: integer("sort_order").notNull().default(0),
     isFreePreview: boolean("is_free_preview").notNull().default(false),
+    // NotebookLM-generated rich content URLs
+    audioUrl: text("audio_url"),        // audio overview (MP3 in Supabase Storage)
+    slidesUrl: text("slides_url"),      // Google Slides / Canva embed URL
+    mindmapUrl: text("mindmap_url"),    // mind map image in Supabase Storage
+    infographicUrl: text("infographic_url"), // infographic image in Supabase Storage
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
@@ -352,6 +357,77 @@ export const webhookLogs = pgTable(
   })
 )
 
+// ─── Quizzes ───────────────────────────────────────────────────────────────────
+// One quiz per lesson (optional). Questions stored as JSONB array.
+// Question shape: { question: string; options: string[]; correct: number; explanation?: string }
+
+export const quizzes = pgTable(
+  "quizzes",
+  {
+    id: uuid("id")
+      .primaryKey()
+      .default(sql`gen_random_uuid()`),
+    lessonId: uuid("lesson_id")
+      .notNull()
+      .references(() => lessons.id, { onDelete: "cascade" }),
+    title: varchar("title", { length: 200 }).notNull(),
+    questions: jsonb("questions").notNull().default(sql`'[]'::jsonb`),
+    passingScore: integer("passing_score").notNull().default(70),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => ({
+    lessonIdx: uniqueIndex("quizzes_lesson_idx").on(table.lessonId),
+  })
+)
+
+// ─── Quiz Attempts ─────────────────────────────────────────────────────────────
+// Tracks each student attempt at a quiz.
+
+export const quizAttempts = pgTable(
+  "quiz_attempts",
+  {
+    id: uuid("id")
+      .primaryKey()
+      .default(sql`gen_random_uuid()`),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => profiles.id),
+    quizId: uuid("quiz_id")
+      .notNull()
+      .references(() => quizzes.id, { onDelete: "cascade" }),
+    score: integer("score").notNull(),    // 0-100
+    passed: boolean("passed").notNull().default(false),
+    answers: jsonb("answers").notNull().default(sql`'[]'::jsonb`), // selected option indices
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => ({
+    userQuizIdx: index("quiz_attempts_user_quiz_idx").on(table.userId, table.quizId),
+  })
+)
+
+// ─── Flashcard Decks ───────────────────────────────────────────────────────────
+// One deck per lesson (optional). Cards stored as JSONB array.
+// Card shape: { front: string; back: string; hint?: string }
+
+export const flashcardDecks = pgTable(
+  "flashcard_decks",
+  {
+    id: uuid("id")
+      .primaryKey()
+      .default(sql`gen_random_uuid()`),
+    lessonId: uuid("lesson_id")
+      .notNull()
+      .references(() => lessons.id, { onDelete: "cascade" }),
+    cards: jsonb("cards").notNull().default(sql`'[]'::jsonb`),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => ({
+    lessonIdx: uniqueIndex("flashcard_decks_lesson_idx").on(table.lessonId),
+  })
+)
+
 // ─── Type Exports ──────────────────────────────────────────────────────────────
 
 export type Profile = typeof profiles.$inferSelect
@@ -374,3 +450,9 @@ export type Changelog = typeof changelog.$inferSelect
 export type NewChangelog = typeof changelog.$inferInsert
 export type WebhookLog = typeof webhookLogs.$inferSelect
 export type NewWebhookLog = typeof webhookLogs.$inferInsert
+export type Quiz = typeof quizzes.$inferSelect
+export type NewQuiz = typeof quizzes.$inferInsert
+export type QuizAttempt = typeof quizAttempts.$inferSelect
+export type NewQuizAttempt = typeof quizAttempts.$inferInsert
+export type FlashcardDeck = typeof flashcardDecks.$inferSelect
+export type NewFlashcardDeck = typeof flashcardDecks.$inferInsert
