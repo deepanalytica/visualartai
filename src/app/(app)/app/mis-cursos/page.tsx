@@ -19,65 +19,81 @@ export default async function MisCursosPage() {
   } = await supabase.auth.getUser()
   if (!user) redirect("/auth/login")
 
-  // Get active enrollments with course data
-  const userEnrollments = await db
-    .select({
-      enrollmentId: enrollments.id,
-      grantedAt: enrollments.grantedAt,
-      courseId: courses.id,
-      courseTitle: courses.title,
-      courseSlug: courses.slug,
-      courseRoute: courses.route,
-      courseLevel: courses.level,
-      totalLessons: courses.totalLessons,
-      durationMinutes: courses.durationMinutes,
-    })
-    .from(enrollments)
-    .innerJoin(courses, eq(enrollments.courseId, courses.id))
-    .where(and(eq(enrollments.userId, user.id), eq(enrollments.status, "active")))
-
-  // Calculate progress per course:
-  // progress table has no `completed` boolean — a row's existence = completed.
-  // lessons don't have courseId — must go via modules.
-  const courseIds = userEnrollments.map((e) => e.courseId)
-
-  // Build courseId → completedCount map
+  // Fetch enrollments and progress — wrapped in try/catch so a bad DB connection degrades gracefully
+  let userEnrollments: {
+    enrollmentId: string
+    grantedAt: Date | null
+    courseId: string
+    courseTitle: string
+    courseSlug: string
+    courseRoute: string | null
+    courseLevel: string | null
+    totalLessons: number | null
+    durationMinutes: number | null
+  }[] = []
   const completedMap: Record<string, number> = {}
 
-  if (courseIds.length > 0) {
-    // Get all modules for enrolled courses
-    const courseModules = await db
-      .select({ id: modules.id, courseId: modules.courseId })
-      .from(modules)
-      .where(inArray(modules.courseId, courseIds))
+  try {
+    // Get active enrollments with course data
+    userEnrollments = await db
+      .select({
+        enrollmentId: enrollments.id,
+        grantedAt: enrollments.grantedAt,
+        courseId: courses.id,
+        courseTitle: courses.title,
+        courseSlug: courses.slug,
+        courseRoute: courses.route,
+        courseLevel: courses.level,
+        totalLessons: courses.totalLessons,
+        durationMinutes: courses.durationMinutes,
+      })
+      .from(enrollments)
+      .innerJoin(courses, eq(enrollments.courseId, courses.id))
+      .where(and(eq(enrollments.userId, user.id), eq(enrollments.status, "active")))
 
-    const moduleIds = courseModules.map((m) => m.id)
+    // Calculate progress per course:
+    // progress table has no `completed` boolean — a row's existence = completed.
+    // lessons don't have courseId — must go via modules.
+    const courseIds = userEnrollments.map((e) => e.courseId)
 
-    // Get all completed lesson IDs for this user (in these modules)
-    const completedRows =
-      moduleIds.length > 0
-        ? await db
-          .select({ lessonId: progress.lessonId, moduleId: lessons.moduleId })
-          .from(progress)
-          .innerJoin(lessons, eq(progress.lessonId, lessons.id))
-          .where(
-            and(
-              eq(progress.userId, user.id),
-              inArray(lessons.moduleId, moduleIds)
+    if (courseIds.length > 0) {
+      // Get all modules for enrolled courses
+      const courseModules = await db
+        .select({ id: modules.id, courseId: modules.courseId })
+        .from(modules)
+        .where(inArray(modules.courseId, courseIds))
+
+      const moduleIds = courseModules.map((m) => m.id)
+
+      // Get all completed lesson IDs for this user (in these modules)
+      const completedRows =
+        moduleIds.length > 0
+          ? await db
+            .select({ lessonId: progress.lessonId, moduleId: lessons.moduleId })
+            .from(progress)
+            .innerJoin(lessons, eq(progress.lessonId, lessons.id))
+            .where(
+              and(
+                eq(progress.userId, user.id),
+                inArray(lessons.moduleId, moduleIds)
+              )
             )
-          )
-        : []
+          : []
 
-    // Build moduleId → courseId lookup
-    const moduleCourseMap = Object.fromEntries(courseModules.map((m) => [m.id, m.courseId]))
+      // Build moduleId → courseId lookup
+      const moduleCourseMap = Object.fromEntries(courseModules.map((m) => [m.id, m.courseId]))
 
-    // Aggregate per course
-    for (const row of completedRows) {
-      const cId = moduleCourseMap[row.moduleId]
-      if (cId) {
-        completedMap[cId] = (completedMap[cId] ?? 0) + 1
+      // Aggregate per course
+      for (const row of completedRows) {
+        const cId = moduleCourseMap[row.moduleId]
+        if (cId) {
+          completedMap[cId] = (completedMap[cId] ?? 0) + 1
+        }
       }
     }
+  } catch (err) {
+    console.error("[MisCursos] DB query failed:", err)
+    // Continue with empty state
   }
 
   return (

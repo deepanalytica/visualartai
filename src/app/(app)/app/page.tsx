@@ -25,49 +25,65 @@ export default async function AppDashboardPage() {
   } = await supabase.auth.getUser()
   if (!user) redirect("/auth/login")
 
-  // Fetch enrollments with course info
-  // Note: enrollments uses `grantedAt` (not enrolledAt)
-  const userEnrollments = await db
-    .select({
-      enrollmentId: enrollments.id,
-      grantedAt: enrollments.grantedAt,
-      courseId: courses.id,
-      courseTitle: courses.title,
-      courseSlug: courses.slug,
-      courseRoute: courses.route,
-      totalLessons: courses.totalLessons,
-    })
-    .from(enrollments)
-    .innerJoin(courses, eq(enrollments.courseId, courses.id))
-    .where(and(eq(enrollments.userId, user.id), eq(enrollments.status, "active")))
-
-  // Calculate completed lessons per course.
-  // progress has no `completed` boolean — row existing = completed.
-  // lessons have no courseId — must join via modules.
-  const courseIds = userEnrollments.map((e) => e.courseId)
+  // Fetch enrollments with course info — wrapped in try/catch so a bad
+  // DB connection degrades gracefully instead of crashing the whole page.
+  let userEnrollments: {
+    enrollmentId: string
+    grantedAt: Date | null
+    courseId: string
+    courseTitle: string
+    courseSlug: string
+    courseRoute: string | null
+    totalLessons: number | null
+  }[] = []
   const completedMap: Record<string, number> = {}
 
-  if (courseIds.length > 0) {
-    const courseModules = await db
-      .select({ id: modules.id, courseId: modules.courseId })
-      .from(modules)
-      .where(inArray(modules.courseId, courseIds))
+  try {
+    // Note: enrollments uses `grantedAt` (not enrolledAt)
+    userEnrollments = await db
+      .select({
+        enrollmentId: enrollments.id,
+        grantedAt: enrollments.grantedAt,
+        courseId: courses.id,
+        courseTitle: courses.title,
+        courseSlug: courses.slug,
+        courseRoute: courses.route,
+        totalLessons: courses.totalLessons,
+      })
+      .from(enrollments)
+      .innerJoin(courses, eq(enrollments.courseId, courses.id))
+      .where(and(eq(enrollments.userId, user.id), eq(enrollments.status, "active")))
 
-    const moduleIds = courseModules.map((m) => m.id)
-    const moduleCourseMap = Object.fromEntries(courseModules.map((m) => [m.id, m.courseId]))
+    // Calculate completed lessons per course.
+    // progress has no `completed` boolean — row existing = completed.
+    // lessons have no courseId — must join via modules.
+    const courseIds = userEnrollments.map((e) => e.courseId)
 
-    if (moduleIds.length > 0) {
-      const completedRows = await db
-        .select({ moduleId: lessons.moduleId })
-        .from(progress)
-        .innerJoin(lessons, eq(progress.lessonId, lessons.id))
-        .where(and(eq(progress.userId, user.id), inArray(lessons.moduleId, moduleIds)))
+    if (courseIds.length > 0) {
+      const courseModules = await db
+        .select({ id: modules.id, courseId: modules.courseId })
+        .from(modules)
+        .where(inArray(modules.courseId, courseIds))
 
-      for (const row of completedRows) {
-        const cId = moduleCourseMap[row.moduleId]
-        if (cId) completedMap[cId] = (completedMap[cId] ?? 0) + 1
+      const moduleIds = courseModules.map((m) => m.id)
+      const moduleCourseMap = Object.fromEntries(courseModules.map((m) => [m.id, m.courseId]))
+
+      if (moduleIds.length > 0) {
+        const completedRows = await db
+          .select({ moduleId: lessons.moduleId })
+          .from(progress)
+          .innerJoin(lessons, eq(progress.lessonId, lessons.id))
+          .where(and(eq(progress.userId, user.id), inArray(lessons.moduleId, moduleIds)))
+
+        for (const row of completedRows) {
+          const cId = moduleCourseMap[row.moduleId]
+          if (cId) completedMap[cId] = (completedMap[cId] ?? 0) + 1
+        }
       }
     }
+  } catch (err) {
+    console.error("[Dashboard] DB query failed:", err)
+    // App continues with empty enrollments — better than crashing
   }
 
   const profile = await supabase

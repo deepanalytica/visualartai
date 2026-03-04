@@ -31,29 +31,38 @@ export default async function RecursosAppPage() {
   } = await supabase.auth.getUser()
   if (!user) redirect("/auth/login")
 
-  // Get published free resources (always accessible)
-  const freeResources = await db
-    .select()
-    .from(resources)
-    .where(and(eq(resources.isFree, true), eq(resources.status, "published")))
+  // Fetch resources — wrapped in try/catch so a bad DB connection degrades gracefully
+  type ResourceRow = typeof resources.$inferSelect
+  let allAccessible: ResourceRow[] = []
 
-  // Check if user has any active enrollment → unlock paid resources
-  const [activeEnrollment] = await db
-    .select({ id: enrollments.id })
-    .from(enrollments)
-    .where(and(eq(enrollments.userId, user.id), eq(enrollments.status, "active")))
-    .limit(1)
-
-  // Get published paid resources only if user has at least one active enrollment
-  let paidResources: typeof freeResources = []
-  if (activeEnrollment) {
-    paidResources = await db
+  try {
+    // Get published free resources (always accessible)
+    const freeResources = await db
       .select()
       .from(resources)
-      .where(and(eq(resources.isFree, false), eq(resources.status, "published")))
-  }
+      .where(and(eq(resources.isFree, true), eq(resources.status, "published")))
 
-  const allAccessible = [...freeResources, ...paidResources]
+    // Check if user has any active enrollment → unlock paid resources
+    const [activeEnrollment] = await db
+      .select({ id: enrollments.id })
+      .from(enrollments)
+      .where(and(eq(enrollments.userId, user.id), eq(enrollments.status, "active")))
+      .limit(1)
+
+    // Get published paid resources only if user has at least one active enrollment
+    let paidResources: ResourceRow[] = []
+    if (activeEnrollment) {
+      paidResources = await db
+        .select()
+        .from(resources)
+        .where(and(eq(resources.isFree, false), eq(resources.status, "published")))
+    }
+
+    allAccessible = [...freeResources, ...paidResources]
+  } catch (err) {
+    console.error("[Recursos] DB query failed:", err)
+    // Continue with empty list
+  }
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
