@@ -1398,6 +1398,32 @@ html,body{overflow-x:hidden}
   margin-top:5px;
   line-height:1.45;
 }
+
+/* Direct-response scan layer: every section readable in seconds */
+.halbert-flow{align-items:start}
+.halbert-lead{max-width:560px;margin:18px 0 0;color:var(--text2);font-size:17px;line-height:1.5}
+.halbert-steps{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--strong);border-left:1px solid var(--border)}
+.halbert-steps>div{min-height:150px;padding:22px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.halbert-steps span{font:9px var(--mono);color:var(--brand-blue)}
+.halbert-steps b{display:block;margin-top:28px;font-size:22px;letter-spacing:-.03em}
+.halbert-steps p{margin:6px 0 0;color:var(--text2);font-size:13px}
+.sector-grid article{min-height:180px!important}
+.sector-grid h3{margin:25px 0 8px!important}
+.sector-grid p{max-width:34ch}
+.case-fast strong{display:block;font-size:20px!important;letter-spacing:-.025em;margin-top:12px}
+.case-fast small{display:block;margin-top:5px}
+.price-card h3{max-width:24ch}
+.resource{min-height:230px!important}
+.resource h3{margin-top:24px!important}
+@media(max-width:700px){
+  .halbert-steps{grid-template-columns:1fr 1fr}
+  .halbert-steps>div{min-height:128px;padding:18px}
+  .halbert-steps b{margin-top:22px;font-size:18px}
+  .story-grid{gap:34px!important}
+  .head{margin-bottom:34px!important}
+  .section{padding:64px 0!important}
+  .price-card{padding:24px!important}
+}
 </style>
 <link rel="stylesheet" href="brand/visual-art-ai-design-system.css?v=5">
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
@@ -1518,77 +1544,65 @@ html,body{overflow-x:hidden}
 </section>
 
 
-<section class="section story" id="recorrido"><div class="shell"><div class="story-grid">
+<section class="section story" id="recorrido"><div class="shell">
+  <div class="story-grid halbert-flow">
     <div>
-      <div class="mono">QUÉ PASA ENTRE UNA BÚSQUEDA Y UN CONTACTO</div>
-      <h2>La visibilidad funciona cuando <em>el camino completo tiene sentido.</em></h2>
+      <div class="mono">ASÍ SE GANA — O SE PIERDE — UNA OPORTUNIDAD</div>
+      <h2>Te buscan. Te comparan. <em>Te eligen.</em></h2>
+      <p class="halbert-lead">Si el camino se corta en uno de esos pasos, el contacto no llega.</p>
     </div>
-    <div class="story-copy">
-      <p>Una persona busca o pregunta. Encuentra opciones. Compara. Decide si confía. Y recién entonces hace clic, escribe, agenda, reserva o compra.</p>
-      <p>Nuestro trabajo es revisar ese recorrido completo y detectar dónde se pierde la oportunidad: en la búsqueda, en la información, en la confianza o en el siguiente paso.</p>
-      <div class="story-fact">
-        <strong>BUSCA → ENTIENDE → CONFÍA → CONTACTA</strong>
-        <span>Google · Maps · IA · Web · Contenido · WhatsApp · Agenda · Analítica</span>
-      </div>
+    <div class="halbert-steps" aria-label="Recorrido de una oportunidad">
+      <div><span>01</span><b>BUSCA</b><p>¿Apareces?</p></div>
+      <div><span>02</span><b>ENTIENDE</b><p>¿Queda claro qué haces?</p></div>
+      <div><span>03</span><b>CONFÍA</b><p>¿Hay razones para elegirte?</p></div>
+      <div><span>04</span><b>CONTACTA</b><p>¿Es fácil dar el siguiente paso?</p></div>
     </div>
-  </div></div></section><section class="section" id="sistema"><div class="shell">
-  <div class="head">
-    <div><div class="mono">PRIMERO ENTENDEMOS DÓNDE SE PIERDE LA OPORTUNIDAD</div><h2>No necesitas estar en todas partes. <em>Necesitas estar bien donde importa.</em></h2></div>
-    <p>No partimos vendiéndote una web, una campaña o SEO porque sí. Primero miramos qué ocurre. Después decidimos qué vale la pena mejorar.</p>
-  </div>
-  <div class="stages">
-    <article class="stage"><span class="num">01 / PRESENCIA</span><h3>Que sepan qué haces</h3><p>Ordenamos cómo se presenta tu negocio: qué haces, para quién, dónde estás y por qué alguien debería seguir mirando.</p><small>Marca · Web · Landing · Tienda · Imagen · Video · Contenido</small></article>
-    <article class="stage"><span class="num">02 / DESCUBRIMIENTO</span><h3>Que puedas aparecer cuando te buscan</h3><p>Trabajamos las señales que ayudan a Google, Maps y los sistemas de IA a encontrar y comprender tu negocio.</p><small>Google · Maps · SEO · GEO · Local · Contenido · IA</small></article>
-    <article class="stage"><span class="num">03 / CONVERSIÓN</span><h3>Que el interés tenga un siguiente paso</h3><p>Encontrarte sirve de poco si después nadie sabe qué hacer. Simplificamos el camino hacia una consulta, reserva, cotización, compra o hora agendada.</p><small>WhatsApp · Formularios · Agenda · Reservas · Leads</small></article>
-    <article class="stage"><span class="num">04 / OPERACIÓN</span><h3>Que crecer no signifique trabajar el doble</h3><p>Cuando tiene sentido, simplificamos y automatizamos lo repetitivo para que más consultas no conviertan tu teléfono en un segundo trabajo.</p><small>Respuestas · Filtros · Reservas · Seguimiento · Automatización</small></article>
   </div>
 </div></section>
-<div class="inline-cta-wrap"><div class="shell"><div class="inline-cta">
-  <div><span class="mono">¿QUIERES VER ESTO EN TU PROPIO NEGOCIO?</span><strong>La auditoría convierte este recorrido en prioridades concretas para tu caso.</strong></div>
-  <a class="btn primary" href="#diagnostico">Solicitar auditoría gratuita →</a>
-</div></div></div>
+
 
 <section class="section sectors" id="sectores"><div class="shell">
   <div class="head">
-    <div><div class="mono">QUÉ PODEMOS MEJORAR</div><h2>A veces necesitas una sola corrección. <em>A veces necesitas que todo trabaje junto.</em></h2></div>
-    <p>No todos los negocios tienen el mismo problema. Por eso no vendemos la misma solución a todos. La auditoría nos dice dónde conviene intervenir primero.</p>
+    <div>
+      <div class="mono">QUÉ ARREGLAMOS</div>
+      <h2>No vendemos “de todo”. <em>Arreglamos lo que te está frenando.</em></h2>
+    </div>
+    <p>Primero detectamos la fuga. Después trabajamos esa parte.</p>
   </div>
   <div class="sector-grid">
-    <article><span>Google + Maps</span><h3>Que puedan encontrarte cerca</h3><p>Categorías, servicios, ubicación e información consistente para que tu negocio tenga una presencia más clara cuando alguien busca lo que haces.</p></article>
-    <article><span>SEO + GEO + IA</span><h3>Que Internet pueda entender tu negocio</h3><p>Organizamos información y contenido alrededor de los servicios, especialidades y preguntas que tus clientes ya están buscando.</p></article>
-    <article><span>Web</span><h3>Que entenderte tome segundos</h3><p>Tu web debe dejar claro quién eres, qué haces, para quién y qué puede hacer alguien a continuación.</p></article>
-    <article><span>Autoridad</span><h3>Que haya razones para confiar</h3><p>Experiencia, credenciales, reseñas, casos y evidencia pública presentadas de una forma fácil de comprobar.</p></article>
-    <article><span>Conversión</span><h3>Que una oportunidad no muera a centímetros del contacto</h3><p>WhatsApp, agenda, formularios y llamados a la acción para reducir la distancia entre “me interesa” y “quiero hablar contigo”.</p></article>
-    <article><span>Medición</span><h3>Que puedas distinguir movimiento de progreso</h3><p>Muchas visitas no significan necesariamente más oportunidades. Medimos para entender qué funciona y dónde conviene intervenir después.</p></article>
+    <article><span>Google + Maps</span><h3>Que aparezcas cerca.</h3><p>Perfil, categorías, ubicación y señales locales.</p></article>
+    <article><span>SEO + GEO + IA</span><h3>Que te entiendan.</h3><p>Contenido y estructura alrededor de lo que tus clientes buscan y preguntan.</p></article>
+    <article><span>Web</span><h3>Que se entienda en segundos.</h3><p>Qué haces, para quién y cómo contactarte.</p></article>
+    <article><span>Autoridad</span><h3>Que confíen.</h3><p>Reseñas, casos, experiencia y evidencia fácil de comprobar.</p></article>
+    <article><span>Conversión</span><h3>Que den el siguiente paso.</h3><p>WhatsApp, agenda, formularios y llamados a la acción.</p></article>
+    <article><span>Medición</span><h3>Que sepas qué funciona.</h3><p>Tráfico, consultas y oportunidades reales.</p></article>
   </div>
 </div></section>
 
 <section class="section proof-section" id="caso-real"><div class="shell"><div class="case-study">
   <div class="case-copy">
     <div class="mono">CASO REAL · PSICOLOGÍA</div>
-    <h2>Una web bonita <em>no era el problema.</em></h2>
-    <p>La pregunta importante era otra: ¿puede una persona entender rápidamente qué hace, saber si es la profesional adecuada y encontrar una manera sencilla de pedir atención?</p>
-    <p>Ordenamos cómo se presentaba su especialidad, construimos un sistema visual coherente, hicimos más claro el contenido y simplificamos el recorrido hasta el contacto.</p>
-    <p class="case-note">A veces una mejora importante comienza con algo aparentemente pequeño: dejar de obligar al cliente a adivinar. No usamos métricas de captación que no estén documentadas y autorizadas.</p>
+    <h2>El problema no era una web fea. <em>Era hacer pensar demasiado.</em></h2>
+    <p>Una persona debía entender tres cosas rápido: qué hacía la profesional, si era adecuada para su caso y cómo pedir una hora.</p>
+    <p class="case-note">Así que hicimos eso más fácil.</p>
   </div>
-  <div class="case-math">
-    <span class="math-label">QUÉ MEJORAMOS</span>
-    <strong style="font-size:clamp(30px,3vw,48px)">Claridad</strong>
-    <small>Especialidad y servicios que se entienden rápido</small>
+  <div class="case-math case-fast">
+    <span class="math-label">QUÉ CAMBIAMOS</span>
+    <strong>01 · Claridad</strong><small>Especialidad y servicios fáciles de entender.</small>
     <div class="math-line"></div>
-    <b>Contacto</b>
-    <small>Menos fricción para pedir atención</small>
-    <div class="math-result"><span>Una presencia digital más fácil de comprender y un recorrido más claro hasta la consulta.</span></div>
+    <strong>02 · Confianza</strong><small>Información profesional mejor ordenada.</small>
+    <div class="math-line"></div>
+    <strong>03 · Contacto</strong><small>Menos pasos para pedir atención.</small>
   </div>
 </div></div></section>
 
 <section class="section pricing" id="precios"><div class="shell">
   <div class="head pricing-head">
     <div>
-      <div class="mono">PRECIOS CLAROS · SIN COTIZACIONES A CIEGAS</div>
-      <h2>Empieza pequeño. <em>Escala cuando tenga sentido.</em></h2>
+      <div class="mono">PRECIOS</div>
+      <h2>Empieza gratis. <em>Escala solo si tiene sentido.</em></h2>
     </div>
-    <p>La auditoría identifica la prioridad. Después eliges si quieres resolver una pieza, construir el sistema completo o mantenerlo optimizado.</p>
+    <p>Primero vemos qué falla. Después eliges cuánto quieres resolver.</p>
   </div>
 
   <div class="price-grid price-grid-v2">
@@ -1597,88 +1611,64 @@ html,body{overflow-x:hidden}
         <span class="price-kicker">AUDITORÍA DE PRESENCIA DIGITAL</span>
         <span class="price-badge">GRATIS HASTA 31 OCT 2026</span>
       </div>
-      <div class="price-display promo-price">
-        <span class="price-was">US$ 99</span>
-        <strong>US$ 0</strong>
-        <small>por tiempo limitado</small>
-      </div>
-      <h3>Descubre qué te está costando visibilidad antes de pagar por arreglarlo.</h3>
+      <div class="price-display promo-price"><span class="price-was">US$ 99</span><strong>US$ 0</strong></div>
+      <h3>Te decimos qué está frenando tu visibilidad.</h3>
       <ul class="price-features">
-        <li>Google y Maps</li>
-        <li>Web y claridad de la oferta</li>
-        <li>Señales públicas para IA</li>
-        <li>Recorrido hasta el contacto</li>
-        <li>Prioridades: qué mejorar primero</li>
+        <li>Google y Maps</li><li>Web</li><li>Señales para IA</li><li>Conversión</li><li>Prioridades</li>
       </ul>
-      <p class="price-scope">1 negocio · 1 dominio · 1 ubicación principal · entrega por email</p>
-      <a class="btn primary price-cta" href="#diagnostico" data-interest="Auditoría de presencia digital">Solicitar auditoría gratis →</a>
+      <p class="price-scope">1 negocio · 1 dominio · 1 ubicación principal</p>
+      <a class="btn primary price-cta" href="#diagnostico" data-interest="Auditoría de presencia digital">Quiero mi auditoría gratis →</a>
     </article>
 
     <article class="price-card">
       <div class="price-top">
         <span class="price-kicker">SPRINT DE VISIBILIDAD</span>
-        <span class="price-badge subtle">UNA PRIORIDAD</span>
+        <span class="price-badge subtle">1 PRIORIDAD</span>
       </div>
-      <div class="price-display">
-        <strong>US$ 490</strong>
-        <small>pago único</small>
-      </div>
-      <h3>Resolvemos una prioridad concreta detectada en la auditoría.</h3>
+      <div class="price-display"><strong>US$ 490</strong><small>pago único</small></div>
+      <h3>Arreglamos una prioridad.</h3>
       <ul class="price-features">
-        <li>1 prioridad principal</li>
-        <li>Implementación y ajustes de copy</li>
-        <li>SEO, GEO o presencia local según el caso</li>
-        <li>Mejora del punto de conversión</li>
-        <li>Medición básica de la intervención</li>
+        <li>1 problema principal</li><li>Implementación</li><li>Copy y estructura</li><li>SEO, GEO o local</li><li>Conversión</li>
       </ul>
-      <p class="price-scope">Ideal para corregir una pieza sin rehacer todo el sistema.</p>
-      <a class="btn price-cta" href="#diagnostico" data-interest="Sprint de visibilidad — US$490">Quiero resolver una prioridad →</a>
+      <p class="price-scope">Para corregir sin rehacer todo.</p>
+      <a class="btn price-cta" href="#diagnostico" data-interest="Sprint de visibilidad — US$490">Resolver una prioridad →</a>
     </article>
 
     <article class="price-card price-card-featured">
       <div class="price-top">
         <span class="price-kicker">SISTEMA DE PRESENCIA</span>
-        <span class="price-badge">PARA CRECER</span>
+        <span class="price-badge">BASE COMPLETA</span>
       </div>
-      <div class="price-display">
-        <strong>US$ 1.490</strong>
-        <small>pago único</small>
-      </div>
-      <h3>Construimos la base completa para que te encuentren, entiendan y contacten.</h3>
+      <div class="price-display"><strong>US$ 1.490</strong><small>pago único</small></div>
+      <h3>Construimos la base completa.</h3>
       <ul class="price-features">
-        <li>Arquitectura de mensaje y oferta</li>
-        <li>Landing o presencia web principal</li>
-        <li>Google y Maps</li>
-        <li>Fundamentos SEO + GEO + señales para IA</li>
-        <li>Conversión, analítica y recorrido de contacto</li>
+        <li>Mensaje y oferta</li><li>Landing o web principal</li><li>Google y Maps</li><li>SEO + GEO + IA</li><li>Conversión + analítica</li>
       </ul>
-      <p class="price-scope">Implementación por etapas. Todo trabajo fuera de este alcance se cotiza antes de ejecutarse.</p>
-      <a class="btn primary price-cta" href="#diagnostico" data-interest="Sistema de presencia — US$1.490">Quiero construir mi sistema →</a>
+      <p class="price-scope">Implementación por etapas.</p>
+      <a class="btn primary price-cta" href="#diagnostico" data-interest="Sistema de presencia — US$1.490">Construir mi sistema →</a>
     </article>
   </div>
 
   <div class="continuity-offer">
     <div>
       <span class="mono">OPTIMIZACIÓN CONTINUA</span>
-      <h3>Una vez que la base funciona, la seguimos mejorando.</h3>
-      <p>Revisión mensual, hasta 2 optimizaciones priorizadas, reporte breve y soporte asíncrono.</p>
+      <h3>Medimos. Ajustamos. Repetimos.</h3>
+      <p>Hasta 2 mejoras priorizadas al mes + reporte breve + soporte asíncrono.</p>
     </div>
     <div class="continuity-price">
       <strong>US$ 290</strong><span>/ mes</span>
-      <a class="btn" href="#diagnostico" data-interest="Optimización continua — US$290/mes">Quiero optimización continua →</a>
+      <a class="btn" href="#diagnostico" data-interest="Optimización continua — US$290/mes">Seguir optimizando →</a>
     </div>
   </div>
-
-  <p class="pricing-note">Precios correspondientes al alcance indicado. Cualquier trabajo adicional se acuerda y cotiza antes de comenzar.</p>
 </div></section>
 
 <section class="section diagnostic-focus" id="diagnostico"><div class="shell"><div class="diag">
   <div>
-    <div class="mono">SOLICITA TU AUDITORÍA</div>
-    <h2>Tres datos. <em>Nosotros hacemos el resto.</em></h2>
-    <p>Cuéntanos qué está pasando y dónde podemos revisar tu negocio. Te enviamos los hallazgos y el orden de prioridades por email.</p>
+    <div class="mono">AUDITORÍA GRATIS</div>
+    <h2>Cuéntanos qué pasa. <em>Te diremos qué mover primero.</em></h2>
+    <p>Tres datos. Nada más.</p>
     <form class="diagnostic-form" id="diagnosticForm">
-      <label><span>¿Qué está pasando con tu negocio?</span><select id="goal" required>
+      <label><span>¿Qué está pasando?</span><select id="goal" required>
         <option value="">Selecciona una opción</option>
         <option>No aparezco cuando buscan mis servicios</option>
         <option>No sé qué información encuentran los asistentes de IA sobre mi negocio</option>
@@ -1686,44 +1676,43 @@ html,body{overflow-x:hidden}
         <option>Mi presencia digital no refleja la calidad de mi trabajo</option>
         <option>Quiero saber qué debería mejorar primero</option>
       </select></label>
-      <label><span>¿Qué haces y dónde atiendes?</span><textarea id="situation" rows="4" placeholder="Ej.: soy psicóloga, atiendo online y quiero aparecer cuando buscan especialistas en trauma." required></textarea></label>
-      <label><span>¿Dónde enviamos la revisión?</span><input id="email" type="email" autocomplete="email" placeholder="tu@email.cl" required></label>
-      <button class="btn primary form-submit" type="submit">Solicitar mi auditoría gratuita →</button>
-      <p class="form-note">Valor regular US$ 99 · Gratis hasta el 31 de octubre de 2026 · Sin compromiso.</p>
+      <label><span>¿Qué haces y dónde?</span><textarea id="situation" rows="4" placeholder="Ej.: psicóloga online en Maule." required></textarea></label>
+      <label><span>¿Dónde te escribimos?</span><input id="email" type="email" autocomplete="email" placeholder="tu@email.cl" required></label>
+      <button class="btn primary form-submit" type="submit">Quiero mi auditoría gratis →</button>
+      <p class="form-note">Valor regular US$ 99 · Gratis hasta el 31 de octubre de 2026.</p>
       <input type="hidden" id="interest" value="Auditoría de presencia digital">
     </form>
   </div>
   <div class="audit audit-deliverables">
-    <div><span class="mono">01</span><div><b>Hallazgos claros</b><span>Qué está ayudando y qué está frenando tu presencia hoy.</span></div></div>
-    <div><span class="mono">02</span><div><b>Prioridades</b><span>Qué conviene corregir primero y qué puede esperar.</span></div></div>
-    <div><span class="mono">03</span><div><b>Siguiente paso</b><span>Una recomendación concreta para avanzar, con nosotros o por tu cuenta.</span></div></div>
+    <div><span class="mono">01</span><div><b>Qué está fallando</b><span>Sin rodeos.</span></div></div>
+    <div><span class="mono">02</span><div><b>Qué mover primero</b><span>En orden de prioridad.</span></div></div>
+    <div><span class="mono">03</span><div><b>Qué hacer después</b><span>Con nosotros o por tu cuenta.</span></div></div>
   </div>
 </div></div></section>
 
 
 <section class="section" id="ideas"><div class="shell">
   <div class="head">
-    <div><div class="mono">GUÍAS GRATUITAS</div><h2>Entiende cómo te encuentran <em>y qué conviene mejorar.</em></h2></div>
-    <p>Estas guías te ayudan a revisar por tu cuenta Google Maps, SEO, GEO, búsqueda con IA y conversión, y a reconocer cuándo una intervención profesional empieza a tener sentido.</p>
+    <div><div class="mono">GUÍAS GRATUITAS</div><h2>Antes de gastar, <em>entiende qué está fallando.</em></h2></div>
+    <p>Ideas prácticas para revisar tu presencia por tu cuenta.</p>
   </div>
   <div class="resource-grid">
-    <a class="resource" href="articulos/google-maps.html"><span>Google Maps</span><h3>Estoy en Google Maps. ¿Por qué casi nadie me encuentra?</h3><p>Las señales que conviene revisar antes de pagar por anuncios.</p><b>Leer guía →</b></a>
-    <a class="resource" href="articulos/ia-recomienda-competencia.html"><span>IA + búsqueda</span><h3>Le pregunté a una IA por mi servicio. Apareció mi competencia.</h3><p>Por qué tener experiencia no basta si Internet no puede entenderla.</p><b>Leer guía →</b></a>
-    <a class="resource" href="articulos/mas-pacientes.html"><span>Salud</span><h3>Quiero más pacientes. ¿Qué debería mejorar antes de pagar publicidad?</h3><p>Visibilidad, confianza y agenda antes de comprar más tráfico.</p><b>Leer guía →</b></a>
-    <a class="resource" href="articulos/whatsapp.html"><span>Operación</span><h3>Si crecer significa responder WhatsApp todo el día, algo está fallando</h3><p>Cómo quitar trabajo repetitivo sin volver fría la relación.</p><b>Leer guía →</b></a>
-    <a class="resource" href="articulos/web-convierte.html"><span>Conversión</span><h3>Tu web se ve bien. ¿Pero realmente ayuda a que te elijan?</h3><p>Cómo detectar dónde se pierde una persona antes de contactarte.</p><b>Leer guía →</b></a>
-    <a class="resource" href="articulos/seo-geo.html"><span>SEO + GEO</span><h3>SEO, GEO e IA: qué cambió de verdad y qué sigue importando</h3><p>Una explicación clara, sin humo, sobre búsqueda generativa.</p><b>Leer guía →</b></a>
+    <a class="resource" href="articulos/google-maps.html"><span>Google Maps</span><h3>Estoy en Maps. ¿Por qué casi nadie me encuentra?</h3><p>Qué revisar antes de pagar anuncios.</p><b>Leer →</b></a>
+    <a class="resource" href="articulos/ia-recomienda-competencia.html"><span>IA + búsqueda</span><h3>La IA mostró a mi competencia. ¿Por qué?</h3><p>Experiencia no basta si Internet no la entiende.</p><b>Leer →</b></a>
+    <a class="resource" href="articulos/mas-pacientes.html"><span>Salud</span><h3>Quiero más pacientes. ¿Qué arreglo primero?</h3><p>Antes de comprar más tráfico.</p><b>Leer →</b></a>
+    <a class="resource" href="articulos/whatsapp.html"><span>Operación</span><h3>Responder WhatsApp todo el día no es crecer.</h3><p>Qué conviene automatizar.</p><b>Leer →</b></a>
+    <a class="resource" href="articulos/web-convierte.html"><span>Conversión</span><h3>Tu web se ve bien. ¿Pero convierte?</h3><p>Dónde se pierde una consulta.</p><b>Leer →</b></a>
+    <a class="resource" href="articulos/seo-geo.html"><span>SEO + GEO</span><h3>SEO, GEO e IA. ¿Qué cambió?</h3><p>Lo que todavía importa.</p><b>Leer →</b></a>
   </div>
 </div></section><section class="final"><div class="shell">
-    <div class="mono">TU SIGUIENTE PASO</div>
-    <h2>Ya sabes qué revisamos. <em>Ahora veamos tu caso.</em></h2>
-    <p>No necesitas decidir hoy si quieres SEO, una nueva web, automatización o una campaña. Primero descubramos qué pieza está frenando el recorrido.</p>
-    <div class="actions">
-      <a class="btn primary" href="#diagnostico">Solicitar auditoría de presencia digital gratis →</a>
-      <a class="btn" href="#sectores">Volver a servicios →</a>
-    </div>
-    <p class="hero-micro">Valor regular US$ 99 · Gratis hasta el 31 de octubre de 2026 · Sin compromiso</p>
-  </div></section>
+  <div class="mono">DEJA DE ADIVINAR</div>
+  <h2>Mira qué están encontrando <em>cuando buscan lo que haces.</em></h2>
+  <div class="actions">
+    <a class="btn primary" href="#diagnostico">Solicitar auditoría gratis →</a>
+    <a class="btn" href="#sectores">Ver servicios →</a>
+  </div>
+  <p class="hero-micro">US$ 99 → gratis hasta el 31 de octubre de 2026</p>
+</div></section>
 
 </main><div class="mobile-convert" id="mobileConvert"><span>Auditoría de presencia digital</span><a href="#diagnostico">Solicitar gratis →</a></div>
 <footer class="footer"><div class="shell foot"><span>Visual Art AI / Chile</span><span>Visibilidad en la nueva búsqueda.</span><span>2026</span></div></footer>
