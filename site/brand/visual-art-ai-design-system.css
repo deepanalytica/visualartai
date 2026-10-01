@@ -35,10 +35,14 @@
 
 /* CTA */
 .btn.primary,.mobile-convert a{
-  background:linear-gradient(90deg,var(--brand-blue) 0%,var(--brand-pink) 56%,var(--brand-violet) 100%);
-  border-color:transparent;
+  background:var(--brand-blue);
+  border-color:var(--brand-blue);
   color:#fff;
   box-shadow:0 10px 30px rgba(47,107,255,.14);
+}
+.btn.primary:hover,.mobile-convert a:hover{
+  background:var(--brand-accent-hover);
+  border-color:var(--brand-accent-hover);
 }
 
 /* Header identity */
@@ -116,22 +120,22 @@
 
 /* Night-combo atmosphere */
 body:before{
-  background:radial-gradient(circle,rgba(47,107,255,.17) 0%,rgba(47,107,255,.055) 38%,transparent 72%)!important;
+  background:radial-gradient(circle,rgba(47,107,255,.14) 0%,rgba(47,107,255,.05) 38%,transparent 72%)!important;
 }
 body:after{
-  background:radial-gradient(circle,rgba(255,61,141,.10) 0%,rgba(155,122,247,.045) 42%,transparent 74%)!important;
+  background:radial-gradient(circle,rgba(255,61,141,.055) 0%,rgba(155,122,247,.028) 42%,transparent 74%)!important;
 }
 [data-theme="dark"] body:before{
-  background:radial-gradient(circle,rgba(47,107,255,.28),rgba(47,107,255,.075) 42%,transparent 74%)!important;
+  background:radial-gradient(circle,rgba(47,107,255,.24),rgba(47,107,255,.07) 42%,transparent 74%)!important;
 }
 [data-theme="dark"] body:after{
-  background:radial-gradient(circle,rgba(255,61,141,.16),rgba(155,122,247,.06) 44%,transparent 76%)!important;
+  background:radial-gradient(circle,rgba(255,61,141,.09),rgba(155,122,247,.035) 44%,transparent 76%)!important;
 }
 .hero-v6 .hero-main-question .hero-question-end{
-  background:linear-gradient(90deg,var(--text) 2%,var(--brand-blue) 42%,var(--brand-pink) 76%,var(--brand-violet) 100%)!important;
-  -webkit-background-clip:text!important;
-  background-clip:text!important;
-  color:transparent!important;
+  color:var(--brand-blue)!important;
+  background:none!important;
+  -webkit-background-clip:initial!important;
+  background-clip:initial!important;
 }
 
 /* Mobile: brand first. Descriptor moves out of the header visually. */
