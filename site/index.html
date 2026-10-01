@@ -1342,6 +1342,22 @@ html,body{overflow-x:hidden}
     padding-inline:16px!important;
   }
 }
+
+/* Literary direct-response layer */
+.pain-stories article b{
+  font-size:clamp(16px,1.35vw,20px);
+  line-height:1.28;
+  letter-spacing:-.025em;
+}
+.pain-stories article p{
+  max-width:680px;
+}
+.final p strong{
+  color:var(--text);
+}
+@media(max-width:700px){
+  .pain-stories article b{font-size:17px}
+}
 </style>
 <link rel="stylesheet" href="brand/visual-art-ai-design-system.css?v=4">
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
@@ -1360,7 +1376,7 @@ html,body{overflow-x:hidden}
     </span>
     
   </span>
-</a><nav class="nav" aria-label="Navegación principal"><a href="#sistema">Cómo trabajamos</a><a href="#sectores">Qué hacemos</a><a href="#diagnostico">Diagnóstico</a><a href="#ideas">Aprende</a></nav><div class="right"><button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><span>Menú</span><b aria-hidden="true">☰</b></button><button class="theme" id="theme" aria-label="Cambiar tema" title="Cambiar tema">◐</button><a class="btn primary" href="#diagnostico">Auditoría gratis →</a></div></div></header><div class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-menu-inner"><div class="mobile-menu-top"><span class="mono">Visual Art AI</span><button id="menuClose" class="menu-close" aria-label="Cerrar menú">×</button></div><nav aria-label="Navegación móvil"><a href="#sistema"><span>01</span>Cómo trabajamos</a><a href="#sectores"><span>02</span>Qué corregimos</a><a href="#caso-real"><span>03</span>Caso real</a><a href="#ideas"><span>04</span>ANTES DE PAGAR, ENTIENDE QUÉ ESTÁ FALLANDO</a><a href="#diagnostico" class="menu-diagnostic"><span>05</span>Diagnóstico 360° gratis</a></nav><div class="mobile-menu-cta"><span class="mono">DIAGNÓSTICO INICIAL GRATUITO</span><p><strong>Descubre qué está frenando tu presencia digital.</strong> Te mostramos qué encuentra Google, qué puede entender la IA y qué conviene mejorar primero.</p><a class="btn primary" href="#diagnostico">Quiero mi diagnóstico gratis →</a></div></div></div>
+</a><nav class="nav" aria-label="Navegación principal"><a href="#sectores">Servicios</a><a href="#sistema">Cómo trabajamos</a><a href="#caso-real">Caso real</a><a href="#ideas">Aprende</a></nav><div class="right"><button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><span>Menú</span><b aria-hidden="true">☰</b></button><button class="theme" id="theme" aria-label="Cambiar tema" title="Cambiar tema">◐</button><a class="btn primary" href="#diagnostico">Auditoría gratis →</a></div></div></header><div class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-menu-inner"><div class="mobile-menu-top"><span class="mono">Visual Art AI</span><button id="menuClose" class="menu-close" aria-label="Cerrar menú">×</button></div><nav aria-label="Navegación móvil"><a href="#sectores"><span>01</span>Servicios</a><a href="#sistema"><span>02</span>Cómo trabajamos</a><a href="#caso-real"><span>03</span>Caso real</a><a href="#ideas"><span>04</span>Aprende</a><a href="#diagnostico" class="menu-diagnostic"><span>05</span>Auditoría gratis</a></nav><div class="mobile-menu-cta"><span class="mono">DIAGNÓSTICO INICIAL GRATUITO</span><p><strong>Descubre qué está frenando tu presencia digital.</strong> Te mostramos qué encuentra Google, qué puede entender la IA y qué conviene mejorar primero.</p><a class="btn primary" href="#diagnostico">Quiero mi diagnóstico gratis →</a></div></div></div>
 <main>
 <section class="hero hero-v6" id="inicio">
   <div class="hero-copy">
@@ -1464,53 +1480,152 @@ html,body{overflow-x:hidden}
   <div class="shell">
     <div class="action-grid">
       <div class="action-copy">
-        <div class="mono">SI NO TE ENCUENTRAN, NO PUEDEN ELEGIRTE</div>
-        <h2>Puedes tener un gran negocio <em>y seguir siendo invisible.</em></h2>
-        <p>No porque tu negocio sea malo. Porque Google, Maps o la IA pueden no entender bien qué haces, dónde estás o por qué deberían considerarte. Antes de gastar más en publicidad, revisemos qué ve hoy una persona cuando te busca.</p>
+        <div class="mono">A VECES EL PROBLEMA ESTÁ ANTES DEL CONTACTO</div>
+        <h2>No siempre faltan clientes. <em>A veces falta el camino para que lleguen hasta ti.</em></h2>
+        <p>El problema no siempre está en lo que vendes. A veces está en lo que ocurre antes de que alguien llegue a ti.</p>
         <div class="actions">
-          <a class="btn primary" href="#diagnostico">Quiero saber qué están encontrando →</a>
+          <a class="btn primary" href="#diagnostico">Solicitar auditoría gratuita →</a>
         </div>
-        <small>Sin costo · Sin compromiso · Con prioridades concretas</small>
+        <small>Sin costo · Sin compromiso · Primero vemos qué está pasando</small>
       </div>
 
-      <div class="action-output" aria-label="Qué incluye el diagnóstico">
-        <article><span>01</span><div><b>¿Apareces cuando te buscan?</b><p>Revisamos Google, Maps y las búsquedas que una persona haría para encontrar un negocio como el tuyo.</p></div></article>
-        <article><span>02</span><div><b>¿La IA entiende qué haces?</b><p>Miramos qué información pública existe sobre tus servicios, especialidad, ubicación y experiencia, y si se entiende con claridad.</p></div></article>
-        <article><span>03</span><div><b>¿Tu presencia ayuda a elegirte?</b><p>Seguimos el recorrido desde la búsqueda hasta tu web, perfil, WhatsApp, agenda o formulario para detectar dónde se corta la intención.</p></div></article>
-        <article><span>04</span><div><b>¿Qué mover primero?</b><p>Te mostramos qué conviene corregir primero para no gastar tiempo ni dinero donde no hace falta.</p></div></article>
+      <div class="action-output pain-stories" aria-label="Situaciones que vemos con frecuencia">
+        <article><span>01</span><div><b>“Tengo pocos pacientes y no sé cómo conseguir más.”</b><p>La demanda puede existir. La pregunta es si tu presencia aparece, se entiende y genera suficiente confianza para que alguien te contacte.</p></div></article>
+        <article><span>02</span><div><b>“Mi negocio existe, pero casi no aparezco en Google Maps.”</b><p>Estar publicado no significa necesariamente estar bien presentado cuando alguien busca exactamente lo que haces.</p></div></article>
+        <article><span>03</span><div><b>“Tengo años de experiencia, pero cuando preguntan a una IA aparecen otros.”</b><p>La experiencia ayuda poco si Internet no puede encontrarla, interpretarla y contrastarla con claridad.</p></div></article>
+        <article><span>04</span><div><b>“Hago un producto excelente, pero solo me preguntan cuánto cuesta.”</b><p>Cuando el valor no se entiende, el precio termina ocupando toda la conversación.</p></div></article>
+        <article><span>05</span><div><b>“Pierdo demasiado tiempo respondiendo lo mismo por WhatsApp.”</b><p>Más consultas no deberían significar más caos. Parte del recorrido también puede simplificarse.</p></div></article>
       </div>
     </div>
   </div>
 </section>
-<section class="manifesto"><div class="shell"><div class="mono">LA BÚSQUEDA YA NO ES SOLO UNA LISTA DE ENLACES</div><blockquote>Google sigue siendo importante. <em>Pero ya no está solo.</em></blockquote><p>La búsqueda dejó de ser solamente una lista de enlaces. También se está convirtiendo en una conversación. Tu negocio necesita ser comprensible, verificable y fácil de encontrar.</p></div></section>
-<section class="section story"><div class="shell"><div class="story-grid"><div><div class="mono">ASÍ OCURRE UNA DECISIÓN HOY</div><h2>Tu cliente puede llegar <em>desde cualquier punto.</em></h2></div><div class="story-copy"><p>Busca. Pregunta. Compara. Elige. Ese recorrido puede empezar en Google, Maps, ChatGPT, Gemini o Perplexity y terminar en tu web, WhatsApp, agenda o tienda.</p><p>No existe un botón mágico que obligue a Google o a una IA a recomendarte. Lo que sí podemos hacer es mejorar las señales públicas que esos sistemas pueden descubrir, entender y contrastar.</p><div class="story-fact"><strong>Que aparezcas cuando importa es mejor. Que además te entiendan, mucho mejor.</strong><span>Google · Maps · Web · SEO · GEO · Contenido · Datos estructurados · Autoridad</span></div></div></div></div></section><section class="section" id="sistema"><div class="shell"><div class="head"><div><div class="mono">NO HACEMOS TODO. HACEMOS LO QUE MUEVE LA AGUJA.</div><h2>No necesitas estar en todas partes. <em>Necesitas estar donde te buscan.</em></h2></div><p>Si el problema está en Maps, trabajamos Maps. Si está en tu web, trabajamos tu web. Si está en cómo te entiende la IA, ordenamos esas señales. Sin inflar el proyecto porque sí.</p></div><div class="stages">
-<article class="stage"><span class="num">01 / PRESENCIA</span><h3>Que sepan qué haces</h3><p>Dejamos claro qué haces, para quién, dónde estás y por qué alguien debería seguir mirando.</p><small>Marca · Web · Landing · Tienda · Imagen · Video · Contenido</small></article>
-<article class="stage"><span class="num">02 / DESCUBRIMIENTO</span><h3>Que te encuentren</h3><p>Ordenamos información, estructura y contenido para que Google, Maps y los asistentes de IA tengan mejores señales para entender tu negocio.</p><small>Google · Maps · SEO · Local · Contenido · Asistentes de IA</small></article>
-<article class="stage"><span class="num">03 / CONVERSIÓN</span><h3>Que el siguiente paso sea obvio</h3><p>Hacemos fácil lo que viene después: consultar, agendar, cotizar, reservar o comprar.</p><small>Campañas · Ads · Landing · Leads · Formularios · WhatsApp</small></article>
-<article class="stage"><span class="num">04 / OPERACIÓN</span><h3>Que crecer no te desordene</h3><p>Cuando hace falta, simplificamos respuestas, filtros, reservas y seguimiento para que más consultas no signifiquen más caos.</p><small>Respuestas · Reservas · Filtros · Seguimiento · Automatización</small></article>
-</div></div></section>
+<section class="manifesto"><div class="shell">
+  <div class="mono">LA BÚSQUEDA YA NO EMPIEZA SIEMPRE IGUAL</div>
+  <blockquote>Hoy una decisión puede empezar con una búsqueda. <em>O con una pregunta.</em></blockquote>
+  <p>“Necesito un kinesiólogo cerca.” “¿Dónde puedo almorzar comida casera?” “Recomiéndame una psicóloga especializada en trauma.” Una persona pregunta. Google, Maps o una IA intenta entender qué necesita. Encuentra opciones. Compara información. Y finalmente alguien recibe el clic, el mensaje, la reserva o la llamada.</p>
+</div></section>
+<section class="section story"><div class="shell"><div class="story-grid">
+  <div>
+    <div class="mono">DE LA BÚSQUEDA A LA DECISIÓN</div>
+    <h2>Ahí queremos que tu negocio <em>tenga una oportunidad real.</em></h2>
+  </div>
+  <div class="story-copy">
+    <p>Una persona busca. Ve opciones. Compara. Confía. Contacta. Ese recorrido puede empezar en Google, Maps, ChatGPT, Gemini o Perplexity y terminar en tu web, WhatsApp, agenda o tienda.</p>
+    <p>No existe un botón mágico que obligue a Google o a una inteligencia artificial a recomendarte. Sí podemos construir una presencia digital que sea más fácil de encontrar, entender, comprobar y elegir.</p>
+    <div class="story-fact"><strong>Que te encuentren es mejor. Que además te entiendan, mucho mejor.</strong><span>Google · Maps · Web · SEO · GEO · Contenido · Datos estructurados · Autoridad</span></div>
+  </div>
+</div></div></section><section class="section" id="sistema"><div class="shell">
+  <div class="head">
+    <div><div class="mono">PRIMERO ENTENDEMOS DÓNDE SE PIERDE LA OPORTUNIDAD</div><h2>No necesitas estar en todas partes. <em>Necesitas estar bien donde importa.</em></h2></div>
+    <p>No partimos vendiéndote una web, una campaña o SEO porque sí. Primero miramos qué ocurre. Después decidimos qué vale la pena mejorar.</p>
+  </div>
+  <div class="stages">
+    <article class="stage"><span class="num">01 / PRESENCIA</span><h3>Que sepan qué haces</h3><p>Ordenamos cómo se presenta tu negocio: qué haces, para quién, dónde estás y por qué alguien debería seguir mirando.</p><small>Marca · Web · Landing · Tienda · Imagen · Video · Contenido</small></article>
+    <article class="stage"><span class="num">02 / DESCUBRIMIENTO</span><h3>Que puedas aparecer cuando te buscan</h3><p>Trabajamos las señales que ayudan a Google, Maps y los sistemas de IA a encontrar y comprender tu negocio.</p><small>Google · Maps · SEO · GEO · Local · Contenido · IA</small></article>
+    <article class="stage"><span class="num">03 / CONVERSIÓN</span><h3>Que el interés tenga un siguiente paso</h3><p>Encontrarte sirve de poco si después nadie sabe qué hacer. Simplificamos el camino hacia una consulta, reserva, cotización, compra o hora agendada.</p><small>WhatsApp · Formularios · Agenda · Reservas · Leads</small></article>
+    <article class="stage"><span class="num">04 / OPERACIÓN</span><h3>Que crecer no signifique trabajar el doble</h3><p>Cuando tiene sentido, simplificamos y automatizamos lo repetitivo para que más consultas no conviertan tu teléfono en un segundo trabajo.</p><small>Respuestas · Filtros · Reservas · Seguimiento · Automatización</small></article>
+  </div>
+</div></section>
 <div class="inline-cta-wrap"><div class="shell"><div class="inline-cta">
   <div><span class="mono">¿QUIERES SABER DÓNDE ESTÁ LA FRICCIÓN?</span><strong>Antes de invertir, descubre qué está frenando tu visibilidad.</strong></div>
   <a class="btn primary" href="#diagnostico">Diagnóstico 360° gratis →</a>
 </div></div></div>
 
-<section class="section sectors" id="sectores"><div class="shell"><div class="head"><div><div class="mono">VISIBILIDAD QUE TERMINA EN UNA ACCIÓN</div><h2>Encontrarte es <em>solo el principio.</em></h2></div><p>Trabajamos el recorrido completo: aparecer, explicar, generar confianza y dejar un siguiente paso claro. La meta no es acumular visitas. Es convertir atención en una oportunidad real.</p></div><div class="sector-grid"><article><span>Google + Maps</span><h3>Que te vean cerca</h3><p>Perfil, categorías, servicios, ubicación e información consistente para que una búsqueda local tenga mejores posibilidades de encontrarte.</p></article><article><span>SEO + GEO</span><h3>Que te entiendan en la búsqueda</h3><p>Contenido y estructura alrededor de las preguntas, servicios y especialidades que tus clientes ya están escribiendo o preguntando.</p></article><article><span>Web</span><h3>Que tu web diga lo correcto</h3><p>Arquitectura, copy, diseño y datos estructurados para explicar con precisión quién eres, qué haces y qué debería hacer alguien después.</p></article><article><span>Autoridad</span><h3>Que tengan motivos para confiar</h3><p>Experiencia, credenciales, casos, reseñas y evidencia pública presentadas de forma fácil de comprobar.</p></article><article><span>Conversión</span><h3>Que el interés no se pierda</h3><p>WhatsApp, agenda, formularios y CTA para acortar la distancia entre “me interesa” y “quiero hablar”.</p></article><article><span>Medición</span><h3>Que sepas qué está funcionando</h3><p>Analítica y seguimiento para separar visitas de oportunidades reales y decidir dónde conviene insistir.</p></article></div></div></section>
+<section class="section sectors" id="sectores"><div class="shell">
+  <div class="head">
+    <div><div class="mono">QUÉ PODEMOS MEJORAR</div><h2>A veces necesitas una sola corrección. <em>A veces necesitas que todo trabaje junto.</em></h2></div>
+    <p>No todos los negocios tienen el mismo problema. Por eso no vendemos la misma solución a todos. La auditoría nos dice dónde conviene intervenir primero.</p>
+  </div>
+  <div class="sector-grid">
+    <article><span>Google + Maps</span><h3>Que puedan encontrarte cerca</h3><p>Categorías, servicios, ubicación e información consistente para que tu negocio tenga una presencia más clara cuando alguien busca lo que haces.</p></article>
+    <article><span>SEO + GEO + IA</span><h3>Que Internet pueda entender tu negocio</h3><p>Organizamos información y contenido alrededor de los servicios, especialidades y preguntas que tus clientes ya están buscando.</p></article>
+    <article><span>Web</span><h3>Que entenderte tome segundos</h3><p>Tu web debe dejar claro quién eres, qué haces, para quién y qué puede hacer alguien a continuación.</p></article>
+    <article><span>Autoridad</span><h3>Que haya razones para confiar</h3><p>Experiencia, credenciales, reseñas, casos y evidencia pública presentadas de una forma fácil de comprobar.</p></article>
+    <article><span>Conversión</span><h3>Que una oportunidad no muera a centímetros del contacto</h3><p>WhatsApp, agenda, formularios y llamados a la acción para reducir la distancia entre “me interesa” y “quiero hablar contigo”.</p></article>
+    <article><span>Medición</span><h3>Que puedas distinguir movimiento de progreso</h3><p>Muchas visitas no significan necesariamente más oportunidades. Medimos para entender qué funciona y dónde conviene intervenir después.</p></article>
+  </div>
+</div></section>
 
-<section class="section proof-section" id="caso-real"><div class="shell"><div class="case-study"><div class="case-copy"><div class="mono">Caso real · Psicología</div><h2>Una presencia más clara <em>para recibir consultas.</em></h2><p>Mejoramos la presencia online de una psicóloga: ordenamos cómo se presenta su especialidad, definimos un sistema visual y construimos una web capaz de explicar con claridad qué hace, para quién y cómo agendar.</p><p class="case-note">El proyecto ilustra cómo estructuramos la información profesional y el recorrido hasta el contacto. No usamos números de captación que no estén documentados y autorizados.</p></div><div class="case-math"><span class="math-label">QUÉ MEJORAMOS</span><strong style="font-size:clamp(30px,3vw,48px)">Claridad</strong><small>Especialidad y servicios que se entienden rápido</small><div class="math-line"></div><b>Contacto</b><small>Menos fricción para pedir atención</small><div class="math-result"><span>Las métricas de captación se publicarán cuando estén documentadas y autorizadas.</span></div></div></div></div></section>
-
-<section class="section pricing" id="precios"><div class="shell"><div class="head"><div><div class="mono">ANTES DE PAGAR POR NADA</div><h2>Descubre qué está pasando <em>con tu negocio.</em></h2></div><p>La revisión inicial cuesta $0. Si encontramos una oportunidad clara, te mostramos qué corregir. Después decides si lo haces por tu cuenta o si quieres que lo implementemos.</p></div><div class="price-grid"><article class="price-card free"><span>DIAGNÓSTICO 360°</span><strong>$0</strong><h3>Descubre qué encuentran hoy, qué no se entiende y qué conviene corregir primero.</h3><p>Google, Maps, web, búsqueda con IA, claridad, confianza y conversión.</p><small>Plazo de entrega sujeto a confirmación</small><a class="btn primary" href="#diagnostico">Quiero mi auditoría gratuita →</a></article><article class="price-card"><span>MEJORA PUNTUAL</span><strong>Cotización</strong><h3>Corregimos la pieza que está frenando el resultado.</h3><p>Google/Maps, SEO/GEO, contenido, landing, conversión o una intervención específica.</p><small>Alcance definido desde el diagnóstico</small></article><article class="price-card"><span>SISTEMA COMPLETO</span><strong>Cotización</strong><h3>Conectamos las piezas para que trabajen juntas.</h3><p>Marca, web, posicionamiento, contenido, captación, automatización y medición cuando el caso lo requiere.</p><small>Propuesta por etapas y prioridades</small></article></div></div></section>
-
-<section class="section diagnostic-focus" id="diagnostico"><div class="shell"><div class="diag"><div><div class="mono">TU PRIMER PASO CUESTA $0</div><h2>Busca tu negocio <em>como lo haría un cliente.</em></h2><p>Revisamos Google, Maps, tu web, búsquedas por servicio, presencia local y señales públicas que pueden usar los sistemas de IA. Después te mostramos qué encuentran, qué falta y qué conviene mover primero.</p><form class="diagnostic-form" id="diagnosticForm"><label><span>¿Qué está pasando ahora?</span><select id="goal" required><option value="">Selecciona una opción</option><option>No aparezco cuando buscan mis servicios</option><option>No sé qué información encuentran los asistentes de IA sobre mi negocio</option><option>Aparezco, pero recibo pocas consultas</option><option>Mi presencia digital no refleja mi trabajo</option><option>Quiero saber qué debería mejorar primero</option></select></label><label><span>Cuéntanos qué haces y dónde atiendes</span><textarea id="situation" rows="4" placeholder="Ej.: soy psicóloga, atiendo online y quiero aparecer cuando buscan especialistas en trauma." required></textarea></label><label><span>¿A qué correo enviamos la revisión?</span><input id="email" type="email" autocomplete="email" placeholder="tu@email.cl" required></label><button class="btn primary form-submit" type="submit">Solicitar mi auditoría gratuita →</button><p class="form-note">Auditoría inicial gratuita · Sin compromiso · Confirmamos el plazo al recibir tu solicitud.</p></form></div><div class="audit"><div><span class="mono">01</span><section><b>¿Apareces donde importa?</b><span>Google, Maps, búsquedas por servicio y asistentes de IA.</span></section></div><div><span class="mono">02</span><section><b>¿Se entiende qué haces?</b><span>Especialidad, servicios, ubicación, estructura y consistencia.</span></section></div><div><span class="mono">03</span><section><b>¿Hay razones para confiar?</b><span>Contenido, autoridad, reseñas, credenciales y evidencia pública.</span></section></div><div><span class="mono">04</span><section><b>¿Es fácil contactarte?</b><span>Web, móvil, CTA, WhatsApp, agenda, formularios y medición.</span></section></div></div></div></div></section>
-
-<section class="final"><div class="shell"><div class="mono">LA PRÓXIMA BÚSQUEDA PUEDE SER HOY</div><h2>Mañana alguien puede buscar <em>exactamente lo que haces.</em></h2><p>Puede hacerlo en Google, abrir Maps o preguntarle a ChatGPT. La pregunta es si te encontrará a ti… o a otro negocio. Empieza por saber qué están viendo hoy.</p><div class="actions"><a class="btn primary" href="#diagnostico">Solicita tu auditoría gratis →</a><a class="btn" href="#ideas">Ver servicios</a></div></div></section>
-<section class="section" id="ideas"><div class="shell"><div class="head"><div><div class="mono">Guías gratuitas</div><h2>Entiende cómo te encuentran <em>antes de pagar por mejorarlo.</em></h2></div><p>Guías prácticas para revisar por tu cuenta Google Maps, SEO, GEO, búsqueda con IA y conversión. Y para saber cuándo el problema ya necesita una intervención más profunda.</p></div><div class="resource-grid">
-<a class="resource" href="articulos/google-maps.html"><span>Google Maps</span><h3>Estoy en Google Maps. ¿Por qué casi nadie me encuentra?</h3><p>Las señales que conviene revisar antes de pagar por anuncios.</p><b>Leer guía →</b></a>
-<a class="resource" href="articulos/ia-recomienda-competencia.html"><span>IA + búsqueda</span><h3>Le pregunté a una IA por mi servicio. Apareció mi competencia.</h3><p>Por qué tener experiencia no basta si Internet no puede entenderla.</p><b>Leer guía →</b></a>
-<a class="resource" href="articulos/mas-pacientes.html"><span>Salud</span><h3>Quiero más pacientes. ¿Qué debería arreglar antes de pagar publicidad?</h3><p>Visibilidad, confianza y agenda antes de comprar más tráfico.</p><b>Leer guía →</b></a>
-<a class="resource" href="articulos/whatsapp.html"><span>Operación</span><h3>Si crecer significa responder WhatsApp todo el día, algo está fallando</h3><p>Cómo quitar trabajo repetitivo sin volver fría la relación.</p><b>Leer guía →</b></a>
-<a class="resource" href="articulos/web-convierte.html"><span>Conversión</span><h3>Tu web se ve bien. ¿Pero ayuda a que te elijan?</h3><p>Cómo detectar dónde se pierde una persona antes de contactarte.</p><b>Leer guía →</b></a>
-<a class="resource" href="articulos/seo-geo.html"><span>SEO + GEO</span><h3>SEO, GEO e IA: qué cambió de verdad y qué sigue importando</h3><p>Una explicación clara, sin humo, sobre búsqueda generativa.</p><b>Leer guía →</b></a>
+<section class="section proof-section" id="caso-real"><div class="shell"><div class="case-study">
+  <div class="case-copy">
+    <div class="mono">CASO REAL · PSICOLOGÍA</div>
+    <h2>Una web bonita <em>no era el problema.</em></h2>
+    <p>La pregunta importante era otra: ¿puede una persona entender rápidamente qué hace, saber si es la profesional adecuada y encontrar una manera sencilla de pedir atención?</p>
+    <p>Ordenamos cómo se presentaba su especialidad, construimos un sistema visual coherente, hicimos más claro el contenido y simplificamos el recorrido hasta el contacto.</p>
+    <p class="case-note">A veces una mejora importante comienza con algo aparentemente pequeño: dejar de obligar al cliente a adivinar. No usamos métricas de captación que no estén documentadas y autorizadas.</p>
+  </div>
+  <div class="case-math">
+    <span class="math-label">QUÉ MEJORAMOS</span>
+    <strong style="font-size:clamp(30px,3vw,48px)">Claridad</strong>
+    <small>Especialidad y servicios que se entienden rápido</small>
+    <div class="math-line"></div>
+    <b>Contacto</b>
+    <small>Menos fricción para pedir atención</small>
+    <div class="math-result"><span>Una presencia digital más fácil de comprender y un recorrido más claro hasta la consulta.</span></div>
+  </div>
 </div></div></section>
+
+<section class="section pricing" id="precios"><div class="shell">
+  <div class="head">
+    <div><div class="mono">ANTES DE GASTAR MÁS</div><h2>Descubre dónde está <em>el problema.</em></h2></div>
+    <p>Una nueva web cuesta dinero. Una campaña también. El SEO necesita tiempo. Ninguna de esas cosas debería ser el primer paso si todavía no sabemos qué está fallando.</p>
+  </div>
+  <div class="price-grid">
+    <article class="price-card free"><span>AUDITORÍA INICIAL DE PRESENCIA DIGITAL</span><strong>$0</strong><h3>Primero te mostramos qué encuentran, qué no se entiende y qué conviene mejorar.</h3><p>Google, Maps, web, búsquedas por servicio, presencia local, señales públicas para IA y recorrido hasta el contacto.</p><small>Sin costo · Sin compromiso</small><a class="btn primary" href="#diagnostico">Solicitar mi auditoría gratuita →</a></article>
+    <article class="price-card"><span>MEJORA PUNTUAL</span><strong>Cotización</strong><h3>Corregimos la pieza que realmente está frenando el resultado.</h3><p>Google/Maps, SEO/GEO, contenido, landing, conversión o una intervención específica.</p><small>Alcance definido desde la auditoría</small></article>
+    <article class="price-card"><span>SISTEMA COMPLETO</span><strong>Cotización</strong><h3>Conectamos las piezas para que trabajen juntas.</h3><p>Marca, web, posicionamiento, contenido, captación, automatización y medición cuando el caso lo requiere.</p><small>Propuesta por etapas y prioridades</small></article>
+  </div>
+</div></section>
+
+<section class="section diagnostic-focus" id="diagnostico"><div class="shell"><div class="diag">
+  <div>
+    <div class="mono">TU PRIMER PASO CUESTA $0</div>
+    <h2>Cuéntanos <em>dónde estás hoy.</em></h2>
+    <p>Revisamos tu negocio como podría hacerlo alguien que todavía no te conoce. Miramos Google, Maps, tu web, búsquedas relacionadas con lo que haces, información pública y señales que pueden utilizar los sistemas de IA. Después te mostramos qué encuentran, qué falta y qué conviene mover primero.</p>
+    <form class="diagnostic-form" id="diagnosticForm">
+      <label><span>¿Qué está pasando con tu negocio?</span><select id="goal" required>
+        <option value="">Selecciona una opción</option>
+        <option>No aparezco cuando buscan mis servicios</option>
+        <option>No sé qué información encuentran los asistentes de IA sobre mi negocio</option>
+        <option>Aparezco, pero recibo pocas consultas</option>
+        <option>Mi presencia digital no refleja la calidad de mi trabajo</option>
+        <option>Quiero saber qué debería mejorar primero</option>
+      </select></label>
+      <label><span>¿Qué haces y dónde atiendes?</span><textarea id="situation" rows="4" placeholder="Ej.: soy psicóloga, atiendo online y quiero aparecer cuando buscan especialistas en trauma." required></textarea></label>
+      <label><span>¿Dónde enviamos la revisión?</span><input id="email" type="email" autocomplete="email" placeholder="tu@email.cl" required></label>
+      <button class="btn primary form-submit" type="submit">Solicitar mi auditoría gratuita →</button>
+      <p class="form-note">Auditoría inicial gratuita · Sin compromiso · Confirmamos el plazo al recibir tu solicitud.</p>
+    </form>
+  </div>
+  <div class="audit">
+    <div><span class="mono">01</span><section><b>¿Apareces donde importa?</b><span>Google, Maps, búsquedas por servicio y asistentes de IA.</span></section></div>
+    <div><span class="mono">02</span><section><b>¿Se entiende qué haces?</b><span>Especialidad, servicios, ubicación, estructura y consistencia.</span></section></div>
+    <div><span class="mono">03</span><section><b>¿Hay razones para confiar?</b><span>Contenido, autoridad, reseñas, credenciales y evidencia pública.</span></section></div>
+    <div><span class="mono">04</span><section><b>¿Es fácil contactarte?</b><span>Web, móvil, CTA, WhatsApp, agenda, formularios y medición.</span></section></div>
+  </div>
+</div></div></section></div><div><span class="mono">02</span><section><b>¿Se entiende qué haces?</b><span>Especialidad, servicios, ubicación, estructura y consistencia.</span></section></div><div><span class="mono">03</span><section><b>¿Hay razones para confiar?</b><span>Contenido, autoridad, reseñas, credenciales y evidencia pública.</span></section></div><div><span class="mono">04</span><section><b>¿Es fácil contactarte?</b><span>Web, móvil, CTA, WhatsApp, agenda, formularios y medición.</span></section></div></div></div></div></section>
+
+<section class="final"><div class="shell">
+  <div class="mono">LA PRÓXIMA BÚSQUEDA PUEDE ESTAR OCURRIENDO AHORA</div>
+  <h2>Alguien puede estar buscando <em>exactamente lo que haces.</em></h2>
+  <p>Quizá escriba una frase en Google. Quizá abra Maps. Quizá le pregunte a ChatGPT. Tú no puedes decidir qué resultado verá. Pero sí puedes decidir qué encontrará Internet cuando intente entender tu negocio.</p>
+  <p><strong>Empieza por ahí. Hagamos más fácil que puedan encontrarte.</strong></p>
+  <div class="actions"><a class="btn primary" href="#diagnostico">Solicita tu auditoría de presencia digital gratis →</a><a class="btn" href="#ideas">Explorar las guías →</a></div>
+</div></section>
+<section class="section" id="ideas"><div class="shell">
+  <div class="head">
+    <div><div class="mono">¿TODAVÍA NO QUIERES HABLAR CON NOSOTROS?</div><h2>Está bien. <em>Empieza entendiendo el problema.</em></h2></div>
+    <p>Estas guías te ayudan a revisar por tu cuenta Google Maps, SEO, GEO, búsqueda con IA y conversión, y a reconocer cuándo una intervención profesional empieza a tener sentido.</p>
+  </div>
+  <div class="resource-grid">
+    <a class="resource" href="articulos/google-maps.html"><span>Google Maps</span><h3>Estoy en Google Maps. ¿Por qué casi nadie me encuentra?</h3><p>Las señales que conviene revisar antes de pagar por anuncios.</p><b>Leer guía →</b></a>
+    <a class="resource" href="articulos/ia-recomienda-competencia.html"><span>IA + búsqueda</span><h3>Le pregunté a una IA por mi servicio. Apareció mi competencia.</h3><p>Por qué tener experiencia no basta si Internet no puede entenderla.</p><b>Leer guía →</b></a>
+    <a class="resource" href="articulos/mas-pacientes.html"><span>Salud</span><h3>Quiero más pacientes. ¿Qué debería mejorar antes de pagar publicidad?</h3><p>Visibilidad, confianza y agenda antes de comprar más tráfico.</p><b>Leer guía →</b></a>
+    <a class="resource" href="articulos/whatsapp.html"><span>Operación</span><h3>Si crecer significa responder WhatsApp todo el día, algo está fallando</h3><p>Cómo quitar trabajo repetitivo sin volver fría la relación.</p><b>Leer guía →</b></a>
+    <a class="resource" href="articulos/web-convierte.html"><span>Conversión</span><h3>Tu web se ve bien. ¿Pero realmente ayuda a que te elijan?</h3><p>Cómo detectar dónde se pierde una persona antes de contactarte.</p><b>Leer guía →</b></a>
+    <a class="resource" href="articulos/seo-geo.html"><span>SEO + GEO</span><h3>SEO, GEO e IA: qué cambió de verdad y qué sigue importando</h3><p>Una explicación clara, sin humo, sobre búsqueda generativa.</p><b>Leer guía →</b></a>
+  </div>
+</div></section>
 <div class="inline-cta-wrap inline-cta-final"><div class="shell"><div class="inline-cta">
   <div><span class="mono">¿PREFIERES QUE LO REVISEMOS POR TI?</span><strong>Empezamos con una revisión clara de tu presencia digital.</strong></div>
   <a class="btn primary" href="#diagnostico">Descubre si te están encontrando →</a>
@@ -1530,8 +1645,8 @@ document.getElementById("diagnosticForm")?.addEventListener("submit",e=>{
  const situation=document.getElementById("situation").value.trim();
  const email=document.getElementById("email").value.trim();
  if(!goal||!situation||!email)return;
- const subject=encodeURIComponent("Revisión inicial — Visual Art AI");
- const body=encodeURIComponent("Objetivo: "+goal+"\n\nSituación: "+situation+"\n\nEmail de contacto: "+email);
+ const subject=encodeURIComponent("Solicitud de auditoría de presencia digital — Visual Art AI");
+ const body=encodeURIComponent("Situación principal: "+goal+"\n\nNegocio / contexto: "+situation+"\n\nEmail de contacto: "+email);
  location.href="mailto:contacto@deepanalytica.cl?subject="+subject+"&body="+body;
 });
 </script><script>
