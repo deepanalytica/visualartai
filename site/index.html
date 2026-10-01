@@ -842,6 +842,34 @@ html,body{overflow-x:hidden}
     margin-top:10px!important;
   }
 }
+
+/* Hero hook: immediate problem recognition before the headline */
+.hero-v6 .hero-hook{
+  max-width:620px;
+  margin:0 0 18px;
+  font-size:clamp(17px,1.35vw,23px);
+  line-height:1.25;
+  font-weight:650;
+  letter-spacing:-.02em;
+  color:var(--text2);
+}
+.hero-v6 .hero-hook::before{
+  content:"";
+  display:inline-block;
+  width:7px;
+  height:7px;
+  margin:0 9px 2px 0;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 10%,transparent);
+}
+@media(max-width:700px){
+  .hero-v6 .hero-hook{
+    margin-bottom:15px;
+    font-size:17px;
+    line-height:1.28;
+  }
+}
 </style>
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
 </head>
@@ -850,7 +878,7 @@ html,body{overflow-x:hidden}
 <main>
 <section class="hero hero-v6" id="inicio">
   <div class="hero-copy">
-    <div class="mono hero-eyebrow">VISIBILIDAD EN LA NUEVA BÚSQUEDA</div>
+    <div class="hero-hook">Cuando alguien pide una recomendación a ChatGPT, ¿tu negocio aparece?</div>
 
     <h1>
       <span class="hline">Hay personas buscando</span>
