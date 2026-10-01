@@ -1343,22 +1343,6 @@ html,body{overflow-x:hidden}
   }
 }
 
-/* Literary direct-response layer */
-.pain-stories article b{
-  font-size:clamp(16px,1.35vw,20px);
-  line-height:1.28;
-  letter-spacing:-.025em;
-}
-.pain-stories article p{
-  max-width:680px;
-}
-.final p strong{
-  color:var(--text);
-}
-@media(max-width:700px){
-  .pain-stories article b{font-size:17px}
-}
-
 /* Pricing system v2 — clear comparison, explicit scope, one focal offer */
 .price-grid-v2{align-items:stretch}
 .price-card{
@@ -1429,7 +1413,7 @@ html,body{overflow-x:hidden}
     </span>
     
   </span>
-</a><nav class="nav" aria-label="Navegación principal"><a href="#sectores">Servicios</a><a href="#sistema">Cómo trabajamos</a><a href="#caso-real">Caso real</a><a href="#ideas">Aprende</a></nav><div class="right"><button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><span>Menú</span><b aria-hidden="true">☰</b></button><button class="theme" id="theme" aria-label="Cambiar tema" title="Cambiar tema">◐</button><a class="btn primary" href="#diagnostico">Auditoría gratis →</a></div></div></header><div class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-menu-inner"><div class="mobile-menu-top"><span class="mono">Visual Art AI</span><button id="menuClose" class="menu-close" aria-label="Cerrar menú">×</button></div><nav aria-label="Navegación móvil"><a href="#sectores"><span>01</span>Servicios</a><a href="#sistema"><span>02</span>Cómo trabajamos</a><a href="#caso-real"><span>03</span>Caso real</a><a href="#ideas"><span>04</span>Aprende</a><a href="#diagnostico" class="menu-diagnostic"><span>05</span>Auditoría gratis</a></nav><div class="mobile-menu-cta"><span class="mono">AUDITORÍA GRATIS · HASTA 31 OCT 2026</span><p><strong>Primero descubrimos qué está pasando.</strong> Te mostramos qué encuentra Google, qué puede entender la IA y qué conviene mejorar primero.</p><a class="btn primary" href="#diagnostico">Solicitar auditoría gratis →</a></div></div></div>
+</a><nav class="nav" aria-label="Navegación principal"><a href="#recorrido">Cómo funciona</a><a href="#sectores">Servicios</a><a href="#caso-real">Caso real</a><a href="#precios">Precios</a></nav><div class="right"><button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><span>Menú</span><b aria-hidden="true">☰</b></button><button class="theme" id="theme" aria-label="Cambiar tema" title="Cambiar tema">◐</button><a class="btn primary" href="#diagnostico">Auditoría gratis →</a></div></div></header><div class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-menu-inner"><div class="mobile-menu-top"><span class="mono">Visual Art AI</span><button id="menuClose" class="menu-close" aria-label="Cerrar menú">×</button></div><nav aria-label="Navegación móvil"><a href="#recorrido"><span>01</span>Cómo funciona</a><a href="#sectores"><span>02</span>Servicios</a><a href="#caso-real"><span>03</span>Caso real</a><a href="#precios"><span>04</span>Precios</a><a href="#diagnostico" class="menu-diagnostic"><span>05</span>Auditoría gratis</a></nav><div class="mobile-menu-cta"><span class="mono">AUDITORÍA GRATIS · HASTA 31 OCT 2026</span><p><strong>Primero descubrimos qué está pasando.</strong> Te mostramos qué encuentra Google, qué puede entender la IA y qué conviene mejorar primero.</p><a class="btn primary" href="#diagnostico">Solicitar auditoría gratis →</a></div></div></div>
 <main>
 <section class="hero hero-v6" id="inicio">
   <div class="hero-copy">
@@ -1529,45 +1513,22 @@ html,body{overflow-x:hidden}
     </article>
   </div>
 </section>
-<section class="section action-section" id="accion">
-  <div class="shell">
-    <div class="action-grid">
-      <div class="action-copy">
-        <div class="mono">A VECES EL PROBLEMA ESTÁ ANTES DEL CONTACTO</div>
-        <h2>No siempre faltan clientes. <em>A veces falta el camino para que lleguen hasta ti.</em></h2>
-        <p>El problema no siempre está en lo que vendes. A veces está en lo que ocurre antes de que alguien llegue a ti.</p>
-        <div class="actions">
-          <a class="btn primary" href="#diagnostico">Solicitar auditoría gratuita →</a>
-        </div>
-        <small>Sin costo · Sin compromiso · Primero vemos qué está pasando</small>
-      </div>
 
-      <div class="action-output pain-stories" aria-label="Situaciones que vemos con frecuencia">
-        <article><span>01</span><div><b>“Tengo pocos pacientes y no sé cómo conseguir más.”</b><p>La demanda puede existir. La pregunta es si tu presencia aparece, se entiende y genera suficiente confianza para que alguien te contacte.</p></div></article>
-        <article><span>02</span><div><b>“Mi negocio existe, pero casi no aparezco en Google Maps.”</b><p>Estar publicado no significa necesariamente estar bien presentado cuando alguien busca exactamente lo que haces.</p></div></article>
-        <article><span>03</span><div><b>“Tengo años de experiencia, pero cuando preguntan a una IA aparecen otros.”</b><p>La experiencia ayuda poco si Internet no puede encontrarla, interpretarla y contrastarla con claridad.</p></div></article>
-        <article><span>04</span><div><b>“Hago un producto excelente, pero solo me preguntan cuánto cuesta.”</b><p>Cuando el valor no se entiende, el precio termina ocupando toda la conversación.</p></div></article>
-        <article><span>05</span><div><b>“Pierdo demasiado tiempo respondiendo lo mismo por WhatsApp.”</b><p>Más consultas no deberían significar más caos. Parte del recorrido también puede simplificarse.</p></div></article>
+
+<section class="section story" id="recorrido"><div class="shell"><div class="story-grid">
+    <div>
+      <div class="mono">QUÉ PASA ENTRE UNA BÚSQUEDA Y UN CONTACTO</div>
+      <h2>La visibilidad funciona cuando <em>el camino completo tiene sentido.</em></h2>
+    </div>
+    <div class="story-copy">
+      <p>Una persona busca o pregunta. Encuentra opciones. Compara. Decide si confía. Y recién entonces hace clic, escribe, agenda, reserva o compra.</p>
+      <p>Nuestro trabajo es revisar ese recorrido completo y detectar dónde se pierde la oportunidad: en la búsqueda, en la información, en la confianza o en el siguiente paso.</p>
+      <div class="story-fact">
+        <strong>BUSCA → ENTIENDE → CONFÍA → CONTACTA</strong>
+        <span>Google · Maps · IA · Web · Contenido · WhatsApp · Agenda · Analítica</span>
       </div>
     </div>
-  </div>
-</section>
-<section class="manifesto"><div class="shell">
-  <div class="mono">LA BÚSQUEDA YA NO EMPIEZA SIEMPRE IGUAL</div>
-  <blockquote>Hoy una decisión puede empezar con una búsqueda. <em>O con una pregunta.</em></blockquote>
-  <p>“Necesito un kinesiólogo cerca.” “¿Dónde puedo almorzar comida casera?” “Recomiéndame una psicóloga especializada en trauma.” Una persona pregunta. Google, Maps o una IA intenta entender qué necesita. Encuentra opciones. Compara información. Y finalmente alguien recibe el clic, el mensaje, la reserva o la llamada.</p>
-</div></section>
-<section class="section story"><div class="shell"><div class="story-grid">
-  <div>
-    <div class="mono">DE LA BÚSQUEDA A LA DECISIÓN</div>
-    <h2>Ahí queremos que tu negocio <em>tenga una oportunidad real.</em></h2>
-  </div>
-  <div class="story-copy">
-    <p>Una persona busca. Ve opciones. Compara. Confía. Contacta. Ese recorrido puede empezar en Google, Maps, ChatGPT, Gemini o Perplexity y terminar en tu web, WhatsApp, agenda o tienda.</p>
-    <p>No existe un botón mágico que obligue a Google o a una inteligencia artificial a recomendarte. Sí podemos construir una presencia digital que sea más fácil de encontrar, entender, comprobar y elegir.</p>
-    <div class="story-fact"><strong>Que te encuentren es mejor. Que además te entiendan, mucho mejor.</strong><span>Google · Maps · Web · SEO · GEO · Contenido · Datos estructurados · Autoridad</span></div>
-  </div>
-</div></div></section><section class="section" id="sistema"><div class="shell">
+  </div></div></section><section class="section" id="sistema"><div class="shell">
   <div class="head">
     <div><div class="mono">PRIMERO ENTENDEMOS DÓNDE SE PIERDE LA OPORTUNIDAD</div><h2>No necesitas estar en todas partes. <em>Necesitas estar bien donde importa.</em></h2></div>
     <p>No partimos vendiéndote una web, una campaña o SEO porque sí. Primero miramos qué ocurre. Después decidimos qué vale la pena mejorar.</p>
@@ -1580,7 +1541,7 @@ html,body{overflow-x:hidden}
   </div>
 </div></section>
 <div class="inline-cta-wrap"><div class="shell"><div class="inline-cta">
-  <div><span class="mono">ANTES DE INVERTIR</span><strong>Descubre qué está frenando tu presencia digital y qué conviene mover primero.</strong></div>
+  <div><span class="mono">¿QUIERES VER ESTO EN TU PROPIO NEGOCIO?</span><strong>La auditoría convierte este recorrido en prioridades concretas para tu caso.</strong></div>
   <a class="btn primary" href="#diagnostico">Solicitar auditoría gratuita →</a>
 </div></div></div>
 
@@ -1736,13 +1697,7 @@ html,body{overflow-x:hidden}
   </div>
 </div></div></section>
 
-<section class="final"><div class="shell">
-  <div class="mono">LA PRÓXIMA BÚSQUEDA PUEDE ESTAR OCURRIENDO AHORA</div>
-  <h2>Alguien puede estar buscando <em>exactamente lo que haces.</em></h2>
-  <p>Quizá escriba una frase en Google. Quizá abra Maps. Quizá le pregunte a ChatGPT. Tú no puedes decidir qué resultado verá. Pero sí puedes decidir qué encontrará Internet cuando intente entender tu negocio.</p>
-  <p><strong>Empieza por ahí. Hagamos más fácil que puedan encontrarte.</strong></p>
-  <div class="actions"><a class="btn primary" href="#diagnostico">Solicita tu auditoría de presencia digital gratis →</a><a class="btn" href="#ideas">Explorar las guías →</a></div>
-</div></section>
+
 <section class="section" id="ideas"><div class="shell">
   <div class="head">
     <div><div class="mono">¿TODAVÍA NO QUIERES HABLAR CON NOSOTROS?</div><h2>Está bien. <em>Empieza entendiendo el problema.</em></h2></div>
@@ -1756,11 +1711,17 @@ html,body{overflow-x:hidden}
     <a class="resource" href="articulos/web-convierte.html"><span>Conversión</span><h3>Tu web se ve bien. ¿Pero realmente ayuda a que te elijan?</h3><p>Cómo detectar dónde se pierde una persona antes de contactarte.</p><b>Leer guía →</b></a>
     <a class="resource" href="articulos/seo-geo.html"><span>SEO + GEO</span><h3>SEO, GEO e IA: qué cambió de verdad y qué sigue importando</h3><p>Una explicación clara, sin humo, sobre búsqueda generativa.</p><b>Leer guía →</b></a>
   </div>
-</div></section>
-<div class="inline-cta-wrap inline-cta-final"><div class="shell"><div class="inline-cta">
-  <div><span class="mono">¿PREFIERES QUE LO REVISEMOS POR TI?</span><strong>Empezamos descubriendo qué encuentra hoy una persona cuando busca lo que haces.</strong></div>
-  <a class="btn primary" href="#diagnostico">Solicitar auditoría gratuita →</a>
-</div></div></div>
+</div></section><section class="final"><div class="shell">
+    <div class="mono">TU SIGUIENTE PASO</div>
+    <h2>Ya sabes qué revisamos. <em>Ahora veamos tu caso.</em></h2>
+    <p>No necesitas decidir hoy si quieres SEO, una nueva web, automatización o una campaña. Primero descubramos qué pieza está frenando el recorrido.</p>
+    <div class="actions">
+      <a class="btn primary" href="#diagnostico">Solicitar auditoría de presencia digital gratis →</a>
+      <a class="btn" href="#sectores">Volver a servicios →</a>
+    </div>
+    <p class="hero-micro">Valor regular US$ 99 · Gratis hasta el 31 de octubre de 2026 · Sin compromiso</p>
+  </div></section>
+
 </main><div class="mobile-convert" id="mobileConvert"><span>Auditoría de presencia digital</span><a href="#diagnostico">Solicitar gratis →</a></div>
 <footer class="footer"><div class="shell foot"><span>Visual Art AI / Chile</span><span>Visibilidad en la nueva búsqueda.</span><span>2026</span></div></footer>
 <script>document.getElementById("theme").addEventListener("click",()=>{const r=document.documentElement,n=r.dataset.theme==="dark"?"light":"dark";r.dataset.theme=n;try{localStorage.setItem("visualartai-theme",n)}catch{}})</script>
