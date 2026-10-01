@@ -1000,31 +1000,30 @@ html,body{overflow-x:hidden}
 .brand-a{
   position:relative;
   display:inline-block;
-  width:.68em;
-  height:.82em;
+  width:.78em;
+  height:.78em;
   margin:0 .015em;
   color:transparent;
-  vertical-align:-.03em;
+  vertical-align:-.02em;
 }
 .brand-a::before,
 .brand-a::after{
   content:"";
   position:absolute;
-  bottom:0;
-  width:1.55px;
+  bottom:.01em;
+  width:1.8px;
   height:100%;
   border-radius:99px;
-  background:currentColor;
-  background-image:linear-gradient(180deg,#725BFF,#E16F9E);
+  background:var(--text);
 }
 .brand-a::before{
-  left:.16em;
-  transform:rotate(21deg);
+  left:.18em;
+  transform:rotate(17deg);
   transform-origin:bottom center;
 }
 .brand-a::after{
-  right:.16em;
-  transform:rotate(-21deg);
+  right:.18em;
+  transform:rotate(-17deg);
   transform-origin:bottom center;
 }
 .brand-lockup small{
