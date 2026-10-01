@@ -2,37 +2,43 @@
    Principle: clarity first. Signal → discovery → match.
 */
 :root{
-  --brand-accent:#D94A2B;
-  --brand-accent-hover:#B9381F;
-  --brand-accent-bright:#FF7254;
-  --brand-accent-soft:rgba(217,74,43,.10);
-  --brand-accent-halo:rgba(217,74,43,.18);
+  --brand-night:#060817;
+  --brand-blue:#2F6BFF;
+  --brand-pink:#FF3D8D;
+  --brand-violet:#9B7AF7;
+  --brand-white:#F6F7FB;
+  --brand-accent:var(--brand-blue);
+  --brand-accent-hover:#2559D8;
+  --brand-accent-bright:var(--brand-pink);
+  --brand-accent-soft:rgba(47,107,255,.10);
+  --brand-accent-halo:rgba(47,107,255,.18);
   --brand-ink:#171715;
   --brand-paper:#F8F7F3;
   --brand-warm:#F2EEE8;
   --iris:var(--brand-accent);
-  --violet:var(--brand-accent);
-  --violet-2:var(--brand-accent-bright);
+  --violet:var(--brand-violet);
+  --violet-2:var(--brand-pink);
   --accent:var(--brand-accent);
-  --accent2:var(--brand-accent-bright);
+  --accent2:var(--brand-violet);
   --soft:var(--brand-accent-soft);
 }
 [data-theme="dark"]{
-  --brand-accent:#FF7254;
-  --brand-accent-hover:#FF8B72;
-  --brand-accent-bright:#FF9B84;
-  --brand-accent-soft:rgba(255,114,84,.14);
-  --brand-accent-halo:rgba(255,114,84,.22);
+  --brand-accent:#4C7DFF;
+  --brand-accent-hover:#6A94FF;
+  --brand-accent-bright:var(--brand-pink);
+  --brand-accent-soft:rgba(76,125,255,.14);
+  --brand-accent-halo:rgba(76,125,255,.24);
   --accent:var(--brand-accent);
-  --accent2:var(--brand-accent-bright);
+  --accent2:var(--brand-violet);
   --soft:var(--brand-accent-soft);
 }
 
 /* CTA */
 .btn.primary,.mobile-convert a{
-  background:var(--brand-accent);
-  border-color:var(--brand-accent);
+  background:linear-gradient(90deg,var(--brand-blue) 0%,var(--brand-pink) 56%,var(--brand-violet) 100%);
+  border-color:transparent;
   color:#fff;
+  box-shadow:0 10px 30px rgba(47,107,255,.14);
 }
 
 /* Header identity */
@@ -108,15 +114,21 @@
   50%{transform:scale(1.18);opacity:1}
 }
 
-/* Warm signal atmosphere */
+/* Night-combo atmosphere */
 body:before{
-  background:radial-gradient(circle,var(--brand-accent-halo) 0%,rgba(217,74,43,.07) 36%,transparent 70%)!important;
+  background:radial-gradient(circle,rgba(47,107,255,.17) 0%,rgba(47,107,255,.055) 38%,transparent 72%)!important;
+}
+body:after{
+  background:radial-gradient(circle,rgba(255,61,141,.10) 0%,rgba(155,122,247,.045) 42%,transparent 74%)!important;
 }
 [data-theme="dark"] body:before{
-  background:radial-gradient(circle,rgba(255,114,84,.22),rgba(255,114,84,.065) 40%,transparent 72%)!important;
+  background:radial-gradient(circle,rgba(47,107,255,.28),rgba(47,107,255,.075) 42%,transparent 74%)!important;
+}
+[data-theme="dark"] body:after{
+  background:radial-gradient(circle,rgba(255,61,141,.16),rgba(155,122,247,.06) 44%,transparent 76%)!important;
 }
 .hero-v6 .hero-main-question .hero-question-end{
-  background:linear-gradient(90deg,var(--text) 8%,var(--brand-accent) 92%)!important;
+  background:linear-gradient(90deg,var(--text) 2%,var(--brand-blue) 42%,var(--brand-pink) 76%,var(--brand-violet) 100%)!important;
   -webkit-background-clip:text!important;
   background-clip:text!important;
   color:transparent!important;
@@ -137,3 +149,7 @@ body:before{
   .vaa-signal-arc,.vaa-signal-dot{animation:none!important}
   .vaa-signal-arc{stroke-dashoffset:0;opacity:1}
 }
+
+/* Palette accents on brand signal */
+.vaa-signal-arc{stroke:url(#vaaSignalGradient)}
+.vaa-signal-dot{fill:var(--brand-pink)!important}
