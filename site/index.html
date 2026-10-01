@@ -667,6 +667,36 @@ html,body{overflow-x:hidden}
   .demo-process-v6,.criteria-v6,.result-arrow,.found-card-v6{animation:none!important;opacity:1!important;transform:none!important}
   .hero-v6{--static-phase:1}
 }
+
+/* Mental-conversation section + recurring conversion CTAs */
+.mental-section{padding:clamp(72px,8vw,118px) 0;background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 78%,transparent),var(--bg));border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.mental-head{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:clamp(28px,6vw,90px);align-items:end;margin-bottom:clamp(28px,4vw,46px)}
+.mental-head h2{margin:10px 0 0;max-width:760px;font-size:clamp(40px,4.6vw,72px);line-height:.96;letter-spacing:-.052em}
+.mental-head h2 em{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--accent)}
+.mental-head>p{margin:0 0 4px;max-width:440px;color:var(--muted);font-size:15px;line-height:1.65}
+.mental-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.mental-card{position:relative;min-height:230px;padding:clamp(24px,3vw,38px);border:1px solid var(--hair);border-radius:var(--r-md);background:var(--surface);box-shadow:var(--shadow-1);overflow:hidden;transition:transform .35s var(--ease-premium),box-shadow .35s var(--ease-premium),border-color .35s ease}
+.mental-card:before{content:"";position:absolute;inset:auto -18% -46% 38%;height:150px;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 10%,transparent),transparent 68%);pointer-events:none}
+.mental-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-2);border-color:color-mix(in srgb,var(--accent) 22%,var(--hair))}
+.mental-index{display:block;font:600 9px/1 var(--mono);letter-spacing:.14em;color:var(--accent);margin-bottom:24px}
+.mental-card blockquote{margin:0;max-width:560px;font-size:clamp(21px,2vw,30px);line-height:1.16;letter-spacing:-.025em;font-weight:560}
+.mental-card small{display:block;margin-top:28px;font:500 9px/1.4 var(--mono);letter-spacing:.05em;color:var(--muted)}
+.mental-cta{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;margin-top:16px;padding:clamp(24px,3vw,34px);border:1px solid color-mix(in srgb,var(--accent) 25%,var(--hair));border-radius:var(--r-md);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 8%,var(--surface)),var(--surface));box-shadow:var(--shadow-1)}
+.mental-cta strong{display:block;margin-top:8px;font-size:clamp(19px,2vw,27px);letter-spacing:-.025em}
+.mental-cta p{margin:8px 0 0;max-width:720px;color:var(--muted);line-height:1.55}
+.mental-cta .btn{white-space:nowrap}
+.inline-cta-wrap{padding:0 0 clamp(58px,7vw,92px)}
+.inline-cta{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding:24px 26px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.inline-cta strong{display:block;margin-top:6px;font-size:clamp(17px,1.8vw,23px);letter-spacing:-.02em}
+.inline-cta .btn{white-space:nowrap}
+.inline-cta-final{padding-top:0;padding-bottom:clamp(62px,8vw,110px);margin-top:24px}
+@media(max-width:800px){
+  .mental-head{grid-template-columns:1fr;gap:18px}
+  .mental-grid{grid-template-columns:1fr}
+  .mental-card{min-height:auto}
+  .mental-cta,.inline-cta{grid-template-columns:1fr}
+  .mental-cta .btn,.inline-cta .btn{width:100%;justify-content:center}
+}
 </style>
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
 </head>
@@ -772,7 +802,51 @@ html,body{overflow-x:hidden}
       <p class="demo-disclaimer-v6">Simulación visual. No representa una recomendación real ni garantiza aparición en una plataforma.</p>
     </article>
   </div>
-</section><section class="bridge"><div class="shell"><div class="bridge-card"><div class="mono">¿Qué quieres conseguir?</div><h2>Cuéntanos tu objetivo. <em>Empecemos por ahí.</em></h2><p>Revisamos dónde estás hoy y qué puede ayudarte a avanzar: visibilidad, confianza, conversión o automatización.</p><a class="btn primary" href="https://wa.me/?text=Hola%2C%20quiero%20contarles%20qu%C3%A9%20quiero%20conseguir%20con%20mi%20negocio." target="_blank" rel="noopener">Revisar mi caso →</a></div></div>
+</section>
+<section class="mental-section" aria-labelledby="mental-title">
+  <div class="shell">
+    <div class="mental-head">
+      <div>
+        <div class="mono">¿TE SUENA FAMILIAR?</div>
+        <h2 id="mental-title">A veces el problema se piensa <em>exactamente así.</em></h2>
+      </div>
+      <p>No son problemas de “marketing” en abstracto. Son oportunidades que hoy no están llegando al negocio correcto.</p>
+    </div>
+
+    <div class="mental-grid">
+      <article class="mental-card">
+        <span class="mental-index">01</span>
+        <blockquote>“Tengo un centro de eventos, pero mi agenda sigue vacía.”</blockquote>
+        <small>Centro de eventos · Reservas</small>
+      </article>
+      <article class="mental-card">
+        <span class="mental-index">02</span>
+        <blockquote>“Tengo una productora de eventos y años de experiencia, pero ChatGPT no me recomienda cuando alguien busca un proveedor como yo.”</blockquote>
+        <small>Productora · Experiencia · IA</small>
+      </article>
+      <article class="mental-card">
+        <span class="mental-index">03</span>
+        <blockquote>“Tengo un emprendimiento de chalecos tejidos a crochet, pero no logro llegar a personas que valoren el trabajo artesanal.”</blockquote>
+        <small>Producto artesanal · Clientes adecuados</small>
+      </article>
+      <article class="mental-card">
+        <span class="mental-index">04</span>
+        <blockquote>“Tengo comida casera, pero mi restaurante no aparece cuando la gente busca dónde comer en Google.”</blockquote>
+        <small>Gastronomía · Google · Búsqueda local</small>
+      </article>
+    </div>
+
+    <div class="mental-cta">
+      <div>
+        <span class="mono">DIAGNÓSTICO 360° · GRATIS</span>
+        <strong>Si te reconociste en alguna, revisemos qué está pasando.</strong>
+        <p>Te mostramos qué encuentra Google, qué puede entender la IA y qué conviene mejorar primero. Entrega estimada en 24 horas.</p>
+      </div>
+      <a class="btn primary" href="#diagnostico">Revisar mi presencia digital →</a>
+    </div>
+  </div>
+</section>
+<section class="bridge"><div class="shell"><div class="bridge-card"><div class="mono">¿Qué quieres conseguir?</div><h2>Cuéntanos tu objetivo. <em>Empecemos por ahí.</em></h2><p>Revisamos dónde estás hoy y qué puede ayudarte a avanzar: visibilidad, confianza, conversión o automatización.</p><a class="btn primary" href="https://wa.me/?text=Hola%2C%20quiero%20contarles%20qu%C3%A9%20quiero%20conseguir%20con%20mi%20negocio." target="_blank" rel="noopener">Revisar mi caso →</a></div></div>
 <section class="section" id="objetivos"><div class="shell"><div class="head"><div><div class="mono">01 / El problema</div><h2>Tu negocio puede ser excelente. <em>Internet necesita poder entenderlo.</em></h2></div><p>Cuando alguien pide una recomendación, Google y los buscadores con IA necesitan señales claras sobre quién eres, qué haces, dónde atiendes y por qué eres relevante para esa búsqueda.</p></div><div class="cases">
 <a class="case" href="#diagnostico"><span class="idx">01.1</span><h3>Quiero aparecer cuando buscan lo que hago.</h3><p>Mejoramos las señales que ayudan a Google y Maps a identificar tu negocio, entender tus servicios y mostrar información útil.</p><span class="arrow">↗</span></a>
 <a class="case" href="#diagnostico"><span class="idx">01.2</span><h3>Quiero que más pacientes me encuentren y agenden.</h3><p>Revisamos presencia, especialidad, señales de confianza y el recorrido hasta la agenda.</p><span class="arrow">↗</span></a>
@@ -787,6 +861,11 @@ html,body{overflow-x:hidden}
 <article class="stage"><span class="num">03 / CONVERSIÓN</span><h3>Que puedan actuar</h3><p>Diseñamos un siguiente paso evidente y fácil: consultar, agendar, cotizar, reservar o comprar.</p><small>Campañas · Ads · Landing · Leads · Formularios · WhatsApp</small></article>
 <article class="stage"><span class="num">04 / OPERACIÓN</span><h3>Que el sistema acompañe</h3><p>Cuando tiene sentido, simplificamos respuestas, filtros, reservas y seguimiento para que la operación pueda sostener más demanda.</p><small>Respuestas · Reservas · Filtros · Seguimiento · Automatización</small></article>
 </div></div></section>
+<div class="inline-cta-wrap"><div class="shell"><div class="inline-cta">
+  <div><span class="mono">¿QUIERES SABER DÓNDE ESTÁ LA FRICCIÓN?</span><strong>Antes de invertir, descubre qué está frenando tu visibilidad.</strong></div>
+  <a class="btn primary" href="#diagnostico">Diagnóstico 360° gratis →</a>
+</div></div></div>
+
 <section class="section sectors" id="sectores"><div class="shell"><div class="head"><div><div class="mono">03 / Qué corregimos</div><h2>Mejoramos las señales que ayudan a <em>encontrarte, entenderte y elegirte.</em></h2></div><p>No hacemos todo por defecto. El diagnóstico revela dónde está la fricción y qué intervención puede tener más impacto.</p></div><div class="sector-grid"><article><span>Google + Maps</span><h3>Presencia local</h3><p>Perfil, categorías, servicios, ubicación e información consistente para búsquedas cercanas.</p></article><article><span>SEO + GEO</span><h3>Búsquedas e IA</h3><p>Contenido y estructura alrededor de las preguntas, servicios y especialidades que tus clientes ya buscan.</p></article><article><span>Web</span><h3>Una fuente clara</h3><p>Arquitectura, copy, diseño y datos estructurados para explicar con precisión quién eres y qué haces.</p></article><article><span>Autoridad</span><h3>Razones para confiar</h3><p>Experiencia, credenciales, casos, reseñas y evidencia pública presentadas de forma verificable.</p></article><article><span>Conversión</span><h3>Del hallazgo al contacto</h3><p>WhatsApp, agenda, formularios y CTA para reducir la distancia entre “me interesa” y “quiero hablar”.</p></article><article><span>Medición</span><h3>Saber qué funciona</h3><p>Analítica y seguimiento para distinguir tráfico de oportunidades reales y decidir el siguiente paso.</p></article></div></div></section>
 
 <section class="section proof-section"><div class="shell"><div class="case-study"><div class="case-copy"><div class="mono">Caso real · Psicología</div><h2>3 nuevos pacientes <em>en el primer mes.</em></h2><p>Mejoramos la presencia online de una psicóloga: ordenamos cómo se presenta su especialidad, definimos un sistema visual y construimos una web capaz de explicar con claridad qué hace, para quién y cómo agendar.</p><p class="case-note">La profesional atribuyó 3 nuevos pacientes durante el primer mes a esta mejora de presencia digital. Es un caso concreto, no una garantía de resultados.</p></div><div class="case-math"><span class="math-label">Impacto potencial</span><strong>3</strong><small>nuevos pacientes</small><div class="math-line"></div><b>$50.000</b><small>por sesión</small><div class="math-result"><span>Si cada paciente realiza 4 sesiones al mes</span><strong>$600.000<small>/mes</small></strong></div></div></div></div></section>
@@ -803,7 +882,12 @@ html,body{overflow-x:hidden}
 <a class="resource" href="articulos/whatsapp.html"><span>Operación</span><h3>Responder WhatsApp todo el día no debería ser el precio de crecer</h3><p>Automatizar lo repetitivo sin automatizar la relación.</p><b>Leer guía →</b></a>
 <a class="resource" href="articulos/web-convierte.html"><span>Conversión</span><h3>Tu web se ve bien. Ahora la pregunta incómoda: ¿ayuda a que te elijan?</h3><p>Cómo detectar fricción entre una visita y una consulta.</p><b>Leer guía →</b></a>
 <a class="resource" href="articulos/seo-geo.html"><span>SEO + GEO</span><h3>SEO, GEO y búsqueda con IA: qué cambia y qué sigue siendo importante</h3><p>Una explicación sin humo sobre visibilidad en búsqueda generativa.</p><b>Leer guía →</b></a>
-</div></div></section></main><div class="mobile-convert" id="mobileConvert"><span>¿Quieres revisar tu caso?</span><a href="#diagnostico">Cuéntanos →</a></div>
+</div></div></section>
+<div class="inline-cta-wrap inline-cta-final"><div class="shell"><div class="inline-cta">
+  <div><span class="mono">¿PREFIERES QUE LO REVISEMOS POR TI?</span><strong>Te entregamos una lectura clara de tu presencia digital en 24 horas.</strong></div>
+  <a class="btn primary" href="#diagnostico">Solicitar diagnóstico gratuito →</a>
+</div></div></div>
+</main><div class="mobile-convert" id="mobileConvert"><span>¿Quieres revisar tu caso?</span><a href="#diagnostico">Cuéntanos →</a></div>
 <footer class="footer"><div class="shell foot"><span>Visual Art AI / Chile</span><span>Visibilidad · Confianza · Conversión · Automatización</span><span>2026</span></div></footer>
 <script>document.getElementById("theme").addEventListener("click",()=>{const r=document.documentElement,n=r.dataset.theme==="dark"?"light":"dark";r.dataset.theme=n;try{localStorage.setItem("visualartai-theme",n)}catch{}})</script>
 <script>
