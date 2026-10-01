@@ -379,26 +379,222 @@ html,body{overflow-x:hidden}
   .demo-process,.compare-signals,.business-result{opacity:1!important;transform:none!important}
   .hero-v5 h1 em{transition:none!important}
 }
+
+/* HERO V6 — correction: compact editorial type + one unequivocal demonstration */
+.hero.hero-v6{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  min-height:calc(100svh - var(--hero-nav-h,68px))!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,45%) minmax(0,55%)!important;
+  border:0!important;
+  background:
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px),
+    var(--bg)!important;
+  background-size:56px 56px,56px 56px,auto!important;
+}
+.hero-v6 .hero-copy{
+  min-height:calc(100svh - var(--hero-nav-h,68px))!important;
+  padding:clamp(42px,4vw,68px) clamp(44px,4.5vw,78px)!important;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  border:0!important;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 96%,transparent),color-mix(in srgb,var(--bg) 82%,transparent) 88%,transparent)!important;
+}
+.hero-v6 .hero-eyebrow{margin-bottom:17px!important}
+.hero-v6 h1{
+  margin:0!important;
+  max-width:760px!important;
+  font-size:clamp(58px,4vw,76px)!important;
+  line-height:.96!important;
+  letter-spacing:-.045em!important;
+  font-weight:650!important;
+  text-wrap:initial!important;
+}
+.hero-v6 h1 .hline{display:block}
+.hero-v6 h1 em{
+  display:block;
+  margin-top:.18em!important;
+  font-family:var(--serif)!important;
+  font-size:clamp(34px,2.6vw,52px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.03em!important;
+  font-weight:400!important;
+  font-style:italic;
+  color:transparent!important;
+  background:linear-gradient(100deg,#725bff 0%,#7f6cf5 48%,#d1748a 100%)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  transition:filter .4s ease,transform .4s ease;
+}
+.hero-v6.result-phase h1 em{filter:brightness(1.06) saturate(1.04);transform:translateY(-1px)}
+.hero-v6 .lead{
+  max-width:595px!important;
+  margin:23px 0 0!important;
+  font-size:clamp(15px,1.02vw,17px)!important;
+  line-height:1.58!important;
+}
+.hero-v6 .platform-context{margin-top:24px;max-width:640px}
+.hero-v6 .platform-context-label{display:block;margin-bottom:10px;font:600 8px/1 var(--mono);letter-spacing:.13em;color:var(--text3)}
+.hero-v6 .platform-row{display:flex;align-items:center;flex-wrap:wrap;gap:9px 16px}
+.hero-v6 .platform-row>span{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:650;color:var(--text2)}
+.hero-v6 .platform-row img{width:19px;height:19px;object-fit:contain;flex:none}
+.hero-v6 .actions{margin-top:25px!important}
+.hero-v6 .hero-micro{margin:10px 0 0!important;font:8.5px/1.45 var(--mono);letter-spacing:.035em;color:var(--text3)}
+
+.discovery-demo-v6{
+  min-height:calc(100svh - var(--hero-nav-h,68px))!important;
+  position:relative;
+  overflow:hidden;
+  padding:clamp(34px,3.4vw,58px)!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border:0!important;
+  background:transparent!important;
+}
+.demo-grid-v6{position:absolute;inset:0;background:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:48px 48px;opacity:.4;mask-image:radial-gradient(circle at 50% 50%,black 12%,rgba(0,0,0,.72) 58%,transparent 93%)}
+.demo-halo-v6{position:absolute;left:50%;top:50%;width:min(60vw,690px);height:min(52vw,560px);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(117,83,255,.13),rgba(117,83,255,.045) 38%,transparent 68%);filter:blur(10px)}
+
+.search-demo-card{
+  position:relative;
+  z-index:5;
+  width:min(600px,82%);
+  height:auto;
+  padding:22px;
+  border:1px solid rgba(99,84,130,.17);
+  border-radius:22px;
+  background:rgba(255,255,255,.94);
+  box-shadow:0 28px 74px rgba(52,39,88,.13);
+  backdrop-filter:blur(16px) saturate(115%);
+  -webkit-backdrop-filter:blur(16px) saturate(115%);
+}
+[data-theme=dark] .search-demo-card{background:rgba(28,27,32,.94)}
+.demo-card-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:15px;border-bottom:1px solid var(--hair)}
+.demo-platform-v6{display:flex;align-items:center;gap:8px}.demo-platform-v6 img{width:21px;height:21px}.demo-platform-v6 b{font-size:11px}
+.demo-badge-v6{padding:6px 8px;border-radius:999px;background:var(--soft);color:var(--accent);font:600 7.5px/1 var(--mono);letter-spacing:.11em}
+.demo-question-v6{display:flex;align-items:flex-start;gap:10px;margin-top:18px;padding:13px 14px;border:1px solid color-mix(in srgb,var(--accent) 17%,var(--hair));border-radius:14px 14px 5px 14px;background:color-mix(in srgb,var(--accent) 5%,var(--surface))}
+.avatar-dot-v6{display:grid;place-items:center;flex:0 0 26px;height:26px;border-radius:50%;background:var(--text);color:var(--surface);font:600 8px var(--mono)}
+.demo-question-v6 p{margin:2px 0 0;font-size:13px;line-height:1.44;font-weight:560}
+.demo-arrow-v6{text-align:center;margin:8px 0;color:color-mix(in srgb,var(--accent) 70%,var(--text3));font-size:14px;line-height:1}
+.demo-process-v6{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:11px;background:var(--sub);animation:v6Process 10s ease-in-out infinite}
+.demo-process-v6 p{margin:0;font-size:10px;color:var(--text2)}
+.thinking-dot-v6{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:v6Pulse 1.3s ease-out infinite}
+.criteria-v6{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;margin-top:10px;animation:v6Criteria 10s ease-in-out infinite}
+.criteria-v6 span{padding:6px 9px;border:1px solid var(--hair);border-radius:999px;background:var(--surface);font-size:8px;color:var(--text2)}
+.result-arrow{animation:v6Criteria 10s ease-in-out infinite}
+.found-card-v6{padding:16px;border:1px solid color-mix(in srgb,var(--accent) 28%,var(--hair));border-radius:16px;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 6%,var(--surface)),var(--surface));box-shadow:0 13px 32px rgba(75,55,125,.08);animation:v6Result 10s cubic-bezier(.22,.8,.22,1) infinite}
+.found-topline{font:600 7px/1 var(--mono);letter-spacing:.12em;color:var(--accent);margin-bottom:9px}
+.found-title-row{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.found-title-row h3{margin:0!important;font-size:21px!important;line-height:1.08!important;letter-spacing:-.03em!important}
+.found-title-row p{margin:4px 0 0!important;font-size:10px!important;color:var(--text2)!important}
+.result-check-v6{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:color-mix(in srgb,var(--green) 15%,var(--surface));color:var(--green);font-size:11px}
+.found-list{display:grid;gap:5px;margin:12px 0 0;padding:0;list-style:none}
+.found-list li{position:relative;padding-left:15px;font-size:9px;color:var(--text2)}
+.found-list li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+.result-link-v6{display:inline-block;margin-top:12px;font:600 8px var(--mono);letter-spacing:.04em;color:var(--accent)}
+.demo-disclaimer-v6{margin:12px 2px 0;font-size:7.5px;line-height:1.42;color:var(--text3)}
+
+.ambient-card{
+  position:absolute;
+  z-index:3;
+  width:min(260px,29%);
+  padding:12px;
+  border:1px solid rgba(99,84,130,.14);
+  border-radius:17px;
+  background:rgba(255,255,255,.84);
+  box-shadow:0 15px 42px rgba(48,38,80,.08);
+  opacity:.54;
+  transform:scale(.93);
+}
+[data-theme=dark] .ambient-card{background:rgba(35,34,39,.84)}
+.ambient-top{left:5.5%;top:16%;transform:scale(.93) rotate(-.5deg)}
+.ambient-bottom{right:4.5%;bottom:15%;transform:scale(.92) rotate(.45deg)}
+.ambient-head{display:flex;align-items:center;gap:7px;margin-bottom:8px}.ambient-head img{width:17px;height:17px}.ambient-head b{font-size:8.5px}
+.ambient-query{display:flex;align-items:center;gap:6px;padding:8px 9px;border:1px solid var(--hair);border-radius:999px;background:var(--surface);font-size:8px;line-height:1.3}.ambient-query span{font-size:12px;color:var(--text3)}
+
+@keyframes v6Process{
+  0%,12%{opacity:.32;transform:translateY(3px)}
+  17%,84%{opacity:1;transform:none}
+  94%,100%{opacity:.38}
+}
+@keyframes v6Criteria{
+  0%,26%{opacity:0;transform:translateY(5px)}
+  31%,86%{opacity:1;transform:none}
+  96%,100%{opacity:0}
+}
+@keyframes v6Result{
+  0%,46%{opacity:0;transform:translateY(9px) scale(.99)}
+  52%,88%{opacity:1;transform:none}
+  91%,96%{opacity:1;transform:translateY(-1px) scale(1.005)}
+  100%{opacity:0;transform:translateY(-3px) scale(.997)}
+}
+@keyframes v6Pulse{65%{box-shadow:0 0 0 7px rgba(114,91,255,0)}100%{box-shadow:0 0 0 0 rgba(114,91,255,0)}}
+
+@media(max-width:1439px){
+  .hero.hero-v6{grid-template-columns:minmax(0,46%) minmax(0,54%)!important}
+  .hero-v6 .hero-copy{padding-inline:clamp(34px,3.6vw,58px)!important}
+  .hero-v6 h1{font-size:clamp(52px,4.2vw,68px)!important}
+  .search-demo-card{width:min(590px,84%)}
+}
+@media(max-width:1180px){
+  .hero.hero-v6{grid-template-columns:1fr!important;min-height:auto!important}
+  .hero-v6 .hero-copy{min-height:auto!important;padding:68px 7vw 44px!important}
+  .hero-v6 h1{max-width:900px!important;font-size:clamp(56px,6.8vw,78px)!important}
+  .discovery-demo-v6{min-height:670px!important;padding:44px 6vw 68px!important}
+  .search-demo-card{width:min(600px,76%)}
+}
+@media(max-width:767px){
+  .hero-v6 .hero-copy{padding:48px 18px 30px!important}
+  .hero-v6 h1{font-size:clamp(46px,12.5vw,62px)!important;line-height:.95!important}
+  .hero-v6 h1 .hline{display:inline}
+  .hero-v6 h1 .hline:after{content:" "}
+  .hero-v6 h1 em{font-size:clamp(34px,9.5vw,46px)!important}
+  .hero-v6 .lead{font-size:16px!important}
+  .hero-v6 .platform-row{gap:9px 14px}
+  .hero-v6 .platform-row>span{font-size:11px}
+  .hero-v6 .actions{gap:8px}.hero-v6 .btn{width:100%;justify-content:center}
+  .discovery-demo-v6{min-height:580px!important;padding:32px 16px 48px!important}
+  .search-demo-card{width:calc(100vw - 32px);padding:17px;border-radius:20px}
+  .ambient-card{display:none}
+  .demo-question-v6 p{font-size:12px}
+  .found-title-row h3{font-size:19px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .demo-process-v6,.criteria-v6,.result-arrow,.found-card-v6,.thinking-dot-v6{animation:none!important;opacity:1!important;transform:none!important}
+  .hero-v6 h1 em{transition:none!important}
+}
 </style>
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
 </head>
 <body>
 <header class="top"><div class="shell topin"><a class="brand" href="#"><span class="mark"></span><span>VISUAL ART AI</span></a><nav class="nav" aria-label="Navegación principal"><a href="#objetivos">Objetivos</a><a href="#sistema">Cómo trabajamos</a><a href="#diagnostico">Diagnóstico</a><a href="#ideas">Ideas</a></nav><div class="right"><button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><span>Menú</span><b aria-hidden="true">☰</b></button><button class="theme" id="theme" aria-label="Cambiar tema" title="Cambiar tema">◐</button><a class="btn primary" href="#diagnostico">Revisar mi negocio</a></div></div></header><div class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-menu-inner"><div class="mobile-menu-top"><span class="mono">Visual Art AI</span><button id="menuClose" class="menu-close" aria-label="Cerrar menú">×</button></div><nav aria-label="Navegación móvil"><a href="#objetivos"><span>01</span>Qué quieres conseguir</a><a href="#sistema"><span>02</span>Cómo lo resolvemos</a><a href="#sectores"><span>03</span>Para quién</a><a href="#ideas"><span>04</span>Guías</a><a href="#diagnostico"><span>05</span>Cuéntanos tu caso</a></nav><div class="mobile-menu-cta"><p>¿Hay algo de tu presencia digital que hoy no está funcionando como debería?</p><a class="btn primary" href="#diagnostico">Cuéntanoslo →</a></div></div></div>
 <main>
-<section class="hero hero-v5" id="inicio">
+<section class="hero hero-v6" id="inicio">
   <div class="hero-copy">
     <div class="mono hero-eyebrow">VISIBILIDAD EN LA NUEVA BÚSQUEDA</div>
-    <h1><span class="hline">Hay personas buscando</span><span class="hline">exactamente lo que</span><span class="hline">tu negocio ofrece.</span><em id="heroEmotion">Hagamos que te encuentren.</em></h1>
+
+    <h1>
+      <span class="hline">Hay personas buscando</span>
+      <span class="hline">exactamente lo que</span>
+      <span class="hline">tu negocio ofrece.</span>
+      <em id="heroEmotion">Hagamos que te encuentren.</em>
+    </h1>
+
     <p class="lead">Tus clientes ya buscan en Google, Maps y asistentes de IA. Preparamos tu presencia digital para que puedan encontrarte, entender lo que haces y considerarte entre sus opciones.</p>
 
-    <div class="platform-context" aria-label="Entornos de búsqueda donde ayudamos a mejorar la encontrabilidad">
+    <div class="platform-context" aria-label="Entornos de búsqueda">
       <span class="platform-context-label">TE AYUDAMOS A SER MÁS ENCONTRABLE EN</span>
       <div class="platform-row">
-        <span><img src="brands/google.svg" alt="" width="18" height="18">Google</span>
-        <span><img src="brands/google-maps.svg" alt="" width="18" height="18">Maps</span>
-        <span><img src="brands/chatgpt.svg" alt="" width="18" height="18">ChatGPT</span>
-        <span><img src="brands/gemini.svg" alt="" width="18" height="18">Gemini</span>
-        <span><img src="brands/perplexity.svg" alt="" width="18" height="18">Perplexity</span>
+        <span><img src="brands/google.svg" alt="" width="20" height="20">Google</span>
+        <span><img src="brands/google-maps.svg" alt="" width="20" height="20">Maps</span>
+        <span><img src="brands/chatgpt.svg" alt="" width="20" height="20">ChatGPT</span>
+        <span><img src="brands/gemini.svg" alt="" width="20" height="20">Gemini</span>
+        <span><img src="brands/perplexity.svg" alt="" width="20" height="20">Perplexity</span>
       </div>
     </div>
 
@@ -409,84 +605,68 @@ html,body{overflow-x:hidden}
     <p class="hero-micro">Sin costo · Sin compromiso · Entrega estimada en 24 horas</p>
   </div>
 
-  <div class="hero-field discovery-demo" aria-label="Demostración visual de una búsqueda que encuentra y considera un negocio relevante">
-    <div class="demo-grid" aria-hidden="true"></div>
-    <div class="demo-halo" aria-hidden="true"></div>
+  <div class="hero-field discovery-demo-v6" aria-label="Demostración: una persona busca, una plataforma compara información y aparece una opción relevante">
+    <div class="demo-grid-v6" aria-hidden="true"></div>
+    <div class="demo-halo-v6" aria-hidden="true"></div>
 
-    <article class="secondary-search secondary-search-a" aria-hidden="true">
-      <div class="secondary-head"><img src="brands/google.svg" alt="" width="18" height="18"><b>Google</b></div>
-      <div class="secondary-query"><span class="search-icon">⌕</span><span>pediatra recomendado en Talca</span></div>
+    <article class="ambient-card ambient-top" aria-hidden="true">
+      <div class="ambient-head"><img src="brands/google.svg" alt="" width="18" height="18"><b>Google</b></div>
+      <div class="ambient-query"><span>⌕</span>pediatra recomendado en Talca</div>
     </article>
 
-    <article class="secondary-search secondary-search-b" aria-hidden="true">
-      <div class="secondary-head"><img src="brands/google-maps.svg" alt="" width="18" height="18"><b>Google Maps</b></div>
-      <div class="secondary-query"><span class="search-icon">⌕</span><span>panadería artesanal cerca de mí</span></div>
+    <article class="ambient-card ambient-bottom" aria-hidden="true">
+      <div class="ambient-head"><img src="brands/google-maps.svg" alt="" width="18" height="18"><b>Google Maps</b></div>
+      <div class="ambient-query"><span>⌕</span>panadería artesanal cerca de mí</div>
     </article>
 
-    <article class="secondary-search secondary-search-c" aria-hidden="true">
-      <div class="secondary-head"><img src="brands/gemini.svg" alt="" width="18" height="18"><b>Gemini</b></div>
-      <div class="secondary-query secondary-ai">¿Qué kinesiólogo recomiendas para rehabilitación deportiva?</div>
-    </article>
-
-    <article class="secondary-search secondary-search-d" aria-hidden="true">
-      <div class="secondary-head"><img src="brands/perplexity.svg" alt="" width="18" height="18"><b>Perplexity</b></div>
-      <div class="secondary-query secondary-ai">mejor almuerzo casero en Curicó</div>
-    </article>
-
-    <div class="primary-demo" id="searchDemo">
-      <div class="demo-topline">
-        <span class="demo-badge">DEMOSTRACIÓN</span>
-        <span class="demo-step" id="demoStep">BÚSQUEDA EN CURSO</span>
+    <article class="search-demo-card" id="searchDemo" aria-live="polite">
+      <div class="demo-card-head">
+        <div class="demo-platform-v6">
+          <img id="demoPlatformLogo" src="brands/chatgpt.svg" alt="" width="22" height="22">
+          <b id="demoPlatformName">ChatGPT</b>
+        </div>
+        <span class="demo-badge-v6">DEMOSTRACIÓN</span>
       </div>
 
-      <div class="demo-platform">
-        <img src="brands/chatgpt.svg" alt="" width="22" height="22">
-        <div><b>ChatGPT</b><small>Ejemplo de descubrimiento</small></div>
-        <span class="demo-dots">•••</span>
+      <div class="demo-question-v6">
+        <span class="avatar-dot-v6">A</span>
+        <p id="demoQuery">“Recomiéndame una psicóloga online especialista en trauma en el Maule.”</p>
       </div>
 
-      <div class="demo-query">
-        <span class="avatar-dot">A</span>
-        <p id="demoQuery">Recomiéndame una psicóloga online especialista en trauma.</p>
+      <div class="demo-arrow-v6" aria-hidden="true">↓</div>
+
+      <div class="demo-process-v6">
+        <span class="thinking-dot-v6" aria-hidden="true"></span>
+        <p id="demoProcess">Buscando y comparando información relevante…</p>
       </div>
 
-      <div class="demo-process">
-        <span class="thinking-mark" aria-hidden="true"></span>
-        <p id="demoProcess">Buscando especialistas con información relevante…</p>
+      <div class="criteria-v6" aria-label="Criterios comparados">
+        <span id="criterion1">Especialidad</span>
+        <span id="criterion2">Ubicación</span>
+        <span id="criterion3">Atención online</span>
       </div>
 
-      <div class="compare-signals" aria-hidden="true">
-        <span>Especialización</span>
-        <span>Servicios</span>
-        <span>Modalidad</span>
-        <span>Información disponible</span>
-      </div>
+      <div class="demo-arrow-v6 result-arrow" aria-hidden="true">↓</div>
 
-      <div class="business-result" id="businessResult">
-        <div class="result-kicker">OPCIÓN RELEVANTE ENCONTRADA</div>
-        <div class="result-title-row">
+      <div class="found-card-v6" id="businessResult">
+        <div class="found-topline">OPCIÓN RELEVANTE</div>
+        <div class="found-title-row">
           <div>
             <h3 id="resultName">Jessica Arriagada</h3>
             <p id="resultCategory">Psicología · Trauma · EMDR</p>
           </div>
-          <span class="result-check">✓</span>
+          <span class="result-check-v6">✓</span>
         </div>
-        <div class="result-details">
-          <span id="resultDetail1">Información profesional relevante</span>
-          <span id="resultDetail2">Sitio web disponible</span>
-          <span id="resultDetail3">Atención online</span>
-        </div>
-        <span class="result-link">Ver profesional →</span>
+        <ul class="found-list">
+          <li id="resultDetail1">Atención online</li>
+          <li id="resultDetail2">Información profesional</li>
+          <li id="resultDetail3">Sitio web disponible</li>
+        </ul>
+        <span class="result-link-v6">Ver profesional →</span>
       </div>
 
-      <p class="demo-disclaimer">Simulación visual. No representa una recomendación real ni garantiza aparición en una plataforma.</p>
-    </div>
-
-    <div class="demo-caption">
-      <span>LA OPORTUNIDAD</span>
-      <strong>La búsqueda ya está ocurriendo.</strong>
-      <p>Tu negocio necesita estar preparado para poder aparecer cuando alguien la hace.</p>
-    </div>
+      <p class="demo-disclaimer-v6">Simulación visual. No representa una recomendación real ni garantiza aparición en una plataforma.</p>
+    </article>
   </div>
 </section><section class="bridge"><div class="shell"><div class="bridge-card"><div class="mono">¿Qué quieres conseguir?</div><h2>Cuéntanos tu objetivo. <em>Empecemos por ahí.</em></h2><p>Revisamos dónde estás hoy y qué puede ayudarte a avanzar: visibilidad, confianza, conversión o automatización.</p><a class="btn primary" href="https://wa.me/?text=Hola%2C%20quiero%20contarles%20qu%C3%A9%20quiero%20conseguir%20con%20mi%20negocio." target="_blank" rel="noopener">Revisar mi caso →</a></div></div>
 <section class="section" id="objetivos"><div class="shell"><div class="head"><div><div class="mono">01 / El problema</div><h2>Tu negocio puede ser excelente. <em>Internet necesita poder entenderlo.</em></h2></div><p>Cuando alguien pide una recomendación, Google y los buscadores con IA necesitan señales claras sobre quién eres, qué haces, dónde atiendes y por qué eres relevante para esa búsqueda.</p></div><div class="cases">
@@ -543,43 +723,47 @@ document.getElementById("diagnosticForm")?.addEventListener("submit",e=>{
 </script><script>
 (()=>{if(matchMedia("(pointer:fine)").matches){document.querySelectorAll(".sector-grid article,.resource").forEach(el=>el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect();el.style.setProperty("--mx",e.clientX-r.left+"px");el.style.setProperty("--my",e.clientY-r.top+"px")}))}const h=document.querySelector(".header");let last=0;addEventListener("scroll",()=>{const y=scrollY;if(h){h.style.boxShadow=y>18?"0 10px 40px rgba(35,25,70,.07)":"none"}last=y},{passive:true})})();
 </script>
+
 <script>
 (()=>{
- const hero=document.querySelector('.hero-v5');
- const demo=document.getElementById('searchDemo');
- if(!hero||!demo)return;
- const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const hero=document.querySelector('.hero-v6');
  const q=document.getElementById('demoQuery');
+ if(!hero||!q)return;
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const logo=document.getElementById('demoPlatformLogo');
+ const platform=document.getElementById('demoPlatformName');
  const proc=document.getElementById('demoProcess');
+ const c1=document.getElementById('criterion1');
+ const c2=document.getElementById('criterion2');
+ const c3=document.getElementById('criterion3');
  const name=document.getElementById('resultName');
  const cat=document.getElementById('resultCategory');
  const d1=document.getElementById('resultDetail1');
  const d2=document.getElementById('resultDetail2');
  const d3=document.getElementById('resultDetail3');
- const step=document.getElementById('demoStep');
+
  const cases=[
-  {q:'Recomiéndame una psicóloga online especialista en trauma.',p:'Buscando especialistas con información relevante…',n:'Jessica Arriagada',c:'Psicología · Trauma · EMDR',d:['Información profesional relevante','Sitio web disponible','Atención online']},
-  {q:'¿Dónde encuentro un buen almuerzo casero en Curicó?',p:'Buscando opciones locales y contrastando información disponible…',n:'Negocio local relevante',c:'Gastronomía · Curicó',d:['Ubicación disponible','Información de servicios','Presencia local clara']},
-  {q:'Busco kinesiólogo para rehabilitación cerca de Talca.',p:'Comparando especialidad, ubicación y modalidades de atención…',n:'Profesional relevante',c:'Kinesiología · Rehabilitación',d:['Especialidad identificable','Atención en Talca','Información de contacto']},
-  {q:'Busco departamento amoblado para arrendar por mes en Iquique.',p:'Buscando disponibilidad, modalidad de arriendo e información pública…',n:'Propiedad relevante',c:'Arriendo amoblado · Iquique',d:['Arriendo mensual','Información disponible','Canal de contacto']},
-  {q:'panadería artesanal cerca de Villa Alegre',p:'Buscando negocios cercanos con información local consistente…',n:'Negocio local relevante',c:'Panadería artesanal · Villa Alegre',d:['Ubicación clara','Categoría relevante','Información de contacto']}
+  {p:'ChatGPT',logo:'brands/chatgpt.svg',q:'“Recomiéndame una psicóloga online especialista en trauma en el Maule.”',proc:'Buscando y comparando información relevante…',criteria:['Especialidad','Ubicación','Atención online'],name:'Jessica Arriagada',cat:'Psicología · Trauma · EMDR',details:['Atención online','Información profesional','Sitio web disponible']},
+  {p:'Google',logo:'brands/google.svg',q:'“pediatra recomendado en Talca”',proc:'Buscando y comparando resultados relevantes…',criteria:['Especialidad','Ubicación','Información pública'],name:'Profesional relevante',cat:'Pediatría · Talca',details:['Especialidad identificable','Ubicación disponible','Información de contacto']},
+  {p:'Google Maps',logo:'brands/google-maps.svg',q:'“panadería artesanal cerca de mí”',proc:'Buscando negocios cercanos con información relevante…',criteria:['Cercanía','Categoría','Información local'],name:'Negocio local relevante',cat:'Panadería artesanal',details:['Ubicación disponible','Categoría clara','Canal de contacto']},
+  {p:'Gemini',logo:'brands/gemini.svg',q:'“¿Qué kinesiólogo recomiendas para rehabilitación deportiva?”',proc:'Buscando y comparando profesionales relevantes…',criteria:['Especialidad','Servicios','Ubicación'],name:'Profesional relevante',cat:'Kinesiología · Rehabilitación',details:['Especialidad clara','Servicios disponibles','Información profesional']},
+  {p:'Perplexity',logo:'brands/perplexity.svg',q:'“¿Dónde encuentro almuerzo casero en Curicó?”',proc:'Buscando opciones y contrastando información disponible…',criteria:['Ubicación','Categoría','Información pública'],name:'Negocio local relevante',cat:'Gastronomía · Curicó',details:['Ubicación disponible','Oferta identificable','Información de contacto']}
  ];
  let i=0;
- const apply=(x)=>{
-   q.textContent=x.q;proc.textContent=x.p;name.textContent=x.n;cat.textContent=x.c;
-   d1.textContent=x.d[0];d2.textContent=x.d[1];d3.textContent=x.d[2];
+ const apply=x=>{
+  platform.textContent=x.p;logo.src=x.logo;q.textContent=x.q;proc.textContent=x.proc;
+  c1.textContent=x.criteria[0];c2.textContent=x.criteria[1];c3.textContent=x.criteria[2];
+  name.textContent=x.name;cat.textContent=x.cat;d1.textContent=x.details[0];d2.textContent=x.details[1];d3.textContent=x.details[2];
  };
  apply(cases[0]);
- if(reduce){step.textContent='EJEMPLO DE DESCUBRIMIENTO';hero.classList.add('result-phase');return;}
+ if(reduce){hero.classList.add('result-phase');return;}
  const cycle=()=>{
-   step.textContent='BÚSQUEDA EN CURSO';
-   hero.classList.remove('result-phase');
-   setTimeout(()=>{step.textContent='COMPARANDO INFORMACIÓN';},2600);
-   setTimeout(()=>{step.textContent='OPCIÓN RELEVANTE';hero.classList.add('result-phase');},4300);
-   setTimeout(()=>{hero.classList.remove('result-phase');},7600);
-   setTimeout(()=>{i=(i+1)%cases.length;apply(cases[i]);step.textContent='BÚSQUEDA EN CURSO';},8750);
+  hero.classList.remove('result-phase');
+  setTimeout(()=>hero.classList.add('result-phase'),5100);
+  setTimeout(()=>hero.classList.remove('result-phase'),9000);
+  setTimeout(()=>{i=(i+1)%cases.length;apply(cases[i]);},9700);
  };
  cycle();
- setInterval(cycle,9000);
+ setInterval(cycle,10000);
 })();
 </script></body></html>
