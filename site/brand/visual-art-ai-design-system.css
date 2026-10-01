@@ -1,0 +1,170 @@
+/* Visual Art AI — Brand Design System v1
+   Identity principle: Signal, discovery, clarity.
+   Primary accent deliberately avoids generic AI purple.
+*/
+:root{
+  --brand-accent:#D94A2B;
+  --brand-accent-hover:#B9381F;
+  --brand-accent-bright:#FF7254;
+  --brand-accent-soft:rgba(217,74,43,.10);
+  --brand-accent-halo:rgba(217,74,43,.20);
+  --brand-ink:#171715;
+  --brand-paper:#F8F7F3;
+  --brand-warm:#F2EEE8;
+
+  /* Backward-compatible aliases used across the current UI */
+  --iris:var(--brand-accent);
+  --violet:var(--brand-accent);
+  --violet-2:var(--brand-accent-bright);
+  --accent:var(--brand-accent);
+  --accent2:var(--brand-accent-bright);
+  --soft:var(--brand-accent-soft);
+}
+
+[data-theme="dark"]{
+  --brand-accent:#FF7254;
+  --brand-accent-hover:#FF8B72;
+  --brand-accent-bright:#FF9B84;
+  --brand-accent-soft:rgba(255,114,84,.14);
+  --brand-accent-halo:rgba(255,114,84,.24);
+  --accent:var(--brand-accent);
+  --accent2:var(--brand-accent-bright);
+  --soft:var(--brand-accent-soft);
+}
+
+/* Primary CTAs use dark ink on the vivid accent for accessible contrast. */
+.btn.primary,
+.mobile-convert a{
+  background:var(--brand-accent);
+  border-color:var(--brand-accent);
+  color:#171715;
+}
+[data-theme="light"] .btn.primary,
+[data-theme="light"] .mobile-convert a{
+  color:#fff;
+}
+
+/* Canonical brand lockup */
+.vaa-brand{
+  display:inline-flex!important;
+  align-items:center!important;
+  min-width:0;
+  color:var(--text);
+  line-height:1;
+}
+.vaa-brand-svg{
+  display:block;
+  width:clamp(202px,15.3vw,244px);
+  height:auto;
+  overflow:visible;
+}
+.vaa-word{
+  fill:currentColor;
+  font-family:Inter,"Helvetica Neue",Arial,system-ui,sans-serif;
+  font-size:12.7px;
+  font-weight:760;
+  letter-spacing:1.62px;
+}
+.vaa-letter-a{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.72;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.vaa-tagline{
+  fill:var(--text2);
+  font-family:Inter,"Helvetica Neue",Arial,system-ui,sans-serif;
+  font-size:8.6px;
+  font-weight:520;
+  letter-spacing:.08px;
+}
+.vaa-mark-ring{
+  fill:none;
+  stroke:color-mix(in srgb,currentColor 18%,transparent);
+  stroke-width:1.05;
+}
+.vaa-mark-orbit{
+  fill:none;
+  stroke:var(--brand-accent);
+  stroke-width:1.65;
+  stroke-linecap:round;
+  stroke-dasharray:35;
+  stroke-dashoffset:35;
+  animation:vaaBrandOrbit 5.2s cubic-bezier(.22,1,.36,1) infinite;
+}
+.vaa-mark-core{
+  fill:var(--brand-accent);
+  transform-origin:19px 19px;
+  filter:drop-shadow(0 0 5px var(--brand-accent-halo));
+  animation:vaaBrandCore 5.2s ease-in-out infinite;
+}
+.vaa-mark-node{
+  fill:currentColor;
+  opacity:.72;
+}
+.vaa-mark-node-muted{opacity:.34}
+.vaa-mark-signal{
+  fill:var(--brand-accent);
+  filter:drop-shadow(0 0 4px var(--brand-accent-halo));
+  animation:vaaBrandSignal 5.2s cubic-bezier(.4,0,.2,1) infinite;
+}
+.vaa-mark-spark{
+  fill:var(--brand-accent-bright);
+  opacity:0;
+  transform-origin:31.2px 9.6px;
+  animation:vaaBrandSpark 5.2s ease-in-out infinite;
+}
+@keyframes vaaBrandOrbit{
+  0%,13%{stroke-dashoffset:35;opacity:.25}
+  31%,76%{stroke-dashoffset:0;opacity:1}
+  100%{stroke-dashoffset:0;opacity:.34}
+}
+@keyframes vaaBrandCore{
+  0%,100%{transform:scale(1)}
+  48%{transform:scale(1.13)}
+  64%{transform:scale(1)}
+}
+@keyframes vaaBrandSignal{
+  0%{transform:translate(0,0);opacity:0}
+  12%{opacity:1}
+  34%{transform:translate(8px,-5px)}
+  56%{transform:translate(15px,-8px)}
+  74%{transform:translate(22.4px,-13px);opacity:1}
+  89%,100%{transform:translate(22.4px,-13px);opacity:0}
+}
+@keyframes vaaBrandSpark{
+  0%,69%{opacity:0;transform:scale(.72) rotate(0)}
+  78%{opacity:1;transform:scale(1.12) rotate(10deg)}
+  91%{opacity:.48;transform:scale(1)}
+  100%{opacity:0;transform:scale(.84)}
+}
+
+/* Accent atmosphere: warm signal, not violet glow */
+body:before{
+  background:radial-gradient(circle,var(--brand-accent-halo) 0%,rgba(217,74,43,.075) 36%,transparent 70%)!important;
+}
+[data-theme="dark"] body:before{
+  background:radial-gradient(circle,rgba(255,114,84,.24),rgba(255,114,84,.07) 40%,transparent 72%)!important;
+}
+
+/* H1 emphasis belongs to the identity system, not a multi-brand rainbow. */
+.hero-v6 .hero-main-question .hero-question-end{
+  background:linear-gradient(90deg,var(--text) 8%,var(--brand-accent) 92%)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  color:transparent!important;
+}
+
+@media(max-width:700px){
+  .vaa-brand-svg{width:198px}
+}
+@media(max-width:390px){
+  .vaa-brand-svg{width:184px}
+}
+@media(prefers-reduced-motion:reduce){
+  .vaa-mark-orbit,.vaa-mark-core,.vaa-mark-signal,.vaa-mark-spark{animation:none!important}
+  .vaa-mark-orbit{stroke-dashoffset:0;opacity:1}
+  .vaa-mark-signal{opacity:.9;transform:translate(22.4px,-13px)}
+  .vaa-mark-spark{opacity:.72}
+}
