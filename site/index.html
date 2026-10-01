@@ -681,18 +681,7 @@ html,body{overflow-x:hidden}
 .mental-index{display:block;font:600 9px/1 var(--mono);letter-spacing:.14em;color:var(--accent);margin-bottom:24px}
 .mental-card blockquote{margin:0;max-width:560px;font-size:clamp(21px,2vw,30px);line-height:1.16;letter-spacing:-.025em;font-weight:560}
 .mental-card small{display:block;margin-top:28px;font:500 9px/1.4 var(--mono);letter-spacing:.05em;color:var(--muted)}
-.mental-cta{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;margin-top:16px;padding:clamp(24px,3vw,34px);border:1px solid color-mix(in srgb,var(--accent) 25%,var(--hair));border-radius:var(--r-md);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 8%,var(--surface)),var(--surface));box-shadow:var(--shadow-1)}
-.mental-cta strong{display:block;margin-top:8px;font-size:clamp(19px,2vw,27px);letter-spacing:-.025em}
-.mental-cta p{margin:8px 0 0;max-width:720px;color:var(--muted);line-height:1.55}
-.mental-cta .btn{white-space:nowrap}
-.inline-cta-wrap{padding:0 0 clamp(58px,7vw,92px)}
-.inline-cta{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding:24px 26px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
-.inline-cta strong{display:block;margin-top:6px;font-size:clamp(17px,1.8vw,23px);letter-spacing:-.02em}
-.inline-cta .btn{white-space:nowrap}
-.inline-cta-final{padding-top:0;padding-bottom:clamp(62px,8vw,110px);margin-top:24px}
-@media(max-width:800px){
-  .mental-head{grid-template-columns:1fr;gap:18px}
-  .mental-grid{grid-template-columns:1fr}
+.mental-grid{grid-template-columns:1fr}
   .mental-card{min-height:auto}
   .mental-cta,.inline-cta{grid-template-columns:1fr}
   .mental-cta .btn,.inline-cta .btn{width:100%;justify-content:center}
@@ -1395,6 +1384,20 @@ html,body{overflow-x:hidden}
   background:color-mix(in srgb,var(--brand-blue) 4%,var(--surface))!important;
   border-color:color-mix(in srgb,var(--brand-blue) 30%,var(--border))!important;
 }
+
+.audit-deliverables>div{
+  grid-template-columns:42px 1fr!important;
+}
+.audit-deliverables>div>div b,
+.audit-deliverables>div>div span{
+  display:block;
+}
+.audit-deliverables>div>div span{
+  color:var(--text3);
+  font-size:13px;
+  margin-top:5px;
+  line-height:1.45;
+}
 </style>
 <link rel="stylesheet" href="brand/visual-art-ai-design-system.css?v=5">
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
@@ -1671,9 +1674,9 @@ html,body{overflow-x:hidden}
 
 <section class="section diagnostic-focus" id="diagnostico"><div class="shell"><div class="diag">
   <div>
-    <div class="mono">TU PRIMER PASO CUESTA $0</div>
-    <h2>Cuéntanos <em>dónde estás hoy.</em></h2>
-    <p>Revisamos tu negocio como podría hacerlo alguien que todavía no te conoce. Miramos Google, Maps, tu web, búsquedas relacionadas con lo que haces, información pública y señales que pueden utilizar los sistemas de IA. Después te mostramos qué encuentran, qué falta y qué conviene mover primero.</p>
+    <div class="mono">SOLICITA TU AUDITORÍA</div>
+    <h2>Tres datos. <em>Nosotros hacemos el resto.</em></h2>
+    <p>Cuéntanos qué está pasando y dónde podemos revisar tu negocio. Te enviamos los hallazgos y el orden de prioridades por email.</p>
     <form class="diagnostic-form" id="diagnosticForm">
       <label><span>¿Qué está pasando con tu negocio?</span><select id="goal" required>
         <option value="">Selecciona una opción</option>
@@ -1686,11 +1689,16 @@ html,body{overflow-x:hidden}
       <label><span>¿Qué haces y dónde atiendes?</span><textarea id="situation" rows="4" placeholder="Ej.: soy psicóloga, atiendo online y quiero aparecer cuando buscan especialistas en trauma." required></textarea></label>
       <label><span>¿Dónde enviamos la revisión?</span><input id="email" type="email" autocomplete="email" placeholder="tu@email.cl" required></label>
       <button class="btn primary form-submit" type="submit">Solicitar mi auditoría gratuita →</button>
-      <p class="form-note">Valor regular US$ 99 · Gratis hasta el 31 de octubre de 2026 · Sin compromiso.</p><input type="hidden" id="interest" value="Auditoría de presencia digital">
+      <p class="form-note">Valor regular US$ 99 · Gratis hasta el 31 de octubre de 2026 · Sin compromiso.</p>
+      <input type="hidden" id="interest" value="Auditoría de presencia digital">
     </form>
   </div>
-  <div class="audit">
-    <div><span class="mono">01</span><section><b>¿Apareces donde importa?</b><span>Google, Maps, búsquedas por servicio y asistentes de IA.</span></section></div>
+  <div class="audit audit-deliverables">
+    <div><span class="mono">01</span><div><b>Hallazgos claros</b><span>Qué está ayudando y qué está frenando tu presencia hoy.</span></div></div>
+    <div><span class="mono">02</span><div><b>Prioridades</b><span>Qué conviene corregir primero y qué puede esperar.</span></div></div>
+    <div><span class="mono">03</span><div><b>Siguiente paso</b><span>Una recomendación concreta para avanzar, con nosotros o por tu cuenta.</span></div></div>
+  </div>
+</div></div></section></div>
     <div><span class="mono">02</span><section><b>¿Se entiende qué haces?</b><span>Especialidad, servicios, ubicación, estructura y consistencia.</span></section></div>
     <div><span class="mono">03</span><section><b>¿Hay razones para confiar?</b><span>Contenido, autoridad, reseñas, credenciales y evidencia pública.</span></section></div>
     <div><span class="mono">04</span><section><b>¿Es fácil contactarte?</b><span>Web, móvil, CTA, WhatsApp, agenda, formularios y medición.</span></section></div>
