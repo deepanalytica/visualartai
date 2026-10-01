@@ -568,6 +568,105 @@ html,body{overflow-x:hidden}
   .demo-process-v6,.criteria-v6,.result-arrow,.found-card-v6,.thinking-dot-v6{animation:none!important;opacity:1!important;transform:none!important}
   .hero-v6 h1 em{transition:none!important}
 }
+
+/* HERO V7 refinement — clarity, attention direction and payoff */
+.hero-v6 .platform-context{opacity:.78;margin-top:22px}
+.hero-v6 .platform-context-label{font-size:7.5px}
+.hero-v6 .platform-row{gap:8px 15px}
+.hero-v6 .platform-row>span{font-size:11px;font-weight:620}
+.hero-v6 .platform-row img{width:18px;height:18px}
+.hero-v6 .actions{margin-top:22px!important}
+.hero-proof-mini{display:flex;align-items:center;gap:7px;margin-top:12px;color:var(--text3);font-size:9px}
+.hero-proof-mini>span{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px color-mix(in srgb,var(--green) 10%,transparent)}
+.hero-proof-mini b{font:600 8px/1 var(--mono);letter-spacing:.08em;color:var(--text2);text-transform:uppercase}
+.hero-proof-mini em{font-style:normal}
+
+.discovery-demo-v6{padding-inline:clamp(30px,3vw,50px)!important}
+.search-demo-card{width:min(570px,80%);padding:20px;box-shadow:0 26px 68px rgba(52,39,88,.12)}
+.demo-card-head{padding-bottom:12px}
+.demo-steps-v7{display:grid;grid-template-columns:auto 1fr auto 1fr auto;align-items:center;gap:8px;margin:12px 1px 2px}
+.demo-steps-v7 span{font:600 7px/1 var(--mono);letter-spacing:.12em;color:var(--text3);transition:color .35s ease,opacity .35s ease}
+.demo-steps-v7 i{height:1px;background:linear-gradient(90deg,var(--hair),color-mix(in srgb,var(--accent) 35%,var(--hair)));transform-origin:left;opacity:.8}
+.hero-v6.phase-search .step-search-v7,
+.hero-v6.phase-compare .step-compare-v7,
+.hero-v6.phase-result .step-result-v7{color:var(--accent)}
+.hero-v6.phase-search .step-compare-v7,.hero-v6.phase-search .step-result-v7,
+.hero-v6.phase-compare .step-result-v7{opacity:.42}
+
+.demo-question-v6{margin-top:14px;padding:12px 13px}
+.demo-question-v6 p{font-size:12.5px}
+.demo-process-v6{padding:9px 11px;animation:v7Process 10s ease-in-out infinite}
+.criteria-v6{margin-top:9px;animation:v7Criteria 10s ease-in-out infinite}
+.criteria-v6 span{padding:6px 9px;font-size:8.5px}
+.result-arrow{animation:v7Criteria 10s ease-in-out infinite}
+
+.found-card-v6{
+  padding:19px;
+  margin-top:1px;
+  border-color:color-mix(in srgb,var(--accent) 34%,var(--hair));
+  background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 8%,var(--surface)),var(--surface));
+  box-shadow:0 15px 38px rgba(75,55,125,.09);
+  animation:v7Result 10s cubic-bezier(.22,.8,.22,1) infinite;
+  transform-origin:center;
+  transition:border-color .35s ease,box-shadow .35s ease,filter .35s ease;
+}
+.found-topline{font-size:7.5px;margin-bottom:10px}
+.found-title-row h3{font-size:25px!important}
+.found-title-row p{font-size:11px!important}
+.result-check-v6{width:30px;height:30px;font-size:12px}
+.found-list{gap:6px;margin-top:13px}
+.found-list li{font-size:10px;padding-left:16px}
+.result-link-v6{margin-top:14px;font-size:9px}
+.hero-v6.result-phase .found-card-v6{
+  border-color:color-mix(in srgb,var(--accent) 52%,var(--hair));
+  box-shadow:0 24px 58px rgba(114,91,255,.16);
+  filter:saturate(1.03);
+}
+.hero-v6.result-phase .demo-process-v6,
+.hero-v6.result-phase .criteria-v6,
+.hero-v6.result-phase .result-arrow{opacity:.42!important}
+.hero-v6.result-phase .demo-question-v6{opacity:.72}
+.hero-v6.result-phase h1 em{filter:brightness(1.1) saturate(1.08) drop-shadow(0 8px 18px rgba(114,91,255,.09));transform:translateY(-1px)}
+
+.ambient-card{opacity:.48;width:min(250px,27%)}
+.ambient-top{left:6%;top:17%}
+.ambient-bottom{right:5%;bottom:16%}
+.demo-halo-v6{background:radial-gradient(circle,rgba(117,83,255,.15),rgba(117,83,255,.045) 37%,transparent 66%)}
+
+@keyframes v7Process{
+  0%,11%{opacity:.38;transform:translateY(2px)}
+  15%,30%{opacity:1;transform:none}
+  35%,88%{opacity:.62;transform:none}
+  96%,100%{opacity:.38}
+}
+@keyframes v7Criteria{
+  0%,24%{opacity:0;transform:translateY(4px)}
+  29%,43%{opacity:1;transform:none}
+  48%,88%{opacity:.68;transform:none}
+  96%,100%{opacity:0}
+}
+@keyframes v7Result{
+  0%,38%{opacity:0;transform:translateY(8px) scale(.992)}
+  43%,84%{opacity:1;transform:none}
+  85%,90%{opacity:1;transform:translateY(-1px) scale(1.012)}
+  96%,100%{opacity:0;transform:translateY(-3px) scale(.998)}
+}
+@media(max-width:1439px){
+  .search-demo-card{width:min(555px,82%)}
+  .found-title-row h3{font-size:23px!important}
+}
+@media(max-width:767px){
+  .hero-proof-mini{font-size:8.5px;flex-wrap:wrap}
+  .search-demo-card{width:calc(100vw - 32px);padding:16px}
+  .demo-steps-v7{margin-top:10px}
+  .found-card-v6{padding:16px}
+  .found-title-row h3{font-size:20px!important}
+  .found-list li{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  .demo-process-v6,.criteria-v6,.result-arrow,.found-card-v6{animation:none!important;opacity:1!important;transform:none!important}
+  .hero-v6{--static-phase:1}
+}
 </style>
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
 </head>
@@ -602,7 +701,7 @@ html,body{overflow-x:hidden}
       <a class="btn primary" href="#diagnostico">DIAGNÓSTICO 360° GRATIS →</a>
       <a class="btn" href="#sistema">VER CÓMO FUNCIONA</a>
     </div>
-    <p class="hero-micro">Sin costo · Sin compromiso · Entrega estimada en 24 horas</p>
+    <p class="hero-micro">Sin costo · Sin compromiso · Entrega estimada en 24 horas</p><div class="hero-proof-mini"><span aria-hidden="true"></span><b>Caso real</b><em>3 nuevos pacientes en el primer mes</em></div>
   </div>
 
   <div class="hero-field discovery-demo-v6" aria-label="Demostración: una persona busca, una plataforma compara información y aparece una opción relevante">
@@ -626,6 +725,11 @@ html,body{overflow-x:hidden}
           <b id="demoPlatformName">ChatGPT</b>
         </div>
         <span class="demo-badge-v6">DEMOSTRACIÓN</span>
+      </div>
+      <div class="demo-steps-v7" aria-hidden="true">
+        <span class="step-search-v7">BUSCA</span><i></i>
+        <span class="step-compare-v7">COMPARA</span><i></i>
+        <span class="step-result-v7">ENCUENTRA</span>
       </div>
 
       <div class="demo-question-v6">
@@ -749,19 +853,39 @@ document.getElementById("diagnosticForm")?.addEventListener("submit",e=>{
   {p:'Gemini',logo:'brands/gemini.svg',q:'“¿Qué kinesiólogo recomiendas para rehabilitación deportiva?”',proc:'Buscando y comparando profesionales relevantes…',criteria:['Especialidad','Servicios','Ubicación'],name:'Profesional relevante',cat:'Kinesiología · Rehabilitación',details:['Especialidad clara','Servicios disponibles','Información profesional']},
   {p:'Perplexity',logo:'brands/perplexity.svg',q:'“¿Dónde encuentro almuerzo casero en Curicó?”',proc:'Buscando opciones y contrastando información disponible…',criteria:['Ubicación','Categoría','Información pública'],name:'Negocio local relevante',cat:'Gastronomía · Curicó',details:['Ubicación disponible','Oferta identificable','Información de contacto']}
  ];
+
  let i=0;
+ const timers=[];
+ const clearTimers=()=>{while(timers.length)clearTimeout(timers.pop())};
+ const later=(fn,ms)=>timers.push(setTimeout(fn,ms));
+ const phase=p=>{
+   hero.classList.remove('phase-search','phase-compare','phase-result');
+   hero.classList.add('phase-'+p);
+   hero.classList.toggle('result-phase',p==='result');
+ };
  const apply=x=>{
   platform.textContent=x.p;logo.src=x.logo;q.textContent=x.q;proc.textContent=x.proc;
   c1.textContent=x.criteria[0];c2.textContent=x.criteria[1];c3.textContent=x.criteria[2];
   name.textContent=x.name;cat.textContent=x.cat;d1.textContent=x.details[0];d2.textContent=x.details[1];d3.textContent=x.details[2];
  };
  apply(cases[0]);
- if(reduce){hero.classList.add('result-phase');return;}
+
+ if(reduce){
+   phase('result');
+   return;
+ }
+
  const cycle=()=>{
-  hero.classList.remove('result-phase');
-  setTimeout(()=>hero.classList.add('result-phase'),5100);
-  setTimeout(()=>hero.classList.remove('result-phase'),9000);
-  setTimeout(()=>{i=(i+1)%cases.length;apply(cases[i]);},9700);
+   clearTimers();
+   phase('search');
+   later(()=>phase('compare'),1500);
+   later(()=>phase('result'),4000);
+   later(()=>hero.classList.remove('result-phase'),8700);
+   later(()=>{
+     i=(i+1)%cases.length;
+     apply(cases[i]);
+     phase('search');
+   },9700);
  };
  cycle();
  setInterval(cycle,10000);
