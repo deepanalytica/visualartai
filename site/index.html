@@ -734,6 +734,31 @@ html,body{overflow-x:hidden}
   .mobile-menu-cta p strong{font-size:16px}
   .mobile-menu-cta .btn{width:100%;justify-content:center;font-size:8.5px}
 }
+
+/* Mental section scanability pass */
+.mental-head-simple{align-items:start}
+.mental-head-simple h2{max-width:820px}
+.mental-grid-simple{gap:10px}
+.mental-card-simple{min-height:190px;padding:28px 30px;display:flex;flex-direction:column;justify-content:flex-start}
+.mental-card-simple .mental-index{margin-bottom:18px}
+.mental-card-simple blockquote{font-size:clamp(24px,2.25vw,34px);line-height:1.08;letter-spacing:-.035em;max-width:620px}
+.mental-card-simple p{margin:16px 0 0;max-width:560px;font-size:13px;line-height:1.55;color:var(--muted)}
+.mental-cta-simple{margin-top:12px}
+@media(max-width:700px){
+  .mental-section{padding:54px 0 64px}
+  .mental-head-simple{gap:12px;margin-bottom:22px}
+  .mental-head-simple .mono{font-size:9px}
+  .mental-head-simple h2{font-size:clamp(34px,9.4vw,46px);line-height:.98;letter-spacing:-.045em;margin-top:8px}
+  .mental-head-simple>p{font-size:14px;line-height:1.5}
+  .mental-grid-simple{gap:8px}
+  .mental-card-simple{min-height:0;padding:20px 20px 21px;border-radius:18px}
+  .mental-card-simple .mental-index{margin-bottom:12px;font-size:8px}
+  .mental-card-simple blockquote{font-size:clamp(22px,6.3vw,28px);line-height:1.08;letter-spacing:-.03em}
+  .mental-card-simple p{margin-top:10px;font-size:12.5px;line-height:1.45}
+  .mental-cta-simple{padding:20px;margin-top:10px}
+  .mental-cta-simple strong{font-size:19px;line-height:1.15}
+  .mental-cta-simple p{font-size:13px}
+}
 </style>
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
 </head>
@@ -842,44 +867,47 @@ html,body{overflow-x:hidden}
 </section>
 <section class="mental-section" aria-labelledby="mental-title">
   <div class="shell">
-    <div class="mental-head">
+    <div class="mental-head mental-head-simple">
       <div>
-        <div class="mono">¿TE SUENA FAMILIAR?</div>
-        <h2 id="mental-title">A veces el problema se piensa <em>exactamente así.</em></h2>
+        <div class="mono">¿TE PASA ALGO DE ESTO?</div>
+        <h2 id="mental-title">Tu negocio está ahí. <em>Pero las oportunidades no están llegando.</em></h2>
       </div>
-      <p>No son problemas de “marketing” en abstracto. Son oportunidades que hoy no están llegando al negocio correcto.</p>
+      <p>Si alguna de estas frases se parece a lo que estás viviendo, probablemente hay algo en tu presencia digital que podemos revisar.</p>
     </div>
 
-    <div class="mental-grid">
-      <article class="mental-card">
-        <span class="mental-index">01</span>
-        <blockquote>“Tengo un centro de eventos, pero mi agenda sigue vacía.”</blockquote>
-        <small>Centro de eventos · Reservas</small>
+    <div class="mental-grid mental-grid-simple">
+      <article class="mental-card mental-card-simple">
+        <span class="mental-index">01 · CENTRO DE EVENTOS</span>
+        <blockquote>“Mi agenda sigue vacía.”</blockquote>
+        <p>Tengo un centro de eventos, pero no llegan suficientes reservas.</p>
       </article>
-      <article class="mental-card">
-        <span class="mental-index">02</span>
-        <blockquote>“Tengo una productora de eventos y años de experiencia, pero ChatGPT no me recomienda cuando alguien busca un proveedor como yo.”</blockquote>
-        <small>Productora · Experiencia · IA</small>
+
+      <article class="mental-card mental-card-simple">
+        <span class="mental-index">02 · PRODUCTORA</span>
+        <blockquote>“ChatGPT no me recomienda.”</blockquote>
+        <p>Tengo años de experiencia, pero cuando alguien pide un proveedor como yo, no aparezco.</p>
       </article>
-      <article class="mental-card">
-        <span class="mental-index">03</span>
-        <blockquote>“Tengo un emprendimiento de chalecos tejidos a crochet, pero no logro llegar a personas que valoren el trabajo artesanal.”</blockquote>
-        <small>Producto artesanal · Clientes adecuados</small>
+
+      <article class="mental-card mental-card-simple">
+        <span class="mental-index">03 · EMPRENDIMIENTO</span>
+        <blockquote>“No llego a clientes que valoren mi trabajo.”</blockquote>
+        <p>Vendo chalecos tejidos a crochet y necesito llegar a personas dispuestas a pagar por lo artesanal.</p>
       </article>
-      <article class="mental-card">
-        <span class="mental-index">04</span>
-        <blockquote>“Tengo comida casera, pero mi restaurante no aparece cuando la gente busca dónde comer en Google.”</blockquote>
-        <small>Gastronomía · Google · Búsqueda local</small>
+
+      <article class="mental-card mental-card-simple">
+        <span class="mental-index">04 · GASTRONOMÍA</span>
+        <blockquote>“No aparezco en Google.”</blockquote>
+        <p>Vendo comida casera, pero mi restaurante no aparece cuando la gente busca dónde comer.</p>
       </article>
     </div>
 
-    <div class="mental-cta">
+    <div class="mental-cta mental-cta-simple">
       <div>
-        <span class="mono">DIAGNÓSTICO 360° · GRATIS</span>
-        <strong>Si te reconociste en alguna, revisemos qué está pasando.</strong>
-        <p>Te mostramos qué encuentra Google, qué puede entender la IA y qué conviene mejorar primero. Entrega estimada en 24 horas.</p>
+        <span class="mono">DIAGNÓSTICO 360° · GRATIS · 24 HORAS</span>
+        <strong>¿Te pasa algo parecido? Te decimos qué está fallando.</strong>
+        <p>Revisamos cómo te encuentra Google, qué puede entender la IA y qué conviene mejorar primero.</p>
       </div>
-      <a class="btn primary" href="#diagnostico">Revisar mi presencia digital →</a>
+      <a class="btn primary" href="#diagnostico">Quiero mi diagnóstico →</a>
     </div>
   </div>
 </section>
@@ -945,7 +973,7 @@ document.getElementById("diagnosticForm")?.addEventListener("submit",e=>{
  location.href="mailto:contacto@deepanalytica.cl?subject="+subject+"&body="+body;
 });
 </script><script>
-(()=>{const mm=document.getElementById("mobileMenu"),mb=document.getElementById("menuBtn"),mc=document.getElementById("menuClose");if(mm&&mb&&mc){const sm=o=>{mm.classList.toggle("open",o);mm.setAttribute("aria-hidden",String(!o));mb.setAttribute("aria-expanded",String(o));document.body.style.overflow=o?"hidden":""};mb.addEventListener("click",()=>sm(true));mc.addEventListener("click",()=>sm(false));mm.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>sm(false)));document.addEventListener("keydown",e=>{if(e.key==="Escape")sm(false)})}const st=document.getElementById("mobileConvert"),dg=document.getElementById("diagnostico");if(st&&dg){const w=()=>{const r=dg.getBoundingClientRect();st.classList.toggle("show",scrollY>innerHeight*.72&&!(r.top<innerHeight&&r.bottom>0))};addEventListener("scroll",w,{passive:true});w()}})();
+(()=>{const mm=document.getElementById("mobileMenu"),mb=document.getElementById("menuBtn"),mc=document.getElementById("menuClose");if(mm&&mb&&mc){const sm=o=>{mm.classList.toggle("open",o);mm.setAttribute("aria-hidden",String(!o));mb.setAttribute("aria-expanded",String(o));document.body.style.overflow=o?"hidden":""};mb.addEventListener("click",()=>sm(true));mc.addEventListener("click",()=>sm(false));mm.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>sm(false)));document.addEventListener("keydown",e=>{if(e.key==="Escape")sm(false)})}const st=document.getElementById("mobileConvert"),dg=document.getElementById("diagnostico"),ms=document.querySelector(".mental-section");if(st&&dg){const visible=el=>{if(!el)return false;const r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0};const w=()=>{st.classList.toggle("show",scrollY>innerHeight*.72&&!visible(dg)&&!visible(ms))};addEventListener("scroll",w,{passive:true});w()}})();
 </script><script>
 (()=>{if(matchMedia("(pointer:fine)").matches){document.querySelectorAll(".sector-grid article,.resource").forEach(el=>el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect();el.style.setProperty("--mx",e.clientX-r.left+"px");el.style.setProperty("--my",e.clientY-r.top+"px")}))}const h=document.querySelector(".header");let last=0;addEventListener("scroll",()=>{const y=scrollY;if(h){h.style.boxShadow=y>18?"0 10px 40px rgba(35,25,70,.07)":"none"}last=y},{passive:true})})();
 </script>
