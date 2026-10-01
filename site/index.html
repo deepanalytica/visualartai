@@ -785,6 +785,24 @@ html,body{overflow-x:hidden}
   .action-output b{font-size:15px}
   .action-output p{font-size:12.5px}
 }
+
+/* Hero platform statement */
+.hero-v6 .platform-context-label{
+  margin-bottom:12px!important;
+  font-family:var(--sans)!important;
+  font-size:clamp(20px,1.65vw,28px)!important;
+  line-height:1.05!important;
+  font-weight:650!important;
+  letter-spacing:-.025em!important;
+  text-transform:none!important;
+  color:var(--text)!important;
+}
+@media(max-width:700px){
+  .hero-v6 .platform-context-label{
+    font-size:24px!important;
+    margin-bottom:13px!important;
+  }
+}
 </style>
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
 </head>
@@ -805,7 +823,7 @@ html,body{overflow-x:hidden}
     <p class="lead">Tus clientes ya buscan en Google, Maps y asistentes de IA. Preparamos tu presencia digital para que puedan encontrarte, entender lo que haces y considerarte entre sus opciones.</p>
 
     <div class="platform-context" aria-label="Entornos de búsqueda">
-      <span class="platform-context-label">TE AYUDAMOS A SER MÁS ENCONTRABLE EN</span>
+      <span class="platform-context-label">Quiero aparecer en:</span>
       <div class="platform-row">
         <span><img src="brands/google.svg" alt="" width="20" height="20">Google</span>
         <span><img src="brands/google-maps.svg" alt="" width="20" height="20">Maps</span>
