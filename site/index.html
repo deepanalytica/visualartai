@@ -1083,6 +1083,30 @@ html,body{overflow-x:hidden}
   .vaa-symbol{width:31px!important;height:31px!important;flex-basis:31px!important}
   .vaa-wordmark{font-size:11.8px!important}
 }
+
+/* Hero typography system v8: one sans family, clear headline/question/body scale */
+.hero-v6 .hero-copy{font-family:var(--sans)!important}
+.hero-v6 .hero-main-question{font-family:var(--sans)!important;font-size:clamp(48px,5vw,76px)!important;line-height:1.035!important;letter-spacing:-.055em!important;font-weight:750!important;margin:18px 0 0!important;max-width:760px!important}
+.hero-v6 .hero-main-question .hline{display:block}
+.hero-v6 .hero-question-secondary{font-family:var(--sans)!important;font-size:clamp(25px,2.7vw,40px)!important;line-height:1.12!important;letter-spacing:-.04em!important;font-weight:700!important;color:#3268ee!important;background:none!important;-webkit-text-fill-color:currentColor!important;margin:20px 0 0!important;max-width:720px!important}
+.hero-v6 .lead{font-family:var(--sans)!important;font-size:clamp(16px,1.35vw,19px)!important;line-height:1.55!important;margin:26px 0 0!important;letter-spacing:-.012em!important}
+.hero-v6 .hero-remate{font-family:var(--sans)!important;font-style:normal!important;font-size:clamp(17px,1.5vw,21px)!important;font-weight:650!important;line-height:1.35!important;letter-spacing:-.02em!important;color:var(--text)!important;margin:16px 0 0!important}
+.hero-v6 .platform-context{margin-top:28px!important}
+.hero-v6 .platform-context-label{font-family:var(--sans)!important;font-size:13px!important;line-height:1.4!important;font-weight:650!important;letter-spacing:0!important;color:var(--text2)!important;margin-bottom:12px!important}
+.hero-v6 .hero-micro{font-family:var(--sans)!important;font-size:12px!important;line-height:1.45!important;letter-spacing:0!important;color:var(--text3)!important}
+.hero-v6 .actions .btn{font-family:var(--sans)!important;font-weight:700!important;letter-spacing:.005em!important;font-size:12px!important}
+@media(max-width:700px){
+ .hero-v6 .hero-copy{padding:35px 24px 32px!important}
+ .hero-v6 .hero-main-question{font-size:clamp(38px,9.2vw,49px)!important;line-height:1.035!important;letter-spacing:-.055em!important;margin-top:15px!important}
+ .hero-v6 .hero-question-secondary{font-size:clamp(24px,6.25vw,31px)!important;line-height:1.13!important;margin-top:16px!important;letter-spacing:-.04em!important}
+ .hero-v6 .lead{font-size:16px!important;line-height:1.5!important;margin-top:23px!important}
+ .hero-v6 .hero-remate{font-size:17px!important;line-height:1.35!important;margin-top:13px!important}
+ .hero-v6 .platform-context{margin-top:24px!important}
+ .hero-v6 .platform-context-label{font-size:13px!important;margin-bottom:12px!important}
+ .hero-v6 .actions{margin-top:22px!important}
+ .hero-v6 .actions .btn{font-size:12px!important;line-height:1.3!important;min-height:52px!important;padding:12px 14px!important}
+ .hero-v6 .hero-micro{font-size:12px!important;margin-top:12px!important}
+}
 </style>
 <link rel="stylesheet" href="brand/visual-art-ai-design-system.css?v=4">
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
@@ -1109,10 +1133,10 @@ html,body{overflow-x:hidden}
     <h1 class="hero-main-question">
       <span class="hline">Hay personas buscando</span>
       <span class="hline">exactamente lo que ofreces.</span>
-      <span class="hline hero-question-end">¿Te encuentran a ti… o a otro negocio?</span>
-    </h1>
+      </h1>
+    <p class="hero-question-end hero-question-secondary">¿Te encuentran a ti… o a otro negocio?</p>
     <p class="lead">Hoy tus clientes buscan en <strong>Google y Maps</strong>.<br>Y cada vez más, preguntan directamente a <strong>ChatGPT, Gemini y Perplexity</strong>.</p>
-    <div class="hero-remate">Te ayudamos a estar ahí cuando te están buscando.</div>
+    <p class="hero-remate">Te ayudamos a estar ahí cuando te están buscando.</p>
 
     <div class="platform-context" aria-label="Entornos de búsqueda">
       <span class="platform-context-label">Donde hoy comienza la búsqueda:</span>
@@ -1129,7 +1153,7 @@ html,body{overflow-x:hidden}
       <a class="btn primary" href="#diagnostico">DESCUBRE SI TE ESTÁN ENCONTRANDO →</a>
       <a class="btn" href="#sistema">VER CÓMO FUNCIONA</a>
     </div>
-    <p class="hero-micro">Diagnóstico inicial gratuito · Sin compromiso · Plazo confirmado al recibir tu solicitud</p><div class="hero-proof-mini"><span aria-hidden="true"></span><b>Caso real</b><em>Un caso de presencia digital para psicología</em></div>
+    <p class="hero-micro">Diagnóstico inicial gratuito · Sin compromiso · Plazo confirmado al recibir tu solicitud</p>
   </div>
 
   <div class="hero-field discovery-demo-v6" aria-label="Demostración: una persona busca, una plataforma compara información y aparece una opción relevante">
