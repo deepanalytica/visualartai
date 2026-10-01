@@ -803,6 +803,45 @@ html,body{overflow-x:hidden}
     margin-bottom:13px!important;
   }
 }
+
+/* Compact approved hero copy */
+.hero-v6 h1{
+  max-width:720px!important;
+}
+.hero-v6 .platform-context{
+  margin-top:24px!important;
+}
+.hero-v6 .platform-context-label{
+  font-size:clamp(20px,1.55vw,27px)!important;
+}
+@media(max-width:700px){
+  .hero-v6 .hero-copy{
+    padding-top:42px!important;
+    padding-bottom:26px!important;
+  }
+  .hero-v6 h1{
+    font-size:clamp(43px,11.7vw,58px)!important;
+    line-height:.94!important;
+  }
+  .hero-v6 h1 em{
+    margin-top:.16em!important;
+    font-size:clamp(31px,8.6vw,42px)!important;
+    line-height:1!important;
+  }
+  .hero-v6 .platform-context{
+    margin-top:22px!important;
+  }
+  .hero-v6 .platform-context-label{
+    font-size:22px!important;
+    margin-bottom:12px!important;
+  }
+  .hero-v6 .actions{
+    margin-top:20px!important;
+  }
+  .hero-v6 .hero-proof-mini{
+    margin-top:10px!important;
+  }
+}
 </style>
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
 </head>
@@ -815,15 +854,12 @@ html,body{overflow-x:hidden}
 
     <h1>
       <span class="hline">Hay personas buscando</span>
-      <span class="hline">exactamente lo que</span>
-      <span class="hline">tu negocio ofrece.</span>
-      <em id="heroEmotion">Hagamos que te encuentren.</em>
+      <span class="hline">lo que tu negocio ofrece.</span>
+      <em id="heroEmotion">Hagamos que encuentren el tuyo.</em>
     </h1>
 
-    <p class="lead">Tus clientes ya buscan en Google, Maps y asistentes de IA. Preparamos tu presencia digital para que puedan encontrarte, entender lo que haces y considerarte entre sus opciones.</p>
-
     <div class="platform-context" aria-label="Entornos de búsqueda">
-      <span class="platform-context-label">Quiero aparecer en:</span>
+      <span class="platform-context-label">Potenciamos tu presencia digital en:</span>
       <div class="platform-row">
         <span><img src="brands/google.svg" alt="" width="20" height="20">Google</span>
         <span><img src="brands/google-maps.svg" alt="" width="20" height="20">Maps</span>
