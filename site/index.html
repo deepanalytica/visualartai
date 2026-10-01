@@ -1358,6 +1358,53 @@ html,body{overflow-x:hidden}
 @media(max-width:700px){
   .pain-stories article b{font-size:17px}
 }
+
+/* Pricing system v2 — clear comparison, explicit scope, one focal offer */
+.price-grid-v2{align-items:stretch}
+.price-card{
+  position:relative;
+  min-height:560px!important;
+  padding:30px!important;
+}
+.price-card-featured{
+  border:1.5px solid color-mix(in srgb,var(--brand-blue) 58%,var(--border))!important;
+  box-shadow:0 18px 54px rgba(47,107,255,.10)!important;
+}
+.price-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-height:30px}
+.price-kicker{font:600 10px/1.25 var(--mono);letter-spacing:.12em;color:var(--brand-blue)}
+.price-badge{display:inline-flex;align-items:center;min-height:25px;padding:5px 8px;border-radius:999px;background:var(--brand-blue);color:#fff;font:650 8px/1 var(--mono);letter-spacing:.06em;white-space:nowrap}
+.price-badge.subtle{background:var(--soft);color:var(--brand-blue);border:1px solid color-mix(in srgb,var(--brand-blue) 22%,transparent)}
+.price-display{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:30px 0 20px}
+.price-display strong{margin:0!important;font-size:clamp(38px,3.3vw,54px)!important;letter-spacing:-.055em!important;line-height:.95}
+.price-display small{font:500 11px/1.2 var(--sans);color:var(--text3)}
+.price-was{position:relative;color:var(--text3);font-size:16px;font-weight:600}
+.price-was:after{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:1.5px;background:var(--text3);transform:rotate(-7deg)}
+.price-card h3{margin:8px 0 18px!important;font-size:22px!important;line-height:1.12!important;letter-spacing:-.035em}
+.price-features{display:grid;gap:10px;margin:0 0 22px;padding:0;list-style:none}
+.price-features li{position:relative;padding-left:20px;color:var(--text2);font-size:13.5px;line-height:1.42}
+.price-features li:before{content:"✓";position:absolute;left:0;top:0;color:var(--brand-blue);font-weight:800}
+.price-scope{margin-top:auto!important;padding-top:18px;border-top:1px solid var(--border);font-size:12px!important;line-height:1.45!important;color:var(--text3)!important}
+.price-cta{width:100%!important;min-height:48px;margin-top:18px!important;text-align:center}
+.continuity-offer{display:grid;grid-template-columns:1.3fr .7fr;gap:30px;align-items:center;margin-top:16px;padding:28px 30px;border:1px solid var(--border);border-radius:22px;background:color-mix(in srgb,var(--surface) 88%,var(--brand-blue) 2%);box-shadow:var(--shadow-1)}
+.continuity-offer h3{margin:10px 0 8px;font-size:clamp(24px,2.4vw,34px);letter-spacing:-.04em}
+.continuity-offer p{margin:0;color:var(--text2);line-height:1.55}
+.continuity-price{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:baseline;gap:4px 7px}
+.continuity-price strong{font-size:36px;letter-spacing:-.05em}
+.continuity-price span{color:var(--text3)}
+.continuity-price .btn{flex-basis:100%;margin-top:12px}
+.pricing-note{max-width:820px;margin:18px auto 0;text-align:center;color:var(--text3);font-size:11px;line-height:1.5}
+@media(max-width:900px){
+  .continuity-offer{grid-template-columns:1fr}
+  .continuity-price{justify-content:flex-start}
+}
+@media(max-width:700px){
+  .price-card{min-height:auto!important;padding:26px 24px!important}
+  .price-top{min-height:0}
+  .price-badge{font-size:7.5px}
+  .price-display{margin-top:26px}
+  .continuity-offer{padding:24px}
+  .continuity-price .btn{width:100%}
+}
 </style>
 <link rel="stylesheet" href="brand/visual-art-ai-design-system.css?v=5">
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
@@ -1404,7 +1451,7 @@ html,body{overflow-x:hidden}
       <a class="btn primary" href="#diagnostico">SOLICITA TU AUDITORÍA DE PRESENCIA DIGITAL GRATIS →</a>
       <a class="btn hero-secondary-action" href="#sectores">Ver servicios <span aria-hidden="true">↗</span></a>
     </div>
-    <p class="hero-micro">Sin costo · Sin compromiso · Te mostramos qué mejorar primero.</p>
+    <p class="hero-micro">US$ 99 → gratis hasta el 31 de octubre de 2026 · Sin compromiso</p>
   </div>
 
   <div class="hero-field discovery-demo-v6" aria-label="Demostración: una persona busca, una plataforma compara información y aparece una opción relevante">
@@ -1566,15 +1613,93 @@ html,body{overflow-x:hidden}
 </div></div></section>
 
 <section class="section pricing" id="precios"><div class="shell">
-  <div class="head">
-    <div><div class="mono">ANTES DE GASTAR MÁS</div><h2>Descubre dónde está <em>el problema.</em></h2></div>
-    <p>Una nueva web cuesta dinero. Una campaña también. El SEO necesita tiempo. Ninguna de esas cosas debería ser el primer paso si todavía no sabemos qué está fallando.</p>
+  <div class="head pricing-head">
+    <div>
+      <div class="mono">PRECIOS CLAROS · SIN COTIZACIONES A CIEGAS</div>
+      <h2>Empieza pequeño. <em>Escala cuando tenga sentido.</em></h2>
+    </div>
+    <p>La auditoría identifica la prioridad. Después eliges si quieres resolver una pieza, construir el sistema completo o mantenerlo optimizado.</p>
   </div>
-  <div class="price-grid">
-    <article class="price-card free"><span>AUDITORÍA INICIAL DE PRESENCIA DIGITAL</span><strong>$0</strong><h3>Primero te mostramos qué encuentran, qué no se entiende y qué conviene mejorar.</h3><p>Google, Maps, web, búsquedas por servicio, presencia local, señales públicas para IA y recorrido hasta el contacto.</p><small>Sin costo · Sin compromiso</small><a class="btn primary" href="#diagnostico">Solicitar mi auditoría gratuita →</a></article>
-    <article class="price-card"><span>MEJORA PUNTUAL</span><strong>Cotización</strong><h3>Corregimos la pieza que realmente está frenando el resultado.</h3><p>Google/Maps, SEO/GEO, contenido, landing, conversión o una intervención específica.</p><small>Alcance definido desde la auditoría</small></article>
-    <article class="price-card"><span>SISTEMA COMPLETO</span><strong>Cotización</strong><h3>Conectamos las piezas para que trabajen juntas.</h3><p>Marca, web, posicionamiento, contenido, captación, automatización y medición cuando el caso lo requiere.</p><small>Propuesta por etapas y prioridades</small></article>
+
+  <div class="price-grid price-grid-v2">
+    <article class="price-card free audit-offer">
+      <div class="price-top">
+        <span class="price-kicker">AUDITORÍA DE PRESENCIA DIGITAL</span>
+        <span class="price-badge">GRATIS HASTA 31 OCT 2026</span>
+      </div>
+      <div class="price-display promo-price">
+        <span class="price-was">US$ 99</span>
+        <strong>US$ 0</strong>
+        <small>por tiempo limitado</small>
+      </div>
+      <h3>Descubre qué te está costando visibilidad antes de pagar por arreglarlo.</h3>
+      <ul class="price-features">
+        <li>Google y Maps</li>
+        <li>Web y claridad de la oferta</li>
+        <li>Señales públicas para IA</li>
+        <li>Recorrido hasta el contacto</li>
+        <li>Prioridades: qué mejorar primero</li>
+      </ul>
+      <p class="price-scope">1 negocio · 1 dominio · 1 ubicación principal · entrega por email</p>
+      <a class="btn primary price-cta" href="#diagnostico" data-interest="Auditoría de presencia digital">Solicitar auditoría gratis →</a>
+    </article>
+
+    <article class="price-card">
+      <div class="price-top">
+        <span class="price-kicker">SPRINT DE VISIBILIDAD</span>
+        <span class="price-badge subtle">UNA PRIORIDAD</span>
+      </div>
+      <div class="price-display">
+        <strong>US$ 490</strong>
+        <small>pago único</small>
+      </div>
+      <h3>Resolvemos una prioridad concreta detectada en la auditoría.</h3>
+      <ul class="price-features">
+        <li>1 prioridad principal</li>
+        <li>Implementación y ajustes de copy</li>
+        <li>SEO, GEO o presencia local según el caso</li>
+        <li>Mejora del punto de conversión</li>
+        <li>Medición básica de la intervención</li>
+      </ul>
+      <p class="price-scope">Ideal para corregir una pieza sin rehacer todo el sistema.</p>
+      <a class="btn price-cta" href="#diagnostico" data-interest="Sprint de visibilidad — US$490">Quiero resolver una prioridad →</a>
+    </article>
+
+    <article class="price-card price-card-featured">
+      <div class="price-top">
+        <span class="price-kicker">SISTEMA DE PRESENCIA</span>
+        <span class="price-badge">PARA CRECER</span>
+      </div>
+      <div class="price-display">
+        <strong>US$ 1.490</strong>
+        <small>pago único</small>
+      </div>
+      <h3>Construimos la base completa para que te encuentren, entiendan y contacten.</h3>
+      <ul class="price-features">
+        <li>Arquitectura de mensaje y oferta</li>
+        <li>Landing o presencia web principal</li>
+        <li>Google y Maps</li>
+        <li>Fundamentos SEO + GEO + señales para IA</li>
+        <li>Conversión, analítica y recorrido de contacto</li>
+      </ul>
+      <p class="price-scope">Implementación por etapas. Todo trabajo fuera de este alcance se cotiza antes de ejecutarse.</p>
+      <a class="btn primary price-cta" href="#diagnostico" data-interest="Sistema de presencia — US$1.490">Quiero construir mi sistema →</a>
+    </article>
   </div>
+
+  <div class="continuity-offer">
+    <div>
+      <span class="mono">OPTIMIZACIÓN CONTINUA</span>
+      <h3>Una vez que la base funciona, la seguimos mejorando.</h3>
+      <p>Revisión mensual, hasta 2 optimizaciones priorizadas, reporte breve y soporte asíncrono.</p>
+    </div>
+    <div class="continuity-price">
+      <strong>US$ 290</strong><span>/ mes</span>
+      <a class="btn" href="#diagnostico" data-interest="Optimización continua — US$290/mes">Quiero optimización continua →</a>
+    </div>
+  </div>
+
+  <p class="pricing-note">Precios correspondientes al alcance indicado. Cualquier trabajo adicional se acuerda y cotiza antes de comenzar.</p>
 </div></section>
 
 <section class="section diagnostic-focus" id="diagnostico"><div class="shell"><div class="diag">
@@ -1594,7 +1719,7 @@ html,body{overflow-x:hidden}
       <label><span>¿Qué haces y dónde atiendes?</span><textarea id="situation" rows="4" placeholder="Ej.: soy psicóloga, atiendo online y quiero aparecer cuando buscan especialistas en trauma." required></textarea></label>
       <label><span>¿Dónde enviamos la revisión?</span><input id="email" type="email" autocomplete="email" placeholder="tu@email.cl" required></label>
       <button class="btn primary form-submit" type="submit">Solicitar mi auditoría gratuita →</button>
-      <p class="form-note">Auditoría inicial gratuita · Sin compromiso · Confirmamos el plazo al recibir tu solicitud.</p>
+      <p class="form-note">Valor regular US$ 99 · Gratis hasta el 31 de octubre de 2026 · Sin compromiso.</p><input type="hidden" id="interest" value="Auditoría de presencia digital">
     </form>
   </div>
   <div class="audit">
@@ -1644,9 +1769,10 @@ document.getElementById("diagnosticForm")?.addEventListener("submit",e=>{
  const goal=document.getElementById("goal").value.trim();
  const situation=document.getElementById("situation").value.trim();
  const email=document.getElementById("email").value.trim();
+ const interest=document.getElementById("interest")?.value||"Auditoría de presencia digital";
  if(!goal||!situation||!email)return;
  const subject=encodeURIComponent("Solicitud de auditoría de presencia digital — Visual Art AI");
- const body=encodeURIComponent("Situación principal: "+goal+"\n\nNegocio / contexto: "+situation+"\n\nEmail de contacto: "+email);
+ const body=encodeURIComponent("Interés: "+interest+"\n\nSituación principal: "+goal+"\n\nNegocio / contexto: "+situation+"\n\nEmail de contacto: "+email);
  location.href="mailto:contacto@deepanalytica.cl?subject="+subject+"&body="+body;
 });
 </script><script>
@@ -1717,4 +1843,11 @@ document.getElementById("diagnosticForm")?.addEventListener("submit",e=>{
  cycle();
  setInterval(cycle,10000);
 })();
+</script><script>
+document.querySelectorAll("[data-interest]").forEach(el=>{
+  el.addEventListener("click",()=>{
+    const input=document.getElementById("interest");
+    if(input) input.value=el.dataset.interest||"Auditoría de presencia digital";
+  });
+});
 </script></body></html>
