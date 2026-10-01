@@ -151,5 +151,5 @@ body:after{
 }
 
 /* Palette accents on brand signal */
-.vaa-signal-arc{stroke:url(#vaaSignalGradient)}
+.vaa-signal-arc{stroke:var(--brand-blue)!important}
 .vaa-signal-dot{fill:var(--brand-pink)!important}
