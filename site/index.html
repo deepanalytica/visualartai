@@ -759,11 +759,37 @@ html,body{overflow-x:hidden}
   .mental-cta-simple strong{font-size:19px;line-height:1.15}
   .mental-cta-simple p{font-size:13px}
 }
+
+/* Solution-first handoff immediately after the hero */
+.action-section{padding:clamp(68px,7vw,108px) 0;background:linear-gradient(180deg,var(--bg),color-mix(in srgb,var(--accent) 3%,var(--bg)));border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.action-grid{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:clamp(42px,7vw,110px);align-items:center}
+.action-copy h2{margin:12px 0 0;max-width:680px;font-size:clamp(42px,5vw,76px);line-height:.95;letter-spacing:-.052em}
+.action-copy h2 em{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--accent)}
+.action-copy>p{max-width:610px;margin:24px 0 0;font-size:16px;line-height:1.65;color:var(--text2)}
+.action-copy .actions{margin-top:24px}
+.action-copy>small{display:block;margin-top:11px;font:8.5px/1.45 var(--mono);letter-spacing:.04em;color:var(--text3)}
+.action-output{display:grid;border-top:1px solid var(--hair-strong)}
+.action-output article{display:grid;grid-template-columns:46px 1fr;gap:14px;padding:20px 0;border-bottom:1px solid var(--hair);align-items:start}
+.action-output article>span{display:grid;place-items:center;width:31px;height:31px;border-radius:9px;background:var(--soft);color:var(--accent);font:600 8px var(--mono)}
+.action-output b{display:block;font-size:17px;letter-spacing:-.02em}
+.action-output p{margin:5px 0 0;max-width:560px;font-size:13px;line-height:1.55;color:var(--text2)}
+@media(max-width:900px){
+  .action-grid{grid-template-columns:1fr;gap:34px}
+}
+@media(max-width:700px){
+  .action-section{padding:52px 0 62px}
+  .action-copy h2{font-size:clamp(36px,9.8vw,48px);line-height:.98}
+  .action-copy>p{font-size:14px;line-height:1.55}
+  .action-copy .btn{width:100%;justify-content:center}
+  .action-output article{grid-template-columns:38px 1fr;padding:16px 0;gap:11px}
+  .action-output b{font-size:15px}
+  .action-output p{font-size:12.5px}
+}
 </style>
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
 </head>
 <body>
-<header class="top"><div class="shell topin"><a class="brand" href="#"><span class="mark"></span><span>VISUAL ART AI</span></a><nav class="nav" aria-label="Navegación principal"><a href="#objetivos">Objetivos</a><a href="#sistema">Cómo trabajamos</a><a href="#diagnostico">Diagnóstico</a><a href="#ideas">Ideas</a></nav><div class="right"><button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><span>Menú</span><b aria-hidden="true">☰</b></button><button class="theme" id="theme" aria-label="Cambiar tema" title="Cambiar tema">◐</button><a class="btn primary" href="#diagnostico">Revisar mi negocio</a></div></div></header><div class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-menu-inner"><div class="mobile-menu-top"><span class="mono">Visual Art AI</span><button id="menuClose" class="menu-close" aria-label="Cerrar menú">×</button></div><nav aria-label="Navegación móvil"><a href="#objetivos"><span>01</span>El problema</a><a href="#sistema"><span>02</span>Qué mejoramos</a><a href="#sectores"><span>03</span>Qué corregimos</a><a href="#ideas"><span>04</span>Guías gratuitas</a><a href="#diagnostico" class="menu-diagnostic"><span>05</span>Diagnóstico 360° gratis</a></nav><div class="mobile-menu-cta"><span class="mono">GRATIS · 24 HORAS</span><p><strong>Descubre qué está frenando tu presencia digital.</strong> Te mostramos qué encuentra Google, qué puede entender la IA y qué conviene mejorar primero.</p><a class="btn primary" href="#diagnostico">Quiero mi diagnóstico gratis →</a></div></div></div>
+<header class="top"><div class="shell topin"><a class="brand" href="#"><span class="mark"></span><span>VISUAL ART AI</span></a><nav class="nav" aria-label="Navegación principal"><a href="#sistema">Cómo trabajamos</a><a href="#sectores">Qué corregimos</a><a href="#diagnostico">Diagnóstico</a><a href="#ideas">Guías</a></nav><div class="right"><button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><span>Menú</span><b aria-hidden="true">☰</b></button><button class="theme" id="theme" aria-label="Cambiar tema" title="Cambiar tema">◐</button><a class="btn primary" href="#diagnostico">Revisar mi negocio</a></div></div></header><div class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-menu-inner"><div class="mobile-menu-top"><span class="mono">Visual Art AI</span><button id="menuClose" class="menu-close" aria-label="Cerrar menú">×</button></div><nav aria-label="Navegación móvil"><a href="#sistema"><span>01</span>Cómo trabajamos</a><a href="#sectores"><span>02</span>Qué corregimos</a><a href="#caso-real"><span>03</span>Caso real</a><a href="#ideas"><span>04</span>Guías gratuitas</a><a href="#diagnostico" class="menu-diagnostic"><span>05</span>Diagnóstico 360° gratis</a></nav><div class="mobile-menu-cta"><span class="mono">GRATIS · 24 HORAS</span><p><strong>Descubre qué está frenando tu presencia digital.</strong> Te mostramos qué encuentra Google, qué puede entender la IA y qué conviene mejorar primero.</p><a class="btn primary" href="#diagnostico">Quiero mi diagnóstico gratis →</a></div></div></div>
 <main>
 <section class="hero hero-v6" id="inicio">
   <div class="hero-copy">
@@ -848,7 +874,7 @@ html,body{overflow-x:hidden}
         <div class="found-topline">OPCIÓN RELEVANTE</div>
         <div class="found-title-row">
           <div>
-            <h3 id="resultName">Jessica Arriagada</h3>
+            <h3 id="resultName">Jessica</h3>
             <p id="resultCategory">Psicología · Trauma · EMDR</p>
           </div>
           <span class="result-check-v6">✓</span>
@@ -865,61 +891,28 @@ html,body{overflow-x:hidden}
     </article>
   </div>
 </section>
-<section class="mental-section" aria-labelledby="mental-title">
+<section class="section action-section" id="accion">
   <div class="shell">
-    <div class="mental-head mental-head-simple">
-      <div>
-        <div class="mono">¿TE PASA ALGO DE ESTO?</div>
-        <h2 id="mental-title">Tu negocio está ahí. <em>Pero las oportunidades no están llegando.</em></h2>
+    <div class="action-grid">
+      <div class="action-copy">
+        <div class="mono">SIGUIENTE PASO · GRATIS · 24 HORAS</div>
+        <h2>Ahora veamos <em>qué está pasando con tu negocio.</em></h2>
+        <p>No necesitas adivinar si el problema está en Google, Maps, tu web o en cómo te entienden los buscadores con IA. Lo revisamos y te mostramos qué conviene mejorar primero.</p>
+        <div class="actions">
+          <a class="btn primary" href="#diagnostico">Quiero mi diagnóstico 360° →</a>
+        </div>
+        <small>Sin costo · Sin compromiso · Con prioridades concretas</small>
       </div>
-      <p>Si alguna de estas frases se parece a lo que estás viviendo, probablemente hay algo en tu presencia digital que podemos revisar.</p>
-    </div>
 
-    <div class="mental-grid mental-grid-simple">
-      <article class="mental-card mental-card-simple">
-        <span class="mental-index">01 · CENTRO DE EVENTOS</span>
-        <blockquote>“Mi agenda sigue vacía.”</blockquote>
-        <p>Tengo un centro de eventos, pero no llegan suficientes reservas.</p>
-      </article>
-
-      <article class="mental-card mental-card-simple">
-        <span class="mental-index">02 · PRODUCTORA</span>
-        <blockquote>“ChatGPT no me recomienda.”</blockquote>
-        <p>Tengo años de experiencia, pero cuando alguien pide un proveedor como yo, no aparezco.</p>
-      </article>
-
-      <article class="mental-card mental-card-simple">
-        <span class="mental-index">03 · EMPRENDIMIENTO</span>
-        <blockquote>“No llego a clientes que valoren mi trabajo.”</blockquote>
-        <p>Vendo chalecos tejidos a crochet y necesito llegar a personas dispuestas a pagar por lo artesanal.</p>
-      </article>
-
-      <article class="mental-card mental-card-simple">
-        <span class="mental-index">04 · GASTRONOMÍA</span>
-        <blockquote>“No aparezco en Google.”</blockquote>
-        <p>Vendo comida casera, pero mi restaurante no aparece cuando la gente busca dónde comer.</p>
-      </article>
-    </div>
-
-    <div class="mental-cta mental-cta-simple">
-      <div>
-        <span class="mono">DIAGNÓSTICO 360° · GRATIS · 24 HORAS</span>
-        <strong>¿Te pasa algo parecido? Te decimos qué está fallando.</strong>
-        <p>Revisamos cómo te encuentra Google, qué puede entender la IA y qué conviene mejorar primero.</p>
+      <div class="action-output" aria-label="Qué incluye el diagnóstico">
+        <article><span>01</span><div><b>Qué encuentra Google</b><p>Cómo apareces en búsqueda, Maps y resultados relacionados con lo que haces.</p></div></article>
+        <article><span>02</span><div><b>Qué puede entender la IA</b><p>Qué información pública existe sobre tu especialidad, servicios, ubicación y experiencia.</p></div></article>
+        <article><span>03</span><div><b>Qué está frenando la conversión</b><p>Qué ocurre cuando alguien llega a tu web, perfil, WhatsApp, agenda o formulario.</p></div></article>
+        <article><span>04</span><div><b>Qué mejorar primero</b><p>Te entregamos un orden de prioridades realista antes de proponerte cualquier implementación.</p></div></article>
       </div>
-      <a class="btn primary" href="#diagnostico">Quiero mi diagnóstico →</a>
     </div>
   </div>
 </section>
-<section class="section" id="objetivos"><div class="shell"><div class="head"><div><div class="mono">01 / El problema</div><h2>Tu negocio puede ser excelente. <em>Internet necesita poder entenderlo.</em></h2></div><p>Cuando alguien pide una recomendación, Google y los buscadores con IA necesitan señales claras sobre quién eres, qué haces, dónde atiendes y por qué eres relevante para esa búsqueda.</p></div><div class="cases">
-<a class="case" href="#diagnostico"><span class="idx">01.1</span><h3>Quiero aparecer cuando buscan lo que hago.</h3><p>Mejoramos las señales que ayudan a Google y Maps a identificar tu negocio, entender tus servicios y mostrar información útil.</p><span class="arrow">↗</span></a>
-<a class="case" href="#diagnostico"><span class="idx">01.2</span><h3>Quiero que más pacientes me encuentren y agenden.</h3><p>Revisamos presencia, especialidad, señales de confianza y el recorrido hasta la agenda.</p><span class="arrow">↗</span></a>
-<a class="case" href="#diagnostico"><span class="idx">01.3</span><h3>Quiero lanzar mi idea y empezar a conseguir clientes.</h3><p>Convertimos la idea en una propuesta clara, una presencia creíble y un camino concreto para empezar a captar demanda.</p><span class="arrow">↗</span></a>
-<a class="case" href="#diagnostico"><span class="idx">01.4</span><h3>Quiero dejar de competir solo por precio.</h3><p>Trabajamos posicionamiento, mensaje y presentación para que la diferencia sea visible antes de preguntar cuánto cuesta.</p><span class="arrow">↗</span></a>
-<a class="case" href="#diagnostico"><span class="idx">01.5</span><h3>Quiero atender más consultas sin que cada una empiece desde cero.</h3><p>Diseñamos filtros, respuestas, agenda y seguimiento para reducir fricción sin perder el trato humano.</p><span class="arrow">↗</span></a>
-</div></div></section>
-<section class="bridge"><div class="shell"><div class="bridge-card"><div class="mono">¿Qué quieres conseguir?</div><h2>Cuéntanos tu objetivo. <em>Empecemos por ahí.</em></h2><p>Revisamos dónde estás hoy y qué puede ayudarte a avanzar: visibilidad, confianza, conversión o automatización.</p><a class="btn primary" href="https://wa.me/?text=Hola%2C%20quiero%20contarles%20qu%C3%A9%20quiero%20conseguir%20con%20mi%20negocio." target="_blank" rel="noopener">Revisar mi caso →</a></div></div></section>
-
 <section class="manifesto"><div class="shell"><div class="mono">Un criterio simple</div><blockquote>No se trata de engañar al algoritmo. <em>Se trata de hacer tu negocio más fácil de entender, verificar y elegir.</em></blockquote><p>Ordenamos las señales que describen tu negocio y las conectamos con una experiencia que convierte interés en una consulta, reserva o compra.</p></div></section>
 <section class="section story"><div class="shell"><div class="story-grid"><div><div class="mono">Antes de recomendarte</div><h2>Internet primero intenta <em>entender quién eres.</em></h2></div><div class="story-copy"><p>¿Qué haces? ¿Dónde atiendes? ¿En qué te especializas? ¿Tu información coincide entre tu web, Google y otras fuentes? ¿Hay señales públicas que respalden lo que dices?</p><p>No existe un botón que obligue a Google o a una IA a recomendar un negocio. Sí podemos mejorar la información pública que estos sistemas pueden descubrir, comprender y contrastar.</p><div class="story-fact"><strong>Una presencia que se puede entender.</strong><span>Google · Maps · Web · SEO · GEO · Contenido · Datos estructurados · Autoridad</span></div></div></div></div></section><section class="section" id="sistema"><div class="shell"><div class="head"><div><div class="mono">02 / Qué mejoramos</div><h2>Construimos una presencia que <em>buscadores y personas puedan entender.</em></h2></div><p>El diagnóstico nos dice qué piezas están frenando tu visibilidad y cuáles conviene intervenir primero.</p></div><div class="stages">
 <article class="stage"><span class="num">01 / PRESENCIA</span><h3>Que te entiendan</h3><p>Clarificamos qué haces, para quién, qué te diferencia y cómo presentarlo con una presencia coherente y profesional.</p><small>Marca · Web · Landing · Tienda · Imagen · Video · Contenido</small></article>
@@ -934,7 +927,7 @@ html,body{overflow-x:hidden}
 
 <section class="section sectors" id="sectores"><div class="shell"><div class="head"><div><div class="mono">03 / Qué corregimos</div><h2>Mejoramos las señales que ayudan a <em>encontrarte, entenderte y elegirte.</em></h2></div><p>No hacemos todo por defecto. El diagnóstico revela dónde está la fricción y qué intervención puede tener más impacto.</p></div><div class="sector-grid"><article><span>Google + Maps</span><h3>Presencia local</h3><p>Perfil, categorías, servicios, ubicación e información consistente para búsquedas cercanas.</p></article><article><span>SEO + GEO</span><h3>Búsquedas e IA</h3><p>Contenido y estructura alrededor de las preguntas, servicios y especialidades que tus clientes ya buscan.</p></article><article><span>Web</span><h3>Una fuente clara</h3><p>Arquitectura, copy, diseño y datos estructurados para explicar con precisión quién eres y qué haces.</p></article><article><span>Autoridad</span><h3>Razones para confiar</h3><p>Experiencia, credenciales, casos, reseñas y evidencia pública presentadas de forma verificable.</p></article><article><span>Conversión</span><h3>Del hallazgo al contacto</h3><p>WhatsApp, agenda, formularios y CTA para reducir la distancia entre “me interesa” y “quiero hablar”.</p></article><article><span>Medición</span><h3>Saber qué funciona</h3><p>Analítica y seguimiento para distinguir tráfico de oportunidades reales y decidir el siguiente paso.</p></article></div></div></section>
 
-<section class="section proof-section"><div class="shell"><div class="case-study"><div class="case-copy"><div class="mono">Caso real · Psicología</div><h2>3 nuevos pacientes <em>en el primer mes.</em></h2><p>Mejoramos la presencia online de una psicóloga: ordenamos cómo se presenta su especialidad, definimos un sistema visual y construimos una web capaz de explicar con claridad qué hace, para quién y cómo agendar.</p><p class="case-note">La profesional atribuyó 3 nuevos pacientes durante el primer mes a esta mejora de presencia digital. Es un caso concreto, no una garantía de resultados.</p></div><div class="case-math"><span class="math-label">Impacto potencial</span><strong>3</strong><small>nuevos pacientes</small><div class="math-line"></div><b>$50.000</b><small>por sesión</small><div class="math-result"><span>Si cada paciente realiza 4 sesiones al mes</span><strong>$600.000<small>/mes</small></strong></div></div></div></div></section>
+<section class="section proof-section" id="caso-real"><div class="shell"><div class="case-study"><div class="case-copy"><div class="mono">Caso real · Psicología</div><h2>3 nuevos pacientes <em>en el primer mes.</em></h2><p>Mejoramos la presencia online de una psicóloga: ordenamos cómo se presenta su especialidad, definimos un sistema visual y construimos una web capaz de explicar con claridad qué hace, para quién y cómo agendar.</p><p class="case-note">La profesional atribuyó 3 nuevos pacientes durante el primer mes a esta mejora de presencia digital. Es un caso concreto, no una garantía de resultados.</p></div><div class="case-math"><span class="math-label">Impacto potencial</span><strong>3</strong><small>nuevos pacientes</small><div class="math-line"></div><b>$50.000</b><small>por sesión</small><div class="math-result"><span>Si cada paciente realiza 4 sesiones al mes</span><strong>$600.000<small>/mes</small></strong></div></div></div></div></section>
 
 <section class="section pricing" id="precios"><div class="shell"><div class="head"><div><div class="mono">04 / Cuánto vale</div><h2>Primero diagnosticamos. <em>Después invertimos donde tiene sentido.</em></h2></div><p>La revisión inicial cuesta $0. Si encontramos una oportunidad clara, puedes ejecutar el plan por tu cuenta o pedirnos que lo implementemos.</p></div><div class="price-grid"><article class="price-card free"><span>DIAGNÓSTICO 360°</span><strong>$0</strong><h3>Descubre qué está frenando tu presencia.</h3><p>Google, Maps, web, búsqueda con IA, claridad, confianza y conversión.</p><small>Entrega estimada: 24 horas</small><a class="btn primary" href="#diagnostico">Quiero mi diagnóstico →</a></article><article class="price-card"><span>MEJORA PUNTUAL</span><strong>Cotización</strong><h3>Corregimos la pieza que realmente lo necesita.</h3><p>Google/Maps, SEO/GEO, contenido, landing, conversión o una intervención específica.</p><small>Alcance definido desde el diagnóstico</small></article><article class="price-card"><span>SISTEMA COMPLETO</span><strong>Cotización</strong><h3>Construimos una presencia conectada.</h3><p>Marca, web, posicionamiento, contenido, captación, automatización y medición cuando el caso lo requiere.</p><small>Propuesta por etapas y prioridades</small></article></div></div></section>
 
@@ -997,7 +990,7 @@ document.getElementById("diagnosticForm")?.addEventListener("submit",e=>{
  const d3=document.getElementById('resultDetail3');
 
  const cases=[
-  {p:'ChatGPT',logo:'brands/chatgpt.svg',q:'“Recomiéndame una psicóloga online especialista en trauma en el Maule.”',proc:'Buscando y comparando información relevante…',criteria:['Especialidad','Ubicación','Atención online'],name:'Jessica Arriagada',cat:'Psicología · Trauma · EMDR',details:['Atención online','Información profesional','Sitio web disponible']},
+  {p:'ChatGPT',logo:'brands/chatgpt.svg',q:'“Recomiéndame una psicóloga online especialista en trauma en el Maule.”',proc:'Buscando y comparando información relevante…',criteria:['Especialidad','Ubicación','Atención online'],name:'Jessica',cat:'Psicología · Trauma · EMDR',details:['Atención online','Información profesional','Sitio web disponible']},
   {p:'Google',logo:'brands/google.svg',q:'“pediatra recomendado en Talca”',proc:'Buscando y comparando resultados relevantes…',criteria:['Especialidad','Ubicación','Información pública'],name:'Profesional relevante',cat:'Pediatría · Talca',details:['Especialidad identificable','Ubicación disponible','Información de contacto']},
   {p:'Google Maps',logo:'brands/google-maps.svg',q:'“panadería artesanal cerca de mí”',proc:'Buscando negocios cercanos con información relevante…',criteria:['Cercanía','Categoría','Información local'],name:'Negocio local relevante',cat:'Panadería artesanal',details:['Ubicación disponible','Categoría clara','Canal de contacto']},
   {p:'Gemini',logo:'brands/gemini.svg',q:'“¿Qué kinesiólogo recomiendas para rehabilitación deportiva?”',proc:'Buscando y comparando profesionales relevantes…',criteria:['Especialidad','Servicios','Ubicación'],name:'Profesional relevante',cat:'Kinesiología · Rehabilitación',details:['Especialidad clara','Servicios disponibles','Información profesional']},
