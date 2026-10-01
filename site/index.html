@@ -88,6 +88,9 @@ main{padding-top:0!important}
   .hero-v4{min-height:calc(100svh - 68px)!important}
   .hero-v4 .hero-copy,.search-showcase{min-height:calc(100svh - 68px)!important}
 }
+/* Hero spacing fix: legacy .hero padding was creating the blank band below navigation */
+.hero.hero-v4{padding-top:0!important;padding-bottom:0!important}
+@media(max-width:700px){.hero.hero-v4{padding-top:0!important}}
 </style>
 <script>try{const t=localStorage.getItem("visualartai-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch{}</script>
 </head>
