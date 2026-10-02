@@ -2,86 +2,189 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Design System Tokens ────────────────────────────────────────────────── */
+/* ─── Visual Art AI Design System v2 ─────────────────────────────────────────
+   Architecture: primitive palette → semantic tokens → component tokens.
+   New components MUST consume semantic/component tokens, never raw hex values.
+   Legacy neon variable names remain as compatibility aliases during migration.
+   ─────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* Background layers */
-  --bg-void: #05060a;
-  --bg-surface: #0a0c12;
-  --bg-elevated: #0f1118;
-  --bg-overlay: #141720;
-  --bg-card: #0d0f17;
+  /* Primitive palette */
+  --paper-50: #f8f7f3;
+  --paper-100: #f1f0ea;
+  --white: #ffffff;
+  --ink-950: #171715;
+  --ink-700: #514e46;
+  --ink-500: #7e7a70;
+  --clay-700: #a93620;
+  --clay-500: #d94a2b;
+  --clay-300: #f29a85;
+  --coral-500: #f56f56;
+  --cyan-500: #5bbbd6;
+  --green-500: #2e8b57;
 
-  /* Neon accents — usar con moderación */
-  --neon-cyan: #00e5ff;
-  --neon-cyan-dim: rgba(0, 229, 255, 0.2);
-  --neon-cyan-glow: rgba(0, 229, 255, 0.08);
-  --neon-magenta: #e040fb;
-  --neon-magenta-dim: rgba(224, 64, 251, 0.2);
-  --neon-magenta-glow: rgba(224, 64, 251, 0.08);
-  --neon-violet: #7c4dff;
-  --neon-violet-dim: rgba(124, 77, 255, 0.2);
-  --neon-violet-glow: rgba(124, 77, 255, 0.08);
-  --neon-amber: #ffd740;
+  /* Semantic colors */
+  --color-bg: var(--paper-50);
+  --color-surface: var(--white);
+  --color-surface-subtle: var(--paper-100);
+  --color-surface-elevated: var(--white);
+  --color-text-primary: var(--ink-950);
+  --color-text-secondary: var(--ink-700);
+  --color-text-tertiary: var(--ink-500);
+  --color-text-on-action: #ffffff;
+  --color-border-subtle: rgba(23, 23, 21, 0.12);
+  --color-border-default: rgba(23, 23, 21, 0.18);
+  --color-border-strong: rgba(23, 23, 21, 0.24);
+  --color-action-primary: var(--clay-500);
+  --color-action-hover: var(--clay-700);
+  --color-action-soft: rgba(217, 74, 43, 0.09);
+  --color-focus: color-mix(in srgb, var(--color-action-primary) 72%, white);
 
-  /* Text hierarchy */
-  --text-primary: #f0f4ff;
-  --text-secondary: #8b95b0;
-  --text-muted: #4a5270;
-  --text-accent: var(--neon-cyan);
-  --text-inverse: #05060a;
+  /* 4pt spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
 
-  /* Borders */
-  --border-subtle: #1e2235;
-  --border-default: #252a3d;
-  --border-accent: rgba(0, 229, 255, 0.25);
-  --border-glow: rgba(0, 229, 255, 0.5);
+  /* Typography */
+  --type-xs: 0.75rem;
+  --type-sm: 0.875rem;
+  --type-body: 1rem;
+  --type-lg: 1.125rem;
+  --type-xl: 1.5rem;
+  --type-2xl: 2rem;
+  --type-3xl: 3rem;
 
-  /* Glows / Shadows */
-  --glow-cyan: 0 0 20px rgba(0, 229, 255, 0.25), 0 0 60px rgba(0, 229, 255, 0.08);
-  --glow-magenta: 0 0 20px rgba(224, 64, 251, 0.25), 0 0 60px rgba(224, 64, 251, 0.08);
-  --glow-violet: 0 0 20px rgba(124, 77, 255, 0.25), 0 0 60px rgba(124, 77, 255, 0.08);
-  --glow-card: 0 4px 32px rgba(0, 0, 0, 0.6), 0 0 1px rgba(0, 229, 255, 0.12);
-  --glow-card-hover: 0 8px 48px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 229, 255, 0.15);
-  --shadow-deep: 0 20px 60px rgba(0, 0, 0, 0.56);
+  /* Radius + elevation */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 30px;
+  --radius-pill: 999px;
+  --elevation-1: 0 1px 2px rgba(28, 20, 16, 0.04), 0 10px 30px rgba(73, 43, 34, 0.07);
+  --elevation-2: 0 2px 4px rgba(28, 20, 16, 0.05), 0 24px 70px rgba(73, 43, 34, 0.12);
+  --shadow-deep: 0 20px 60px rgba(45, 29, 22, 0.16);
 
-  /* Glass */
-  --glass-bg: rgba(10, 12, 18, 0.7);
-  --glass-blur: 12px;
-
-  /* Border radius */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-
-  /* Animation timing */
+  /* Motion */
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 400ms;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* shadcn compatibility — dark theme defaults */
-  --background: 230 20% 4%;
-  --foreground: 220 30% 94%;
-  --card: 230 20% 6%;
-  --card-foreground: 220 30% 94%;
-  --popover: 230 20% 6%;
-  --popover-foreground: 220 30% 94%;
-  --primary: 189 100% 50%;
-  --primary-foreground: 230 20% 4%;
-  --secondary: 230 20% 8%;
-  --secondary-foreground: 220 30% 94%;
-  --muted: 230 20% 10%;
-  --muted-foreground: 220 15% 55%;
-  --accent: 189 100% 50%;
-  --accent-foreground: 230 20% 4%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 220 30% 94%;
-  --border: 230 20% 14%;
-  --input: 230 20% 10%;
-  --ring: 189 100% 50%;
-  --radius: 0.625rem;
+  /* Component tokens */
+  --control-height-sm: 36px;
+  --control-height-md: 44px;
+  --control-height-lg: 52px;
+  --button-radius: var(--radius-pill);
+  --input-radius: var(--radius-md);
+  --card-radius: var(--radius-lg);
+  --card-bg: var(--color-surface);
+  --card-border: var(--color-border-subtle);
+  --card-shadow: var(--elevation-1);
+  --focus-ring: 0 0 0 3px var(--color-action-soft);
+
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-blur: 18px;
+
+  /* Legacy compatibility aliases — do not use in new code */
+  --bg-void: var(--color-bg);
+  --bg-surface: var(--color-surface-subtle);
+  --bg-elevated: var(--color-surface-elevated);
+  --bg-overlay: var(--color-surface-elevated);
+  --bg-card: var(--card-bg);
+  --neon-cyan: var(--color-action-primary);
+  --neon-cyan-dim: var(--color-action-soft);
+  --neon-cyan-glow: var(--color-action-soft);
+  --neon-magenta: var(--coral-500);
+  --neon-magenta-dim: rgba(245, 111, 86, 0.14);
+  --neon-magenta-glow: rgba(245, 111, 86, 0.08);
+  --neon-violet: var(--cyan-500);
+  --neon-violet-dim: rgba(91, 187, 214, 0.16);
+  --neon-violet-glow: rgba(91, 187, 214, 0.08);
+  --neon-amber: #c58f1e;
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --text-muted: var(--color-text-tertiary);
+  --text-accent: var(--color-action-primary);
+  --text-inverse: var(--color-text-on-action);
+  --border-subtle: var(--color-border-subtle);
+  --border-default: var(--color-border-default);
+  --border-accent: color-mix(in srgb, var(--color-action-primary) 30%, transparent);
+  --border-glow: color-mix(in srgb, var(--color-action-primary) 54%, transparent);
+  --glow-cyan: var(--elevation-1);
+  --glow-magenta: var(--elevation-1);
+  --glow-violet: var(--elevation-1);
+  --glow-card: var(--elevation-1);
+  --glow-card-hover: var(--elevation-2);
+
+  /* shadcn compatibility — light defaults */
+  --background: 42 22% 96%;
+  --foreground: 60 4% 9%;
+  --card: 0 0% 100%;
+  --card-foreground: 60 4% 9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 60 4% 9%;
+  --primary: 11 68% 51%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 43 19% 93%;
+  --secondary-foreground: 60 4% 9%;
+  --muted: 43 19% 93%;
+  --muted-foreground: 42 6% 46%;
+  --accent: 11 68% 51%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 45 7% 82%;
+  --input: 45 7% 82%;
+  --ring: 11 68% 51%;
+  --radius: 0.75rem;
+}
+
+[data-theme="dark"],
+.dark {
+  --color-bg: #0f100f;
+  --color-surface: #181a17;
+  --color-surface-subtle: #151714;
+  --color-surface-elevated: #1d201c;
+  --color-text-primary: #f5f4ef;
+  --color-text-secondary: #c9c6bc;
+  --color-text-tertiary: #9a968c;
+  --color-border-subtle: rgba(255, 255, 255, 0.1);
+  --color-border-default: rgba(255, 255, 255, 0.14);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
+  --color-action-primary: #ff7254;
+  --color-action-hover: #ff947e;
+  --color-action-soft: rgba(255, 114, 84, 0.14);
+  --color-focus: color-mix(in srgb, var(--color-action-primary) 76%, white);
+  --glass-bg: rgba(24, 26, 23, 0.72);
+  --elevation-1: 0 12px 34px rgba(0, 0, 0, 0.2);
+  --elevation-2: 0 28px 80px rgba(0, 0, 0, 0.34);
+  --shadow-deep: 0 24px 70px rgba(0, 0, 0, 0.42);
+
+  --background: 120 3% 6%;
+  --foreground: 48 23% 95%;
+  --card: 100 6% 10%;
+  --card-foreground: 48 23% 95%;
+  --popover: 100 6% 10%;
+  --popover-foreground: 48 23% 95%;
+  --primary: 11 100% 66%;
+  --primary-foreground: 120 3% 6%;
+  --secondary: 100 6% 10%;
+  --secondary-foreground: 48 23% 95%;
+  --muted: 100 6% 12%;
+  --muted-foreground: 43 7% 58%;
+  --accent: 11 100% 66%;
+  --accent-foreground: 120 3% 6%;
+  --border: 0 0% 18%;
+  --input: 0 0% 18%;
+  --ring: 11 100% 66%;
 }
 
 /* ─── Base Styles ─────────────────────────────────────────────────────────── */
@@ -95,8 +198,8 @@ html {
 }
 
 body {
-  background-color: var(--bg-void);
-  color: var(--text-primary);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -105,8 +208,8 @@ body {
 
 /* Selection */
 ::selection {
-  background-color: rgba(0, 229, 255, 0.2);
-  color: var(--neon-cyan);
+  background-color: var(--color-action-soft);
+  color: var(--color-action-primary);
 }
 
 /* Scrollbar */
@@ -116,23 +219,23 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-void);
+  background: var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-default);
+  background: var(--color-border-default);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--neon-cyan-dim);
+  background: var(--color-action-soft);
 }
 
 /* Focus styles */
 :focus-visible {
-  outline: 2px solid var(--neon-cyan);
+  outline: 3px solid var(--color-focus);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
 /* ─── Noise Texture Overlay ───────────────────────────────────────────────── */

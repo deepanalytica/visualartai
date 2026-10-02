@@ -13,12 +13,40 @@ const config: Config = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1240px",
       },
     },
     extend: {
       colors: {
-        // Design system tokens mapped to CSS vars
+        canvas: "var(--color-bg)",
+        surface: {
+          DEFAULT: "var(--color-surface)",
+          subtle: "var(--color-surface-subtle)",
+          elevated: "var(--color-surface-elevated)",
+        },
+        ink: {
+          DEFAULT: "var(--color-text-primary)",
+          secondary: "var(--color-text-secondary)",
+          tertiary: "var(--color-text-tertiary)",
+        },
+        brand: {
+          300: "var(--clay-300)",
+          500: "var(--clay-500)",
+          700: "var(--clay-700)",
+          coral: "var(--coral-500)",
+          cyan: "var(--cyan-500)",
+          green: "var(--green-500)",
+        },
+        action: {
+          DEFAULT: "var(--color-action-primary)",
+          hover: "var(--color-action-hover)",
+          soft: "var(--color-action-soft)",
+        },
+        "border-subtle": "var(--color-border-subtle)",
+        "border-default": "var(--color-border-default)",
+        "border-strong": "var(--color-border-strong)",
+
+        // Deprecated aliases kept until old components are migrated.
         "bg-void": "var(--bg-void)",
         "bg-surface": "var(--bg-surface)",
         "bg-elevated": "var(--bg-elevated)",
@@ -34,10 +62,7 @@ const config: Config = {
         "text-secondary": "var(--text-secondary)",
         "text-muted": "var(--text-muted)",
         "text-accent": "var(--text-accent)",
-        "border-subtle": "var(--border-subtle)",
-        "border-default": "var(--border-default)",
-        "border-accent": "var(--border-accent)",
-        "border-glow": "var(--border-glow)",
+
         // shadcn compatibility
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -73,10 +98,24 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      spacing: {
+        "ds-1": "var(--space-1)",
+        "ds-2": "var(--space-2)",
+        "ds-3": "var(--space-3)",
+        "ds-4": "var(--space-4)",
+        "ds-5": "var(--space-5)",
+        "ds-6": "var(--space-6)",
+        "ds-7": "var(--space-7)",
+        "ds-8": "var(--space-8)",
+        "ds-9": "var(--space-9)",
+        "ds-10": "var(--space-10)",
+      },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        xs: "var(--radius-sm)",
+        sm: "var(--radius-md)",
+        md: "var(--radius-lg)",
+        lg: "var(--radius-xl)",
+        full: "var(--radius-pill)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
@@ -84,16 +123,17 @@ const config: Config = {
         mono: ["var(--font-geist-mono)", "monospace"],
       },
       boxShadow: {
-        "glow-cyan": "0 0 20px rgba(0, 229, 255, 0.25), 0 0 60px rgba(0, 229, 255, 0.08)",
-        "glow-magenta": "0 0 20px rgba(224, 64, 251, 0.25), 0 0 60px rgba(224, 64, 251, 0.08)",
-        "glow-violet": "0 0 20px rgba(124, 77, 255, 0.25), 0 0 60px rgba(124, 77, 255, 0.08)",
-        "glow-card": "0 4px 24px rgba(0, 0, 0, 0.5), 0 0 1px rgba(0, 229, 255, 0.12)",
-        deep: "0 20px 60px rgba(0, 0, 0, 0.56)",
-        "neon-sm": "0 0 8px rgba(0, 229, 255, 0.4)",
+        card: "var(--elevation-1)",
+        elevated: "var(--elevation-2)",
+        deep: "var(--shadow-deep)",
+        "glow-cyan": "var(--glow-cyan)",
+        "glow-magenta": "var(--glow-magenta)",
+        "glow-violet": "var(--glow-violet)",
+        "glow-card": "var(--glow-card)",
       },
       backdropBlur: {
         xs: "2px",
-        glass: "12px",
+        glass: "var(--glass-blur)",
       },
       keyframes: {
         "accordion-down": {
@@ -116,21 +156,6 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateY(24px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        "scan-line": {
-          "0%": { transform: "translateY(-100%)" },
-          "100%": { transform: "translateY(100vh)" },
-        },
-        glitch: {
-          "0%, 100%": { transform: "translate(0)" },
-          "20%": { transform: "translate(-2px, 1px)" },
-          "40%": { transform: "translate(2px, -1px)" },
-          "60%": { transform: "translate(-1px, 2px)" },
-          "80%": { transform: "translate(1px, -2px)" },
-        },
-        "border-glow": {
-          "0%, 100%": { borderColor: "rgba(0, 229, 255, 0.3)" },
-          "50%": { borderColor: "rgba(0, 229, 255, 0.8)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -138,9 +163,6 @@ const config: Config = {
         "pulse-neon": "pulse-neon 2s ease-in-out infinite",
         "fade-in": "fade-in 0.4s var(--ease-out) both",
         "slide-up": "slide-up 0.5s var(--ease-out) both",
-        "scan-line": "scan-line 8s linear infinite",
-        glitch: "glitch 0.3s steps(2) infinite",
-        "border-glow": "border-glow 3s ease-in-out infinite",
       },
     },
   },
