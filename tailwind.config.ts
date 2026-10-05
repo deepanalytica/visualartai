@@ -30,12 +30,18 @@ const config: Config = {
           tertiary: "var(--color-text-tertiary)",
         },
         brand: {
-          300: "var(--clay-300)",
-          500: "var(--clay-500)",
-          700: "var(--clay-700)",
-          coral: "var(--coral-500)",
+          300: "var(--blue-300)",
+          500: "var(--blue-500)",
+          600: "var(--blue-600)",
+          700: "var(--blue-700)",
+          800: "var(--blue-800)",
           cyan: "var(--cyan-500)",
-          green: "var(--green-500)",
+          mint: "var(--mint-500)",
+        },
+        signal: {
+          positive: "var(--color-signal-positive)",
+          info: "var(--color-signal-info)",
+          warning: "var(--color-signal-warning)",
         },
         action: {
           DEFAULT: "var(--color-action-primary)",
@@ -118,8 +124,8 @@ const config: Config = {
         full: "var(--radius-pill)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-space-grotesk)", "sans-serif"],
+        sans: ["var(--font-manrope)", "var(--font-inter)", "system-ui", "sans-serif"],
+        display: ["var(--font-manrope)", "var(--font-inter)", "system-ui", "sans-serif"],
         mono: ["var(--font-geist-mono)", "monospace"],
       },
       boxShadow: {

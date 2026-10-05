@@ -1,281 +1,160 @@
-# Visual Art AI Design System v2
+# Visual Art AI — Search Signal Design System v4
 
-Este documento define el sistema de diseño que gobierna Visual Art AI en producción y en la aplicación Next.js.
-
-La regla central es simple:
-
-> una decisión visual importante debe existir como fundamento, token, componente o patrón. No como un valor aislado inventado para una pantalla.
+Visual Art AI usa la metodología de un design system, pero **no copia una estética de referencia**. La identidad nace del problema que resolvemos: ayudar a que un negocio sea **encontrado, entendido y elegido** en Google, Maps, la web y los buscadores de IA.
 
 ## 1. Arquitectura
 
-El sistema se construye en cinco capas:
-
-1. **Foundations** — color, tipografía, espaciado, radios, elevación, motion y accesibilidad.
-2. **Primitive tokens** — valores crudos de la marca, por ejemplo `--clay-500`.
-3. **Semantic tokens** — significado, por ejemplo `--color-action-primary`.
-4. **Component tokens/contracts** — cómo se comportan Button, Input, Card, Navigation, Badge, Modal, Tabs y otros.
-5. **Patterns** — hero, feature grid, pricing, diagnostic, search proof, CTA, cards de recursos y estados vacíos.
-
-El orden de consumo es:
-
 ```
-primitive → semantic → component → pattern → screen
+foundations
+→ primitive tokens
+→ semantic tokens
+→ components
+→ pattern families
+→ templates
+→ art direction
 ```
 
-Una pantalla nueva no debe introducir una nueva lógica visual si la decisión ya existe aguas arriba.
+Una pantalla nueva no inventa colores, radios o comportamientos. Pero tampoco fuerza todas las secciones a verse iguales.
 
-## 2. Identidad Visual Art AI
+## 2. Concepto de marca
 
-La identidad vigente deja atrás la antigua dirección dark-neon como lenguaje principal.
+**Signal → Discovery → Match**
 
-### Paleta base
+El vocabulario visual propio es:
 
-- **Paper**: fondos cálidos y sobrios.
-- **Ink**: jerarquía textual.
-- **Clay / terracotta**: acción y marca principal.
-- **Coral**: apoyo cálido.
-- **Cyan** y **green**: acentos funcionales puntuales; nunca compiten con el CTA principal.
+- consultas;
+- señales;
+- nodos;
+- rutas;
+- entidades;
+- coincidencias;
+- resultados;
+- mapas;
+- plataformas;
+- estados de búsqueda.
 
-El modo oscuro existe como tema, no como identidad separada.
+Esto reemplaza la estética anterior de terracota/editorial y evita depender de cards genéricas.
 
-## 3. Tokens
+## 3. Color
 
-Los tokens canónicos viven en `src/app/globals.css`.
-
-### Primitivos
-
-```css
---paper-50
---paper-100
---ink-950
---ink-700
---ink-500
---clay-700
---clay-500
---clay-300
---coral-500
---cyan-500
---green-500
-```
-
-### Semánticos
-
-Código nuevo debe preferir:
-
-```css
---color-bg
---color-surface
---color-surface-subtle
---color-surface-elevated
---color-text-primary
---color-text-secondary
---color-text-tertiary
---color-border-subtle
---color-border-default
---color-border-strong
---color-action-primary
---color-action-hover
---color-action-soft
---color-focus
-```
-
-No usar `#D94A2B` dentro de un componente. Usar `var(--color-action-primary)`.
-
-### Espaciado: grid de 4pt
+Identidad principal:
 
 ```
-4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 · 128
+Signal Blue   #2F6BFF
+Deep Blue     #1747D1
+Night         #07111F
+Paper         #F7F9FC
+Ink           #0B1320
+Cyan          #51C7E7
+Mint          #35CFA8
 ```
 
-Los aliases Tailwind son `ds-1` a `ds-10`.
+El azul expresa señal y acción. Mint identifica match/estado positivo. Cyan es información secundaria.
 
-### Radios
-
-```
-sm   8px
-md  12px
-lg  20px
-xl  30px
-full 999px
-```
-
-### Motion
-
-```
-fast   150ms
-normal 250ms
-slow   400ms
-ease   cubic-bezier(.22,1,.36,1)
-```
-
-Las interfaces respetan `prefers-reduced-motion`.
+**No usar degradados decorativos como identidad.**
 
 ## 4. Tipografía
 
-Visual Art AI mantiene tres roles:
+- **Manrope**: titulares, interfaz, marketing y lectura.
+- **IBM Plex Mono**: metadata, estados, labels y señales.
 
-- **Sans**: interfaz y lectura.
-- **Serif**: énfasis editorial y contraste expresivo.
-- **Mono**: labels técnicos, metadata y microcopy funcional.
+No existe un rol serif dominante.
 
-No mezclar familias por decoración. Cada familia representa un rol.
+## 5. Componentes
 
-La escala base es:
+Base compartida:
 
-```
-xs     12
-sm     14
-body   16
-lg     18
-xl     24
-2xl    32
-3xl    48
-```
+- Button
+- Input / Select / Textarea
+- Navigation
+- Panel
+- Badge / Entity chip
+- Status
+- Modal / Sheet
+- Table / List
+- Tooltip
 
-Los headlines de marketing pueden usar escalas fluidas con `clamp()`, pero deben mantener la misma lógica de peso, tracking y contraste.
+Todos consumen tokens semánticos.
 
-## 5. Componentes base
+## 6. Patrones propios
 
-### Button
+### Search Lab
+Representa una consulta, las señales que se comparan y un resultado relevante.
 
-Variantes:
+### Signal Path
+Explica el recorrido: necesidad → descubrimiento → comprensión → contacto.
 
-```
-primary
-secondary
-ghost
-destructive
-```
+### Service Lanes
+Explica servicios como capas conectadas, no como seis cards idénticas.
 
-Tamaños:
+### Visibility Trace
+Muestra antes/después o cambio de claridad con una nota explícita cuando la visualización es conceptual.
 
-```
-sm 36
-md 44
-lg 52
-```
+### Audit Scan
+Organiza la auditoría en encontrabilidad, comprensión, confianza y conversión.
 
-Estados obligatorios:
+### Guide Index
+Contenido editorial basado en preguntas reales de búsqueda.
 
-```
-default
-hover
-pressed
-focus
-disabled
-loading
-```
+## 7. Qué hacemos / propuesta de valor
 
-Regla: una sola acción primaria dominante por bloque visual.
+La oferta debe ser comprensible en lenguaje natural:
 
-### Input
+> Hacemos que tu negocio sea más fácil de encontrar, entender y elegir.
 
-Estados obligatorios:
+Servicios:
 
-```
-default
-hover
-focus
-error
-disabled
-```
+- Google y Maps;
+- SEO y contenido;
+- GEO / LLM SEO y visibilidad en buscadores de IA;
+- webs y landing pages;
+- Google Ads y Meta Ads;
+- WhatsApp y automatización;
+- marca y contenido visual;
+- analítica y optimización.
 
-El control interactivo debe mantener al menos 44px de altura táctil cuando sea posible.
+Diferenciador:
 
-### Card
+> No tratamos Google, la IA, la web y la conversión como proyectos aislados. Trabajamos esas capas como un sistema conectado de presencia digital.
 
-Una Card consume:
+## 8. Encontrabilidad propia: Google + IA
 
-```
---card-bg
---card-border
---card-radius
---card-shadow
-```
+Visual Art AI debe aplicar a sí misma lo que ofrece a clientes.
 
-No se crea una sombra o radio nuevo para resolver una sola tarjeta.
+Producción incorpora:
 
-### Navigation
+- HTML semántico y headings descriptivos;
+- copy visible de servicios y beneficios;
+- FAQ visible;
+- JSON-LD con `Organization`, `WebSite`, `Service` y `FAQPage`;
+- canonical y hreflang;
+- robots.txt;
+- sitemap.xml;
+- llms.txt;
+- páginas de contenido enlazadas;
+- metadata Open Graph;
+- promesas responsables: no garantizar recomendaciones de asistentes de IA.
 
-La navegación comparte tokens de control, focus y motion. En móvil debe conservar el mismo orden semántico y no depender únicamente de hover.
+La meta es reducir ambigüedad para personas y sistemas, no rellenar la web con palabras clave.
 
-## 6. Patterns
+## 9. Accesibilidad
 
-Visual Art AI estandariza al menos:
+Mínimos:
 
-- Hero
-- Platform/search proof
-- Diagnostic
-- Feature grid
-- Sector grid
-- Resource card
-- Pricing
-- FAQ / education block
-- CTA
-- Mobile conversion bar
-
-Los patterns pueden cambiar de composición, pero no redefinir las foundations.
-
-## 7. Accesibilidad
-
-Mínimos del sistema:
-
-- focus visible persistente;
-- targets táctiles cercanos o superiores a 44px;
-- contraste suficiente para texto y controles;
-- no comunicar estado únicamente mediante color;
-- soporte de reduced motion;
-- labels explícitos en forms;
-- navegación operable con teclado.
-
-## 8. Convención para desarrollo
-
-Nuevo código:
-
-```tsx
-className="bg-surface text-ink border-border-subtle rounded-md shadow-card"
-```
-
-o CSS:
-
-```css
-.component {
-  background: var(--color-surface);
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--card-radius);
-}
-```
-
-Evitar:
-
-```css
-.component {
-  background: #fff;
-  color: #171715;
-  border-radius: 17px;
-  box-shadow: 0 18px 37px rgba(...);
-}
-```
-
-## 9. Compatibilidad y migración
-
-La aplicación antigua usaba variables con nombres `--neon-*`, `--bg-void` y componentes con nomenclatura neon. Esos nombres se mantienen temporalmente como aliases para no romper pantallas existentes.
-
-**No deben usarse en componentes nuevos.**
-
-La migración correcta es progresiva:
-
-```
-legacy alias → semantic token → component contract
-```
+- focus visible;
+- targets cercanos o superiores a 44px;
+- contraste suficiente;
+- labels explícitos;
+- navegación por teclado;
+- no usar color como única señal;
+- `prefers-reduced-motion`.
 
 ## 10. Source of truth
 
-- Producción estática: `site/index.html`
-- Foundations de aplicación: `src/app/globals.css`
-- Mapeo Tailwind: `tailwind.config.ts`
-- Contratos tipados: `src/lib/design-system.ts`
-- Este documento: `docs/design-system.md`
-
-Si Figma se usa, sus variables deben copiar exactamente esta nomenclatura semántica. Diseño y código deben hablar el mismo idioma.
+- Producción: `site/index.html`
+- Sistema estático: `site/design-system.css`
+- Motion/brand: `site/brand/visual-art-ai-design-system.css`
+- Foundations app: `src/app/globals.css`
+- Tailwind: `tailwind.config.ts`
+- Contratos: `src/lib/design-system.ts`
+- SEO/GEO: `site/robots.txt`, `site/sitemap.xml`, `site/llms.txt`

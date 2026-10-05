@@ -1,8 +1,6 @@
 /**
- * Visual Art AI Design System v2
- *
- * This file carries names/contracts, not raw visual values.
- * Raw values live in CSS primitives; product code consumes semantic variables.
+ * Visual Art AI Search Signal Design System v4
+ * Contracts only. Raw visual values live in CSS primitives.
  */
 
 export const tokens = {
@@ -20,6 +18,9 @@ export const tokens = {
     actionPrimary: "var(--color-action-primary)",
     actionHover: "var(--color-action-hover)",
     actionSoft: "var(--color-action-soft)",
+    signalPositive: "var(--color-signal-positive)",
+    signalInfo: "var(--color-signal-info)",
+    signalWarning: "var(--color-signal-warning)",
     focus: "var(--color-focus)",
   },
   radius: {
@@ -52,7 +53,7 @@ export const componentContracts = {
     states: ["default", "hover", "focus", "error", "disabled"],
     minimumInteractiveHeight: 44,
   },
-  card: {
+  panel: {
     surface: tokens.color.surface,
     border: tokens.color.borderSubtle,
     radius: tokens.radius.lg,
@@ -60,6 +61,16 @@ export const componentContracts = {
   },
 } as const
 
+export const patternContracts = {
+  searchLab: ["query", "signalTrack", "criteria", "entityResult"],
+  signalPath: ["need", "discover", "understand", "contact"],
+  serviceLanes: ["category", "benefit", "explanation", "signal"],
+  visibilityTrace: ["before", "after", "evidenceNote"],
+  auditScan: ["findability", "clarity", "trust", "conversion"],
+  guideIndex: ["topic", "question", "answerIntent"],
+} as const
+
 export type ButtonVariant = (typeof componentContracts.button.variants)[number]
 export type ButtonSize = (typeof componentContracts.button.sizes)[number]
 export type ButtonState = (typeof componentContracts.button.states)[number]
+export type PatternName = keyof typeof patternContracts
