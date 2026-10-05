@@ -1,7 +1,7 @@
-/* Visual Art AI — Search Signal brand layer v4 */
-:root{--brand-blue:#2f6bff;--brand-blue-soft:#8db1ff;--brand-mint:#35cfa8}
-.vaa-signal-arc{stroke:var(--brand-blue);stroke-dasharray:34;stroke-dashoffset:34;animation:vaaArc 5.2s cubic-bezier(.22,1,.36,1) infinite}
-.vaa-signal-dot{fill:var(--brand-mint);transform-origin:18px 18px;animation:vaaDot 5.2s ease-in-out infinite;filter:drop-shadow(0 0 5px rgba(53,207,168,.35))}
-@keyframes vaaArc{0%,14%{stroke-dashoffset:34;opacity:.25}34%,78%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:.42}}
-@keyframes vaaDot{0%,100%{transform:scale(.92);opacity:.72}46%,58%{transform:scale(1.22);opacity:1}}
+/* Visual Art AI — Motion & Discovery brand layer v5 */
+:root{--brand-blue:#2f6bff;--brand-red:#ff4d5a;--brand-yellow:#ffd95a;--brand-mint:#35cfa8}
+.vaa-signal-arc{stroke:var(--brand-blue);stroke-dasharray:34;stroke-dashoffset:34;animation:vaaArc 4.8s cubic-bezier(.22,1,.36,1) infinite}
+.vaa-signal-dot{fill:var(--brand-red);transform-origin:18px 18px;animation:vaaDot 4.8s ease-in-out infinite;filter:drop-shadow(0 0 5px rgba(255,77,90,.28))}
+@keyframes vaaArc{0%,12%{stroke-dashoffset:34;opacity:.28}34%,80%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:.5}}
+@keyframes vaaDot{0%,100%{transform:scale(.9);opacity:.78}46%,58%{transform:scale(1.28);opacity:1}}
 @media(prefers-reduced-motion:reduce){.vaa-signal-arc,.vaa-signal-dot{animation:none!important}.vaa-signal-arc{stroke-dashoffset:0;opacity:1}}

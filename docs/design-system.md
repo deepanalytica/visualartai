@@ -1,4 +1,4 @@
-# Visual Art AI — Search Signal Design System v4
+# Visual Art AI — Motion & Discovery Design System v5
 
 Visual Art AI usa la metodología de un design system, pero **no copia una estética de referencia**. La identidad nace del problema que resolvemos: ayudar a que un negocio sea **encontrado, entendido y elegido** en Google, Maps, la web y los buscadores de IA.
 
@@ -41,17 +41,20 @@ Identidad principal:
 
 ```
 Signal Blue   #2F6BFF
-Deep Blue     #1747D1
-Night         #07111F
-Paper         #F7F9FC
-Ink           #0B1320
-Cyan          #51C7E7
+Red Motion    #FF4D5A
+Yellow Spark  #FFD95A
 Mint          #35CFA8
+Orange        #FF914D
+Violet        #7B61FF
+Pink          #FF78AB
+Paper         #F8FBFF
+Cream         #FFFAF3
+Ink           #0C1524
 ```
 
-El azul expresa señal y acción. Mint identifica match/estado positivo. Cyan es información secundaria.
+El azul expresa dirección y acción. El rojo introduce movimiento y energía. El amarillo funciona como señal de atención. Mint, cyan, violet, orange y pink aportan variedad funcional sin convertir cada sección en una marca distinta.
 
-**No usar degradados decorativos como identidad.**
+La identidad prioriza bloques de color, bordes, desplazamientos, nodos y movimiento. Los colores vivos se usan con jerarquía: azul para acción, rojo para énfasis, amarillo para atención y secundarios para diferenciar contenidos.
 
 ## 4. Tipografía
 

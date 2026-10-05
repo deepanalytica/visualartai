@@ -25,11 +25,18 @@
   --blue-500: #4c7dff;
   --blue-300: #8db1ff;
   --blue-100: #eaf0ff;
+  --red-500: #ff4d5a;
+  --red-100: #fff0f1;
+  --yellow-500: #ffd95a;
+  --yellow-100: #fff8d9;
+  --orange-500: #ff914d;
+  --violet-500: #7b61ff;
+  --pink-500: #ff78ab;
 
   --cyan-500: #51c7e7;
   --mint-500: #35cfa8;
   --amber-500: #f4b942;
-  --red-500: #e55c68;
+  --red-critical: #e55c68;
 
   --night-950: #07111f;
   --night-900: #0b1728;
@@ -50,6 +57,10 @@
   --color-action-primary: var(--blue-600);
   --color-action-hover: var(--blue-700);
   --color-action-soft: var(--blue-100);
+  --color-accent: var(--red-500);
+  --color-accent-soft: var(--red-100);
+  --color-highlight: var(--yellow-500);
+  --color-highlight-soft: var(--yellow-100);
   --color-signal-positive: var(--mint-500);
   --color-signal-info: var(--cyan-500);
   --color-signal-warning: var(--amber-500);
