@@ -1,27 +1,19 @@
-# Visual Art AI — Search Signal Brand System v4
+# Visual Art AI — Brand / Motion Layer v7
 
-## Idea central
-**Signal → Discovery → Match.**
+The public design language is governed by semantic tokens and pattern contracts in `site/styles/`.
 
-La metodología del sistema es sistemática, pero la dirección visual nace del problema que la marca resuelve: hacer que un negocio sea encontrado, entendido y elegido en la nueva búsqueda.
+## Palette discipline
 
-## Vocabulario visual propio
-Consultas, señales, nodos, rutas de descubrimiento, entidades, coincidencias, resultados, mapas, plataformas y estados de búsqueda.
+Visible brand colors are intentionally limited:
+- **Action Blue**: navigation, selected state, direction and CTA.
+- **Coral Accent**: emphasis, interruption and meaningful transition.
+- **Mint**: positive / matched state only.
+- **Neutral scale**: the majority of surfaces, text and structure.
 
-## Paleta
-Signal Blue #2F6BFF · Deep Blue #1747D1 · Night #07111F · Paper #F7F9FC · Ink #0B1320 · Cyan #51C7E7 · Mint #35CFA8.
+Do not introduce yellow, violet, pink, orange or other decorative brand colors locally.
 
-No se usan degradados decorativos como recurso de identidad.
+## Motion discipline
 
-## Tipografía
-Manrope para interfaz, marketing, lectura y titulares. IBM Plex Mono para metadata, labels, señales y estados. No existe un rol serif en la identidad principal.
+The logo arc/dot, GSAP choreography and Three.js hero field all consume the same semantic system. Motion must explain hierarchy, state, relation or progress.
 
-## Arquitectura
-foundations → primitive tokens → semantic tokens → components → pattern families → templates → art direction
-
-## Patrones propios
-Search Lab · Signal Path · Service Lanes · Visibility Trace · Audit Banner · Diagnostic Scan · Guide Index · Signal CTA.
-
-
-## Findability layer
-La identidad visual se acompaña de una capa semántica explícita: copy de servicios en lenguaje natural, FAQ visible, datos estructurados Schema.org, sitemap, robots.txt y llms.txt. La meta no es “escribir para robots”, sino hacer que personas, Google y sistemas de IA puedan comprender con menos ambigüedad qué ofrece Visual Art AI.
+The Three.js field is progressive enhancement: sparse, low-opacity, low-power, DPR-capped, paused outside the viewport, disabled for reduced motion and skipped on smaller screens.
