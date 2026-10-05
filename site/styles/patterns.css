@@ -155,3 +155,9 @@
 @media(max-width:72rem){.pricing-ladder{grid-template-columns:repeat(2,1fr)}.price-tier{grid-column:auto}.hero-visual-stack{grid-column:8/-1}.pain-card{grid-template-columns:1fr}.pain-illustration{display:none}}
 @media(max-width:64rem){.hero-visual-stack{grid-column:auto}.pain-card{grid-template-columns:12rem 1fr}.pain-illustration{display:grid}.pricing-ladder{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:45rem){.pain-card{grid-template-columns:1fr}.pain-illustration{min-height:8rem;max-height:10rem;overflow:hidden}.pain-illustration svg{max-height:9rem}.pricing-ladder{grid-template-columns:1fr}.price-tier{min-height:auto}.tier-promise{min-height:auto}.editorial-underline{white-space:normal}}
+
+/* v8 iconography + premium type pairing */
+.benefit-icon svg{width:1.45rem;height:1.45rem;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.pain-copy h3{font-family:var(--font-editorial);font-weight:400;font-size:clamp(1.5rem,2.3vw,2.15rem);letter-spacing:-.028em;line-height:1}
+.case-remate{font-family:var(--font-editorial);font-size:1.35rem;line-height:1.35;font-weight:400!important}
+.price-tier h3{font-family:var(--font-editorial);font-weight:400;font-size:2rem}
