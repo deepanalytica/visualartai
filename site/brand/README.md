@@ -21,3 +21,7 @@ foundations → primitive tokens → semantic tokens → components → pattern 
 
 ## Patrones propios
 Search Lab · Signal Path · Service Lanes · Visibility Trace · Audit Banner · Diagnostic Scan · Guide Index · Signal CTA.
+
+
+## Findability layer
+La identidad visual se acompaña de una capa semántica explícita: copy de servicios en lenguaje natural, FAQ visible, datos estructurados Schema.org, sitemap, robots.txt y llms.txt. La meta no es “escribir para robots”, sino hacer que personas, Google y sistemas de IA puedan comprender con menos ambigüedad qué ofrece Visual Art AI.

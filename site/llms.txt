@@ -1,0 +1,44 @@
+# Visual Art AI
+
+> Visual Art AI ayuda a profesionales y pymes de Chile a ser más fáciles de encontrar, entender y contactar en Google, Google Maps, la web y los buscadores de inteligencia artificial.
+
+## Qué hacemos
+
+Visual Art AI conecta visibilidad, contenido, autoridad y conversión como un solo sistema de presencia digital.
+
+Servicios:
+- Google Business Profile y Google Maps
+- SEO y arquitectura de contenido
+- GEO / LLM SEO y visibilidad en buscadores de IA
+- Diseño web y landing pages
+- Google Ads y Meta Ads
+- Automatización de WhatsApp y procesos de atención
+- Marca y contenido visual
+- Analítica, medición y optimización de conversión
+
+## Nuestra propuesta de valor
+
+No tratamos Google, la IA, la web y la conversión como proyectos aislados. Mejoramos las señales públicas que describen un negocio y conectamos el descubrimiento con una ruta clara hacia el contacto.
+
+No garantizamos que un asistente de IA recomiende una empresa concreta. Trabajamos para que la información pública sea más clara, consistente, verificable y útil para personas y sistemas.
+
+## Auditoría de presencia digital
+
+La auditoría revisa:
+1. encontrabilidad;
+2. Google y Maps;
+3. claridad de la oferta;
+4. señales para buscadores de IA;
+5. autoridad y evidencia;
+6. experiencia web;
+7. conversión;
+8. prioridades de mejora.
+
+## Recursos
+
+- Página principal: https://deepanalytica.github.io/visualartai/
+- Google Maps: https://deepanalytica.github.io/visualartai/articulos/google-maps.html
+- IA y competencia: https://deepanalytica.github.io/visualartai/articulos/ia-recomienda-competencia.html
+- SEO, GEO e IA: https://deepanalytica.github.io/visualartai/articulos/seo-geo.html
+- Conversión web: https://deepanalytica.github.io/visualartai/articulos/web-convierte.html
+- WhatsApp y operación: https://deepanalytica.github.io/visualartai/articulos/whatsapp.html
