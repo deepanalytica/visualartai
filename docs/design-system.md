@@ -1,176 +1,264 @@
-# Visual Art AI — Motion & Discovery Design System v5
+# Visual Art AI — Design System v7
 
-Visual Art AI usa la metodología de un design system, pero **no copia una estética de referencia**. La identidad nace del problema que resolvemos: ayudar a que un negocio sea **encontrado, entendido y elegido** en Google, Maps, la web y los buscadores de IA.
+## 1. Principle
 
-## 1. Arquitectura
+Visual Art AI is not a collection of colorful sections. It is a system.
 
-```
-foundations
-→ primitive tokens
-→ semantic tokens
-→ components
-→ pattern families
-→ templates
-→ art direction
-```
-
-Una pantalla nueva no inventa colores, radios o comportamientos. Pero tampoco fuerza todas las secciones a verse iguales.
-
-## 2. Concepto de marca
+The brand idea remains:
 
 **Signal → Discovery → Match**
 
-El vocabulario visual propio es:
+The interface translates that into a controlled visual language: search queries, signal paths, entities, states, evidence and conversion.
 
-- consultas;
-- señales;
-- nodos;
-- rutas;
-- entidades;
-- coincidencias;
-- resultados;
-- mapas;
-- plataformas;
-- estados de búsqueda.
+The system is intentionally constrained. **Blue is the primary brand color, coral is the active accent, mint is reserved for positive state, and neutrals carry most of the interface.** Adding a new decorative brand color requires a design-system decision, not a local preference.
 
-Esto reemplaza la estética anterior de terracota/editorial y evita depender de cards genéricas.
-
-## 3. Color
-
-Identidad principal:
+## 2. Architecture
 
 ```
-Signal Blue   #2F6BFF
-Red Motion    #FF4D5A
-Yellow Spark  #FFD95A
-Mint          #35CFA8
-Orange        #FF914D
-Violet        #7B61FF
-Pink          #FF78AB
-Paper         #F8FBFF
-Cream         #FFFAF3
-Ink           #0C1524
+primitive scales
+→ semantic tokens
+→ typography + spacing + grid
+→ component contracts
+→ pattern families
+→ templates
+→ motion grammar
 ```
 
-El azul expresa dirección y acción. El rojo introduce movimiento y energía. El amarillo funciona como señal de atención. Mint, cyan, violet, orange y pink aportan variedad funcional sin convertir cada sección en una marca distinta.
+Production is split into:
 
-La identidad prioriza bloques de color, bordes, desplazamientos, nodos y movimiento. Los colores vivos se usan con jerarquía: azul para acción, rojo para énfasis, amarillo para atención y secundarios para diferenciar contenidos.
+```
+site/styles/tokens.css
+site/styles/foundations.css
+site/styles/components.css
+site/styles/patterns.css
+site/styles/motion.css
+site/design-system.css
+```
 
-## 4. Tipografía
+`design-system.css` is only the public entry point.
 
-- **Manrope**: titulares, interfaz, marketing y lectura.
-- **IBM Plex Mono**: metadata, estados, labels y señales.
+## 3. Color system
 
-No existe un rol serif dominante.
+### Primitive scales
 
-## 5. Componentes
+Brand:
+- Blue 50–950
+- Coral 50–900
 
-Base compartida:
+State:
+- Mint 50–700
 
-- Button
-- Input / Select / Textarea
-- Navigation
-- Panel
-- Badge / Entity chip
-- Status
-- Modal / Sheet
-- Table / List
-- Tooltip
+Neutral:
+- Neutral 0–950
 
-Todos consumen tokens semánticos.
+### Semantic roles
 
-## 6. Patrones propios
+Never use `--blue-600` in a component when `--color-action-primary` expresses the intent.
 
-### Search Lab
-Representa una consulta, las señales que se comparan y un resultado relevante.
+Core semantic tokens:
 
-### Signal Path
-Explica el recorrido: necesidad → descubrimiento → comprensión → contacto.
+```
+--color-canvas
+--color-surface
+--color-surface-subtle
+--color-surface-raised
+--color-surface-inverse
 
-### Service Lanes
-Explica servicios como capas conectadas, no como seis cards idénticas.
+--color-text-primary
+--color-text-secondary
+--color-text-muted
+--color-text-inverse
 
-### Visibility Trace
-Muestra antes/después o cambio de claridad con una nota explícita cuando la visualización es conceptual.
+--color-border-subtle
+--color-border-default
+--color-border-strong
 
-### Audit Scan
-Organiza la auditoría en encontrabilidad, comprensión, confianza y conversión.
+--color-action-primary
+--color-action-primary-hover
+--color-action-primary-pressed
+--color-action-soft
 
-### Guide Index
-Contenido editorial basado en preguntas reales de búsqueda.
+--color-accent
+--color-accent-hover
+--color-accent-soft
 
-## 7. Qué hacemos / propuesta de valor
+--color-success
+--color-success-strong
+--color-success-soft
+```
 
-La oferta debe ser comprensible en lenguaje natural:
+Usage:
+- **Blue** = direction, links, actions, selected state.
+- **Coral** = emphasis, interruption, attention, important transitions.
+- **Mint** = confirmed / positive / matched state only.
+- **Neutrals** = canvas, reading, structure.
 
-> Hacemos que tu negocio sea más fácil de encontrar, entender y elegir.
+## 4. Typography
 
-Servicios:
+Family:
+- Manrope: all interface and marketing text.
+- IBM Plex Mono: labels, metadata, status and technical microcopy.
 
-- Google y Maps;
-- SEO y contenido;
-- GEO / LLM SEO y visibilidad en buscadores de IA;
-- webs y landing pages;
-- Google Ads y Meta Ads;
-- WhatsApp y automatización;
-- marca y contenido visual;
-- analítica y optimización.
+Scale:
 
-Diferenciador:
+| Role | Token |
+|---|---|
+| Display XL | `--type-display-xl` |
+| Display LG | `--type-display-lg` |
+| Display MD | `--type-display-md` |
+| Heading LG | `--type-heading-lg` |
+| Heading MD | `--type-heading-md` |
+| Heading SM | `--type-heading-sm` |
+| Body LG | `--type-body-lg` |
+| Body | `--type-body` |
+| Body SM | `--type-body-sm` |
+| Caption | `--type-caption` |
+| Micro / label | `--type-micro` |
 
-> No tratamos Google, la IA, la web y la conversión como proyectos aislados. Trabajamos esas capas como un sistema conectado de presencia digital.
+Do not introduce ad-hoc `17px`, `23px`, etc. New roles must enter the scale first.
 
-## 8. Encontrabilidad propia: Google + IA
+## 5. Spacing
 
-Visual Art AI debe aplicar a sí misma lo que ofrece a clientes.
+4px foundation:
 
-Producción incorpora:
+`1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 40`
 
-- HTML semántico y headings descriptivos;
-- copy visible de servicios y beneficios;
-- FAQ visible;
-- JSON-LD con `Organization`, `WebSite`, `Service` y `FAQPage`;
-- canonical y hreflang;
-- robots.txt;
-- sitemap.xml;
+These map to `--space-*` tokens. Components use the scale; sections use `--section-space`.
+
+## 6. Grid
+
+Desktop uses a **12-column grid**.
+
+```
+--container-max: 80rem
+--grid-columns: 12
+--grid-gutter: clamp(1rem, 2vw, 1.75rem)
+--page-gutter: clamp(1rem, 4.6vw, 3.5rem)
+```
+
+Examples:
+- Hero: copy 7 / demo 5.
+- What we do: proposition 8 / explanation 4.
+- Service Explorer: navigation 4 / live stage 8.
+- Case: narrative 5 / comparison 7.
+- Diagnostic: context 5 / form 7.
+
+Mobile is a deliberate single-column composition, not a shrunk desktop layout.
+
+## 7. Hierarchy
+
+A section has one dominant idea.
+
+Hierarchy order:
+1. eyebrow / context;
+2. display headline;
+3. supporting argument;
+4. interactive or evidence pattern;
+5. CTA.
+
+Body copy is never allowed to compete visually with the headline. Metadata never competes with body copy.
+
+## 8. Component contracts
+
+Buttons, form controls, disclosures, navigation, panels and status chips consume semantic tokens.
+
+Minimum interactive target: **44px**.
+
+States that must exist where relevant:
+- default;
+- hover;
+- pressed;
+- focus;
+- disabled;
+- loading.
+
+## 9. Pattern families
+
+- **Search Lab** — query → signals → relevant result.
+- **Search Pulse** — rotating demand examples.
+- **Opportunity Path** — need → discover → understand → contact.
+- **Service Explorer** — problem → intervention → benefit.
+- **Case Compare** — qualitative before / after.
+- **Audit Scan** — findability / clarity / trust / conversion.
+- **Guide Index** — useful questions, not generic SEO filler.
+- **FAQ** — plain-language objection handling.
+
+Patterns may look different because their jobs differ, but foundations remain shared.
+
+## 10. Motion grammar
+
+Motion is not decoration.
+
+Use motion for:
+- entrance hierarchy;
+- state change;
+- continuity between steps;
+- cause/effect;
+- spatial relationship.
+
+Timing:
+- instant: 100ms
+- fast: 180ms
+- normal: 280ms
+- slow: 520ms
+- scene: 900ms
+
+Easing:
+- standard: `cubic-bezier(.2,.8,.2,1)`
+- emphasized: `cubic-bezier(.16,1,.3,1)`
+
+### GSAP
+
+GSAP is loaded only on the homepage and only as progressive enhancement. It orchestrates hero hierarchy, scroll reveals and state transitions. The page remains complete without it.
+
+### Three.js
+
+Three.js renders a subtle Search Signal field behind the hero. Rules:
+- low opacity;
+- blue/coral/neutral only;
+- low node count;
+- DPR capped at 1.5;
+- pauses when the hero is off screen;
+- disabled for reduced motion;
+- skipped on smaller screens.
+
+No 3D object may interfere with reading or become the focal product message.
+
+## 11. Accessibility and performance
+
+- `prefers-reduced-motion` disables non-essential movement.
+- External motion libraries are optional; content cannot depend on them.
+- Focus state must remain visible.
+- Color never carries meaning alone.
+- Core CTA targets are ≥44px.
+- WebGL uses low-power mode and a capped pixel ratio.
+- Avoid scroll-jacking and custom cursors.
+
+## 12. Content and findability
+
+The design system supports Google and AI discoverability through clear information architecture rather than keyword decoration.
+
+Production includes:
+- semantic headings;
+- service copy in natural language;
+- FAQ;
+- JSON-LD;
+- canonical + hreflang;
+- sitemap;
+- robots;
 - llms.txt;
-- páginas de contenido enlazadas;
-- metadata Open Graph;
-- promesas responsables: no garantizar recomendaciones de asistentes de IA.
+- article schema;
+- internal links;
+- responsible claims.
 
-La meta es reducir ambigüedad para personas y sistemas, no rellenar la web con palabras clave.
+## 13. Source of truth
 
-## 9. Accesibilidad
-
-Mínimos:
-
-- focus visible;
-- targets cercanos o superiores a 44px;
-- contraste suficiente;
-- labels explícitos;
-- navegación por teclado;
-- no usar color como única señal;
-- `prefers-reduced-motion`.
-
-## 10. Source of truth
-
-- Producción: `site/index.html`
-- Sistema estático: `site/design-system.css`
-- Motion/brand: `site/brand/visual-art-ai-design-system.css`
-- Foundations app: `src/app/globals.css`
-- Tailwind: `tailwind.config.ts`
-- Contratos: `src/lib/design-system.ts`
-- SEO/GEO: `site/robots.txt`, `site/sitemap.xml`, `site/llms.txt`
-
-
-## 11. Living interface
-
-La homepage v6 incorpora patrones interactivos que explican el servicio en lugar de usar movimiento decorativo:
-
-- **Search Pulse**: rota ejemplos de búsquedas para recordar que la demanda ocurre fuera del sitio.
-- **Opportunity Path**: activa secuencialmente buscar → aparecer → entender → contactar.
-- **Service Explorer**: cada problema cambia la consulta, diagnóstico, acciones y beneficio; el usuario puede explorar sin abandonar la página.
-- **Case Compare**: antes/después cualitativo, sin inventar métricas.
-- **Blog Microvisuals**: pequeñas visualizaciones por tema para dar ritmo a los artículos destacados.
-
-El movimiento debe explicar estado, relación o progreso. No se agrega animación sin una función perceptible.
+- Static tokens: `site/styles/tokens.css`
+- Foundations: `site/styles/foundations.css`
+- Components: `site/styles/components.css`
+- Patterns: `site/styles/patterns.css`
+- Motion: `site/styles/motion.css`
+- Brand motion: `site/brand/visual-art-ai-design-system.css`
+- App tokens: `src/styles/design-tokens.css`
+- Tailwind mapping: `tailwind.config.ts`
+- TypeScript contracts: `src/lib/design-system.ts`
