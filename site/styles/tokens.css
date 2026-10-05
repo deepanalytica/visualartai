@@ -86,6 +86,7 @@
 
   /* ── Typography scale ────────────────────────────────────────────── */
   --font-sans:"Manrope",Inter,Arial,system-ui,sans-serif;
+  --font-editorial:"Instrument Serif",Georgia,"Times New Roman",serif;
   --font-mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
 
   --font-weight-regular:400;
