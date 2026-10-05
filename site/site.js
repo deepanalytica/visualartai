@@ -240,3 +240,13 @@ caseButtons.forEach(btn=>btn.addEventListener("click",()=>{
   dots.forEach((dot,idx)=>dot.addEventListener("click",()=>{show(idx);start()}));
   root.addEventListener("pointerenter",()=>clearInterval(timer));root.addEventListener("pointerleave",start);start();
 })();
+/* Blog filters */
+(()=>{
+ const buttons=[...document.querySelectorAll("[data-blog-filter]")];if(!buttons.length)return;
+ const cards=[...document.querySelectorAll(".blog-card[data-category]")];
+ buttons.forEach(btn=>btn.addEventListener("click",()=>{
+   const filter=btn.dataset.blogFilter;
+   buttons.forEach(b=>b.classList.toggle("is-active",b===btn));
+   cards.forEach(card=>{card.hidden=filter!=="all"&&card.dataset.category!==filter});
+ }));
+})();
