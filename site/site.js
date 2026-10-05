@@ -219,3 +219,24 @@ caseButtons.forEach(btn=>btn.addEventListener("click",()=>{
     requestAnimationFrame(frame);
   }catch{}
 })();
+/* ── Hero pain carousel: rotating client angles ─────────────────────── */
+(()=>{
+  const root=document.getElementById("painCarousel");if(!root)return;
+  const data=[
+    {sector:"PSICOLOGÍA",title:"“Tengo experiencia, pero mi agenda sigue con espacios.”",text:"La persona que necesita ayuda busca por problema, modalidad y confianza. Si tu presencia no lo explica rápido, la consulta termina en otro lugar.",search:"Busca: “psicóloga trauma online”",fix:"Claridad + autoridad + contacto"},
+    {sector:"KINESIOLOGÍA",title:"“Sé que puedo ayudar. El problema es que casi nadie llega a preguntarme.”",text:"Cuando alguien busca rehabilitación deportiva, dolor o recuperación, necesita entender especialidad, ubicación y cómo agendar sin llamar a cinco lugares.",search:"Busca: “kinesiólogo deportivo cerca”",fix:"Google + web + agenda"},
+    {sector:"CLÍNICA ESTÉTICA",title:"“Publicamos todos los días, pero las consultas no crecen al mismo ritmo.”",text:"La clínica puede verse activa en Instagram y seguir siendo difícil de encontrar, comparar o entender fuera de esa red.",search:"Busca: “clínica estética Talca”",fix:"Oferta + confianza + conversión"},
+    {sector:"GASTRONOMÍA",title:"“Cocino bien. Lo agotador es tener que avisarle a todo el mundo que existo.”",text:"Menú, ubicación, horarios, Maps y WhatsApp deberían hacer una parte del trabajo comercial antes de que empiece la jornada.",search:"Busca: “almuerzo casero cerca”",fix:"Maps + menú + WhatsApp"},
+    {sector:"ARRIENDOS",title:"“Me preguntan lo mismo todo el día y aun así quedan fechas vacías.”",text:"Disponibilidad, equipamiento, ubicación, condiciones y reserva pueden responderse mejor antes de abrir una conversación manual.",search:"Busca: “arriendo amoblado mensual”",fix:"Web + disponibilidad + automatización"}
+  ];
+  const sector=document.getElementById("painSector"),title=document.getElementById("painTitle"),copy=document.getElementById("painText"),search=document.getElementById("painSearch"),fix=document.getElementById("painFix");
+  const dots=[...root.querySelectorAll("[data-pain-index]")];let i=0,timer;
+  const show=n=>{
+    i=n;root.classList.remove("is-changing");void root.offsetWidth;root.classList.add("is-changing");
+    const d=data[n];sector.textContent=d.sector;title.textContent=d.title;copy.textContent=d.text;search.textContent=d.search;fix.textContent=d.fix;
+    dots.forEach((dot,idx)=>dot.classList.toggle("is-active",idx===n));
+  };
+  const start=()=>{if(reduce)return;clearInterval(timer);timer=setInterval(()=>show((i+1)%data.length),5200)};
+  dots.forEach((dot,idx)=>dot.addEventListener("click",()=>{show(idx);start()}));
+  root.addEventListener("pointerenter",()=>clearInterval(timer));root.addEventListener("pointerleave",start);start();
+})();

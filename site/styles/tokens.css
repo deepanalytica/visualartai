@@ -80,6 +80,9 @@
 
   --color-focus:var(--blue-300);
   --color-selection:var(--blue-100);
+  --gradient-brand:linear-gradient(120deg,var(--blue-600) 0%,var(--blue-500) 48%,var(--coral-500) 100%);
+  --gradient-brand-soft:linear-gradient(135deg,color-mix(in srgb,var(--blue-50) 86%,white),color-mix(in srgb,var(--coral-50) 74%,white));
+  --gradient-glass:linear-gradient(135deg,rgba(255,255,255,.92),rgba(255,255,255,.72));
 
   /* ── Typography scale ────────────────────────────────────────────── */
   --font-sans:"Manrope",Inter,Arial,system-ui,sans-serif;

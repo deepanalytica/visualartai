@@ -12,3 +12,7 @@
   .motion-ready [data-motion-reveal],.motion-ready .hero-copy [data-motion-hero],.motion-ready .search-lab[data-motion-hero]{opacity:1!important;transform:none!important}
   *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+@media(prefers-reduced-motion:no-preference){
+  .pain-carousel{transition:transform var(--duration-normal) var(--ease-emphasized),box-shadow var(--duration-normal)}
+  .pain-carousel:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+}
