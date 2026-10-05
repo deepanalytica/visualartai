@@ -104,6 +104,14 @@
   </div>
 </section>
 
+<section class="search-pulse" aria-label="Ejemplos de búsquedas reales">
+  <div class="shell search-pulse-inner">
+    <div class="pulse-label"><span class="pulse-live"></span><span>ALGUIEN ESTÁ BUSCANDO ALGO COMO ESTO</span></div>
+    <div class="pulse-query" id="pulseQuery">“psicóloga trauma online en Maule”</div>
+    <div class="pulse-source"><span id="pulseSource">ChatGPT</span><b>→</b><span>¿apareces?</span></div>
+  </div>
+</section>
+
 <section class="section what-we-do-section" id="que-hacemos">
   <div class="shell">
     <div class="what-we-do-hero">
@@ -168,30 +176,60 @@
       <div><div class="signal-label"><span class="signal-dot"></span>EL RECORRIDO DE UNA OPORTUNIDAD</div><h2>Para que te contacten, primero tienen que <span>encontrarte y entenderte.</span></h2></div>
       <p>La presencia digital no es una sola cosa. Es una cadena. Si una señal falla, la oportunidad se debilita antes de llegar a tu WhatsApp.</p>
     </div>
-    <div class="opportunity-path">
-      <div class="opportunity-step"><span class="step-index">01</span><div class="path-node"></div><b>BUSCA</b><p>La persona expresa una necesidad.</p><small>“psicóloga trauma online”</small></div>
-      <div class="opportunity-step"><span class="step-index">02</span><div class="path-node"></div><b>APARECES</b><p>Google o la IA encuentra señales sobre ti.</p><small>perfil · web · contenido</small></div>
-      <div class="opportunity-step"><span class="step-index">03</span><div class="path-node"></div><b>TE ENTIENDE</b><p>Queda claro qué haces y para quién.</p><small>servicio · ubicación · autoridad</small></div>
-      <div class="opportunity-step"><span class="step-index">04</span><div class="path-node"></div><b>CONTACTA</b><p>El siguiente paso es evidente y fácil.</p><small>WhatsApp · agenda · formulario</small></div>
+    <div class="opportunity-path" id="opportunityPath">
+      <div class="path-progress" aria-hidden="true"><i id="pathProgress"></i></div>
+      <div class="opportunity-step is-active" data-path-step="0"><span class="step-index">01</span><div class="path-node"></div><b>BUSCA</b><p>La persona expresa una necesidad.</p><small>“psicóloga trauma online”</small></div>
+      <div class="opportunity-step" data-path-step="1"><span class="step-index">02</span><div class="path-node"></div><b>APARECES</b><p>Google, Maps o la IA encuentra señales sobre ti.</p><small>perfil · web · contenido</small></div>
+      <div class="opportunity-step" data-path-step="2"><span class="step-index">03</span><div class="path-node"></div><b>TE ENTIENDE</b><p>Queda claro qué haces y para quién.</p><small>servicio · ubicación · autoridad</small></div>
+      <div class="opportunity-step" data-path-step="3"><span class="step-index">04</span><div class="path-node"></div><b>CONTACTA</b><p>El siguiente paso es evidente y fácil.</p><small>WhatsApp · agenda · formulario</small></div>
     </div>
   </div>
 </section>
 
 <section class="section services-section" id="sectores">
-  <div class="shell services-layout">
-    <aside class="services-intro">
-      <div class="signal-label"><span class="signal-dot"></span>SERVICIOS EN ACCIÓN</div>
-      <h2>Encontramos dónde se está <span>cortando la señal.</span></h2>
-      <p>No vendemos una lista de servicios. Revisamos el recorrido completo y atacamos el punto que hoy te está haciendo perder visibilidad, confianza o consultas.</p>
-      <a class="text-link" href="#diagnostico">Revisar mi negocio <span>→</span></a>
-    </aside>
-    <div class="service-lanes">
-      <article class="service-lane"><span class="lane-index">01</span><div><small>GOOGLE + MAPS</small><h3>Que aparezcas cuando buscan cerca.</h3><p>Perfil, categorías, ubicación, servicios y señales locales coherentes.</p></div><span class="lane-signal">LOCAL</span></article>
-      <article class="service-lane"><span class="lane-index">02</span><div><small>SEO + GEO + IA</small><h3>Que los sistemas entiendan qué haces.</h3><p>Arquitectura, contenido y datos que expliquen tu negocio con claridad.</p></div><span class="lane-signal">ENTITY</span></article>
-      <article class="service-lane"><span class="lane-index">03</span><div><small>WEB</small><h3>Que una persona entienda tu oferta en segundos.</h3><p>Mensaje, jerarquía, páginas de servicio y navegación sin fricción.</p></div><span class="lane-signal">CLARITY</span></article>
-      <article class="service-lane"><span class="lane-index">04</span><div><small>AUTORIDAD</small><h3>Que existan razones para confiar.</h3><p>Casos, experiencia, reseñas y evidencia verificable bien conectada.</p></div><span class="lane-signal">TRUST</span></article>
-      <article class="service-lane"><span class="lane-index">05</span><div><small>CONVERSIÓN</small><h3>Que dar el siguiente paso sea obvio.</h3><p>WhatsApp, agenda, formularios y llamados a la acción mejor diseñados.</p></div><span class="lane-signal">ACTION</span></article>
-      <article class="service-lane"><span class="lane-index">06</span><div><small>MEDICIÓN</small><h3>Que sepas qué está funcionando.</h3><p>Tráfico, consultas, fuentes y oportunidades para decidir con datos.</p></div><span class="lane-signal">DATA</span></article>
+  <div class="shell">
+    <div class="section-heading services-heading">
+      <div>
+        <div class="signal-label"><span class="signal-dot"></span>SERVICIOS EN ACCIÓN</div>
+        <h2>No vendemos piezas sueltas. <span>Conectamos lo que hace falta.</span></h2>
+      </div>
+      <p>Elige un problema y mira cómo cambia el recorrido. La herramienta viene después; primero entendemos qué está frenando al negocio.</p>
+    </div>
+
+    <div class="service-explorer" id="serviceExplorer">
+      <div class="service-tabs" role="tablist" aria-label="Servicios">
+        <button class="service-tab is-active" role="tab" aria-selected="true" data-service="local"><span>01</span><b>Google + Maps</b><small>“No me encuentran cerca”</small></button>
+        <button class="service-tab" role="tab" aria-selected="false" data-service="ai"><span>02</span><b>SEO + IA</b><small>“No entienden qué hago”</small></button>
+        <button class="service-tab" role="tab" aria-selected="false" data-service="web"><span>03</span><b>Web</b><small>“Entran, pero no entienden”</small></button>
+        <button class="service-tab" role="tab" aria-selected="false" data-service="trust"><span>04</span><b>Autoridad</b><small>“No tienen razones para confiar”</small></button>
+        <button class="service-tab" role="tab" aria-selected="false" data-service="conversion"><span>05</span><b>Conversión</b><small>“Miran, pero no escriben”</small></button>
+        <button class="service-tab" role="tab" aria-selected="false" data-service="data"><span>06</span><b>Medición</b><small>“No sé qué funciona”</small></button>
+      </div>
+
+      <div class="service-stage" role="tabpanel" aria-live="polite">
+        <div class="service-stage-top">
+          <div><span class="mono" id="serviceEyebrow">GOOGLE + MAPS</span><h3 id="serviceTitle">Que aparezcas cuando buscan cerca.</h3></div>
+          <span class="service-code" id="serviceCode">LOCAL SIGNAL</span>
+        </div>
+
+        <div class="service-story">
+          <div class="service-searchbox"><span>⌕</span><p id="serviceQuery">“panadería artesanal cerca de mí”</p><b id="servicePlatform">Maps</b></div>
+          <div class="service-arrow">↓</div>
+          <div class="service-problem" id="serviceProblem"><span>HOY</span><p>Tu ficha existe, pero categoría, servicios, web y contacto no cuentan una historia clara.</p></div>
+          <div class="service-arrow">↓</div>
+          <div class="service-actions-list">
+            <span>TRABAJAMOS</span>
+            <div id="serviceActions"><i>Perfil y categorías</i><i>Ubicación y servicios</i><i>Reseñas y evidencia</i><i>Ruta de contacto</i></div>
+          </div>
+          <div class="service-arrow">↓</div>
+          <div class="service-benefit" id="serviceBenefit"><span>OBJETIVO</span><p>Que una búsqueda local tenga una ruta clara desde el resultado hasta el contacto.</p></div>
+        </div>
+
+        <div class="service-stage-foot">
+          <p id="serviceNote">No prometemos una posición concreta. Mejoramos claridad, consistencia y experiencia para reducir fricción.</p>
+          <a class="button button-primary button-small" href="#diagnostico" id="serviceCta" data-interest="Google y Maps">Quiero revisar este problema →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -204,12 +242,40 @@
       <p>Una persona debía entender rápido qué hacía la profesional, si era adecuada para su caso y cómo pedir una hora. Ordenamos ese recorrido para reducir fricción.</p>
       <p class="case-remate">La mejora no fue decorar más. Fue hacer más fácil encontrar, comprender y actuar.</p>
     </div>
-    <div class="case-console">
-      <div class="console-head"><span>VISIBILITY TRACE</span><b>BEFORE / AFTER</b></div>
-      <div class="trace-row"><div class="trace-label"><span>01</span><b>Claridad</b><small>Especialidad y servicios</small></div><div class="trace-meter"><i class="meter-before meter-42"></i><i class="meter-after meter-86"></i></div><div class="trace-state"><span>ANTES</span><b>→</b><span>DESPUÉS</span></div></div>
-      <div class="trace-row"><div class="trace-label"><span>02</span><b>Confianza</b><small>Información profesional</small></div><div class="trace-meter"><i class="meter-before meter-51"></i><i class="meter-after meter-91"></i></div><div class="trace-state"><span>ANTES</span><b>→</b><span>DESPUÉS</span></div></div>
-      <div class="trace-row"><div class="trace-label"><span>03</span><b>Contacto</b><small>Ruta para pedir atención</small></div><div class="trace-meter"><i class="meter-before meter-37"></i><i class="meter-after meter-88"></i></div><div class="trace-state"><span>ANTES</span><b>→</b><span>DESPUÉS</span></div></div>
-      <p class="trace-note">Visualización conceptual del trabajo realizado; no representa una medición estadística de rendimiento.</p>
+
+    <div class="case-compare" id="caseCompare">
+      <div class="case-compare-head">
+        <span class="mono">ANTES / DESPUÉS</span>
+        <div class="case-switch" role="group" aria-label="Comparar estado">
+          <button class="is-active" data-case-mode="before" aria-pressed="true">ANTES</button>
+          <button data-case-mode="after" aria-pressed="false">DESPUÉS</button>
+        </div>
+      </div>
+
+      <div class="case-browser">
+        <div class="browser-bar"><i></i><i></i><i></i><span>sitio profesional</span></div>
+        <div class="case-view before-view is-active">
+          <span class="case-state-tag">ANTES</span>
+          <h3>La visitante tenía que completar demasiados espacios en blanco.</h3>
+          <ul>
+            <li>La especialidad no era obvia al primer vistazo.</li>
+            <li>La información profesional estaba dispersa.</li>
+            <li>El contacto no tenía una ruta suficientemente clara.</li>
+          </ul>
+          <div class="case-friction"><span>FRICCIÓN</span><b>¿Esto es para mí?</b><b>¿Cómo funciona?</b><b>¿Dónde pido hora?</b></div>
+        </div>
+        <div class="case-view after-view">
+          <span class="case-state-tag">DESPUÉS</span>
+          <h3>La información importante quedó en el orden en que una persona la necesita.</h3>
+          <ul>
+            <li>Especialidad y modalidad visibles desde el inicio.</li>
+            <li>Información profesional organizada para generar contexto.</li>
+            <li>Una acción de contacto fácil de encontrar.</li>
+          </ul>
+          <div class="case-friction resolved"><span>RECORRIDO</span><b>Entiendo</b><b>Confío</b><b>Contacto</b></div>
+        </div>
+      </div>
+      <p class="trace-note">Comparación cualitativa del trabajo realizado. No representa una medición estadística ni promete un resultado comercial específico.</p>
     </div>
   </div>
 </section>
@@ -267,12 +333,12 @@
       <p>Artículos cortos, concretos y sin humo: qué revisar, qué evitar y qué tiene sentido hacer primero.</p>
     </div>
     <div class="guide-index">
-      <a class="guide-row guide-row-featured" href="articulos/google-maps.html"><span class="guide-num">01</span><div><small>GOOGLE MAPS</small><h3>Estoy en Maps. ¿Por qué casi nadie me encuentra?</h3></div><p>Qué revisar antes de pagar anuncios.</p><b>LEER →</b></a>
-      <a class="guide-row" href="articulos/ia-recomienda-competencia.html"><span class="guide-num">02</span><div><small>IA + BÚSQUEDA</small><h3>La IA mostró a mi competencia. ¿Por qué?</h3></div><p>Experiencia no basta si Internet no la entiende.</p><b>LEER →</b></a>
-      <a class="guide-row" href="articulos/mas-pacientes.html"><span class="guide-num">03</span><div><small>SALUD</small><h3>Quiero más pacientes. ¿Qué arreglo primero?</h3></div><p>Antes de comprar más tráfico.</p><b>LEER →</b></a>
-      <a class="guide-row" href="articulos/whatsapp.html"><span class="guide-num">04</span><div><small>OPERACIÓN</small><h3>Responder WhatsApp todo el día no es crecer.</h3></div><p>Qué conviene automatizar.</p><b>LEER →</b></a>
-      <a class="guide-row" href="articulos/web-convierte.html"><span class="guide-num">05</span><div><small>CONVERSIÓN</small><h3>Tu web se ve bien. ¿Pero convierte?</h3></div><p>Dónde se pierde una consulta.</p><b>LEER →</b></a>
-      <a class="guide-row" href="articulos/seo-geo.html"><span class="guide-num">06</span><div><small>SEO + GEO</small><h3>SEO, GEO e IA. ¿Qué cambió?</h3></div><p>Lo que todavía importa.</p><b>LEER →</b></a>
+      <a class="guide-row guide-row-featured" href="articulos/google-maps.html"><span class="guide-num">01</span><div><small>GOOGLE MAPS</small><h3>Estoy en Maps. ¿Por qué casi nadie me encuentra?</h3><div class="guide-art art-maps"><i></i><i></i><i></i></div></div><p>Qué revisar antes de pagar anuncios.</p><b>LEER · 6 MIN →</b></a>
+      <a class="guide-row" href="articulos/ia-recomienda-competencia.html"><span class="guide-num">02</span><div><small>IA + BÚSQUEDA</small><h3>La IA mostró a mi competencia. ¿Por qué?</h3><div class="guide-art art-ai"><i></i><i></i><i></i></div></div><p>Experiencia no basta si Internet no la entiende.</p><b>LEER · 5 MIN →</b></a>
+      <a class="guide-row" href="articulos/mas-pacientes.html"><span class="guide-num">03</span><div><small>SALUD</small><h3>Quiero más pacientes. ¿Qué arreglo primero?</h3><div class="guide-art art-health"><i></i><i></i><i></i></div></div><p>Antes de comprar más tráfico.</p><b>LEER · 5 MIN →</b></a>
+      <a class="guide-row" href="articulos/whatsapp.html"><span class="guide-num">04</span><div><small>OPERACIÓN</small><h3>Responder WhatsApp todo el día no es crecer.</h3><div class="guide-art art-chat"><i></i><i></i><i></i></div></div><p>Qué conviene automatizar.</p><b>LEER · 5 MIN →</b></a>
+      <a class="guide-row" href="articulos/web-convierte.html"><span class="guide-num">05</span><div><small>CONVERSIÓN</small><h3>Tu web se ve bien. ¿Pero convierte?</h3><div class="guide-art art-web"><i></i><i></i><i></i></div></div><p>Dónde se pierde una consulta.</p><b>LEER · 5 MIN →</b></a>
+      <a class="guide-row" href="articulos/seo-geo.html"><span class="guide-num">06</span><div><small>SEO + GEO</small><h3>SEO, GEO e IA. ¿Qué cambió?</h3><div class="guide-art art-geo"><i></i><i></i><i></i></div></div><p>Lo que todavía importa.</p><b>LEER · 7 MIN →</b></a>
     </div>
   </div>
 </section>

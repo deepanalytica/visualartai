@@ -161,3 +161,16 @@ Mínimos:
 - Tailwind: `tailwind.config.ts`
 - Contratos: `src/lib/design-system.ts`
 - SEO/GEO: `site/robots.txt`, `site/sitemap.xml`, `site/llms.txt`
+
+
+## 11. Living interface
+
+La homepage v6 incorpora patrones interactivos que explican el servicio en lugar de usar movimiento decorativo:
+
+- **Search Pulse**: rota ejemplos de búsquedas para recordar que la demanda ocurre fuera del sitio.
+- **Opportunity Path**: activa secuencialmente buscar → aparecer → entender → contactar.
+- **Service Explorer**: cada problema cambia la consulta, diagnóstico, acciones y beneficio; el usuario puede explorar sin abandonar la página.
+- **Case Compare**: antes/después cualitativo, sin inventar métricas.
+- **Blog Microvisuals**: pequeñas visualizaciones por tema para dar ritmo a los artículos destacados.
+
+El movimiento debe explicar estado, relación o progreso. No se agrega animación sin una función perceptible.

@@ -72,6 +72,9 @@ export const patternContracts = {
   visibilityTrace: ["before", "after", "evidenceNote"],
   auditScan: ["findability", "clarity", "trust", "conversion"],
   guideIndex: ["topic", "question", "answerIntent"],
+  searchPulse: ["query", "platform", "findabilityPrompt"],
+  serviceExplorer: ["problem", "query", "actions", "benefit", "responsibleNote"],
+  caseCompare: ["before", "after", "qualitativeNote"],
 } as const
 
 export type ButtonVariant = (typeof componentContracts.button.variants)[number]

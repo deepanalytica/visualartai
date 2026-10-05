@@ -22,3 +22,51 @@ document.querySelectorAll(".offer-expand").forEach(detail=>{
     document.querySelectorAll(".offer-expand").forEach(other=>{if(other!==detail)other.open=false});
   });
 });
+const serviceData={
+  local:{eyebrow:"GOOGLE + MAPS",title:"Que aparezcas cuando buscan cerca.",code:"LOCAL SIGNAL",query:"“panadería artesanal cerca de mí”",platform:"Maps",problem:"Tu ficha existe, pero categoría, servicios, web y contacto no cuentan una historia clara.",actions:["Perfil y categorías","Ubicación y servicios","Reseñas y evidencia","Ruta de contacto"],benefit:"Que una búsqueda local tenga una ruta clara desde el resultado hasta el contacto.",note:"No prometemos una posición concreta. Mejoramos claridad, consistencia y experiencia para reducir fricción.",interest:"Google y Maps"},
+  ai:{eyebrow:"SEO + GEO + IA",title:"Que los sistemas entiendan qué haces.",code:"ENTITY SIGNAL",query:"“¿qué psicóloga online trabaja trauma en Maule?”",platform:"IA + Google",problem:"Tu experiencia existe, pero la información pública está dispersa o escrita de forma demasiado genérica.",actions:["Arquitectura SEO","Páginas de servicio","Entidades y contexto","FAQs verificables"],benefit:"Que una persona o sistema pueda identificar con menos ambigüedad quién eres, qué haces y cuándo eres relevante.",note:"No se puede garantizar una recomendación de ChatGPT, Gemini u otro asistente. Sí podemos mejorar las señales públicas que describen tu negocio.",interest:"SEO y visibilidad en buscadores de IA"},
+  web:{eyebrow:"WEB + UX",title:"Que una persona entienda tu oferta en segundos.",code:"CLARITY SIGNAL",query:"“entré a tu web… ¿qué haces exactamente?”",platform:"Web",problem:"La web se ve correcta, pero obliga a leer demasiado o adivinar qué servicio corresponde.",actions:["Propuesta de valor","Jerarquía visual","Páginas de servicio","Responsive"],benefit:"Que el visitante entienda rápido qué haces, para quién y cuál es el siguiente paso.",note:"Diseño y copy trabajan juntos. Una animación no compensa una oferta difícil de entender.",interest:"Web o landing page"},
+  trust:{eyebrow:"AUTORIDAD",title:"Que existan razones para confiar.",code:"TRUST SIGNAL",query:"“¿por qué debería elegir este negocio?”",platform:"Web + Google",problem:"Hay buenas credenciales o experiencia, pero están escondidas, dispersas o sin suficiente contexto.",actions:["Casos reales","Experiencia","Reseñas auténticas","Evidencia verificable"],benefit:"Que la confianza se construya con información concreta, no con frases grandilocuentes.",note:"No inventamos cifras, premios ni testimonios. La autoridad útil debe poder sostenerse.",interest:"Autoridad y confianza digital"},
+  conversion:{eyebrow:"CONVERSIÓN",title:"Que mirar termine en una acción clara.",code:"ACTION SIGNAL",query:"“me interesa… ¿qué hago ahora?”",platform:"Web + WhatsApp",problem:"La persona entiende el servicio, pero el siguiente paso está escondido, es largo o vuelve a empezar desde cero.",actions:["CTA claros","WhatsApp","Agenda","Formularios"],benefit:"Reducir pasos innecesarios entre el interés y una consulta real.",note:"Conversión no significa presionar. Significa hacer más fácil avanzar cuando la persona ya quiere hacerlo.",interest:"Conversión y captación"},
+  data:{eyebrow:"ANALÍTICA",title:"Que sepas qué está funcionando.",code:"DATA SIGNAL",query:"“¿de dónde vienen mis consultas?”",platform:"GA4 + negocio",problem:"Hay tráfico, publicaciones y campañas, pero no una lectura clara de qué genera consultas.",actions:["Eventos clave","Fuentes de tráfico","Conversiones","Prioridades"],benefit:"Tomar decisiones con señales observables en vez de depender solo de intuición.",note:"Medir más no siempre es mejor. Medimos lo necesario para decidir qué conviene cambiar.",interest:"Analítica y optimización"}
+};
+document.querySelectorAll(".service-tab").forEach(tab=>{
+  tab.addEventListener("click",()=>{
+    const data=serviceData[tab.dataset.service];if(!data)return;
+    document.querySelectorAll(".service-tab").forEach(t=>{t.classList.toggle("is-active",t===tab);t.setAttribute("aria-selected",String(t===tab))});
+    const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value};
+    set("serviceEyebrow",data.eyebrow);set("serviceTitle",data.title);set("serviceCode",data.code);set("serviceQuery",data.query);set("servicePlatform",data.platform);set("serviceProblem",data.problem);set("serviceBenefit",data.benefit);set("serviceNote",data.note);
+    const actions=document.getElementById("serviceActions");if(actions)actions.innerHTML=data.actions.map(x=>"<i>"+x+"</i>").join("");
+    const cta=document.getElementById("serviceCta");if(cta)cta.dataset.interest=data.interest;
+  });
+});
+
+const caseButtons=[...document.querySelectorAll("[data-case-mode]")];
+caseButtons.forEach(btn=>btn.addEventListener("click",()=>{
+  const mode=btn.dataset.caseMode;
+  caseButtons.forEach(b=>{const active=b===btn;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active))});
+  document.querySelectorAll(".case-view").forEach(view=>view.classList.toggle("is-active",view.classList.contains(mode+"-view")));
+}));
+
+(()=>{
+  const path=document.getElementById("opportunityPath"),bar=document.getElementById("pathProgress");
+  if(!path||!bar)return;
+  const steps=[...path.querySelectorAll("[data-path-step]")];let i=0;
+  const activate=n=>{steps.forEach((s,idx)=>s.classList.toggle("is-active",idx===n));bar.style.width=((n+1)/steps.length*100)+"%"};
+  activate(0);
+  if(reduce)return;
+  setInterval(()=>{i=(i+1)%steps.length;activate(i)},2200);
+})();
+
+(()=>{
+  const q=document.getElementById("pulseQuery"),s=document.getElementById("pulseSource");if(!q||!s)return;
+  const items=[
+    ["“psicóloga trauma online en Maule”","ChatGPT"],
+    ["“panadería artesanal cerca de mí”","Google Maps"],
+    ["“kinesiólogo rehabilitación deportiva Talca”","Google"],
+    ["“arriendo amoblado mensual en Iquique”","Gemini"],
+    ["“almuerzo casero en Curicó”","Perplexity"]
+  ];
+  let i=0;if(reduce)return;
+  setInterval(()=>{i=(i+1)%items.length;q.animate([{opacity:.15,transform:"translateY(5px)"},{opacity:1,transform:"none"}],{duration:320,easing:"ease-out"});q.textContent=items[i][0];s.textContent=items[i][1]},2800);
+})();
