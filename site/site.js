@@ -250,3 +250,57 @@ caseButtons.forEach(btn=>btn.addEventListener("click",()=>{
    cards.forEach(card=>{card.hidden=filter!=="all"&&card.dataset.category!==filter});
  }));
 })();
+/* ── Homepage v10 ───────────────────────────────────────────────────── */
+(()=>{
+  const root=document.getElementById("v10Story"); if(!root)return;
+  const data=[
+    {sector:"PSICOLOGÍA",initial:"P",platform:"Google",logo:"brands/google.svg",title:"“Tengo experiencia, pero mi agenda sigue con espacios.”",text:"Quien busca ayuda necesita entender especialidad, modalidad y confianza antes de escribir.",search:"“psicóloga trauma online”",gap:"claridad + autoridad",goal:"consulta calificada"},
+    {sector:"KINESIOLOGÍA",initial:"K",platform:"Maps",logo:"brands/google-maps.svg",title:"“Sé hacer bien mi trabajo. Casi nadie llega a preguntarme.”",text:"El paciente busca por dolor, deporte, recuperación y cercanía. Tu especialidad debe aparecer antes del primer mensaje.",search:"“kinesiólogo deportivo cerca”",gap:"servicio + ubicación",goal:"agenda"},
+    {sector:"CLÍNICA ESTÉTICA",initial:"C",platform:"Google",logo:"brands/google.svg",title:"“Publicamos todos los días, pero las consultas no crecen igual.”",text:"Una red activa no reemplaza una presencia que explique tratamientos, confianza y cómo reservar.",search:"“clínica estética Talca”",gap:"oferta + confianza",goal:"evaluación"},
+    {sector:"GASTRONOMÍA",initial:"R",platform:"Maps",logo:"brands/google-maps.svg",title:"“No quiero recordar cada mañana que mi local existe.”",text:"Horario, menú, ubicación y pedido deberían trabajar antes de abrir WhatsApp.",search:"“almuerzo casero cerca”",gap:"Maps + menú",goal:"pedido"},
+    {sector:"ARRIENDOS",initial:"A",platform:"ChatGPT",logo:"brands/chatgpt.svg",title:"“Respondo lo mismo todo el día y aun quedan fechas vacías.”",text:"Disponibilidad, equipamiento y condiciones pueden resolverse antes de iniciar una conversación manual.",search:"“arriendo amoblado mensual”",gap:"información + flujo",goal:"reserva"}
+  ];
+  const dots=[...root.querySelectorAll("[data-story-index]")], by=id=>document.getElementById(id);
+  let i=0,timer;
+  const show=n=>{
+    i=n; const d=data[n];
+    [["v10StorySector",d.sector],["v10StoryInitial",d.initial],["v10StoryPlatform",d.platform],["v10StoryTitle",d.title],["v10StoryText",d.text],["v10StorySearch",d.search],["v10StoryGap",d.gap],["v10StoryGoal",d.goal]].forEach(([id,v])=>{const el=by(id);if(el)el.textContent=v});
+    const logo=by("v10StoryLogo"); if(logo)logo.src=d.logo;
+    dots.forEach((dot,idx)=>dot.classList.toggle("is-active",idx===n));
+    root.animate([{opacity:.62,transform:"translateY(5px) scale(.995)"},{opacity:1,transform:"none"}],{duration:420,easing:"cubic-bezier(.16,1,.3,1)"});
+  };
+  const start=()=>{if(reduce)return;clearInterval(timer);timer=setInterval(()=>show((i+1)%data.length),5000)};
+  dots.forEach((dot,idx)=>dot.addEventListener("click",()=>{show(idx);start()}));
+  root.addEventListener("pointerenter",()=>clearInterval(timer));root.addEventListener("pointerleave",start);start();
+})();
+
+(()=>{
+  const tabs=[...document.querySelectorAll("[data-studio]")]; if(!tabs.length)return;
+  const data={
+    visibility:{label:"GOOGLE · MAPS · SEO · IA",title:"Haz que las búsquedas correctas tengan una ruta hacia ti.",text:"Ordenamos la presencia pública para que sea más fácil relacionar tu negocio con una necesidad, una ubicación y un servicio concreto.",tags:["Perfil de Negocio","SEO local","Páginas de servicio","GEO / IA"],mode:"DISCOVERY",query:"“kinesiólogo deportivo cerca”",a:"Perfil + web",b:"Servicio + zona",c:"Consulta",interest:"Visibilidad"},
+    experience:{label:"WEB · UX · CONTENIDO · AUTORIDAD",title:"Haz que entender tu negocio no requiera una llamada explicativa.",text:"Jerarquía, copy, páginas, evidencia y experiencia móvil para que una persona sepa rápido si tu oferta tiene sentido para ella.",tags:["UX/UI","Copy","Landing pages","Casos + evidencia"],mode:"CLARITY",query:"“¿esto es para mí?”",a:"Oferta",b:"Confianza",c:"Contacto",interest:"Web y experiencia"},
+    growth:{label:"ADS · CONTENIDO · CONVERSIÓN",title:"Compra atención solo cuando la ruta que recibe esa atención está lista.",text:"Campañas, contenido y landing trabajan juntas. Medimos la acción que importa para no confundir clics con oportunidades.",tags:["Google Ads","Meta Ads","Contenido","CRO"],mode:"GROWTH",query:"“quiero más consultas”",a:"Demanda",b:"Landing",c:"Lead",interest:"Growth y publicidad"},
+    ops:{label:"WHATSAPP · AUTOMATIZACIÓN · DATOS",title:"Reduce trabajo repetitivo sin esconder a la persona detrás de un bot.",text:"Capturamos contexto, automatizamos preguntas estables y medimos qué está generando conversaciones útiles.",tags:["WhatsApp","Seguimiento","Integraciones","Analítica"],mode:"OPS",query:"“¿tienen hora mañana?”",a:"Contexto",b:"Respuesta",c:"Seguimiento",interest:"Automatización y analítica"}
+  };
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
+  tabs.forEach(tab=>tab.addEventListener("click",()=>{
+    const d=data[tab.dataset.studio];if(!d)return;
+    tabs.forEach(t=>{const active=t===tab;t.classList.toggle("is-active",active);t.setAttribute("aria-selected",String(active))});
+    set("v10StudioLabel",d.label);set("v10StudioTitle",d.title);set("v10StudioText",d.text);set("v10ScreenMode",d.mode);set("v10ScreenQuery",d.query);set("v10ScreenA",d.a);set("v10ScreenB",d.b);set("v10ScreenC",d.c);
+    const tags=document.getElementById("v10StudioTags");if(tags)tags.innerHTML=d.tags.map(x=>"<span>"+x+"</span>").join("");
+    const cta=document.getElementById("v10StudioCta");if(cta)cta.dataset.interest=d.interest;
+    const panel=document.querySelector(".v10-studio-panel");if(panel)panel.animate([{opacity:.55,transform:"translateY(8px)"},{opacity:1,transform:"none"}],{duration:380,easing:"cubic-bezier(.16,1,.3,1)"});
+  }));
+})();
+
+(()=>{
+  if(reduce)return;
+  document.querySelectorAll(".v10-story-stage,.v10-case-frame").forEach(card=>{
+    card.addEventListener("pointermove",e=>{
+      if(innerWidth<900)return;
+      const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform="perspective(1000px) rotateX("+(-y*1.5)+"deg) rotateY("+(x*1.8)+"deg)";
+    });
+    card.addEventListener("pointerleave",()=>{card.style.transform=""});
+  });
+})();
