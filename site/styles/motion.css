@@ -1,0 +1,14 @@
+/* Motion system: motion must explain state, relation or progress */
+@keyframes signalMove{from{left:-20%}to{left:110%}}
+@keyframes pulseLive{50%{transform:scale(1.35);box-shadow:0 0 0 .55rem color-mix(in srgb,var(--color-accent) 8%,transparent)}}
+@keyframes caseIn{from{opacity:0;transform:translateY(.375rem)}to{opacity:1;transform:none}}
+.case-view.is-active{animation:caseIn var(--duration-normal) var(--ease-emphasized)}
+.motion-ready [data-motion-reveal]{opacity:0;transform:translateY(1.25rem)}
+.motion-ready .hero-copy [data-motion-hero]{opacity:0;transform:translateY(1.25rem)}
+.motion-ready .search-lab[data-motion-hero]{opacity:0;transform:translateY(1rem) scale(.985)}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .track-line:after,.pulse-live,.vaa-signal-arc,.vaa-signal-dot{animation:none!important}
+  .motion-ready [data-motion-reveal],.motion-ready .hero-copy [data-motion-hero],.motion-ready .search-lab[data-motion-hero]{opacity:1!important;transform:none!important}
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
