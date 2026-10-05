@@ -1,1 +1,7 @@
-:root{--brand-accent:var(--clay-500,#d94a2b);--brand-accent-bright:var(--coral-500,#f56f56);--brand-accent-halo:rgba(217,74,43,.20)}[data-theme=dark]{--brand-accent:var(--action,#ff7254);--brand-accent-halo:rgba(255,114,84,.24)}.vaa-signal-arc{stroke:var(--brand-accent);stroke-dasharray:34;stroke-dashoffset:34;animation:vaaArc 5.2s cubic-bezier(.22,1,.36,1) infinite}.vaa-signal-dot{fill:var(--brand-accent-bright);transform-origin:18px 18px;animation:vaaDot 5.2s ease-in-out infinite;filter:drop-shadow(0 0 5px var(--brand-accent-halo))}@keyframes vaaArc{0%,14%{stroke-dashoffset:34;opacity:.25}34%,78%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:.38}}@keyframes vaaDot{0%,100%{transform:scale(.9);opacity:.7}46%,58%{transform:scale(1.2);opacity:1}}@media(prefers-reduced-motion:reduce){.vaa-signal-arc,.vaa-signal-dot{animation:none!important}.vaa-signal-arc{stroke-dashoffset:0;opacity:1}}
+/* Visual Art AI — Search Signal brand layer v4 */
+:root{--brand-blue:#2f6bff;--brand-blue-soft:#8db1ff;--brand-mint:#35cfa8}
+.vaa-signal-arc{stroke:var(--brand-blue);stroke-dasharray:34;stroke-dashoffset:34;animation:vaaArc 5.2s cubic-bezier(.22,1,.36,1) infinite}
+.vaa-signal-dot{fill:var(--brand-mint);transform-origin:18px 18px;animation:vaaDot 5.2s ease-in-out infinite;filter:drop-shadow(0 0 5px rgba(53,207,168,.35))}
+@keyframes vaaArc{0%,14%{stroke-dashoffset:34;opacity:.25}34%,78%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:.42}}
+@keyframes vaaDot{0%,100%{transform:scale(.92);opacity:.72}46%,58%{transform:scale(1.22);opacity:1}}
+@media(prefers-reduced-motion:reduce){.vaa-signal-arc,.vaa-signal-dot{animation:none!important}.vaa-signal-arc{stroke-dashoffset:0;opacity:1}}
