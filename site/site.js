@@ -16,3 +16,9 @@ const cases=[
 {p:"Perplexity",logo:"brands/perplexity.svg",q:"“¿Dónde encuentro almuerzo casero en Curicó?”",process:"Buscando opciones y contrastando información disponible…",criteria:["Ubicación","Categoría","Información pública"],name:"Negocio local relevante",category:"Gastronomía · Curicó",details:["Ubicación disponible","Oferta identificable","Información de contacto"]}];
 let i=0;const apply=x=>{platform.textContent=x.p;logo.src=x.logo;query.textContent=x.q;process.textContent=x.process;c1.textContent=x.criteria[0];c2.textContent=x.criteria[1];c3.textContent=x.criteria[2];name.textContent=x.name;category.textContent=x.category;d1.textContent=x.details[0];d2.textContent=x.details[1];d3.textContent=x.details[2]};const phase=p=>{hero.classList.remove("phase-search","phase-compare","phase-result");hero.classList.add("phase-"+p)};apply(cases[0]);if(reduce){phase("result");return}const cycle=()=>{phase("search");setTimeout(()=>phase("compare"),1500);setTimeout(()=>phase("result"),3700);setTimeout(()=>{i=(i+1)%cases.length;apply(cases[i]);phase("search")},8500)};cycle();setInterval(cycle,9500)})();
 if(document.documentElement.classList.contains("article-page")){const updateProgress=()=>{const max=document.documentElement.scrollHeight-innerHeight;const scale=max>0?Math.min(1,Math.max(0,scrollY/max)):0;document.documentElement.style.setProperty("--article-progress-scale",String(scale))};addEventListener("scroll",updateProgress,{passive:true});updateProgress()}
+document.querySelectorAll(".offer-expand").forEach(detail=>{
+  detail.addEventListener("toggle",()=>{
+    if(!detail.open)return;
+    document.querySelectorAll(".offer-expand").forEach(other=>{if(other!==detail)other.open=false});
+  });
+});

@@ -42,3 +42,8 @@ La auditoría revisa:
 - SEO, GEO e IA: https://deepanalytica.github.io/visualartai/articulos/seo-geo.html
 - Conversión web: https://deepanalytica.github.io/visualartai/articulos/web-convierte.html
 - WhatsApp y operación: https://deepanalytica.github.io/visualartai/articulos/whatsapp.html
+
+
+## Blog
+- Blog principal: https://deepanalytica.github.io/visualartai/blog/
+- Los artículos explican Google Maps, SEO, GEO, buscadores de IA, conversión web y automatización con lenguaje práctico y sin promesas de posiciones o recomendaciones garantizadas.
