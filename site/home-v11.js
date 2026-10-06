@@ -102,4 +102,6 @@
       card.addEventListener("pointerleave",()=>card.style.transform="");
     });
   }
+  // Record intent only; a click does not confirm a message or a sale.
+  document.querySelectorAll("[data-whatsapp]").forEach(link=>link.addEventListener("click",()=>window.VAAI?.track("whatsapp_click")));
 })();
