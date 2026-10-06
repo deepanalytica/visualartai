@@ -35,3 +35,14 @@ References:
 - https://developer.chrome.com/docs/lighthouse/agentic-browsing/llms-txt
 - https://github.com/GoogleChrome/lighthouse/issues/17251
 - https://web.dev/articles/optimize-lcp
+
+
+## Local fonts and layout reads — 6 October 2026
+
+- The six Latin WOFF2 font files in `site/fonts/` are the existing Google Fonts families and styles, with original OFL licenses and source URLs. Spanish accents are included. Hashed filenames allow immutable one-year caching through `site/_headers`.
+- `site/styles/fonts.css` is shared by content pages. The homepage embeds its declarations so fonts are discovered without an extra stylesheet request, and preloads only Manrope and Instrument Serif italic used in the opening headline. The main layout stylesheet stays render-blocking to preserve the initial layout.
+- Run `node scripts/build-local-fonts.mjs` after changing font declarations or preload filenames. It updates the homepage font block, migrates Google Fonts references, and updates shared runtime references idempotently. Other font changes require updating their hashed filenames and source/license inventory.
+- Mobile CTA visibility uses IntersectionObserver rather than synchronous element geometry at startup. The hidden CTA bar is inert for keyboard navigation. Canvas dimensions come from ResizeObserver. The problem-panel animation uses Web Animations rather than forcing a layout to restart a CSS animation.
+- Cloudflare injects its own analytics beacon and email-decode runtime. Their cache policy and legacy code are controlled by Cloudflare, not these source files. Analytics remains enabled because site measurement is an explicit project requirement.
+
+Sources: https://web.dev/articles/font-best-practices and https://web.dev/articles/avoid-large-complex-layouts-and-layout-thrashing

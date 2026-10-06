@@ -5,11 +5,11 @@
 
   // Lightweight Canvas2D signal field. No GSAP / no Three.js / no external payload.
   const canvas=document.getElementById("v14SignalField");
-  if(canvas&&!reduce){
+  if(canvas&&!reduce&&"ResizeObserver" in window){
     const ctx=canvas.getContext("2d",{alpha:true});
     let w=0,h=0,dpr=1,raf=0,pointer={x:.72,y:.34,active:false},particles=[];
     const make=()=>Array.from({length:innerWidth<700?18:32},(_,i)=>({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.00012,vy:(Math.random()-.5)*.00012,r:Math.random()*1.7+1,a:Math.random()*.45+.15,phase:Math.random()*6.28}));
-    const resize=()=>{const r=canvas.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,1.75);w=Math.max(1,r.width);h=Math.max(1,r.height);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);particles=make()};
+    const resize=r=>{dpr=Math.min(devicePixelRatio||1,1.75);w=Math.max(1,r.width);h=Math.max(1,r.height);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);particles=make()};
     const draw=t=>{
       ctx.clearRect(0,0,w,h);
       const time=t*.001;
@@ -32,8 +32,8 @@
     const hero=document.querySelector(".v11-hero");
     hero?.addEventListener("pointermove",e=>{const r=hero.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width;pointer.y=(e.clientY-r.top)/r.height;pointer.active=true});
     hero?.addEventListener("pointerleave",()=>pointer.active=false);
-    addEventListener("resize",resize,{passive:true});resize();raf=requestAnimationFrame(draw);
-    document.addEventListener("visibilitychange",()=>{if(document.hidden){cancelAnimationFrame(raf)}else{raf=requestAnimationFrame(draw)}});
+    new ResizeObserver(entries=>{resize(entries[0].contentRect);if(!raf&&!document.hidden)raf=requestAnimationFrame(draw)}).observe(canvas);
+    document.addEventListener("visibilitychange",()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(w&&h&&!raf){raf=requestAnimationFrame(draw)}});
   }
 
   // Search stories: autoplay on normal motion, explicit pause control always available.
@@ -70,6 +70,7 @@
     ai:{code:"GOOGLE / IA",title:"Google y los buscadores de IA todavía tienen pocas señales claras sobre qué haces y cuándo eres relevante.",text:"Trabajamos SEO, contenido, entidades, páginas de servicio y consistencia pública para que tu negocio sea más fácil de entender por buscadores y asistentes de IA.",layers:[["Entidades","Negocio, servicio, persona, ubicación."],["Contenido","Preguntas y páginas con contexto real."],["Consistencia","Web, perfiles y fuentes alineadas."]],first:"Mejorar las señales públicas que sí controlas.",interest:"SEO, GEO y buscadores de IA",goal:"No sé qué información encuentran los asistentes de IA sobre mi negocio",status:"PRIORIDAD: COMPRENSIÓN",control:["SEO + fuentes públicas","Contenido + contexto","Web + contacto"]}
   };
   const problemButtons=[...document.querySelectorAll("[data-problem]")],diagnosis=document.querySelector(".v11-diagnosis"),layers=document.getElementById("v11DiagnosisLayers"),cta=document.getElementById("v11DiagnosisCta");
+  let diagnosisAnimation=null;
   const applyProblem=key=>{
     const d=problemData[key];if(!d)return;
     problemButtons.forEach(b=>{const active=b.dataset.problem===key;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active))});
@@ -79,7 +80,7 @@
     setText("v11ControlA",d.control[0]);setText("v11ControlB",d.control[1]);setText("v11ControlC",d.control[2]);
     const interest=document.getElementById("interest");if(interest)interest.value=d.interest;
     const goal=document.getElementById("goal");if(goal&&[...goal.options].some(o=>o.value===d.goal))goal.value=d.goal;
-    if(diagnosis&&!reduce){diagnosis.classList.remove("v14-pop");void diagnosis.offsetWidth;diagnosis.classList.add("v14-pop")}
+    if(diagnosis&&!reduce){diagnosisAnimation?.cancel();diagnosisAnimation=diagnosis.animate([{opacity:.58,transform:"translateY(8px) scale(.994)"},{opacity:1,transform:"none"}],{duration:480,easing:"cubic-bezier(.2,0,0,1)"})}
     document.querySelector(".v14-live-room")?.animate([{filter:"brightness(.92)"},{filter:"brightness(1)"}],{duration:520,easing:"ease-out"});
   };
   problemButtons.forEach(b=>b.addEventListener("click",()=>applyProblem(b.dataset.problem)));
