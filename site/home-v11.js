@@ -1,8 +1,7 @@
-/* Visual Art AI — Homepage v11 interactions */
+/* Visual Art AI — Homepage v12 interactions */
 (()=>{
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // HERO: one visual idea, multiple demand examples.
+  const setText=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
   const queryData=[
     {logo:"brands/google.svg",query:"psicóloga trauma online en Maule",entity:"Psicología · Trauma · Online",label:"COINCIDENCIA DE CONTEXTO",result:"Especialidad + modalidad + ubicación"},
     {logo:"brands/google-maps.svg",query:"kinesiólogo deportivo cerca de mí",entity:"Kinesiología · Deporte · Cercanía",label:"BÚSQUEDA LOCAL",result:"Servicio + distancia + contacto"},
@@ -10,126 +9,21 @@
     {logo:"brands/google-maps.svg",query:"almuerzo casero cerca",entity:"Gastronomía · Menú · Ubicación",label:"INTENCIÓN INMEDIATA",result:"Horario + menú + pedido"},
     {logo:"brands/chatgpt.svg",query:"arriendo amoblado mensual en Iquique",entity:"Arriendo · Mensual · Iquique",label:"PREGUNTA CON CONTEXTO",result:"Disponibilidad + equipamiento + contacto"}
   ];
-  const queryTabs=[...document.querySelectorAll("[data-query-index]")];
-  let qi=0,qtimer;
-  const setText=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
-  const showQuery=n=>{
-    qi=n;const d=queryData[n];
-    const logo=document.getElementById("v11QueryLogo");if(logo)logo.src=d.logo;
-    setText("v11QueryText",d.query);setText("v11SignalEntity",d.entity);setText("v11ResultLabel",d.label);setText("v11ResultTitle",d.result);
-    queryTabs.forEach((b,i)=>{const active=i===n;b.classList.toggle("is-active",active);b.setAttribute("aria-selected",String(active))});
-    const scene=document.querySelector(".v11-search-window");
-    if(scene&&!reduce)scene.animate([{opacity:.58,transform:"translateY(5px)"},{opacity:1,transform:"none"}],{duration:380,easing:"cubic-bezier(.16,1,.3,1)"});
-  };
-  const startQuery=()=>{if(reduce)return;clearInterval(qtimer);qtimer=setInterval(()=>showQuery((qi+1)%queryData.length),4700)};
-  queryTabs.forEach((b,i)=>b.addEventListener("click",()=>{showQuery(i);startQuery()}));startQuery();
+  const queryButtons=[...document.querySelectorAll("[data-query-index]")],play=document.getElementById("v11QueryPlay");let qi=0,timer=null,playing=false;
+  const showQuery=n=>{qi=n;const d=queryData[n];if(!d)return;const logo=document.getElementById("v11QueryLogo");if(logo)logo.src=d.logo;setText("v11QueryText",d.query);setText("v11SignalEntity",d.entity);setText("v11ResultLabel",d.label);setText("v11ResultTitle",d.result);queryButtons.forEach((b,i)=>{const active=i===n;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active))});const scene=document.querySelector(".v11-search-window");if(scene&&!reduce)scene.animate([{opacity:.72,transform:"translateY(4px)"},{opacity:1,transform:"none"}],{duration:320,easing:"cubic-bezier(.16,1,.3,1)"})};
+  const stop=()=>{playing=false;clearInterval(timer);timer=null;if(play){play.setAttribute("aria-pressed","false");play.textContent="▶ Reproducir";play.setAttribute("aria-label","Reproducir ejemplos automáticamente")}};
+  const start=()=>{if(reduce)return;playing=true;clearInterval(timer);timer=setInterval(()=>showQuery((qi+1)%queryData.length),5500);if(play){play.setAttribute("aria-pressed","true");play.textContent="Ⅱ Pausar";play.setAttribute("aria-label","Pausar ejemplos automáticos")}};
+  queryButtons.forEach((b,i)=>b.addEventListener("click",()=>{showQuery(i);if(playing)start()}));play?.addEventListener("click",()=>playing?stop():start());
 
-  // PROBLEM SELECTOR: progressive disclosure.
   const problemData={
-    invisible:{
-      code:"DISCOVERY GAP",
-      title:"Puede existir demanda, pero tus señales públicas no la están conectando contigo.",
-      text:"Primero revisaríamos si Google, Maps y tu web describen con suficiente claridad qué haces, dónde y para quién.",
-      layers:[
-        ["Perfil y presencia local","Nombre, categoría, ubicación, servicios."],
-        ["Páginas de servicio","Intención, contexto, lenguaje real."],
-        ["Ruta de contacto","Del resultado a la consulta."]
-      ],
-      first:"Auditar encontrabilidad antes de comprar tráfico.",
-      interest:"Encontrabilidad",
-      status:"PRIORIDAD: ENCONTRABILIDAD",
-      control:["Google + Maps","Oferta + contenido","Web + contacto"]
-    },
-    traffic:{
-      code:"CONVERSION GAP",
-      title:"No parece faltar atención. Parece faltar una razón clara para avanzar.",
-      text:"Revisaríamos propuesta de valor, jerarquía, landing, prueba y CTA antes de aumentar publicaciones o presupuesto.",
-      layers:[
-        ["Oferta","¿Se entiende qué vendes y para quién?"],
-        ["Landing / web","¿La página responde la intención?"],
-        ["Conversión","¿El siguiente paso es obvio y medible?"]
-      ],
-      first:"Arreglar la ruta que recibe el tráfico antes de comprar más.",
-      interest:"Conversión",
-      status:"PRIORIDAD: CONVERSIÓN",
-      control:["Demanda + Ads","Oferta + experiencia","CTA + medición"]
-    },
-    messages:{
-      code:"OPERATIONS GAP",
-      title:"El negocio está resolviendo por chat información que debería llegar antes.",
-      text:"Revisaríamos qué preguntas son repetitivas, qué puede responder la web y qué contexto puede capturarse antes de una conversación humana.",
-      layers:[
-        ["Información pública","Precios, horarios, cobertura, condiciones."],
-        ["Entrada a WhatsApp","Contexto antes de escribir."],
-        ["Automatización","Solo lo estable y repetitivo."]
-      ],
-      first:"Reducir preguntas repetidas antes de instalar un bot complejo.",
-      interest:"WhatsApp y automatización",
-      status:"PRIORIDAD: OPERACIÓN",
-      control:["Web + información","WhatsApp + contexto","Seguimiento + datos"]
-    },
-    premium:{
-      code:"TRUST GAP",
-      title:"La calidad existe en el negocio, pero no se percibe en la experiencia digital.",
-      text:"Revisaríamos dirección de arte, jerarquía, copy, casos y señales de confianza antes de agregar más decoración.",
-      layers:[
-        ["Mensaje","¿La propuesta suena específica y propia?"],
-        ["Experiencia","¿La interfaz transmite criterio y orden?"],
-        ["Autoridad","¿Hay razones verificables para confiar?"]
-      ],
-      first:"Alinear percepción, contenido y experiencia antes de rediseñar por gusto.",
-      interest:"Marca, UX y autoridad",
-      status:"PRIORIDAD: PERCEPCIÓN",
-      control:["Mensaje + marca","UX + autoridad","Contacto + prueba"]
-    },
-    ai:{
-      code:"ENTITY GAP",
-      title:"Tal vez Internet sabe que existes, pero todavía entiende poco sobre cuándo eres relevante.",
-      text:"Revisaríamos arquitectura, entidades, páginas de servicio, consistencia y acceso técnico sin prometer una recomendación concreta de IA.",
-      layers:[
-        ["Entidades","Negocio, servicio, persona, ubicación."],
-        ["Contenido","Preguntas y páginas con contexto real."],
-        ["Consistencia","Web, perfiles y fuentes alineadas."]
-      ],
-      first:"Mejorar las señales públicas que sí controlas.",
-      interest:"SEO, GEO y buscadores de IA",
-      status:"PRIORIDAD: COMPRENSIÓN",
-      control:["Fuentes públicas","Entidades + contenido","Web + conversión"]
-    }
+    invisible:{code:"DISCOVERY GAP",title:"Puede existir demanda, pero tus señales públicas no la están conectando contigo.",text:"Primero revisaríamos si Google, Maps y tu web describen con suficiente claridad qué haces, dónde y para quién.",layers:[["Perfil y presencia local","Nombre, categoría, ubicación, servicios."],["Páginas de servicio","Intención, contexto, lenguaje real."],["Ruta de contacto","Del resultado a la consulta."]],first:"Auditar encontrabilidad antes de comprar tráfico.",interest:"Encontrabilidad",goal:"No aparezco cuando buscan mis servicios",status:"PRIORIDAD: ENCONTRABILIDAD",control:["Google + Maps","Oferta + contenido","Web + contacto"]},
+    traffic:{code:"CONVERSION GAP",title:"No parece faltar atención. Parece faltar una razón clara para avanzar.",text:"Revisaríamos propuesta de valor, jerarquía, landing, prueba y CTA antes de aumentar publicaciones o presupuesto.",layers:[["Oferta","¿Se entiende qué vendes y para quién?"],["Landing / web","¿La página responde la intención?"],["Conversión","¿El siguiente paso es obvio y medible?"]],first:"Arreglar la ruta que recibe el tráfico antes de comprar más.",interest:"Conversión",goal:"Aparezco, pero recibo pocas consultas",status:"PRIORIDAD: CONVERSIÓN",control:["Demanda + Ads","Oferta + experiencia","CTA + medición"]},
+    messages:{code:"OPERATIONS GAP",title:"El negocio está resolviendo por chat información que debería llegar antes.",text:"Revisaríamos qué preguntas son repetitivas, qué puede responder la web y qué contexto puede capturarse antes de una conversación humana.",layers:[["Información pública","Precios, horarios, cobertura, condiciones."],["Entrada a WhatsApp","Contexto antes de escribir."],["Automatización","Solo lo estable y repetitivo."]],first:"Reducir preguntas repetidas antes de instalar un bot complejo.",interest:"WhatsApp y automatización",goal:"Quiero saber qué debería mejorar primero",status:"PRIORIDAD: OPERACIÓN",control:["Web + información","WhatsApp + contexto","Seguimiento + datos"]},
+    premium:{code:"TRUST GAP",title:"La calidad existe en el negocio, pero no se percibe en la experiencia digital.",text:"Revisaríamos dirección de arte, jerarquía, copy, casos y señales de confianza antes de agregar más decoración.",layers:[["Mensaje","¿La propuesta suena específica y propia?"],["Experiencia","¿La interfaz transmite criterio y orden?"],["Autoridad","¿Hay razones verificables para confiar?"]],first:"Alinear percepción, contenido y experiencia antes de rediseñar por gusto.",interest:"Marca, UX y autoridad",goal:"Mi presencia digital no refleja la calidad de mi trabajo",status:"PRIORIDAD: PERCEPCIÓN",control:["Mensaje + marca","UX + autoridad","Contacto + prueba"]},
+    ai:{code:"ENTITY GAP",title:"Tal vez Internet sabe que existes, pero todavía entiende poco sobre cuándo eres relevante.",text:"Revisaríamos arquitectura, entidades, páginas de servicio, consistencia y acceso técnico sin prometer una recomendación concreta de IA.",layers:[["Entidades","Negocio, servicio, persona, ubicación."],["Contenido","Preguntas y páginas con contexto real."],["Consistencia","Web, perfiles y fuentes alineadas."]],first:"Mejorar las señales públicas que sí controlas.",interest:"SEO, GEO y buscadores de IA",goal:"No sé qué información encuentran los asistentes de IA sobre mi negocio",status:"PRIORIDAD: COMPRENSIÓN",control:["Fuentes públicas","Entidades + contenido","Web + conversión"]}
   };
-
-  const problemButtons=[...document.querySelectorAll("[data-problem]")];
-  const diagnosis=document.querySelector(".v11-diagnosis");
-  const layers=document.getElementById("v11DiagnosisLayers");
-  const cta=document.getElementById("v11DiagnosisCta");
-  const applyProblem=key=>{
-    const d=problemData[key];if(!d)return;
-    problemButtons.forEach(b=>{const active=b.dataset.problem===key;b.classList.toggle("is-active",active);b.setAttribute("aria-selected",String(active))});
-    setText("v11DiagnosisCode",d.code);setText("v11DiagnosisTitle",d.title);setText("v11DiagnosisText",d.text);setText("v11DiagnosisFirst",d.first);setText("v11ControlStatus",d.status);
-    if(layers)layers.innerHTML=d.layers.map((x,i)=>"<div><span>0"+(i+1)+"</span><b>"+x[0]+"</b><small>"+x[1]+"</small></div>").join("");
-    if(cta)cta.dataset.interest=d.interest;
-    setText("v11ControlA",d.control[0]);setText("v11ControlB",d.control[1]);setText("v11ControlC",d.control[2]);
-    const interest=document.getElementById("interest");if(interest)interest.value=d.interest;
-    if(diagnosis&&!reduce)diagnosis.animate([{opacity:.55,transform:"translateY(8px)"},{opacity:1,transform:"none"}],{duration:380,easing:"cubic-bezier(.16,1,.3,1)"});
-  };
+  const problemButtons=[...document.querySelectorAll("[data-problem]")],diagnosis=document.querySelector(".v11-diagnosis"),layers=document.getElementById("v11DiagnosisLayers"),cta=document.getElementById("v11DiagnosisCta");
+  const applyProblem=key=>{const d=problemData[key];if(!d)return;problemButtons.forEach(b=>{const active=b.dataset.problem===key;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active))});setText("v11DiagnosisCode",d.code);setText("v11DiagnosisTitle",d.title);setText("v11DiagnosisText",d.text);setText("v11DiagnosisFirst",d.first);setText("v11ControlStatus",d.status);if(layers)layers.innerHTML=d.layers.map((x,i)=>"<div><span>0"+(i+1)+"</span><b>"+x[0]+"</b><small>"+x[1]+"</small></div>").join("");if(cta)cta.dataset.interest=d.interest;setText("v11ControlA",d.control[0]);setText("v11ControlB",d.control[1]);setText("v11ControlC",d.control[2]);const interest=document.getElementById("interest");if(interest)interest.value=d.interest;const goal=document.getElementById("goal");if(goal&&[...goal.options].some(o=>o.value===d.goal))goal.value=d.goal;if(diagnosis&&!reduce)diagnosis.animate([{opacity:.68,transform:"translateY(6px)"},{opacity:1,transform:"none"}],{duration:330,easing:"cubic-bezier(.16,1,.3,1)"})};
   problemButtons.forEach(b=>b.addEventListener("click",()=>applyProblem(b.dataset.problem)));
-
-  // BEFORE / AFTER: direct manipulation instead of another pair of buttons.
-  const range=document.getElementById("v11CompareRange");
-  const compare=document.querySelector(".v11-compare");
-  if(range&&compare){
-    const update=()=>compare.style.setProperty("--split",range.value+"%");
-    range.addEventListener("input",update);update();
-  }
-
-  // Keyboard-friendly selected tabs.
-  document.querySelectorAll('[role="tablist"]').forEach(list=>{
-    const buttons=[...list.querySelectorAll("button")];
-    buttons.forEach((btn,i)=>btn.addEventListener("keydown",e=>{
-      if(!["ArrowRight","ArrowLeft"].includes(e.key))return;
-      e.preventDefault();
-      const next=e.key==="ArrowRight"?(i+1)%buttons.length:(i-1+buttons.length)%buttons.length;
-      buttons[next].focus();buttons[next].click();
-    }));
-  });
+  const range=document.getElementById("v11CompareRange"),compare=document.querySelector(".v11-compare");if(range&&compare){const update=()=>compare.style.setProperty("--split",range.value+"%");range.addEventListener("input",update);update()}
 })();
