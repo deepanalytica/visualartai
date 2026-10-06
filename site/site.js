@@ -1,7 +1,7 @@
 /* Visual Art AI — shared production runtime v12 */
 (()=>{
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const track=(name,props={})=>{try{if(typeof window.plausible==="function")window.plausible(name,{props});if(typeof window.gtag==="function")window.gtag("event",name,props);window.dispatchEvent(new CustomEvent("vaai:track",{detail:{name,props}}))}catch{}};
+  const track=(name,props={})=>{try{if(window.vaaAnalyticsAllowed===true&&Array.isArray(window.dataLayer))window.dataLayer.push({event:name});window.dispatchEvent(new CustomEvent("vaai:track",{detail:{name,props}}))}catch{}};
   window.VAAI={track};
   const reveal=[...document.querySelectorAll(".section,.final-cta,[data-motion-reveal]")];
   if(reduce||!("IntersectionObserver" in window))reveal.forEach(el=>el.classList.add("in"));else{reveal.forEach(el=>el.classList.add("reveal"));const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)return;entry.target.classList.add("in");io.unobserve(entry.target)}),{threshold:.08,rootMargin:"0px 0px -5% 0px"});reveal.forEach(el=>io.observe(el))}
