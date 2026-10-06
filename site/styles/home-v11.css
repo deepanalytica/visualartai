@@ -413,3 +413,18 @@
   .home-v11:has(#vaa-consent-panel:not([hidden])) .mobile-convert{visibility:hidden;pointer-events:none}
   .home-v11 .footer{padding-bottom:9rem}
 }
+
+/* v19 — definitive pain-led hero */
+.v19-hero-title{display:grid;gap:.04em;max-width:52rem}
+.v19-hero-title>span,.v19-hero-title>em,.v19-hero-title>strong{display:block}
+.v19-hero-title>em{margin-top:.03em;font-family:var(--font-editorial);font-weight:400;color:var(--color-action-primary);letter-spacing:-.045em}
+.v19-hero-title>.v19-pain{margin-top:.34em;font-size:.43em;line-height:1.08;letter-spacing:-.035em;font-weight:700;color:var(--color-text-secondary)}
+.v19-hero-title>strong{font-size:.49em;line-height:1.03;letter-spacing:-.04em;font-weight:800;color:var(--color-accent)}
+.v19-hero-lede{max-width:39rem;margin-top:1.15rem}
+@media(max-width:45rem){
+  .v19-hero-title{gap:.02em;max-width:100%}
+  .v19-hero-title>em{font-size:.88em;line-height:.92}
+  .v19-hero-title>.v19-pain{margin-top:.46em;font-size:.43em;line-height:1.13}
+  .v19-hero-title>strong{font-size:.46em;line-height:1.08}
+  .v19-hero-lede{margin-top:1rem;font-size:.94rem;line-height:1.55}
+}
