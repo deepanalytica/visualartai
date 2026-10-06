@@ -6,6 +6,7 @@
 Una empresa puede perder oportunidades porque no aparece cuando buscan su servicio, porque la oferta se entiende mal, porque la web no transmite suficiente confianza, porque el contacto tiene fricción o porque Google y los buscadores de IA encuentran señales públicas insuficientes o inconsistentes.
 
 ## Servicios
+- Catálogo de servicios: https://deepanalytica.github.io/visualartai/servicios/
 - SEO local y Google Maps: https://deepanalytica.github.io/visualartai/servicios/seo-google-maps.html
 - Visibilidad en buscadores de IA / GEO: https://deepanalytica.github.io/visualartai/servicios/visibilidad-ia.html
 - Diseño web y landing pages: https://deepanalytica.github.io/visualartai/servicios/web-landing-pages.html
