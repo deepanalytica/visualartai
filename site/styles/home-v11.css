@@ -109,3 +109,74 @@
   .mobile-convert{position:fixed;z-index:45;left:.625rem;right:.625rem;bottom:.625rem;display:flex;align-items:center;justify-content:space-between;min-height:3.625rem;padding:.5rem .5625rem .5rem .875rem;border:1px solid var(--color-border-subtle);border-radius:1rem;background:var(--color-surface);box-shadow:var(--shadow-lg);transform:translateY(5.625rem);opacity:0;transition:var(--duration-normal) var(--ease-standard)}.mobile-convert.show{transform:none;opacity:1}.mobile-convert a{padding:.625rem .75rem;border-radius:.625rem;background:var(--color-action-primary);color:white;font:700 .5625rem var(--font-mono)}
   .footer{padding-bottom:5.5rem}
 }
+
+/* v13 — mobile optical refinement from real-device QA */
+.v11-hero-grid>*{min-width:0}
+.v11-hero-copy,.v11-search-scene{min-width:0;max-width:100%}
+.v11-searchbar span{min-width:0}
+@media(max-width:45rem){
+  .topbar{height:3.75rem}
+  .topbar-inner{gap:.45rem}
+  .vaa-brand{gap:.42rem;min-width:0}
+  .vaa-symbol{width:1.65rem;height:1.65rem;flex-basis:1.65rem}
+  .vaa-wordmark{font-size:.6rem;letter-spacing:.12em;white-space:nowrap}
+  .topbar-actions{gap:.32rem}
+  .menu-btn{min-height:2.45rem;padding-inline:.68rem;font-size:.5rem}
+  .topbar-actions .button-small{min-height:2.45rem;padding-inline:.68rem;font-size:.49rem;letter-spacing:.045em;white-space:nowrap}
+
+  .v11-hero{padding-top:2.7rem}
+  .v11-hero-grid{width:100%;max-width:100%}
+  .v11-hero-copy{width:100%;overflow:visible}
+  .v11-hero-copy h1{
+    max-width:100%;
+    margin-top:1rem;
+    font-size:clamp(3.02rem,13.2vw,4.35rem);
+    line-height:.89;
+    letter-spacing:-.064em;
+    text-wrap:balance;
+    overflow-wrap:normal;
+    word-break:normal
+  }
+  .v11-hero-copy h1 em{
+    max-width:100%;
+    font-size:.93em;
+    line-height:.9;
+    letter-spacing:-.038em;
+    text-wrap:balance
+  }
+  .v11-hero-lede{
+    max-width:100%;
+    margin-top:1.35rem;
+    font-size:.96rem;
+    line-height:1.58;
+    overflow-wrap:normal;
+    word-break:normal
+  }
+  .v11-hero-lede u{
+    -webkit-box-decoration-break:clone;
+    box-decoration-break:clone
+  }
+  .v11-hero-actions{margin-top:1.45rem;gap:.85rem}
+  .v11-hero-actions .button{min-height:3.15rem;padding-inline:1rem;font-size:.56rem}
+  .v11-proofline{margin-top:.85rem;gap:.55rem;font-size:.52rem}
+
+  .v11-search-scene{width:100%;padding:.78rem;border-radius:1.45rem}
+  .v11-search-top{gap:.7rem}
+  .v11-query-controls{gap:.45rem}
+  .v11-query-tabs{overscroll-behavior-inline:contain;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .v11-query-tabs button{scroll-snap-align:start;min-height:2.55rem;padding-inline:.78rem}
+  .v11-query-play{min-height:2.55rem}
+  .v11-search-window{min-height:23rem;padding:.8rem;border-radius:1.2rem}
+  .v11-searchbar{padding:.78rem .85rem;gap:.55rem}
+  .v11-searchbar span{font-size:.66rem}
+  .v11-signal-graph{height:12.5rem}
+  .v11-signal-core{width:76%;padding:.85rem}
+  .v11-platform-row{padding:.7rem .2rem .1rem}
+}
+@media(max-width:23.5rem){
+  .vaa-wordmark{font-size:.55rem}
+  .menu-btn{padding-inline:.58rem}
+  .topbar-actions .button-small{padding-inline:.58rem;font-size:.46rem}
+  .v11-hero-copy h1{font-size:2.9rem}
+  .v11-hero-copy h1 em{font-size:.9em}
+}
