@@ -24,7 +24,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="home-core.css?v=12">
 <link rel="stylesheet" href="brand/visual-art-ai-design-system.css?v=10">
-<link rel="stylesheet" href="styles/home-v11.css?v=14">
+<link rel="stylesheet" href="styles/home-v11.css?v=15">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://deepanalytica.github.io/visualartai/#organization","name":"Visual Art AI","url":"https://deepanalytica.github.io/visualartai/","description":"Servicio chileno de visibilidad digital que conecta Google, Google Maps, SEO, buscadores de IA, web, conversión, publicidad, automatización y analítica.","areaServed":{"@type":"Country","name":"Chile"},"knowsAbout":["Google Business Profile","Google Maps","SEO","GEO","AI Search Optimization","Web design","Conversion optimization","Google Ads","Meta Ads","WhatsApp automation","Web analytics"]},{"@type":"WebSite","@id":"https://deepanalytica.github.io/visualartai/#website","url":"https://deepanalytica.github.io/visualartai/","name":"Visual Art AI","inLanguage":"es-CL","publisher":{"@id":"https://deepanalytica.github.io/visualartai/#organization"}},{"@type":"Service","@id":"https://deepanalytica.github.io/visualartai/#visibility-service","name":"Sistema de presencia y visibilidad digital","provider":{"@id":"https://deepanalytica.github.io/visualartai/#organization"},"areaServed":{"@type":"Country","name":"Chile"},"description":"Diagnóstico e implementación para mejorar la encontrabilidad, comprensión, autoridad y conversión de un negocio en Google, Maps, web y buscadores de IA.","serviceType":["Google Maps y visibilidad local","SEO y contenido","GEO y optimización para buscadores de IA","Diseño web y landing pages","Google Ads y Meta Ads","Automatización de WhatsApp","Contenido y marca","Analítica y optimización"]}]}</script>
 <link rel="alternate" type="application/rss+xml" title="Visual Art AI Blog" href="https://deepanalytica.github.io/visualartai/feed.xml">
 </head>
@@ -49,7 +49,7 @@
       <a href="blog/index.html">Ideas</a>
     </nav>
     <div class="topbar-actions">
-      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">MENÚ</button>
+      <button class="menu-btn v15-menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><span class="v15-menu-glyph" aria-hidden="true"><i></i><i></i></span></button>
       <a class="button button-primary button-small" href="#diagnostico">Auditoría gratis</a>
     </div>
   </div>
@@ -57,7 +57,18 @@
 
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <div class="mobile-menu-panel">
-    <div class="mobile-menu-head"><span class="mono">VISUAL ART AI</span><button class="menu-close" id="menuClose" aria-label="Cerrar menú">×</button></div>
+    <div class="mobile-menu-head">
+      <a class="vaa-brand mobile-menu-brand" href="#inicio" aria-label="Visual Art AI — inicio">
+        <svg class="vaa-symbol" viewBox="0 0 36 36" aria-hidden="true">
+          <circle cx="18" cy="18" r="14.25" fill="none" stroke="currentColor" stroke-opacity=".18" stroke-width="1.25"/>
+          <path class="vaa-signal-arc" d="M7.8 22.7A11.3 11.3 0 0 1 25.8 9.2" fill="none" stroke-width="2" stroke-linecap="round"/>
+          <circle class="vaa-signal-dot" cx="7.8" cy="22.7" r="2.15"/>
+          <circle cx="18" cy="18" r="2.25" fill="currentColor"/>
+        </svg>
+        <span class="vaa-wordmark">VISUAL ART AI</span>
+      </a>
+      <button class="menu-close v15-menu-close" id="menuClose" aria-label="Cerrar menú">×</button>
+    </div>
     <nav aria-label="Navegación móvil">
       <a href="#problema"><span>01</span>Solución</a>
       <a href="#recorrido"><span>02</span>Cómo trabajamos</a>
