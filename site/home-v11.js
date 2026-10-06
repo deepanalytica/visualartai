@@ -54,7 +54,7 @@
     const scene=document.querySelector(".v11-search-window");
     if(scene&&!reduce)scene.animate([{opacity:.58,transform:"translateY(8px) scale(.992)"},{opacity:1,transform:"none"}],{duration:520,easing:"cubic-bezier(.16,1,.3,1)"});
   };
-  const syncPlay=()=>{if(!play)return;play.setAttribute("aria-pressed",String(playing));play.textContent=playing?"Ⅱ Pausar":"▶ Reproducir";play.setAttribute("aria-label",playing?"Pausar ejemplos automáticos":"Reproducir ejemplos automáticamente")};
+  const syncPlay=()=>{if(!play)return;play.setAttribute("aria-pressed",String(playing));play.innerHTML=playing?'<span aria-hidden="true">Ⅱ</span> Pausar':'<span aria-hidden="true">▶</span> Reproducir';play.setAttribute("aria-label",playing?"Pausar ejemplos automáticos":"Reproducir ejemplos automáticamente")};
   const stop=()=>{playing=false;clearInterval(timer);timer=null;syncPlay()};
   const start=()=>{if(reduce)return;playing=true;clearInterval(timer);timer=setInterval(()=>showQuery((qi+1)%queryData.length),5200);syncPlay()};
   queryButtons.forEach((b,i)=>b.addEventListener("click",()=>{showQuery(i);if(playing)start()}));

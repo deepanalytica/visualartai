@@ -1,0 +1,21 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Visual Art AI",
+    "documentationUrl": "https://visualartai.cl/llms.txt"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:visualartai.cl:skills:public-site-navigation",
+      "displayName": "Consultar y navegar el sitio público de Visual Art AI",
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
+      "url": "https://visualartai.cl/agent-guide.md",
+      "description": "Guía de consulta de servicios, metodología y evidencia pública. Describe navegación; no expone una API ni envía formularios.",
+      "representativeQueries": [
+        "¿Qué servicios ofrece Visual Art AI para mi negocio?",
+        "¿Cómo solicitar un diagnóstico de presencia digital a Visual Art AI?"
+      ],
+      "version": "1.0.0"
+    }
+  ]
+}

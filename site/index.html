@@ -1,13 +1,15 @@
 <!doctype html>
 <html lang="es" data-theme="light">
 <head>
-<script src="/analytics-consent.js?v=1" defer></script>
+<script src="/analytics-consent.js?v=2" defer></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f8fafc">
 <title>Visual Art AI — Visibilidad en la nueva búsqueda</title>
 <meta name="description" content="Agencia de visibilidad y captación digital en Chile: SEO, Google Maps, buscadores de IA, web, landing pages, Ads, WhatsApp, contenido y analítica. Diagnóstico inicial gratuito.">
 <link rel="canonical" href="https://visualartai.cl/">
+<link rel="ard" href="/.well-known/ard.json">
+<link rel="ai-catalog" href="/.well-known/ai-catalog.json">
 <link rel="alternate" hreflang="es-CL" href="https://visualartai.cl/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
@@ -24,9 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="home-core.css?v=12">
-<link rel="stylesheet" href="brand/visual-art-ai-design-system.css?v=10">
-<link rel="stylesheet" href="styles/home-v11.css?v=17">
+<link rel="stylesheet" href="home-core.css?v=14">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://visualartai.cl/#organization","name":"Visual Art AI","url":"https://visualartai.cl/","logo":{"@type":"ImageObject","url":"https://visualartai.cl/brands/visual-art-ai-logo.svg"},"email":"contacto@deepanalytica.cl","description":"Agencia chilena de visibilidad y captación digital para pymes y profesionales. Conecta SEO, Google Maps, buscadores de IA, web, landing pages, publicidad, WhatsApp, contenido y analítica.","areaServed":{"@type":"Country","name":"Chile"},"brand":{"@type":"Brand","name":"Visual Art AI"},"contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"contacto@deepanalytica.cl","availableLanguage":"Spanish","areaServed":"CL"},"knowsAbout":["Google Business Profile","Google Maps","SEO local","GEO","AI Search Optimization","Web design","Landing pages","Conversion optimization","Google Ads","Meta Ads","WhatsApp automation","Content strategy","Web analytics"],"subjectOf":{"@type":"WebPage","url":"https://deepanalytica.cl/casos","name":"Visual Art AI en el portafolio público de Deep Analytica"}},{"@type":"WebSite","@id":"https://visualartai.cl/#website","url":"https://visualartai.cl/","name":"Visual Art AI","inLanguage":"es-CL","publisher":{"@id":"https://visualartai.cl/#organization"}},{"@type":"Service","@id":"https://visualartai.cl/#visibility-service","name":"Sistema de presencia y captación digital","provider":{"@id":"https://visualartai.cl/#organization"},"areaServed":{"@type":"Country","name":"Chile"},"description":"Diagnóstico e implementación para mejorar visibilidad, comprensión, confianza y conversión en Google, Maps, web y buscadores de IA.","hasOfferCatalog":{"@id":"https://visualartai.cl/#services"}},{"@type":"OfferCatalog","@id":"https://visualartai.cl/#services","name":"Servicios de Visual Art AI","itemListElement":[{"@type":"Offer","position":1,"itemOffered":{"@type":"Service","name":"SEO + Google Maps","url":"https://visualartai.cl/servicios/seo-google-maps.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":2,"itemOffered":{"@type":"Service","name":"Visibilidad en IA / GEO","url":"https://visualartai.cl/servicios/visibilidad-ia.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":3,"itemOffered":{"@type":"Service","name":"Webs + landing pages","url":"https://visualartai.cl/servicios/web-landing-pages.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":4,"itemOffered":{"@type":"Service","name":"Ads + captación","url":"https://visualartai.cl/servicios/google-meta-ads.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":5,"itemOffered":{"@type":"Service","name":"WhatsApp + automatización","url":"https://visualartai.cl/servicios/whatsapp-automatizacion.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":6,"itemOffered":{"@type":"Service","name":"Contenido + analítica","url":"https://visualartai.cl/servicios/contenido-analitica.html","provider":{"@id":"https://visualartai.cl/#organization"}}}]}]}</script>
 <link rel="alternate" type="application/rss+xml" title="Visual Art AI Blog" href="https://visualartai.cl/feed.xml">
 </head>
@@ -112,7 +112,7 @@
             <button data-query-index="3" aria-pressed="false">Gastronomía</button>
             <button data-query-index="4" aria-pressed="false">Arriendos</button>
           </div>
-          <button class="v11-query-play" id="v11QueryPlay" type="button" aria-pressed="false" aria-label="Reproducir ejemplos automáticamente">▶ Reproducir</button>
+          <button class="v11-query-play" id="v11QueryPlay" type="button" aria-pressed="false" aria-label="Reproducir ejemplos automáticamente"><span aria-hidden="true">▶</span> Reproducir</button>
         </div>
       </div>
 
@@ -374,6 +374,6 @@
 <div class="mobile-convert" id="mobileConvert"><span>Diagnóstico $0</span><a href="#diagnostico">Empezar →</a></div>
 <footer class="footer"><div class="shell footer-grid v17-footer-grid"><div><b>VISUAL ART AI / CHILE</b><span>Visibilidad y captación digital.</span></div><div><b>SERVICIOS</b><a href="servicios/seo-google-maps.html">SEO + Maps</a><a href="servicios/visibilidad-ia.html">IA / GEO</a><a href="servicios/web-landing-pages.html">Web + landing</a></div><div><b>EMPRESA</b><a href="nosotros.html">Nosotros</a><a href="metodologia.html">Metodología</a><a href="casos/">Casos</a></div><div><b>RECURSOS</b><a href="blog/">Blog</a><a href="auditoria-presencia-digital.html">Auditoría gratis</a></div></div></footer>
 <script src="site.js?v=12" defer></script>
-<script src="home-v11.js?v=16" defer></script>
+<script src="home-v11.js?v=17" defer></script>
 </body>
 </html>
