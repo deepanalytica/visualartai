@@ -1,57 +1,46 @@
 # Visual Art AI
 
-> Visual Art AI ayuda a profesionales y pymes de Chile a ser más fáciles de encontrar, entender y contactar en Google, Google Maps, la web y los buscadores de inteligencia artificial.
+> Visual Art AI es una agencia chilena de visibilidad y captación digital para pymes y profesionales. Ayudamos a que un negocio sea más fácil de encontrar, entender y contactar en Google, Google Maps, la web y los buscadores de inteligencia artificial.
 
-## Qué hacemos
-- Google Business Profile y Google Maps
-- SEO y arquitectura de contenido
-- GEO / LLM SEO y visibilidad en buscadores de IA
-- Diseño web y landing pages
-- Google Ads y Meta Ads
-- Automatización de WhatsApp y seguimiento
-- Marca y contenido visual
-- Analítica, medición y optimización de conversión
+## Qué problema resolvemos
+Una empresa puede perder oportunidades porque no aparece cuando buscan su servicio, porque la oferta se entiende mal, porque la web no transmite suficiente confianza, porque el contacto tiene fricción o porque Google y los buscadores de IA encuentran señales públicas insuficientes o inconsistentes.
 
-## Propuesta de valor
-No tratamos Google, IA, web y conversión como proyectos aislados. Trabajamos las señales públicas, la experiencia y el recorrido de contacto como un sistema conectado.
+## Servicios
+- SEO local y Google Maps: https://deepanalytica.github.io/visualartai/servicios/seo-google-maps.html
+- Visibilidad en buscadores de IA / GEO: https://deepanalytica.github.io/visualartai/servicios/visibilidad-ia.html
+- Diseño web y landing pages: https://deepanalytica.github.io/visualartai/servicios/web-landing-pages.html
+- Google Ads y Meta Ads: https://deepanalytica.github.io/visualartai/servicios/google-meta-ads.html
+- WhatsApp y automatización: https://deepanalytica.github.io/visualartai/servicios/whatsapp-automatizacion.html
+- Contenido y analítica: https://deepanalytica.github.io/visualartai/servicios/contenido-analitica.html
 
-No garantizamos una posición en Google ni que un asistente de IA recomiende una empresa. Mejoramos claridad, consistencia, encontrabilidad, verificabilidad y conversión.
+## Metodología
+https://deepanalytica.github.io/visualartai/metodologia.html
 
-## Precios orientativos en Chile
+Visual Art AI diagnostica, prioriza, implementa y mide. Observa encontrabilidad, claridad, confianza, conversión y operación antes de recomendar una herramienta.
+
+## Diagnóstico
+https://deepanalytica.github.io/visualartai/auditoria-presencia-digital.html
+Precio actual: $0 CLP.
+Objetivo: identificar una prioridad antes de proponer un servicio.
+
+## Sobre Visual Art AI
+https://deepanalytica.github.io/visualartai/nosotros.html
+Área atendida: Chile.
+Contacto: contacto@deepanalytica.cl
+
+## Casos y evidencia
+https://deepanalytica.github.io/visualartai/casos/
+Caso documentado: https://deepanalytica.github.io/visualartai/casos/jessica-arriagada-presencia-digital.html
+
+Visual Art AI no garantiza posiciones en Google, recomendaciones en ChatGPT/Gemini/Perplexity, ventas, pacientes ni reservas. Trabaja sobre señales públicas, arquitectura, contenido, experiencia, conversión y medición que sí pueden ser gestionadas.
+
+## Precios orientativos
 - Diagnóstico inicial: $0 CLP
 - Puesta a punto: desde $89.000 CLP
 - Sprint de visibilidad: desde $249.000 CLP
 - Sistema de presencia: desde $690.000 CLP
 - Optimización continua: desde $149.000 CLP/mes
-Los valores pueden variar según alcance e integraciones.
 
 ## Blog
-El blog contiene 20 guías largas con ejemplos, diagramas, enlaces internos y fuentes oficiales cuando se hacen afirmaciones sobre plataformas.
-
-- Estoy en Google Maps. ¿Por qué casi nadie me encuentra?: https://deepanalytica.github.io/visualartai/articulos/google-maps.html
-- Mi negocio no aparece en Google Maps. ¿Qué reviso primero?: https://deepanalytica.github.io/visualartai/articulos/negocio-no-aparece-google-maps.html
-- Cómo pedir reseñas en Google sin sonar desesperado ni meterte en problemas: https://deepanalytica.github.io/visualartai/articulos/resenas-google-como-pedir-sin-riesgo.html
-- La IA mostró a mi competencia y yo no aparecí. ¿Qué significa de verdad?: https://deepanalytica.github.io/visualartai/articulos/ia-recomienda-competencia.html
-- “ChatGPT no recomienda mi negocio”. Bien: empecemos por el problema real.: https://deepanalytica.github.io/visualartai/articulos/chatgpt-no-recomienda-mi-negocio.html
-- SEO, GEO e IA: qué cambió y qué sigue siendo sorprendentemente básico: https://deepanalytica.github.io/visualartai/articulos/seo-geo.html
-- Tu mejor calendario editorial probablemente ya está escondido en WhatsApp: https://deepanalytica.github.io/visualartai/articulos/contenido-preguntas-clientes-seo-ia.html
-- Qué debería revisar una auditoría de presencia digital antes de recomendarte una web nueva: https://deepanalytica.github.io/visualartai/articulos/auditoria-presencia-digital-que-revisar.html
-- Un plan de 90 días para que una pyme deje de improvisar su presencia digital: https://deepanalytica.github.io/visualartai/articulos/estrategia-visibilidad-90-dias-pyme.html
-- La landing de un negocio local no necesita decirlo todo. Necesita hacer una cosa muy bien.: https://deepanalytica.github.io/visualartai/articulos/landing-page-negocio-local.html
-- Tu web se ve bien. La pregunta incómoda es: ¿ayuda a que te elijan?: https://deepanalytica.github.io/visualartai/articulos/web-convierte.html
-- ¿Cuánto debería invertir una pyme en Google Ads? Primero define qué puedes medir: https://deepanalytica.github.io/visualartai/articulos/cuanto-invertir-google-ads-pyme.html
-- Responder WhatsApp todo el día no debería ser el precio de crecer: https://deepanalytica.github.io/visualartai/articulos/whatsapp.html
-- Te escribieron por WhatsApp y no compraron. ¿Cuánto seguimiento es útil?: https://deepanalytica.github.io/visualartai/articulos/seguimiento-leads-whatsapp.html
-- Quiero más pacientes. ¿Por dónde empiezo antes de pagar publicidad?: https://deepanalytica.github.io/visualartai/articulos/mas-pacientes.html
-- Psicología online: cómo transmitir confianza sin sonar fría, genérica ni desesperada: https://deepanalytica.github.io/visualartai/articulos/psicologo-online-visibilidad-confianza.html
-- Soy kinesiólogo y sé hacer bien mi trabajo. ¿Cómo logro que más personas me encuentren?: https://deepanalytica.github.io/visualartai/articulos/kinesiologo-conseguir-pacientes-locales.html
-- Tu clínica estética publica todos los días. ¿Por qué las consultas no crecen igual?: https://deepanalytica.github.io/visualartai/articulos/clinica-estetica-clientes-google-ia.html
-- Tu comida puede ser excelente y aun así depender demasiado de publicar el menú cada día: https://deepanalytica.github.io/visualartai/articulos/restaurante-menu-google-maps-whatsapp.html
-- Tengo departamentos amoblados y fechas vacías: ¿cómo convierto búsquedas en reservas?: https://deepanalytica.github.io/visualartai/articulos/arriendos-amoblados-llenar-calendario.html
-
-## Entrada principal
-- Sitio: https://deepanalytica.github.io/visualartai/
-- Blog: https://deepanalytica.github.io/visualartai/blog/
-- Diagnóstico: https://deepanalytica.github.io/visualartai/#diagnostico
-- Servicios: https://deepanalytica.github.io/visualartai/#sectores
-- Precios: https://deepanalytica.github.io/visualartai/#precios
+https://deepanalytica.github.io/visualartai/blog/
+20 guías sobre Google Maps, SEO, GEO, buscadores de IA, web, landing pages, Ads, WhatsApp, contenido y captación.
