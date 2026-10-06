@@ -1,4 +1,4 @@
-# Visual Art AI — Design System v11
+# Visual Art AI — Design System v12
 
 ## 1. Principle
 
@@ -380,3 +380,34 @@ The homepage must answer these questions in order:
 7. How do I begin?
 
 That sequence takes precedence over showing the complete service inventory.
+
+
+## 15. Production hardening v12
+
+### Performance
+- Homepage no longer imports the legacy patterns/editorial bundles.
+- Homepage uses `home-core.css` + `home-v11.css`.
+- GSAP and Three.js were removed from the production homepage.
+- Shared runtime was reduced to navigation, conversion, article progress, blog filtering and lightweight analytics hooks.
+- Decorative motion is never required to understand the page.
+
+### Motion and control
+- Search examples are manual by default.
+- Autoplay only starts after explicit user action and exposes a pause control.
+- Problem selectors use standard buttons with `aria-pressed`; they are not mislabeled as tabs.
+
+### Homepage conversion
+- Broken legacy anchors and unused theme controls were removed.
+- Pricing uses progressive disclosure for examples and exclusions.
+- The diagnostic section previews the structure of the deliverable so the CTA sells an understood outcome, not just a form.
+- FAQ structured data is not emitted unless equivalent FAQ content is visible.
+
+### Mobile editorial
+- Desktop sidebars are removed from the mobile reading path.
+- A compact collapsible table of contents is generated from the desktop TOC.
+- Decorative platform rails are hidden on small screens.
+- Hero visuals, responsibility notes, section gaps and diagrams are compressed for reading rhythm.
+- Mobile blog filters remain accessible in a horizontally scrollable sticky rail.
+
+### Lead capture constraint
+The current GitHub Pages production is static. The diagnostic form therefore uses a transparent email handoff rather than pretending a database submission exists. A persistent lead endpoint must only be enabled once a real serverless/API destination and data policy are configured.
