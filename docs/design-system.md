@@ -1,4 +1,4 @@
-# Visual Art AI — Design System v7
+# Visual Art AI — Design System v11
 
 ## 1. Principle
 
@@ -96,8 +96,11 @@ Usage:
 ## 4. Typography
 
 Family:
-- Manrope: all interface and marketing text.
+- Manrope: UI, navigation, body and controls.
+- Instrument Serif: selective editorial emphasis, emotional contrast and high-impact statements.
 - IBM Plex Mono: labels, metadata, status and technical microcopy.
+
+Rule: serif is scarce. It is not the default heading face. Scarcity gives it meaning.
 
 Scale:
 
@@ -262,3 +265,118 @@ Production includes:
 - App tokens: `src/styles/design-tokens.css`
 - Tailwind mapping: `tailwind.config.ts`
 - TypeScript contracts: `src/lib/design-system.ts`
+
+
+## 14. Homepage v11 — Senior UX operating model
+
+The homepage is no longer a catalogue of services. It is a seven-scene commercial journey:
+
+1. **Search** — one dominant visual idea: a query becoming understandable context.
+2. **Recognize the problem** — the visitor selects the pain that resembles their situation.
+3. **Control room** — we reveal only the layers relevant to that pain.
+4. **Evidence** — one before/after case with direct manipulation.
+5. **Offer** — one free entry point plus three paid levels.
+6. **Journal** — three curated readings, not a wall of cards.
+7. **Diagnostic** — the final conversion surface.
+
+### Senior rules
+
+Before adding an element, answer:
+
+1. What user problem does it solve?
+2. What must the visitor understand here?
+3. What is the dominant element in this viewport?
+4. What can be removed?
+
+If those answers are weak, the element does not enter production.
+
+### One major idea per viewport
+
+No section may simultaneously introduce:
+- a new product metaphor,
+- a second interactive demo,
+- a second CTA hierarchy,
+- and a large content grid.
+
+Every scene has one visual protagonist and one commercial job.
+
+### Progressive disclosure
+
+Do not expose the entire service catalogue on first contact.
+
+The visitor first identifies a problem. The interface then reveals:
+- the likely friction;
+- the three layers we would inspect;
+- the recommended first step.
+
+This is implemented by the v11 Problem Selector.
+
+### Motion grammar
+
+Homepage v11 permits four motion purposes only:
+
+- **Reveal** — new information enters hierarchy.
+- **Transform** — query or state changes.
+- **Connect** — relationship between signals becomes visible.
+- **Respond** — hover, focus, selection or direct manipulation.
+
+No decorative looping animation is allowed unless it communicates system state.
+
+### Premium art direction
+
+Premium is defined as:
+- stronger hierarchy;
+- controlled contrast;
+- asymmetric composition;
+- selective glass;
+- restrained gradients;
+- fewer cards;
+- more whitespace;
+- visual scenes with different rhythm;
+- serif used as editorial tension, not ornament.
+
+Premium is **not** defined as more effects.
+
+### Interaction patterns in v11
+
+- **Search Scene** — rotating demand examples within one stable visual concept.
+- **Problem Selector** — user declares the pain; diagnosis is progressively disclosed.
+- **Control Room** — three-layer system view that updates from the selected problem.
+- **Case Slider** — direct-manipulation before/after comparison.
+- **Offer Ladder** — free diagnosis, accessible entry, sprint, full system.
+- **Journal Curation** — one lead story plus two secondary readings.
+
+### Accessibility
+
+Homepage v11 additionally requires:
+- skip link;
+- keyboard-operable tab groups with arrow navigation;
+- visible focus;
+- reduced-motion support;
+- range input for the before/after comparison;
+- no information conveyed by color alone;
+- core targets ≥44px where applicable.
+
+### Performance constraints
+
+- Three.js remains hero-only and progressive.
+- WebGL does not carry essential information.
+- All interaction works without GSAP.
+- No scroll-jacking.
+- No custom cursor.
+- No second 3D scene.
+- No large decorative media below the fold unless it earns its cost.
+
+### Commercial hierarchy
+
+The homepage must answer these questions in order:
+
+1. Is this relevant to my problem?
+2. Do they understand the problem?
+3. Do they have a coherent way to solve it?
+4. Is there evidence of judgment?
+5. What does it cost to start?
+6. Can I learn more without talking to someone?
+7. How do I begin?
+
+That sequence takes precedence over showing the complete service inventory.
