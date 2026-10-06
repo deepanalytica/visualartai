@@ -85,3 +85,7 @@
   .blog-tools{position:sticky;top:3.5rem;z-index:25;flex-wrap:nowrap;overflow-x:auto;width:100%;margin:0;padding:.7rem var(--page-gutter);background:color-mix(in srgb,var(--color-surface) 95%,transparent);border-bottom:1px solid var(--color-border-subtle);backdrop-filter:blur(14px);scrollbar-width:none}.blog-tools::-webkit-scrollbar{display:none}.blog-filter{flex:0 0 auto;min-height:2.75rem}
   .blog-grid{padding-top:1.5rem}.blog-card{min-height:auto;padding:1.2rem}.blog-card-visual{height:3.3rem;margin:.9rem 0 .15rem}.blog-card h2{margin:1.1rem 0 .5rem;font-size:1.55rem}.blog-card b{padding-top:1.2rem}
 }
+
+/* Editorial hierarchy: shared sans headings, serif reserved for quotations. */
+.blog-featured h2,.blog-end h2,.article-page article h2,.article-page .article h2,.story-break h3{font-family:var(--font-sans)!important;font-weight:750!important;line-height:1.16;letter-spacing:-.03em}
+.article-page header p,.article-page header .dek{font-family:var(--font-sans);font-size:1.125rem;line-height:1.65}
