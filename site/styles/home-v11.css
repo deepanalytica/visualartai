@@ -391,3 +391,6 @@
 
 /* Small accent labels need 4.5:1 on the light page surfaces. */
 .v11-problem-list button>span,.v11-diagnosis-layers>div>span,.v11-journal-list a>span{color:var(--coral-700)}
+
+/* Footer links remain easy to tap on touch screens. */
+.v17-footer-grid a{display:flex;align-items:center;min-height:2.75rem}

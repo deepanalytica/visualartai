@@ -30,7 +30,7 @@
     control.id="vaa-privacy-control";
     control.type="button";
     control.textContent="Privacidad";
-    control.setAttribute("aria-label","Cambiar preferencias de medición");
+    control.setAttribute("aria-label","Privacidad: cambiar preferencias de medición");
     document.body.appendChild(control);
     var panel=document.createElement("section");
     panel.id="vaa-consent-panel";
