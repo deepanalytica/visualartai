@@ -67,11 +67,11 @@ Record: system, date, query, answer position, description used, cited source, sc
 Do not manipulate answers or record a success unless the system independently returns Visual Art AI and the description is supported by public pages.
 
 ## Sources to monitor
-- https://deepanalytica.github.io/visualartai/
-- https://deepanalytica.github.io/visualartai/nosotros.html
-- https://deepanalytica.github.io/visualartai/metodologia.html
-- https://deepanalytica.github.io/visualartai/servicios/
-- https://deepanalytica.github.io/visualartai/casos/
+- https://visualartai.cl/
+- https://visualartai.cl/nosotros.html
+- https://visualartai.cl/metodologia.html
+- https://visualartai.cl/servicios/
+- https://visualartai.cl/casos/
 - https://deepanalytica.cl/casos
 
 ## Next step after custom domain

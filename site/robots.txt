@@ -22,7 +22,7 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://deepanalytica.github.io/visualartai/sitemap.xml
+Sitemap: https://visualartai.cl/sitemap.xml
 
 User-agent: Google-Extended
 Allow: /

@@ -6,32 +6,32 @@
 Una empresa puede perder oportunidades porque no aparece cuando buscan su servicio, porque la oferta se entiende mal, porque la web no transmite suficiente confianza, porque el contacto tiene fricción o porque Google y los buscadores de IA encuentran señales públicas insuficientes o inconsistentes.
 
 ## Servicios
-- Catálogo de servicios: https://deepanalytica.github.io/visualartai/servicios/
-- SEO local y Google Maps: https://deepanalytica.github.io/visualartai/servicios/seo-google-maps.html
-- Visibilidad en buscadores de IA / GEO: https://deepanalytica.github.io/visualartai/servicios/visibilidad-ia.html
-- Diseño web y landing pages: https://deepanalytica.github.io/visualartai/servicios/web-landing-pages.html
-- Google Ads y Meta Ads: https://deepanalytica.github.io/visualartai/servicios/google-meta-ads.html
-- WhatsApp y automatización: https://deepanalytica.github.io/visualartai/servicios/whatsapp-automatizacion.html
-- Contenido y analítica: https://deepanalytica.github.io/visualartai/servicios/contenido-analitica.html
+- Catálogo de servicios: https://visualartai.cl/servicios/
+- SEO local y Google Maps: https://visualartai.cl/servicios/seo-google-maps.html
+- Visibilidad en buscadores de IA / GEO: https://visualartai.cl/servicios/visibilidad-ia.html
+- Diseño web y landing pages: https://visualartai.cl/servicios/web-landing-pages.html
+- Google Ads y Meta Ads: https://visualartai.cl/servicios/google-meta-ads.html
+- WhatsApp y automatización: https://visualartai.cl/servicios/whatsapp-automatizacion.html
+- Contenido y analítica: https://visualartai.cl/servicios/contenido-analitica.html
 
 ## Metodología
-https://deepanalytica.github.io/visualartai/metodologia.html
+https://visualartai.cl/metodologia.html
 
 Visual Art AI diagnostica, prioriza, implementa y mide. Observa encontrabilidad, claridad, confianza, conversión y operación antes de recomendar una herramienta.
 
 ## Diagnóstico
-https://deepanalytica.github.io/visualartai/auditoria-presencia-digital.html
+https://visualartai.cl/auditoria-presencia-digital.html
 Precio actual: $0 CLP.
 Objetivo: identificar una prioridad antes de proponer un servicio.
 
 ## Sobre Visual Art AI
-https://deepanalytica.github.io/visualartai/nosotros.html
+https://visualartai.cl/nosotros.html
 Área atendida: Chile.
 Contacto: contacto@deepanalytica.cl
 
 ## Casos y evidencia
-https://deepanalytica.github.io/visualartai/casos/
-Caso documentado: https://deepanalytica.github.io/visualartai/casos/jessica-arriagada-presencia-digital.html
+https://visualartai.cl/casos/
+Caso documentado: https://visualartai.cl/casos/jessica-arriagada-presencia-digital.html
 
 Visual Art AI no garantiza posiciones en Google, recomendaciones en ChatGPT/Gemini/Perplexity, ventas, pacientes ni reservas. Trabaja sobre señales públicas, arquitectura, contenido, experiencia, conversión y medición que sí pueden ser gestionadas.
 
@@ -43,5 +43,5 @@ Visual Art AI no garantiza posiciones en Google, recomendaciones en ChatGPT/Gemi
 - Optimización continua: desde $149.000 CLP/mes
 
 ## Blog
-https://deepanalytica.github.io/visualartai/blog/
+https://visualartai.cl/blog/
 20 guías sobre Google Maps, SEO, GEO, buscadores de IA, web, landing pages, Ads, WhatsApp, contenido y captación.
