@@ -1,0 +1,466 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-06T19:01:40.9171318Z",
+  "title": "Design System: Visual Art AI public site",
+  "extensions": {
+    "colorMeta": {
+      "action-primary": {
+        "role": "primary",
+        "displayName": "action primary",
+        "tonalRamp": [
+          "#112653",
+          "#1c3d88",
+          "#1e45ad",
+          "#2454d8",
+          "#2f6bff",
+          "#7298ff",
+          "#c9d9ff",
+          "#f2f6ff"
+        ]
+      },
+      "action-primary-hover": {
+        "role": "primary",
+        "displayName": "action primary hover",
+        "tonalRamp": [
+          "#112653",
+          "#1c3d88",
+          "#1e45ad",
+          "#2454d8",
+          "#2f6bff",
+          "#7298ff",
+          "#c9d9ff",
+          "#f2f6ff"
+        ]
+      },
+      "action-primary-pressed": {
+        "role": "primary",
+        "displayName": "action primary pressed",
+        "tonalRamp": [
+          "#112653",
+          "#1c3d88",
+          "#1e45ad",
+          "#2454d8",
+          "#2f6bff",
+          "#7298ff",
+          "#c9d9ff",
+          "#f2f6ff"
+        ]
+      },
+      "action-soft": {
+        "role": "primary",
+        "displayName": "action soft",
+        "tonalRamp": [
+          "#112653",
+          "#1c3d88",
+          "#1e45ad",
+          "#2454d8",
+          "#2f6bff",
+          "#7298ff",
+          "#c9d9ff",
+          "#f2f6ff"
+        ]
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "focus",
+        "tonalRamp": [
+          "#112653",
+          "#1c3d88",
+          "#1e45ad",
+          "#2454d8",
+          "#2f6bff",
+          "#7298ff",
+          "#c9d9ff",
+          "#f2f6ff"
+        ]
+      },
+      "accent": {
+        "role": "secondary",
+        "displayName": "Signal Coral",
+        "tonalRamp": [
+          "#7f2030",
+          "#972033",
+          "#b62438",
+          "#d93447",
+          "#f24d5d",
+          "#fda4ae",
+          "#fecdd3",
+          "#fff4f4"
+        ]
+      },
+      "accent-readable": {
+        "role": "secondary",
+        "displayName": "Readable Coral",
+        "tonalRamp": [
+          "#7f2030",
+          "#972033",
+          "#b62438",
+          "#d93447",
+          "#f24d5d",
+          "#fda4ae",
+          "#fecdd3",
+          "#fff4f4"
+        ]
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "canvas",
+        "tonalRamp": [
+          "#08111f",
+          "#1e293b",
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "canvas-warm": {
+        "role": "neutral",
+        "displayName": "canvas warm",
+        "tonalRamp": [
+          "#08111f",
+          "#1e293b",
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "surface",
+        "tonalRamp": [
+          "#08111f",
+          "#1e293b",
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "surface-subtle": {
+        "role": "neutral",
+        "displayName": "surface subtle",
+        "tonalRamp": [
+          "#08111f",
+          "#1e293b",
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "surface-inverse": {
+        "role": "neutral",
+        "displayName": "surface inverse",
+        "tonalRamp": [
+          "#08111f",
+          "#1e293b",
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "text secondary",
+        "tonalRamp": [
+          "#08111f",
+          "#1e293b",
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "text muted",
+        "tonalRamp": [
+          "#08111f",
+          "#1e293b",
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "border-subtle": {
+        "role": "neutral",
+        "displayName": "border subtle",
+        "tonalRamp": [
+          "#08111f",
+          "#1e293b",
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "border-default": {
+        "role": "neutral",
+        "displayName": "border default",
+        "tonalRamp": [
+          "#08111f",
+          "#1e293b",
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "success-strong": {
+        "role": "secondary",
+        "displayName": "Deep Mint",
+        "tonalRamp": [
+          "oklch(25% .08 166)",
+          "oklch(35% .10 166)",
+          "#15775d",
+          "oklch(55% .12 166)",
+          "#23b98e",
+          "#74ddbe",
+          "#d8f8ee",
+          "#effcf8"
+        ]
+      },
+      "success-soft": {
+        "role": "secondary",
+        "displayName": "Soft Mint",
+        "tonalRamp": [
+          "oklch(25% .08 166)",
+          "oklch(35% .10 166)",
+          "#15775d",
+          "oklch(55% .12 166)",
+          "#23b98e",
+          "#74ddbe",
+          "#d8f8ee",
+          "#effcf8"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Hero Display",
+        "purpose": "Main homepage title."
+      },
+      "display-accent": {
+        "displayName": "Editorial Accent",
+        "purpose": "Italic hero emphasis; legacy case illustration and quotation treatments remain."
+      },
+      "headline": {
+        "displayName": "Section Heading",
+        "purpose": "Refined homepage section titles."
+      },
+      "title": {
+        "displayName": "Card Title",
+        "purpose": "Plan and story titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Shared reading and interface copy."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Small supporting labels."
+      },
+      "price": {
+        "displayName": "Price",
+        "purpose": "Tabular price numerals."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-xs",
+        "value": "0 1px 2px rgba(15,23,42,.04)",
+        "purpose": "Small quiet surfaces."
+      },
+      {
+        "name": "shadow-sm",
+        "value": "0 6px 18px rgba(15,23,42,.06)",
+        "purpose": "Search bar and default pricing cards."
+      },
+      {
+        "name": "shadow-md",
+        "value": "0 16px 40px rgba(15,23,42,.09)",
+        "purpose": "Raised editorial surfaces."
+      },
+      {
+        "name": "shadow-lg",
+        "value": "0 28px 80px rgba(15,23,42,.14)",
+        "purpose": "Case comparison and pricing hover."
+      },
+      {
+        "name": "shadow-brand",
+        "value": "0 18px 50px rgba(47,107,255,.18)",
+        "purpose": "Primary buttons and emphasized pricing card."
+      }
+    ],
+    "motion": [
+      {
+        "name": "duration-fast",
+        "value": "180ms",
+        "purpose": "Control states."
+      },
+      {
+        "name": "duration-normal",
+        "value": "280ms",
+        "purpose": "Panels and cards."
+      },
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(.2,.8,.2,1)",
+        "purpose": "Standard interaction easing."
+      },
+      {
+        "name": "ease-emphasized",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Emphasized surfaces."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "hero-stack",
+        "value": "70rem"
+      },
+      {
+        "name": "navigation-collapse",
+        "value": "64rem"
+      },
+      {
+        "name": "selector-stack",
+        "value": "900px"
+      },
+      {
+        "name": "pricing-single",
+        "value": "48rem"
+      },
+      {
+        "name": "mobile-foundations",
+        "value": "45rem"
+      },
+      {
+        "name": "service-row-stack",
+        "value": "600px"
+      }
+    ],
+    "focusRing": "0 0 0 3px color-mix(in srgb,var(--color-focus) 38%,transparent)",
+    "tonalRampNote": "Blue, coral, and neutral strips use eight source scale stops. Mint has five source stops; three OKLCH preview stops fill the strip and are not implementation tokens."
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Blue primary action with hover, pressed, and keyboard focus states.",
+      "html": "<button class=\"ds-primary\">Revisar mi negocio gratis →</button>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;min-height:3.25rem;padding:0 1.25rem;border:1px solid transparent;border-radius:var(--control-radius,.875rem);font:750 .875rem var(--font-sans,Manrope,Arial,sans-serif);cursor:pointer;transition:transform var(--duration-fast,180ms) var(--ease-standard,cubic-bezier(.2,.8,.2,1)),background 180ms,border-color 180ms;background:var(--button-primary-bg,#2f6bff);color:var(--button-primary-text,#fff);box-shadow:var(--shadow-brand,0 18px 50px rgba(47,107,255,.18))}.ds-primary:hover{background:var(--button-primary-bg-hover,#2454d8);transform:translateY(-2px)}.ds-primary:active{background:var(--color-action-primary-pressed,#1e45ad);transform:translateY(0)}.ds-primary:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--color-focus,#9fbcff) 38%,transparent)}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quiet outlined action on light surfaces.",
+      "html": "<button class=\"ds-secondary\">Ver servicio →</button>",
+      "css": ".ds-secondary{display:inline-flex;align-items:center;justify-content:center;min-height:3.25rem;padding:0 1.25rem;border:1px solid transparent;border-radius:var(--control-radius,.875rem);font:750 .875rem var(--font-sans,Manrope,Arial,sans-serif);cursor:pointer;transition:transform var(--duration-fast,180ms) var(--ease-standard,cubic-bezier(.2,.8,.2,1)),background 180ms,border-color 180ms;background:var(--color-surface,#fff);color:var(--color-text-primary,#08111f);border-color:var(--color-border-default,#cbd5e1)}.ds-secondary:hover{border-color:var(--color-action-primary,#2f6bff);color:var(--color-action-primary-hover,#2454d8);transform:translateY(-2px)}.ds-secondary:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--color-focus,#9fbcff) 38%,transparent)}"
+    },
+    {
+      "name": "WhatsApp Button",
+      "kind": "button",
+      "refersTo": "button-whatsapp",
+      "description": "Direct contact action in Deep Mint.",
+      "html": "<button class=\"ds-whatsapp\">Hablar por WhatsApp</button>",
+      "css": ".ds-whatsapp{display:inline-flex;align-items:center;justify-content:center;min-height:3.25rem;padding:0 1.25rem;border:1px solid transparent;border-radius:var(--control-radius,.875rem);font:750 .875rem var(--font-sans,Manrope,Arial,sans-serif);cursor:pointer;transition:transform var(--duration-fast,180ms) var(--ease-standard,cubic-bezier(.2,.8,.2,1)),background 180ms,border-color 180ms;min-height:2.75rem;background:var(--color-success-strong,#15775d);border-color:var(--color-success-strong,#15775d);color:#fff;letter-spacing:0;text-transform:none}.ds-whatsapp:hover{background:#105c48;border-color:#105c48;transform:translateY(-2px)}.ds-whatsapp:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--color-focus,#9fbcff) 38%,transparent)}"
+    },
+    {
+      "name": "Diagnostic Email Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Visible label and white rounded field from the diagnostic form.",
+      "html": "<label class=\"ds-field\"><span>¿Dónde te contactamos?</span><input type=\"email\" autocomplete=\"email\" placeholder=\"tu@email.cl\"></label>",
+      "css": ".ds-field{display:grid;gap:.5rem;max-width:24rem;font-family:var(--font-sans,Manrope,Arial,sans-serif)}.ds-field>span{font-size:.75rem;font-weight:750}.ds-field input{width:100%;min-height:3.25rem;padding:.8125rem .875rem;border:1px solid var(--input-border,#cbd5e1);border-radius:var(--radius-md,.875rem);background:var(--input-bg,#fff);color:var(--color-text-primary,#08111f);font:400 1rem var(--font-sans,Manrope,Arial,sans-serif);transition:border-color 180ms,box-shadow 180ms}.ds-field input:focus{border-color:var(--color-action-primary,#2f6bff);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--color-focus,#9fbcff) 38%,transparent)}"
+    },
+    {
+      "name": "Desktop Navigation",
+      "kind": "nav",
+      "description": "Sans links with quiet blue hover treatment.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Principal\"><a href=\"#problema\">Problemas</a><a href=\"#recorrido\">Servicios</a><a href=\"#precios\">Precios</a></nav>",
+      "css": ".ds-nav{display:flex;flex-wrap:wrap;gap:.125rem}.ds-nav a{padding:.625rem .75rem;border-radius:999px;font:700 .875rem var(--font-sans,Manrope,Arial,sans-serif);color:var(--color-text-secondary,#334155);text-decoration:none;transition:color 180ms,background 180ms}.ds-nav a:hover{color:var(--color-action-primary-hover,#2454d8);background:var(--color-action-soft,#f2f6ff)}.ds-nav a:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--color-focus,#9fbcff) 38%,transparent)}"
+    },
+    {
+      "name": "Search Query Chip",
+      "kind": "chip",
+      "refersTo": "query-chip-active",
+      "description": "Hero query selector with an explicit selected state.",
+      "html": "<div class=\"ds-chip-row\"><button class=\"ds-chip\" aria-pressed=\"true\">Google</button><button class=\"ds-chip\" aria-pressed=\"false\">Maps</button></div>",
+      "css": ".ds-chip-row{display:flex;gap:.35rem}.ds-chip{min-height:2.75rem;padding:0 .72rem;border:1px solid var(--color-border-subtle,#e2e8f0);border-radius:999px;background:rgba(255,255,255,.76);font:700 .5rem var(--font-sans,Manrope,Arial,sans-serif);color:var(--color-text-muted,#64748b);cursor:pointer;transition:background .2s,color .2s,transform .2s}.ds-chip[aria-pressed=true]{background:var(--color-action-primary,#2f6bff);border-color:var(--color-action-primary,#2f6bff);color:#fff}.ds-chip:hover{transform:translateY(-1px);border-color:var(--blue-200,#c9d9ff)}.ds-chip:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--color-focus,#9fbcff) 38%,transparent)}"
+    },
+    {
+      "name": "Pricing Card",
+      "kind": "card",
+      "description": "Sans title, subordinate tier label, and large tabular price.",
+      "html": "<article class=\"ds-price-card\"><span>01 / PUESTA A PUNTO</span><h3>Ajustar lo que ya tienes.</h3><p>Cuando no necesitas rehacer todo: necesitas mejorar una prioridad concreta.</p><small>desde</small><strong>$89.000</strong><small>CLP</small></article>",
+      "css": ".ds-price-card{max-width:23rem;padding:2rem;border:1px solid var(--color-border-subtle,#e2e8f0);border-radius:1.6rem;background:rgba(255,255,255,.88);color:var(--color-text-primary,#08111f);font-family:var(--font-sans,Manrope,Arial,sans-serif);box-shadow:var(--shadow-sm,0 6px 18px rgba(15,23,42,.06));transition:transform .28s var(--ease-emphasized,cubic-bezier(.16,1,.3,1)),box-shadow .28s}.ds-price-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg,0 28px 80px rgba(15,23,42,.14))}.ds-price-card>span{display:block;margin-bottom:1.25rem;font-size:.75rem;font-weight:750;letter-spacing:.05em;color:var(--coral-700,#b62438)}.ds-price-card h3{font-size:1.9rem;line-height:1.18;letter-spacing:-.03em;font-weight:750}.ds-price-card p{font-size:1rem;line-height:1.6;color:var(--color-text-secondary,#334155)}.ds-price-card small{display:block;font-size:.8125rem;color:var(--color-text-muted,#64748b)}.ds-price-card strong{display:block;font-size:3.5rem;line-height:1;letter-spacing:-.055em;font-variant-numeric:tabular-nums}@media(prefers-reduced-motion:reduce){.ds-price-card{transition:none}}"
+    },
+    {
+      "name": "Diagnosis Panel",
+      "kind": "custom",
+      "refersTo": "diagnosis-panel",
+      "description": "Flat response panel paired with the three problem selectors.",
+      "html": "<div class=\"ds-diagnosis\"><span>CÓMO TE AYUDAMOS</span><h3>SEO local y Google Maps</h3><p>Ordenamos tu perfil y tus páginas para que expliquen qué haces y dónde atiendes.</p><div>✓ Perfil de Google optimizado</div><a href=\"#diagnostico\">Consultar este servicio →</a></div>",
+      "css": ".ds-diagnosis{max-width:34rem;padding:2rem;border:1px solid var(--color-border-subtle,#e2e8f0);border-radius:1.25rem;background:#f7f9fc;color:var(--color-text-primary,#08111f);font-family:var(--font-sans,Manrope,Arial,sans-serif)}.ds-diagnosis>span{font-size:.75rem;color:var(--color-text-muted,#64748b)}.ds-diagnosis h3{font-size:2.5rem;line-height:1.16;letter-spacing:-.03em;font-weight:750;margin:1.5rem 0 1rem}.ds-diagnosis p{font-size:1rem;line-height:1.6}.ds-diagnosis>div{padding:.6rem 0;font-size:.9375rem;font-weight:650}.ds-diagnosis a{display:inline-flex;align-items:center;min-height:44px;margin-top:1rem;font-size:.9375rem;font-weight:750;color:var(--color-action-primary-hover,#2454d8);text-decoration:none}.ds-diagnosis a:hover{text-decoration:underline}.ds-diagnosis a:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--color-focus,#9fbcff) 38%,transparent)}"
+    }
+  ],
+  "narrative": {
+    "donts": [
+      "**Don't** use bright Signal Coral for small text on light surfaces; use Readable Coral.",
+      "**Don't** add serif styling to every heading or UI label.",
+      "**Don't** add redundant eyebrows to sections whose titles already provide context.",
+      "**Don't** present illustrative diagrams or interface examples as measured client results."
+    ],
+    "northStar": "Clear Digital Signals",
+    "overview": "This name describes the implemented public site's signal motif and clear hierarchy. Action Blue controls, dark navy sections, white reading surfaces, and spacious rows make the next step visible. Rounded demonstrations illustrate the services alongside direct, readable copy.\n\nThis record covers the static site in `site/`, including its home and editorial styles. It does not specify the separate Next application. It is a scan of the built interface, not a product specification; no PRODUCT.md exists. The source tokens are in `site/styles/tokens.css`; component and page overrides remain authoritative for exact selectors. Homepage CSS is assembled into `site/home-core.css`.",
+    "dos": [
+      "**Do** use semantic CSS tokens for color, spacing, radius, and interaction states.",
+      "**Do** use Manrope for clear headings, interface text, and price numerals.",
+      "**Do** preserve visible focus, active states, and reduced motion behavior.",
+      "**Do** keep illustrative examples labeled and their text readable at mobile widths."
+    ],
+    "keyCharacteristics": [
+      "Bold Manrope hierarchy with an italic Instrument Serif hero accent.",
+      "Blue actions, navy section backgrounds, and restrained coral markers.",
+      "Spacious sections, readable content rows, and rounded illustrative surfaces.",
+      "Visible hover, focus, selection, and disclosure states."
+    ],
+    "rules": [
+      {
+        "name": "The Readable Accent Rule",
+        "body": "Use Readable Coral for small coral text on light surfaces; bright Signal Coral remains a decorative accent.",
+        "section": "colors"
+      },
+      {
+        "name": "The Shared Sans Rule",
+        "body": "Use Manrope for interface labels, section headings, article headings, and prices. Preserve the implemented serif accent and quotation treatments without spreading them into additional UI roles.",
+        "section": "typography"
+      }
+    ]
+  }
+}
