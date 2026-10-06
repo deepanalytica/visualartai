@@ -388,3 +388,6 @@
 .v17-footer-grid div{display:grid;align-content:start}.v17-footer-grid b{display:block;margin-bottom:.45rem;color:#fff;font:700 .52rem var(--font-mono);letter-spacing:.08em}
 .v17-footer-grid a,.v17-footer-grid span{display:block;color:var(--neutral-400);font:600 .62rem/1.8 var(--font-sans)}.v17-footer-grid a:hover{color:#fff}
 @media(max-width:45rem){.v17-footer-grid{grid-template-columns:1fr 1fr}.v17-footer-grid div:first-child{grid-column:1/-1}.v17-footer-grid a,.v17-footer-grid span{font-size:.65rem}}
+
+/* Small accent labels need 4.5:1 on the light page surfaces. */
+.v11-problem-list button>span,.v11-diagnosis-layers>div>span,.v11-journal-list a>span{color:var(--coral-700)}
