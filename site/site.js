@@ -1,4 +1,4 @@
-/* Visual Art AI — shared production runtime v12 */
+/* Visual Art AI — shared production runtime v13 */
 (()=>{
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
   const track=(name,props={})=>{try{if(window.vaaAnalyticsAllowed===true&&Array.isArray(window.dataLayer))window.dataLayer.push({event:name});window.dispatchEvent(new CustomEvent("vaai:track",{detail:{name,props}}))}catch{}};
@@ -7,7 +7,15 @@
   if(reduce||!("IntersectionObserver" in window))reveal.forEach(el=>el.classList.add("in"));else{reveal.forEach(el=>el.classList.add("reveal"));const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)return;entry.target.classList.add("in");io.unobserve(entry.target)}),{threshold:.08,rootMargin:"0px 0px -5% 0px"});reveal.forEach(el=>io.observe(el))}
   const menu=document.getElementById("mobileMenu"),open=document.getElementById("menuBtn"),close=document.getElementById("menuClose");
   if(menu&&open&&close){let lastFocus=null;const focusables=()=>[...menu.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])')].filter(el=>!el.disabled);const setOpen=value=>{menu.classList.toggle("open",value);menu.setAttribute("aria-hidden",String(!value));open.setAttribute("aria-expanded",String(value));document.body.style.overflow=value?"hidden":"";if(value){lastFocus=document.activeElement;setTimeout(()=>close.focus(),0)}else if(lastFocus?.focus)lastFocus.focus()};open.addEventListener("click",()=>setOpen(true));close.addEventListener("click",()=>setOpen(false));menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>setOpen(false)));document.addEventListener("keydown",e=>{if(!menu.classList.contains("open"))return;if(e.key==="Escape"){e.preventDefault();setOpen(false);return}if(e.key!=="Tab")return;const els=focusables();if(!els.length)return;const first=els[0],last=els[els.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}})}
-  const bar=document.getElementById("mobileConvert"),diagnostic=document.getElementById("diagnostico");if(bar&&diagnostic){const visible=el=>{const r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0};let ticking=false;const update=()=>{bar.classList.toggle("show",scrollY>innerHeight*.72&&!visible(diagnostic));ticking=false};addEventListener("scroll",()=>{if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});update()}
+  const bar=document.getElementById("mobileConvert"),diagnostic=document.getElementById("diagnostico");
+  if(bar&&diagnostic&&"IntersectionObserver" in window){
+    let diagnosticVisible=true,ticking=false;
+    const update=()=>{const show=scrollY>innerHeight*.72&&!diagnosticVisible;bar.classList.toggle("show",show);bar.inert=!show;ticking=false};
+    const schedule=()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}};
+    bar.inert=true;
+    new IntersectionObserver(entries=>{diagnosticVisible=entries[0].isIntersecting;schedule()}).observe(diagnostic);
+    addEventListener("scroll",schedule,{passive:true});addEventListener("resize",schedule,{passive:true});
+  }
   document.querySelectorAll("[data-interest]").forEach(el=>el.addEventListener("click",()=>{const input=document.getElementById("interest");if(input)input.value=el.dataset.interest||"Diagnóstico de presencia digital";track("diagnostic_interest",{interest:el.dataset.interest||"general"})}));
   const form=document.getElementById("diagnosticForm");form?.addEventListener("focusin",()=>{if(!form.dataset.started){form.dataset.started="1";track("form_start")}});
   form?.addEventListener("submit",e=>{e.preventDefault();const goal=document.getElementById("goal")?.value.trim(),situation=document.getElementById("situation")?.value.trim(),email=document.getElementById("email")?.value.trim(),interest=document.getElementById("interest")?.value||"Diagnóstico de presencia digital";if(!goal||!situation||!email)return;const status=document.getElementById("formStatus");if(status)status.textContent="Solicitud preparada. Abriremos tu aplicación de correo para enviarla.";track("lead_intent",{interest,goal});const subject=encodeURIComponent("Solicitud de diagnóstico — Visual Art AI");const body=encodeURIComponent("Interés: "+interest+"\n\nSituación principal: "+goal+"\n\nNegocio / contexto: "+situation+"\n\nEmail de contacto: "+email+"\n\nOrigen: "+location.href);setTimeout(()=>{location.href="mailto:contacto@deepanalytica.cl?subject="+subject+"&body="+body},120)});
