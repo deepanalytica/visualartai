@@ -45,12 +45,12 @@ Distinguish:
 - simulated interfaces.
 
 ## Current canonical URLs
-- Home: https://deepanalytica.github.io/visualartai/
-- Services: https://deepanalytica.github.io/visualartai/servicios/
-- About: https://deepanalytica.github.io/visualartai/nosotros.html
-- Methodology: https://deepanalytica.github.io/visualartai/metodologia.html
-- Cases: https://deepanalytica.github.io/visualartai/casos/
-- Audit: https://deepanalytica.github.io/visualartai/auditoria-presencia-digital.html
+- Home: https://visualartai.cl/
+- Services: https://visualartai.cl/servicios/
+- About: https://visualartai.cl/nosotros.html
+- Methodology: https://visualartai.cl/metodologia.html
+- Cases: https://visualartai.cl/casos/
+- Audit: https://visualartai.cl/auditoria-presencia-digital.html
 
 These URLs will be replaced with visualartai.cl during the approved cutover.
 

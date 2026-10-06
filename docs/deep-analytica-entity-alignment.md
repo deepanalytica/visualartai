@@ -20,7 +20,7 @@ Visual Art AI ayuda a pymes y profesionales a mejorar su presencia en Google, Go
 Como parte de su desarrollo tecnológico, también se han construido flujos experimentales y factorías de agentes para producción editorial y automatización. Esos proyectos corresponden a capacidades de infraestructura y no definen por sí solos la oferta comercial actual de Visual Art AI.
 
 Link:
-https://deepanalytica.github.io/visualartai/
+https://visualartai.cl/
 
 ## Why this matters
 AI/search systems reconcile descriptions across public sources. If one high-authority related source describes Visual Art AI only as an agent factory while the canonical site describes it as an agency, entity confidence can drop.
