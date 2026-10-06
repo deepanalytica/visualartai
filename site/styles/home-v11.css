@@ -394,3 +394,22 @@
 
 /* Footer links remain easy to tap on touch screens. */
 .v17-footer-grid a{display:flex;align-items:center;min-height:2.75rem}
+
+/* Direct sales contact, preserving the existing CTA hierarchy. */
+.v18-whatsapp{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:2.75rem;background:var(--color-success-strong);color:#fff;border-color:var(--color-success-strong);font:750 .75rem var(--font-sans);letter-spacing:0;text-transform:none}
+.v18-whatsapp:hover{background:#105c48;border-color:#105c48;color:#fff}
+.v18-whatsapp svg,.v18-footer-contact svg{flex:0 0 auto}
+.v11-hero-actions>.v11-link{flex-basis:100%;font-size:.75rem}
+.v18-direct-contact{display:grid;gap:.75rem;padding:1.25rem 0;border-bottom:1px solid rgba(255,255,255,.15)}
+.v18-direct-contact p{margin:0;color:var(--neutral-200);font-size:.875rem;line-height:1.55}
+.v18-direct-contact small{color:var(--neutral-300);font-size:.75rem;line-height:1.55}
+.v17-footer-grid .v18-footer-contact{display:flex;gap:.5rem}
+@media(max-width:45rem){
+  .v11-hero-actions>.button{width:100%}
+  .mobile-convert{bottom:calc(3.5rem + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:.5rem;min-height:3.75rem;transition:transform var(--duration-normal) var(--ease-standard),opacity var(--duration-normal) var(--ease-standard)}
+  .mobile-convert a{display:flex;align-items:center;justify-content:center;min-height:2.75rem;padding:.5rem;font:750 .75rem var(--font-sans);letter-spacing:0}
+  .mobile-convert .v18-whatsapp{background:var(--color-success-strong);color:#fff}
+  .mobile-convert .v18-mobile-diagnostic{background:var(--color-action-soft);color:var(--color-action-primary-hover)}
+  .home-v11:has(#vaa-consent-panel:not([hidden])) .mobile-convert{visibility:hidden;pointer-events:none}
+  .home-v11 .footer{padding-bottom:9rem}
+}
