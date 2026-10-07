@@ -130,6 +130,8 @@ This record covers the static site in `site/`, including its home and editorial 
 - Blue actions, navy section backgrounds, and restrained coral markers.
 - Spacious sections, readable content rows, and rounded illustrative surfaces.
 - Visible hover, focus, selection, and disclosure states.
+- The homepage search scene uses six selectable, illustrative query bars. Its active state explains the work behind a search without portraying invented rankings or recommendations.
+- The problem selector pairs each service response with a candid, explicitly illustrative professional portrait. Photography supports the person and their situation; product claims and calls to action remain selectable HTML text.
 
 ## Colors
 

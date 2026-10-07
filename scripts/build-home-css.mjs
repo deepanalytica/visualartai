@@ -11,6 +11,7 @@ const sources = [
   'brand/visual-art-ai-design-system.css',
   'styles/home-v11.css',
   'styles/home-clarity.css',
+  'styles/home-search-people.css',
 ];
 const parts = await Promise.all(sources.map(async source => {
   const css = await readFile(resolve(root, 'site', source), 'utf8');

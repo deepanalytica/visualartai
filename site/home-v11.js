@@ -36,39 +36,27 @@
     document.addEventListener("visibilitychange",()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(w&&h&&!raf){raf=requestAnimationFrame(draw)}});
   }
 
-  // Search stories: autoplay on normal motion, explicit pause control always available.
-  const queryData=[
-    {logo:"brands/google.svg",query:"psicóloga trauma online en Maule",entity:"Psicología · Trauma · Online",label:"QUÉ QUEREMOS LOGRAR",result:"Que una búsqueda correcta termine en una consulta."},
-    {logo:"brands/google-maps.svg",query:"kinesiólogo deportivo cerca de mí",entity:"Kinesiología · Deporte · Cercanía",label:"QUÉ QUEREMOS LOGRAR",result:"Que te encuentren por servicio y cercanía y puedan agendar."},
-    {logo:"brands/google.svg",query:"clínica estética Talca",entity:"Clínica estética · Talca",label:"QUÉ QUEREMOS LOGRAR",result:"Que entiendan tratamientos, confíen y reserven."},
-    {logo:"brands/google-maps.svg",query:"almuerzo casero cerca",entity:"Gastronomía · Menú · Ubicación",label:"QUÉ QUEREMOS LOGRAR",result:"Que vean menú, horario y puedan pedir sin fricción."},
-    {logo:"brands/chatgpt.svg",query:"arriendo amoblado mensual en Iquique",entity:"Arriendo · Mensual · Iquique",label:"QUÉ QUEREMOS LOGRAR",result:"Que entiendan disponibilidad, condiciones y puedan reservar."}
-  ];
+  // Six illustrative questions remain visible; focus advances without inventing results.
+  const queryData=["Una búsqueda local necesita servicios, ubicación y una vía de contacto claros.","Una especialidad como trauma complejo debe explicarse con claridad en la web.","En arriendos por días importan disponibilidad, condiciones y una respuesta fácil.","Servicio y ciudad ayudan a encontrar a un kinesiólogo relevante.","Tratamientos, ubicación y confianza orientan la consulta a una clínica.","Una página clara puede explicar ortodoncia, ciudad y cómo pedir una hora."];
   const queryButtons=[...document.querySelectorAll("[data-query-index]")],play=document.getElementById("v11QueryPlay");
   let qi=0,timer=null,playing=false;
-  const showQuery=n=>{
-    qi=n;const d=queryData[n];if(!d)return;
-    const logo=document.getElementById("v11QueryLogo");if(logo)logo.src=d.logo;
-    setText("v11QueryText",d.query);setText("v11SignalEntity",d.entity);setText("v11ResultLabel",d.label);setText("v11ResultTitle",d.result);
-    queryButtons.forEach((b,i)=>{const active=i===n;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active))});
-    const scene=document.querySelector(".v11-search-window");
-    if(scene&&!reduce)scene.animate([{opacity:.58,transform:"translateY(8px) scale(.992)"},{opacity:1,transform:"none"}],{duration:520,easing:"cubic-bezier(.16,1,.3,1)"});
-  };
-  const syncPlay=()=>{if(!play)return;play.setAttribute("aria-pressed",String(playing));play.innerHTML=playing?"<svg aria-hidden=\"true\" viewBox=\"0 0 12 12\" width=\"10\" height=\"10\"><path fill=\"currentColor\" d=\"M2 1h3v10H2zM7 1h3v10H7z\"/></svg> Pausar":"<svg aria-hidden=\"true\" viewBox=\"0 0 12 12\" width=\"10\" height=\"10\"><path fill=\"currentColor\" d=\"M2 1l9 5-9 5z\"/></svg> Reproducir";play.setAttribute("aria-label",playing?"Pausar ejemplos automáticos":"Reproducir ejemplos automáticamente")};
+  const showQuery=n=>{qi=n;const result=queryData[n];if(!result)return;setText("v11ResultTitle",result);setText("v20QueryCount",String(n+1).padStart(2,"0")+" / 06");queryButtons.forEach((b,i)=>{const active=i===n;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active))})};
+  const syncPlay=()=>{if(!play)return;play.textContent=playing?"Pausar":"Reproducir";play.setAttribute("aria-pressed",String(playing));play.setAttribute("aria-label",playing?"Pausar la secuencia de ejemplos":"Reproducir la secuencia de ejemplos")};
   const stop=()=>{playing=false;clearInterval(timer);timer=null;syncPlay()};
-  const start=()=>{if(reduce)return;playing=true;clearInterval(timer);timer=setInterval(()=>showQuery((qi+1)%queryData.length),5200);syncPlay()};
+  const start=()=>{if(reduce)return;playing=true;clearInterval(timer);timer=setInterval(()=>showQuery((qi+1)%queryData.length),3800);syncPlay()};
   queryButtons.forEach((b,i)=>b.addEventListener("click",()=>{showQuery(i);if(playing)start()}));
   play?.addEventListener("click",()=>playing?stop():start());
-  if(!reduce)start();else syncPlay();
+  if(!reduce)start();else if(play)play.hidden=true;
 
   // Three problems map to a concrete service and inquiry context.
-  const problemData={"invisible":{"code":"VISIBILIDAD","title":"SEO local y Google Maps","text":"Ordenamos tu perfil y tus páginas para que expliquen qué haces y dónde atiendes.","layers":[["Perfil de Google optimizado"],["Páginas de servicio claras"],["Contacto fácil de encontrar"]],"interest":"SEO local y Google Maps","goal":"No aparezco cuando buscan mis servicios"},"traffic":{"code":"DISEÑO WEB","title":"Una web que facilita la consulta","text":"Diseñamos o mejoramos tu página para presentar tu servicio y llevar a la persona al contacto.","layers":[["Oferta y textos claros"],["Diseño adaptable a móviles"],["WhatsApp o formulario visible"]],"interest":"Web y conversión","goal":"Aparezco, pero recibo pocas consultas"},"messages":{"code":"WHATSAPP","title":"Atención y seguimiento ordenados","text":"Preparamos respuestas y un recorrido de atención para que cada consulta tenga un siguiente paso.","layers":[["Preguntas y respuestas frecuentes"],["Contexto antes de cotizar"],["Seguimiento de oportunidades"]],"interest":"WhatsApp y automatización","goal":"Quiero saber qué debería mejorar primero"}};
+  const problemData={"invisible":{"code":"VISIBILIDAD","title":"SEO local y Google Maps","text":"Ordenamos tu perfil y tus páginas para que expliquen qué haces y dónde atiendes.","layers":[["Perfil de Google optimizado"],["Páginas de servicio claras"],["Contacto fácil de encontrar"]],"interest":"SEO local y Google Maps","goal":"No aparezco cuando buscan mis servicios","photo":"restaurant","photoCaption":"Dueña de restaurante · imagen ilustrativa","photoAlt":"Imagen ilustrativa de la dueña de un restaurante de comida casera revisando su teléfono"},"traffic":{"code":"DISEÑO WEB","title":"Una web que facilita la consulta","text":"Diseñamos o mejoramos tu página para presentar tu servicio y llevar a la persona al contacto.","layers":[["Oferta y textos claros"],["Diseño adaptable a móviles"],["WhatsApp o formulario visible"]],"interest":"Web y conversión","goal":"Aparezco, pero recibo pocas consultas","photo":"kinesiology","photoCaption":"Kinesiólogo · imagen ilustrativa","photoAlt":"Imagen ilustrativa de un kinesiólogo en su consulta pensando frente a un computador"},"messages":{"code":"WHATSAPP","title":"Atención y seguimiento ordenados","text":"Preparamos respuestas y un recorrido de atención para que cada consulta tenga un siguiente paso.","layers":[["Preguntas y respuestas frecuentes"],["Contexto antes de cotizar"],["Seguimiento de oportunidades"]],"interest":"WhatsApp y automatización","goal":"Quiero saber qué debería mejorar primero","photo":"rental","photoCaption":"Anfitriona de arriendos · imagen ilustrativa","photoAlt":"Imagen ilustrativa de una anfitriona de arriendos por días revisando su teléfono"}};
   const problemButtons=[...document.querySelectorAll("[data-problem]")],diagnosis=document.querySelector(".v11-diagnosis"),layers=document.getElementById("v11DiagnosisLayers"),cta=document.getElementById("v11DiagnosisCta");
   let diagnosisAnimation=null;
   const applyProblem=key=>{
     const d=problemData[key];if(!d)return;
     problemButtons.forEach(b=>{const active=b.dataset.problem===key;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active))});
-    setText("v11DiagnosisCode",d.code);setText("v11DiagnosisTitle",d.title);setText("v11DiagnosisText",d.text);
+    setText("v11DiagnosisCode",d.code);setText("v11DiagnosisTitle",d.title);setText("v11DiagnosisText",d.text);setText("v20PhotoCaption",d.photoCaption);
+    const photo=document.getElementById("v20ProPhoto");if(photo){photo.dataset.photo=d.photo;photo.setAttribute("aria-label",d.photoAlt)}
     if(layers)layers.innerHTML=d.layers.map(x=>"<div><b>"+x[0]+"</b></div>").join("");
     if(cta)cta.dataset.interest=d.interest;
     const interest=document.getElementById("interest");if(interest)interest.value=d.interest;
