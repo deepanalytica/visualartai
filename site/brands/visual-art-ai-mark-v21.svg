@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title desc">
+<title id="title">Visual Art AI — trayectoria</title>
+<desc id="desc">Una ruta conecta la necesidad de una persona con el contacto con un negocio, a través de tres puntos.</desc>
+<rect width="120" height="120" rx="31" fill="#F2F6FF"/>
+<rect x="14" y="14" width="92" height="92" rx="24" fill="none" stroke="#C9D9FF" stroke-width="2"/>
+<path d="M28 75H43Q52 75 52 66V53Q52 44 61 44H92" fill="none" stroke="#2F6BFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="28" cy="75" r="9" fill="#F24D5D"/>
+<circle cx="52" cy="58" r="5.5" fill="#08111F"/>
+<circle cx="92" cy="44" r="9" fill="#2F6BFF"/>
+</svg>
