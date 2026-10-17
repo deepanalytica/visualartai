@@ -5,6 +5,9 @@
 ## Qué problema resolvemos
 Una empresa puede perder oportunidades porque no aparece cuando buscan su servicio, porque la oferta se entiende mal, porque la web no transmite suficiente confianza, porque el contacto tiene fricción o porque Google y los buscadores de IA encuentran señales públicas insuficientes o inconsistentes.
 
+## Recursos gratuitos
+- [12 guías gratuitas para negocios en Chile](https://visualartai.cl/recursos/)
+
 ## Servicios
 - [Catálogo de servicios](https://visualartai.cl/servicios/)
 - [SEO local y Google Maps](https://visualartai.cl/servicios/seo-google-maps.html)
