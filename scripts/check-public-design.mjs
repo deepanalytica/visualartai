@@ -70,6 +70,8 @@ assert.ok(html.includes('id="recomendaciones"')&&html.includes('aria-labelledby=
 assert.equal((html.match(/class="v30-process"/g)||[]).length,1,"El método de cuatro fases debe mostrarse una sola vez");
 assert.ok(html.includes('metodologia.html#investigacion-busquedas'),"La sección debe enlazar al método ampliado");
 assert.ok(methodPage.includes('id="investigacion-busquedas"')&&methodPage.includes('30 escenarios de búsqueda'),"El protocolo ampliado debe ser rastreable");
+assert.ok(html.includes('id="v30-integrity-title"')&&html.includes("La IA nos ayuda a explorar posibilidades"),"Explicar el propósito de la revisión humana y el plazo");
+assert.ok(methodPage.includes("pendiente de contraste o no verificada")&&methodPage.includes("responsabilidad de revisar"),"Protocolo de verificación humana obligatorio");
 assert.ok(methodPage.includes('no incluye automáticamente el estudio completo'),"Diferenciar diagnóstico gratuito del estudio completo");
 assert.ok(recommendation.includes("@media(max-width:45rem)")&&recommendation.includes(".v30-process"),"La nueva sección requiere layout responsive");
 assert.ok(html.includes('id="preguntas"'),"Falta bloque de objeciones comerciales");
