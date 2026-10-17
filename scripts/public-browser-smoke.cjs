@@ -46,10 +46,6 @@ let browser;
       assert(await page.locator(".v26-research-links").isVisible(),"Rutas para visitantes que aún comparan");
       assert.equal(await page.locator(".v26-research-links a").count(),2,"Dos enlaces discretos a pruebas y FAQ");
       assert((await page.locator(".v26-research-links a").first().getAttribute("href"))==="#caso-real","El ejemplo debe abrir la prueba");
-      const q=page.locator("#preguntas .v20-assurance-answers details").last();
-      await q.locator("summary").click();
-      assert(await q.getAttribute("open")!==null,"El visitante puede ver cómo se miden resultados");
-      await q.locator("summary").click();
     }
     assert.equal(await page.locator(".v23-fast-whatsapp").count(),1,"Una salida directa a WhatsApp");
     assert((await page.locator(".v23-fast-whatsapp").getAttribute("href")).startsWith("https://wa.me/"),"Diagnóstico directo con mensaje preparado");
@@ -74,6 +70,10 @@ let browser;
       const y=await page.evaluate(()=>scrollY);
       assert(y<50,"La decisión de privacidad no debe desplazar la pantalla al pie de página");
       assert(await page.locator("#vaa-consent-panel").isHidden(),"Se respetó la elección de privacidad");
+      const q=page.locator("#preguntas .v20-assurance-answers details").last();
+      await q.locator("summary").click();
+      assert(await q.getAttribute("open")!==null,"El visitante puede ver cómo se miden resultados");
+      await q.locator("summary").click();
       await page.locator("#caso-real").scrollIntoViewIfNeeded();
       await page.waitForTimeout(550);
       const funnelState=await page.evaluate(()=>({
