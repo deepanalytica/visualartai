@@ -23,7 +23,7 @@ for (const file of [
   "site/aviso-de-privacidad.html",
 ]) assert.ok(existsSync(join(root,file)), `Falta recurso: ${file}`);
 
-assert.ok(html.includes('href="styles/experience-v1.css?v=5"'), "Falta stylesheet incremental");
+assert.ok(html.includes('href="styles/experience-v1.css?v=6"'), "Falta stylesheet incremental");
 assert.equal((html.match(/class="vaa-wordmark"/g)||[]).length,2,"Marca tipográfica en desktop y móvil");
 assert.ok(html.includes("<strong>Visual</strong><small>ART AI</small>"), "Visual debe ser protagonista");
 assert.ok(html.includes('id="diagnosticForm"'),"Formulario no encontrado");
@@ -77,4 +77,14 @@ assert.ok(html.indexOf('id="diagnostico"')<html.indexOf('id="ideas"'),"El blog d
 assert.ok(html.includes('casos/jessica-arriagada-presencia-digital.html'),"El caso debe enlazar a su ficha real");
 assert.ok(html.includes("MENSAJE GENÉRICO")&&html.includes("MENSAJE ESPECÍFICO"),"No presentar esquemas ficticios como antes y después medidos");
 assert.ok(html.includes('class="v23-mobile-prices"'),"Precios deben resumirse para móviles");
+assert.ok(html.includes('role="dialog" aria-modal="true" aria-label="Menú de navegación"'),"El menú debe ser un diálogo accesible");
+const navStart=html.indexOf('<nav aria-label="Secciones de la página">');
+const navEnd=html.indexOf('</nav>',navStart);
+assert.ok(navStart>=0&&navEnd>navStart,"No existe navegación móvil acotada");
+const menuLinks=[...html.slice(navStart,navEnd).matchAll(/<a href="([^"]+)">([^<]+)<\/a>/g)];
+assert.deepEqual(menuLinks.map(x=>x[2]),["Servicios","Caso real","Precios","Preguntas frecuentes"],"Solo cuatro rutas esenciales en el menú");
+assert.ok(html.includes('class="button button-primary v24-menu-cta"'),"El menú debe ofrecer un solo CTA de diagnóstico");
+assert.ok(html.includes('data-whatsapp="mobile-menu"'),"CTA del menú debe enlazar directo a WhatsApp");
+assert.ok(style.includes(".home-v11 .mobile-menu-panel")&&style.includes("min-height:0"),"Menú no debe ocupar toda la altura del teléfono");
+assert.ok(runtime.includes('menu.addEventListener("click"'),"El menú debe cerrar al tocar el fondo");
 console.log("✓ Contratos del diseño público validados. Falta QA visual en dispositivos.");
