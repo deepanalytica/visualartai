@@ -44,4 +44,12 @@ Visual Art AI no garantiza posiciones en Google, recomendaciones en ChatGPT/Gemi
 
 ## Blog
 - [Blog](https://visualartai.cl/blog/)
-20 guías sobre Google Maps, SEO, GEO, buscadores de IA, web, landing pages, Ads, WhatsApp, contenido y captación.
+26 guías sobre Google Maps, SEO, buscadores de IA, web, anuncios, WhatsApp, contenido y consultas reales. Este índice complementario no garantiza descubrimiento ni recomendaciones de asistentes de IA.
+
+## Guías nuevas para preguntas concretas de clientes en Chile
+- [Google Maps es gratis. Entonces, ¿por qué pagarle a una agencia?](https://visualartai.cl/articulos/google-maps-gratis-que-cobra-agencia.html)
+- [Soy psicóloga y atiendo solo online: ¿puedo tener Google Maps?](https://visualartai.cl/articulos/psicologa-online-google-maps-requisitos.html)
+- [¿Los anuncios te traen clientes o solo clics? Cómo medirlo con WhatsApp](https://visualartai.cl/articulos/medir-consultas-google-whatsapp-anuncios.html)
+- [Tengo un negocio en Chile y necesito más clientes: ¿qué hago antes de pagar publicidad?](https://visualartai.cl/articulos/conseguir-clientes-negocio-chile-sin-publicidad.html)
+- [¿Tu página realmente aparece en Google? Compruébalo antes de pagar SEO](https://visualartai.cl/articulos/comprobar-web-google-search-console.html)
+- [¿Cuánto cuesta contratar marketing digital en Chile? Qué pedir antes de pagar](https://visualartai.cl/articulos/cuanto-cuesta-marketing-digital-chile.html)
