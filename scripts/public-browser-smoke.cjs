@@ -27,12 +27,18 @@ let browser;
       h1:document.querySelectorAll("h1").length,
       fullWidth:document.documentElement.scrollWidth,
       viewport:window.innerWidth,
-      brand:document.querySelectorAll(".vaa-wordmark strong").length,
+      brand:document.querySelectorAll(".vaa-official-brand img").length,
+      brandLoaded:[...document.querySelectorAll(".vaa-official-brand img")].every(img=>img.complete&&img.naturalWidth>0),
+      brandSource:document.querySelector(".topbar .vaa-official-brand img")?.currentSrc,
+      footerLogoLoaded:document.querySelector(".vaa-footer-identity img")?.naturalWidth>0,
       script:typeof window.VAAI?.track==="function",
       backdrop:getComputedStyle(document.body).backgroundColor,
     }));
     assert.equal(info.h1,1,"Falta H1 único");
-    assert.equal(info.brand,2,"La marca debe estar presente en desktop y móvil");
+    assert.equal(info.brand,2,"La marca oficial debe estar presente en cabecera y menú");
+    assert(info.brandLoaded,"Los SVG oficiales no cargaron");
+    assert(info.footerLogoLoaded,"Versión oscura en footer no cargó");
+    assert(info.brandSource.includes(size.width<=720?"official-compact.svg":"official-light.svg"),"El tamaño debe elegir el logo oficial adecuado");
     assert(info.script,"No se inicializó site.js");
     assert(info.fullWidth<=info.viewport+5,`Overflow horizontal a ${size.width}px: ${info.fullWidth}px`);
     assert.equal(errors.length,0,`Errores JS en ${size.width}px: ${errors.join("; ")}`);
