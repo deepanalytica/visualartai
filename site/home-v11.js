@@ -41,11 +41,11 @@
 
   // Search stories: user-directed by default. Autoplay is strictly opt-in.
   const queryData=[
-    {logo:"brands/google.svg",query:"psicóloga trauma online en Maule",entity:"Psicología · Trauma · Online",label:"QUÉ QUEREMOS LOGRAR",result:"Que una búsqueda correcta termine en una consulta."},
-    {logo:"brands/google-maps.svg",query:"kinesiólogo deportivo cerca de mí",entity:"Kinesiología · Deporte · Cercanía",label:"QUÉ QUEREMOS LOGRAR",result:"Que te encuentren por servicio y cercanía y puedan agendar."},
-    {logo:"brands/google.svg",query:"clínica estética Talca",entity:"Clínica estética · Talca",label:"QUÉ QUEREMOS LOGRAR",result:"Que entiendan tratamientos, confíen y reserven."},
-    {logo:"brands/google-maps.svg",query:"almuerzo casero cerca",entity:"Gastronomía · Menú · Ubicación",label:"QUÉ QUEREMOS LOGRAR",result:"Que vean menú, horario y puedan pedir sin fricción."},
-    {logo:"brands/chatgpt.svg",query:"arriendo amoblado mensual en Iquique",entity:"Arriendo · Mensual · Iquique",label:"QUÉ QUEREMOS LOGRAR",result:"Que entiendan disponibilidad, condiciones y puedan reservar."}
+    {logo:"brands/google.svg",query:"psicóloga trauma online en Maule",entity:"Psicología · Trauma · Online",label:"QUÉ QUEREMOS LOGRAR",result:"Mostrar especialidad, atención online y acceso a agenda."},
+    {logo:"brands/google-maps.svg",query:"kinesiólogo deportivo cerca de mí",entity:"Kinesiología · Deporte · Cercanía",label:"QUÉ QUEREMOS LOGRAR",result:"Indicar dónde atiende y cómo pedir una evaluación."},
+    {logo:"brands/google.svg",query:"clínica estética Talca",entity:"Clínica estética · Talca",label:"QUÉ QUEREMOS LOGRAR",result:"Explicar tratamientos, profesionales y cómo reservar."},
+    {logo:"brands/google-maps.svg",query:"almuerzo casero cerca",entity:"Gastronomía · Menú · Ubicación",label:"QUÉ QUEREMOS LOGRAR",result:"Mostrar el menú de hoy, horario y número para hacer un pedido."},
+    {logo:"brands/chatgpt.svg",query:"arriendo amoblado mensual en Iquique",entity:"Arriendo · Mensual · Iquique",label:"QUÉ QUEREMOS LOGRAR",result:"Indicar fechas disponibles, precio y condiciones antes de preguntar."}
   ];
   const queryButtons=[...document.querySelectorAll("[data-query-index]")],play=document.getElementById("v11QueryPlay");
   let qi=0,timer=null,playing=false;
@@ -65,7 +65,7 @@
   syncPlay();
 
   // Three problems map to a concrete service and inquiry context.
-  const problemData={"invisible":{"code":"VISIBILIDAD","title":"SEO local y Google Maps","text":"Ordenamos tu perfil y tus páginas para que expliquen qué haces y dónde atiendes.","layers":[["Perfil de Google optimizado"],["Páginas de servicio claras"],["Contacto fácil de encontrar"]],"interest":"SEO local y Google Maps","goal":"No aparezco cuando buscan mis servicios"},"traffic":{"code":"DISEÑO WEB","title":"Una web que facilita la consulta","text":"Diseñamos o mejoramos tu página para presentar tu servicio y llevar a la persona al contacto.","layers":[["Oferta y textos claros"],["Diseño adaptable a móviles"],["WhatsApp o formulario visible"]],"interest":"Web y conversión","goal":"Aparezco, pero recibo pocas consultas"},"messages":{"code":"WHATSAPP","title":"Atención y seguimiento ordenados","text":"Preparamos respuestas y un recorrido de atención para que cada consulta tenga un siguiente paso.","layers":[["Preguntas y respuestas frecuentes"],["Contexto antes de cotizar"],["Seguimiento de oportunidades"]],"interest":"WhatsApp y automatización","goal":"Quiero saber qué debería mejorar primero"}};
+  const problemData={"invisible":{"code":"VISIBILIDAD","title":"SEO local y Google Maps","text":"Revisamos categoría, servicios, horarios, ubicación y el enlace a tu web. Corregimos la información que esté equivocada o incompleta.","layers":[["Ficha con datos correctos"],["Servicios y zona de atención"],["Número y horario visibles"]],"interest":"SEO local y Google Maps","goal":"No aparezco cuando buscan mis servicios"},"traffic":{"code":"DISEÑO WEB","title":"Una web que facilita la consulta","text":"Probamos tu página desde un celular. Corregimos títulos confusos, información que falta y botones que no llevan a ninguna parte.","layers":[["Servicio y condiciones"],["Lectura cómoda en celular"],["Formulario y enlaces probados"]],"interest":"Web y conversión","goal":"Aparezco, pero recibo pocas consultas"},"messages":{"code":"WHATSAPP","title":"Mensajes de WhatsApp","text":"Ordenamos respuestas a preguntas habituales y registramos las consultas que necesitan seguimiento. Tu cliente siempre debe poder hablar con una persona.","layers":[["Respuestas a preguntas habituales"],["Servicio y ubicación solicitados"],["Consultas pendientes identificadas"]],"interest":"WhatsApp y automatización","goal":"Quiero saber qué debería mejorar primero"}};
   const problemButtons=[...document.querySelectorAll("[data-problem]")],diagnosis=document.querySelector(".v11-diagnosis"),layers=document.getElementById("v11DiagnosisLayers"),cta=document.getElementById("v11DiagnosisCta");
   let diagnosisAnimation=null;
   const applyProblem=key=>{
