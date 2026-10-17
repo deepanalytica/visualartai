@@ -22,6 +22,7 @@ let browser;
     page.on("pageerror",e=>errors.push(String(e)));
     await page.goto(origin,{waitUntil:"load",timeout:30000});
     await page.evaluate(()=>document.fonts.ready);
+    await page.locator(".vaa-footer-identity img").evaluate(async img=>{img.loading="eager";await img.decode()});
     const info=await page.evaluate(()=>({
       title:document.title,
       h1:document.querySelectorAll("h1").length,
