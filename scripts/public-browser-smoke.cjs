@@ -37,7 +37,7 @@ let browser;
     assert(info.fullWidth<=info.viewport+5,`Overflow horizontal a ${size.width}px: ${info.fullWidth}px`);
     assert.equal(errors.length,0,`Errores JS en ${size.width}px: ${errors.join("; ")}`);
     assert.equal(await page.locator("#problema .v21-service-card").count(),6,"La primera sección debe contener seis servicios legibles");
-    assert.equal(await page.locator("#problema h2").innerText(),"¿Qué hacemos en Visual Art AI?","Mensaje claro inmediatamente después del héro");
+    assert.equal(await page.locator("#problema h2").innerText(),size.width<=720?"¿En qué te ayudamos?":"¿Qué hacemos en Visual Art AI?","Mensaje claro inmediatamente después del héro");
     assert(await page.locator('#problema .v21-service-card a[href^="servicios/"]').count()===6,"Enlaces a los seis servicios");
     assert(await page.locator("#diagnosticForm").count()===1,"Formulario de diagnóstico ausente");
     if(size.width===390){
