@@ -1,7 +1,7 @@
 /* Visual Art AI — shared production runtime v13 */
 (()=>{
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const track=(name,props={})=>{try{if(window.vaaAnalyticsAllowed===true&&Array.isArray(window.dataLayer))window.dataLayer.push({event:name});window.dispatchEvent(new CustomEvent("vaai:track",{detail:{name,props}}))}catch{}};
+  const track=(name,props={})=>{try{if(window.vaaAnalyticsAllowed===true&&Array.isArray(window.dataLayer)){const placement=typeof props.placement==="string"?props.placement.slice(0,40):undefined;window.dataLayer.push(placement?{event:name,placement}:{event:name})}window.dispatchEvent(new CustomEvent("vaai:track",{detail:{name,props}}))}catch{}};
   window.VAAI={track};
   const reveal=[...document.querySelectorAll(".section,.final-cta,[data-motion-reveal]")];
   if(reduce||!("IntersectionObserver" in window))reveal.forEach(el=>el.classList.add("in"));else{reveal.forEach(el=>el.classList.add("reveal"));const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)return;entry.target.classList.add("in");io.unobserve(entry.target)}),{threshold:.08,rootMargin:"0px 0px -5% 0px"});reveal.forEach(el=>io.observe(el))}
@@ -24,7 +24,14 @@
     if(document.readyState==="complete")observeConsent();else document.addEventListener("DOMContentLoaded",observeConsent,{once:true});
     schedule();
   }
-  document.querySelectorAll("[data-interest]").forEach(el=>el.addEventListener("click",()=>{const input=document.getElementById("interest");if(input)input.value=el.dataset.interest||"Diagnóstico de presencia digital";track("diagnostic_interest",{interest:el.dataset.interest||"general"})}));
+  document.querySelectorAll("[data-interest]").forEach(el=>el.addEventListener("click",()=>{
+    const interest=el.dataset.interest||"Diagnóstico de presencia digital";
+    const input=document.getElementById("interest");
+    if(input)input.value=interest;
+    const fast=document.querySelector(".v23-fast-whatsapp");
+    if(fast)fast.href="https://wa.me/56958039450?text="+encodeURIComponent("Hola, quiero solicitar mi diagnóstico gratuito de Visual Art AI. Estoy consultando por: "+interest+". Mi negocio es: ");
+    track("diagnostic_interest",{interest})
+  }));
   const form=document.getElementById("diagnosticForm");
   const emailButton=document.getElementById("sendByEmail");
   const status=document.getElementById("formStatus");
