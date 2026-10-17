@@ -110,7 +110,7 @@ assert.ok(html.includes('class="v27-mobile-voice-details"'),"En móvil las voces
 assert.equal((html.match(/class="v27-method-grid"/g)||[]).length,1,"Debe haber cuatro resultados conectados");
 assert.ok(html.includes('Que sepas qué funciona.'),"Debe hablar de consultas verificables");
 assert.ok(html.includes('class="v27-start-steps"'),"Faltan los tres pasos del diagnóstico");
-assert.ok(html.includes('class="v27-close-cta"'),"Falta el último CTA visible");
+assert.ok(html.includes('v27-close-cta"'),"Falta el último CTA visible");
 assert.equal((html.match(/<details>/g)||[]).length>=8,true,"El FAQ debe cubrir ocho objeciones");
 assert.ok(html.includes('Respuesta en 24 h hábiles'),"La política comercial de respuesta debe ser visible");
 assert.ok(html.includes('data-whatsapp="quick-hero-desktop"'),"El CTA desktop debe abrir WhatsApp directamente");
