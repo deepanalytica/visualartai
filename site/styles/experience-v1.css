@@ -564,7 +564,6 @@
 
 /* v28 · Fiel al manual: Azul IA, coral, grafito, gris y blanco.
    Reparación del logotipo: jamás ampliar el SVG por encima del header. */
-:root{--blue-600:#2563FF;--blue-700:#1c50df;--coral-500:#FF4F6D;--neutral-950:#081220;--neutral-50:#F8FAFC;--color-canvas:#F8FAFC;--color-surface-inverse:#081220;--color-accent:#FF4F6D;--color-action-primary:#2563FF;--color-action-primary-hover:#1c50df}
 html,body.home-v11{max-width:100%;overflow-x:clip}
 .home-v11 .topbar,.home-v11 .topbar-inner,.home-v11 .vaa-official-brand{min-width:0}
 .home-v11 .topbar{min-height:4.35rem;height:auto}
@@ -572,62 +571,62 @@ html,body.home-v11{max-width:100%;overflow-x:clip}
 .home-v11 .vaa-official-brand,.home-v11 .vaa-official-brand picture{width:clamp(140px,17vw,198px);max-width:198px;max-height:65px;display:block;flex:0 1 auto}
 .home-v11 .vaa-official-brand img,.home-v11 .topbar .vaa-official-brand img{width:100%;max-width:100%;height:auto;max-height:65px;object-fit:contain;object-position:left center;display:block}
 .home-v11 .mobile-menu-brand.vaa-official-brand,.home-v11 .mobile-menu-brand.vaa-official-brand img{width:120px;max-width:120px;max-height:55px}
-.home-v11 .v11-hero{isolation:isolate;position:relative;overflow:clip;background:#F8FAFC}
+.home-v11 .v11-hero{isolation:isolate;position:relative;overflow:clip;background:var(--neutral-50)}
 .home-v11 .v11-hero::before{content:"";position:absolute;inset:-15% -17% -7%;background:url("/brands/visual-search-waves.svg") center / cover no-repeat;opacity:.59;pointer-events:none;z-index:-1}
 .home-v11 .v11-hero::after{content:"";position:absolute;left:38%;top:4%;width:44%;height:55%;border-radius:50%;background:radial-gradient(ellipse,rgba(186,222,255,.22),transparent 67%);pointer-events:none;z-index:-1}
 .home-v11 .v11-hero .shell,.home-v11 .v11-hero-grid,.home-v11 .v11-hero-copy{min-width:0;max-width:100%;position:relative}
 .home-v11 .v19-hero-title{max-width:100%;overflow-wrap:normal;word-break:normal;text-wrap:balance}
 .home-v11 .v11-eyebrow{max-width:100%}
-.home-v11 .v21-service-overview{background:linear-gradient(152deg,#fff 12%,#f3f8ff 56%,#f8fafc 100%);position:relative}
-.home-v11 .v27-searches{background:linear-gradient(130deg,#f8fafc,#e8f4ff 63%,#fff5f7)}
-.home-v11 .v27-voices{background:#081220}
+.home-v11 .v21-service-overview{background:linear-gradient(152deg,var(--neutral-0) 12%,var(--blue-50) 56%,var(--neutral-50) 100%);position:relative}
+.home-v11 .v27-searches{background:linear-gradient(130deg,var(--neutral-50),var(--blue-50) 63%,var(--coral-50))}
+.home-v11 .v27-voices{background:var(--neutral-950)}
 .home-v11 .v27-voices::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 92% 15%,rgba(37,99,255,.22),transparent 45%),radial-gradient(ellipse at 12% 94%,rgba(255,79,109,.09),transparent 40%);opacity:.85}
 .home-v11 .v27-voices .shell{position:relative}
-.home-v11 .v27-why{background:linear-gradient(160deg,#f8fafc 0%,#edf6ff 60%,#f8fafc);position:relative;overflow:hidden}
+.home-v11 .v27-why{background:linear-gradient(160deg,var(--neutral-50) 0%,var(--blue-50) 60%,var(--neutral-50));position:relative;overflow:hidden}
 .home-v11 .v27-why::before{content:"";position:absolute;inset:0;background:url("/brands/visual-search-waves.svg") right center / 95% auto no-repeat;opacity:.23;pointer-events:none}
 .home-v11 .v27-why .shell{position:relative}
-.home-v11 .v11-case{background:#081220;color:#F8FAFC}
-.home-v11 .v11-case h2,.home-v11 .v11-case h3{color:#F8FAFC}
-.home-v11 .v11-case p,.home-v11 .v11-case .v11-case-copy p{color:#D3DEEF}
-.home-v11 .v11-case .v11-link,.home-v11 .v11-case .v26-source-link{color:#9FC6FF}
-.home-v11 .v11-journal{background:linear-gradient(145deg,#f8fafc,#ecf5ff 70%,#fff7f9)}
-.home-v11 .v27-close{background:linear-gradient(150deg,#f8fafc 0%,#e6f2ff 70%,#fff3f6 100%);isolation:isolate;position:relative;overflow:hidden}
+.home-v11 .v11-case{background:var(--neutral-950);color:var(--neutral-50)}
+.home-v11 .v11-case h2,.home-v11 .v11-case h3{color:var(--neutral-50)}
+.home-v11 .v11-case p,.home-v11 .v11-case .v11-case-copy p{color:var(--neutral-300)}
+.home-v11 .v11-case .v11-link,.home-v11 .v11-case .v26-source-link{color:var(--blue-300)}
+.home-v11 .v11-journal{background:linear-gradient(145deg,var(--neutral-50),var(--blue-50) 70%,var(--coral-50))}
+.home-v11 .v27-close{background:linear-gradient(150deg,var(--neutral-50) 0%,var(--blue-50) 70%,var(--coral-50) 100%);isolation:isolate;position:relative;overflow:hidden}
 .home-v11 .v27-close::before{content:"";position:absolute;inset:-20% -10%;background:url("/brands/visual-search-waves.svg") center / cover no-repeat;opacity:.36;z-index:-1;pointer-events:none}
 .home-v11 .v27-close-inner{position:relative}
-.home-v11 .v27-close-cta{background:#2563FF;color:#fff}
-.home-v11 .v27-close-cta:hover{background:#1c50df}
-.home-v11 .v27-signal-route>span:nth-of-type(3) b{background:#FF4F6D}
+.home-v11 .v27-close-cta{background:var(--blue-600);color:var(--neutral-0)}
+.home-v11 .v27-close-cta:hover{background:var(--blue-700)}
+.home-v11 .v27-signal-route>span:nth-of-type(3) b{background:var(--coral-500)}
 .v28-resource-teaser{margin-top:2.4rem;border-top:1px solid rgba(100,116,139,.2);padding-top:1.7rem}
 .v28-resource-teaser-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem}
-.v28-resource-teaser-top>span{font:750 .69rem/1.45 var(--font-mono);letter-spacing:.06em;color:#64748B}
-.v28-resource-teaser-top>a{font:800 .82rem/1.4 var(--font-sans);color:#2454d8;min-height:44px;display:inline-flex;align-items:center;gap:.4rem}
+.v28-resource-teaser-top>span{font:750 .69rem/1.45 var(--font-mono);letter-spacing:.06em;color:var(--neutral-500)}
+.v28-resource-teaser-top>a{font:800 .82rem/1.4 var(--font-sans);color:var(--blue-700);min-height:44px;display:inline-flex;align-items:center;gap:.4rem}
 .v28-resource-teaser-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
-.v28-resource-teaser-grid>a{display:grid;min-width:0;align-content:space-between;gap:.7rem;min-height:158px;padding:1.05rem;background:rgba(255,255,255,.93);text-decoration:none;border:1px solid #dae4f4;border-radius:15px;box-shadow:0 8px 25px rgba(8,18,32,.035);transition:transform .18s,border-color .18s}
-.v28-resource-teaser-grid>a:nth-child(3n + 2){background:#f1f6ff}.v28-resource-teaser-grid>a:nth-child(3n + 3){background:#fff7f8}
-.v28-resource-teaser-grid>a:hover{transform:translateY(-2px);border-color:#A8C3FF}
-.v28-resource-teaser-grid span{font:800 .63rem/1.4 var(--font-mono);letter-spacing:.06em;color:#2454d8}
-.v28-resource-teaser-grid strong{font:800 clamp(.92rem,1.25vw,1.1rem)/1.3 var(--font-sans);letter-spacing:-.02em;color:#081220}
-.v28-resource-teaser-grid small{font:800 .75rem/1.4 var(--font-sans);color:#2454d8}
-.v28-resource-teaser a:focus-visible{outline:3px solid #FF4F6D;outline-offset:3px}
+.v28-resource-teaser-grid>a{display:grid;min-width:0;align-content:space-between;gap:.7rem;min-height:158px;padding:1.05rem;background:rgba(255,255,255,.93);text-decoration:none;border:1px solid var(--neutral-200);border-radius:15px;box-shadow:0 8px 25px rgba(8,18,32,.035);transition:transform .18s,border-color .18s}
+.v28-resource-teaser-grid>a:nth-child(3n + 2){background:var(--blue-50)}.v28-resource-teaser-grid>a:nth-child(3n + 3){background:var(--coral-50)}
+.v28-resource-teaser-grid>a:hover{transform:translateY(-2px);border-color:var(--blue-300)}
+.v28-resource-teaser-grid span{font:800 .63rem/1.4 var(--font-mono);letter-spacing:.06em;color:var(--blue-700)}
+.v28-resource-teaser-grid strong{font:800 clamp(.92rem,1.25vw,1.1rem)/1.3 var(--font-sans);letter-spacing:-.02em;color:var(--neutral-950)}
+.v28-resource-teaser-grid small{font:800 .75rem/1.4 var(--font-sans);color:var(--blue-700)}
+.v28-resource-teaser a:focus-visible{outline:3px solid var(--coral-500);outline-offset:3px}
 @media(max-width:64rem){.v28-resource-teaser-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:45rem){
  .home-v11 .topbar,.home-v11 .topbar-inner{height:4.15rem;min-height:4.15rem}
  .home-v11 .topbar .vaa-official-brand,.home-v11 .topbar .vaa-official-brand picture{width:115px;max-width:115px;max-height:54px;flex-shrink:0}
  .home-v11 .topbar .vaa-official-brand img{width:115px!important;max-width:115px!important;max-height:54px!important;height:auto!important}
- .home-v11 .v11-hero{padding-top:1rem;background:linear-gradient(140deg,#f8fafc,#edf6ff 78%,#f8fafc)}
+ .home-v11 .v11-hero{padding-top:1rem;background:linear-gradient(140deg,var(--neutral-50),var(--blue-50) 78%,var(--neutral-50))}
  .home-v11 .v11-hero::before{inset:0 -65% -4% 0;opacity:.34;background-position:50% 50%}
  .home-v11 .v11-hero-copy .v19-hero-title{font-size:clamp(2.05rem,10.2vw,2.85rem);line-height:.98;letter-spacing:-.06em;max-width:100%}
  .home-v11 .v11-hero-copy{overflow-wrap:break-word}
  .home-v11 .v11-hero-copy .v11-eyebrow{font-size:.57rem;white-space:normal}
- .home-v11 .v27-voices{background:#081220;color:#fff}
- .home-v11 .v27-voices .v27-kicker{color:#9FC6FF}
- .home-v11 .v27-voices-heading h2{color:#fff}
- .home-v11 .v27-voices-heading h2 em{color:#9FC6FF}
- .home-v11 .v27-voices-heading p,.home-v11 .v27-voices-bottom{color:#cbd5e1}
- .home-v11 .v27-voices-bottom strong{color:#fff}
+ .home-v11 .v27-voices{background:var(--neutral-950);color:var(--neutral-0)}
+ .home-v11 .v27-voices .v27-kicker{color:var(--blue-300)}
+ .home-v11 .v27-voices-heading h2{color:var(--neutral-0)}
+ .home-v11 .v27-voices-heading h2 em{color:var(--blue-300)}
+ .home-v11 .v27-voices-heading p,.home-v11 .v27-voices-bottom{color:var(--neutral-300)}
+ .home-v11 .v27-voices-bottom strong{color:var(--neutral-0)}
  .home-v11 .v27-voices .v27-mobile-voice-details{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18)}
- .home-v11 .v27-voices .v27-mobile-voice-details summary{color:#fff}
- .home-v11 .v27-voices .v27-mobile-voice-details>p{color:#cbd5e1}
+ .home-v11 .v27-voices .v27-mobile-voice-details summary{color:var(--neutral-0)}
+ .home-v11 .v27-voices .v27-mobile-voice-details>p{color:var(--neutral-300)}
  .v28-resource-teaser{margin-top:1.8rem}
  .v28-resource-teaser-top{align-items:flex-start;flex-direction:column;gap:.15rem}
  .v28-resource-teaser-grid{grid-template-columns:1fr;gap:.5rem}
