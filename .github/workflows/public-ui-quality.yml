@@ -1,0 +1,28 @@
+name: Visual Art AI — Public UI quality
+
+on:
+  pull_request:
+    paths:
+      - "site/**"
+      - "docs/design-system-web-v1.md"
+      - "scripts/check-public-design.mjs"
+      - ".github/workflows/public-ui-quality.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check syntax of public interactions
+        run: |
+          node --check site/site.js
+          node --check site/home-v11.js
+      - name: Check UI design contracts
+        run: node scripts/check-public-design.mjs

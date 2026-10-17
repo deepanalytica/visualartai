@@ -1,0 +1,36 @@
+name: Visual Art AI — Browser QA
+
+on:
+  pull_request:
+    paths:
+      - "site/**"
+      - "scripts/public-browser-smoke.cjs"
+      - ".github/workflows/browser-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install isolated browser harness
+        run: |
+          npm install --prefix /tmp/vaa-browser --no-save --no-audit --no-fund playwright@1.56.1
+          /tmp/vaa-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Browser QA (320, 390, 768, 1024, 1440px)
+        run: NODE_PATH=/tmp/vaa-browser/node_modules node scripts/public-browser-smoke.cjs
+      - name: Save viewport screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-art-ai-public-qa
+          path: qa-screenshots/
+          if-no-files-found: ignore
+          retention-days: 7

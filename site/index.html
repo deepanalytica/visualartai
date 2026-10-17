@@ -84,6 +84,7 @@
 </style>
 <!-- Local fonts: end -->
 <link rel="stylesheet" href="home-core.css?v=20">
+<link rel="stylesheet" href="styles/experience-v1.css?v=1">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://visualartai.cl/#organization","name":"Visual Art AI","url":"https://visualartai.cl/","logo":{"@type":"ImageObject","url":"https://visualartai.cl/brands/visual-art-ai-logo.svg"},"email":"contacto@deepanalytica.cl","description":"Agencia chilena de visibilidad y captación digital para pymes y profesionales. Conecta SEO, Google Maps, buscadores de IA, web, landing pages, publicidad, WhatsApp, contenido y analítica.","areaServed":{"@type":"Country","name":"Chile"},"brand":{"@type":"Brand","name":"Visual Art AI"},"contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"contacto@deepanalytica.cl","availableLanguage":"Spanish","areaServed":"CL"},"knowsAbout":["Google Business Profile","Google Maps","SEO local","GEO","AI Search Optimization","Web design","Landing pages","Conversion optimization","Google Ads","Meta Ads","WhatsApp automation","Content strategy","Web analytics"],"subjectOf":{"@type":"WebPage","url":"https://deepanalytica.cl/casos","name":"Visual Art AI en el portafolio público de Deep Analytica"}},{"@type":"WebSite","@id":"https://visualartai.cl/#website","url":"https://visualartai.cl/","name":"Visual Art AI","inLanguage":"es-CL","publisher":{"@id":"https://visualartai.cl/#organization"}},{"@type":"Service","@id":"https://visualartai.cl/#visibility-service","name":"Sistema de presencia y captación digital","provider":{"@id":"https://visualartai.cl/#organization"},"areaServed":{"@type":"Country","name":"Chile"},"description":"Diagnóstico e implementación para mejorar visibilidad, comprensión, confianza y conversión en Google, Maps, web y buscadores de IA.","hasOfferCatalog":{"@id":"https://visualartai.cl/#services"}},{"@type":"OfferCatalog","@id":"https://visualartai.cl/#services","name":"Servicios de Visual Art AI","itemListElement":[{"@type":"Offer","position":1,"itemOffered":{"@type":"Service","name":"SEO + Google Maps","url":"https://visualartai.cl/servicios/seo-google-maps.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":2,"itemOffered":{"@type":"Service","name":"Visibilidad en IA / GEO","url":"https://visualartai.cl/servicios/visibilidad-ia.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":3,"itemOffered":{"@type":"Service","name":"Webs + landing pages","url":"https://visualartai.cl/servicios/web-landing-pages.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":4,"itemOffered":{"@type":"Service","name":"Ads + captación","url":"https://visualartai.cl/servicios/google-meta-ads.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":5,"itemOffered":{"@type":"Service","name":"WhatsApp + automatización","url":"https://visualartai.cl/servicios/whatsapp-automatizacion.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":6,"itemOffered":{"@type":"Service","name":"Contenido + analítica","url":"https://visualartai.cl/servicios/contenido-analitica.html","provider":{"@id":"https://visualartai.cl/#organization"}}}]}]}</script>
 <link rel="alternate" type="application/rss+xml" title="Visual Art AI Blog" href="https://visualartai.cl/feed.xml">
 </head>
@@ -98,7 +99,7 @@
         <circle class="vaa-signal-dot" cx="7.8" cy="22.7" r="2.15"/>
         <circle cx="18" cy="18" r="2.25" fill="currentColor"/>
       </svg>
-      <span class="vaa-wordmark">VISUAL ART AI</span>
+      <span class="vaa-wordmark"><strong>Visual</strong><small>ART AI</small></span>
     </a>
     <nav class="nav" aria-label="Navegación principal">
       <a href="#problema">Problemas</a>
@@ -124,7 +125,7 @@
           <circle class="vaa-signal-dot" cx="7.8" cy="22.7" r="2.15"/>
           <circle cx="18" cy="18" r="2.25" fill="currentColor"/>
         </svg>
-        <span class="vaa-wordmark">VISUAL ART AI</span>
+        <span class="vaa-wordmark"><strong>Visual</strong><small>ART AI</small></span>
       </a>
       <button class="menu-close v15-menu-close" id="menuClose" aria-label="Cerrar menú">×</button>
     </div>
@@ -363,8 +364,9 @@
         <label><span>¿Qué está pasando?</span><select id="goal" required><option value="">Selecciona una opción</option><option>No aparezco cuando buscan mis servicios</option><option>No sé qué información encuentran los asistentes de IA sobre mi negocio</option><option>Aparezco, pero recibo pocas consultas</option><option>Mi presencia digital no refleja la calidad de mi trabajo</option><option>Quiero saber qué debería mejorar primero</option></select></label>
         <label><span>¿Qué hace tu negocio y dónde atiende?</span><textarea id="situation" rows="4" placeholder="Ej.: clínica estética en Talca; llegan visitas, pero pocas consultas." required></textarea></label>
         <label><span>¿Dónde te contactamos?</span><input id="email" type="email" autocomplete="email" placeholder="tu@email.cl" required></label>
-        <button class="button button-primary" type="submit">Quiero mi diagnóstico →</button>
-        <p class="form-note">Respuesta orientativa en 24–48 h · Sin compromiso · Al enviar abriremos tu correo con la solicitud preparada.</p><div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+        <button class="button button-primary" type="submit">Preparar solicitud por WhatsApp →</button>
+        <button class="vaa-email-option" type="button" id="sendByEmail">Prefiero enviar por correo electrónico ↗</button>
+        <p class="form-note" id="diagnosticInstructions">Respuesta orientativa en 24–48 h · Sin compromiso. Prepararemos el mensaje con tus datos; debes enviarlo desde WhatsApp o tu correo para completar la solicitud. Consulta nuestro <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p><div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
         <input type="hidden" id="interest" value="Diagnóstico de presencia digital">
       </form>
     </div>
