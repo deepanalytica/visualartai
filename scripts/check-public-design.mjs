@@ -23,7 +23,7 @@ for (const file of [
   "site/aviso-de-privacidad.html",
 ]) assert.ok(existsSync(join(root,file)), `Falta recurso: ${file}`);
 
-assert.ok(html.includes('href="styles/experience-v1.css?v=2"'), "Falta stylesheet incremental");
+assert.ok(html.includes('href="styles/experience-v1.css?v=3"'), "Falta stylesheet incremental");
 assert.equal((html.match(/class="vaa-wordmark"/g)||[]).length,2,"Marca tipográfica en desktop y móvil");
 assert.ok(html.includes("<strong>Visual</strong><small>ART AI</small>"), "Visual debe ser protagonista");
 assert.ok(html.includes('id="diagnosticForm"'),"Formulario no encontrado");
@@ -51,6 +51,12 @@ for (const id of ["inicio","problema","recorrido","caso-real","precios","diagnos
 }
 
 assert.ok(html.includes('id="preguntas"'),"Falta bloque de objeciones comerciales");
+assert.ok(html.includes("¿Qué hacemos en Visual Art AI?"),"La primera sección debe explicar los servicios claramente");
+assert.equal((html.match(/class="v21-service-card"/g)||[]).length,6,"Se esperan seis servicios visibles sin interacción");
+assert.ok(["seo-google-maps","visibilidad-ia","web-landing-pages","google-meta-ads","whatsapp-automatizacion","contenido-analitica"].every(slug=>html.includes(`href="servicios/${slug}.html"`)),"Falta enlace directo a alguno de los seis servicios");
+assert.ok(html.indexOf('v21-service-overview')<html.indexOf('id="recorrido"'),"Los servicios deben preceder a los ejemplos");
+assert.ok(!html.includes('data-problem='),"No reintroducir diagnósticos ocultos después del héro");
+assert.ok(!hero.includes('const problemData='),"Eliminar el JavaScript de la interacción descartada");
 assert.equal((html.match(/class="v20-assurance-answers"/g)||[]).length,1,"Falta un único bloque de preguntas");
 assert.equal((html.match(/<section class="v20-assurance"/g)||[]).length,1,"Duplicación de módulo comercial");
 assert.ok(html.includes("qué corregiríamos primero y por qué"),"La oferta gratuita debe ser específica");

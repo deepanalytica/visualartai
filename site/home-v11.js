@@ -64,22 +64,6 @@
   play?.addEventListener("click",()=>playing?stop():start());
   syncPlay();
 
-  // Three problems map to a concrete service and inquiry context.
-  const problemData={"invisible":{"code":"VISIBILIDAD","title":"SEO local y Google Maps","text":"Revisamos categoría, servicios, horarios, ubicación y el enlace a tu web. Corregimos la información que esté equivocada o incompleta.","layers":[["Ficha con datos correctos"],["Servicios y zona de atención"],["Número y horario visibles"]],"interest":"SEO local y Google Maps","goal":"No aparezco cuando buscan mis servicios"},"traffic":{"code":"DISEÑO WEB","title":"Una web que facilita la consulta","text":"Probamos tu página desde un celular. Corregimos títulos confusos, información que falta y botones que no llevan a ninguna parte.","layers":[["Servicio y condiciones"],["Lectura cómoda en celular"],["Formulario y enlaces probados"]],"interest":"Web y conversión","goal":"Aparezco, pero recibo pocas consultas"},"messages":{"code":"WHATSAPP","title":"Mensajes de WhatsApp","text":"Ordenamos respuestas a preguntas habituales y registramos las consultas que necesitan seguimiento. Tu cliente siempre debe poder hablar con una persona.","layers":[["Respuestas a preguntas habituales"],["Servicio y ubicación solicitados"],["Consultas pendientes identificadas"]],"interest":"WhatsApp y automatización","goal":"Quiero saber qué debería mejorar primero"}};
-  const problemButtons=[...document.querySelectorAll("[data-problem]")],diagnosis=document.querySelector(".v11-diagnosis"),layers=document.getElementById("v11DiagnosisLayers"),cta=document.getElementById("v11DiagnosisCta");
-  let diagnosisAnimation=null;
-  const applyProblem=key=>{
-    const d=problemData[key];if(!d)return;
-    problemButtons.forEach(b=>{const active=b.dataset.problem===key;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active))});
-    setText("v11DiagnosisCode",d.code);setText("v11DiagnosisTitle",d.title);setText("v11DiagnosisText",d.text);
-    if(layers)layers.innerHTML=d.layers.map(x=>"<div><b>"+x[0]+"</b></div>").join("");
-    if(cta)cta.dataset.interest=d.interest;
-    const interest=document.getElementById("interest");if(interest)interest.value=d.interest;
-    const goal=document.getElementById("goal");if(goal&&[...goal.options].some(o=>o.value===d.goal))goal.value=d.goal;
-    if(diagnosis&&!reduce){diagnosisAnimation?.cancel();diagnosisAnimation=diagnosis.animate([{opacity:.58,transform:"translateY(8px) scale(.994)"},{opacity:1,transform:"none"}],{duration:480,easing:"cubic-bezier(.2,0,0,1)"})}
-  };
-  problemButtons.forEach(b=>b.addEventListener("click",()=>applyProblem(b.dataset.problem)));
-
   // Before / after direct manipulation.
   const range=document.getElementById("v11CompareRange"),compare=document.querySelector(".v11-compare");
   if(range&&compare){const update=()=>compare.style.setProperty("--split",range.value+"%");range.addEventListener("input",update);update()}
