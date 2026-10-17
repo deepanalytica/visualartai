@@ -39,7 +39,7 @@ for(const [label,asset] of [["claro",identitySvg],["oscuro",identityDark],["isot
 }
 assert.ok(identitySvg.includes("VISIBILIDAD")&&identityDark.includes("QUE GENERA"),"Falta lema del manual");
 assert.ok(style.includes(".vaa-footer-identity"),"La versión oscura debe tener reglas de pie");
-assert.ok(html.includes("<strong>Visual</strong><small>ART AI</small>"), "Visual debe ser protagonista");
+assert.ok(identitySvg.includes("Visual Art AI")&&html.includes("vaa-official-brand"), "El logotipo oficial debe ser protagonista, no texto reconstruido en HTML");
 assert.ok(html.includes('id="diagnosticForm"'),"Formulario no encontrado");
 assert.ok(html.includes('id="sendByEmail"'),"Falta alternativa de email");
 assert.ok(html.includes('type="submit">Preparar solicitud por WhatsApp'),"CTA principal debe ser explícito");
