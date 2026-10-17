@@ -23,7 +23,7 @@ for (const file of [
   "site/aviso-de-privacidad.html",
 ]) assert.ok(existsSync(join(root,file)), `Falta recurso: ${file}`);
 
-assert.ok(html.includes('href="styles/experience-v1.css?v=4"'), "Falta stylesheet incremental");
+assert.ok(html.includes('href="styles/experience-v1.css?v=5"'), "Falta stylesheet incremental");
 assert.equal((html.match(/class="vaa-wordmark"/g)||[]).length,2,"Marca tipográfica en desktop y móvil");
 assert.ok(html.includes("<strong>Visual</strong><small>ART AI</small>"), "Visual debe ser protagonista");
 assert.ok(html.includes('id="diagnosticForm"'),"Formulario no encontrado");
@@ -71,4 +71,10 @@ assert.ok(html.includes('class="v22-mobile-services"'),"Falta resumen móvil de 
 assert.ok(style.includes(".home-v11 .v11-search-scene"),"No ocultar demo ornamental en móvil");
 const consent=read("site/analytics-consent.js");
 assert.ok(consent.includes('document.querySelector("footer.footer")||document.body'),"Los ajustes de privacidad deben mantenerse accesibles sin tapar la pantalla");
+assert.ok(html.includes('class="v23-fast-whatsapp"')||html.includes('v23-fast-whatsapp"'),"Falta diagnóstico directo sin formulario");
+assert.ok(html.includes('class="v23-optional-brief"'),"Formulario no puede ser obligatorio para solicitar diagnóstico");
+assert.ok(html.indexOf('id="diagnostico"')<html.indexOf('id="ideas"'),"El blog debe aparecer después del CTA comercial");
+assert.ok(html.includes('casos/jessica-arriagada-presencia-digital.html'),"El caso debe enlazar a su ficha real");
+assert.ok(html.includes("MENSAJE GENÉRICO")&&html.includes("MENSAJE ESPECÍFICO"),"No presentar esquemas ficticios como antes y después medidos");
+assert.ok(html.includes('class="v23-mobile-prices"'),"Precios deben resumirse para móviles");
 console.log("✓ Contratos del diseño público validados. Falta QA visual en dispositivos.");
