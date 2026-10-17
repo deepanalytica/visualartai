@@ -49,6 +49,8 @@ let browser;
     for(const id of ["busquedas","voces","por-que","empezar"])assert.equal(await page.locator("#"+id).count(),1,"Sección faltante: "+id);
     assert.equal(await page.locator("#recomendaciones").count(),1,"Falta el capítulo sobre recomendaciones");
     assert.equal(await page.locator("#recomendaciones .v30-process article").count(),4,"Cuatro pasos de investigación y mejora");
+    assert.equal(await page.locator("#recomendaciones .v30-integrity").count(),1,"Bloque de rigor humano ausente");
+    assert.equal(await page.locator("#recomendaciones .v30-integrity-card>div").count(),3,"Tres controles de criterio humano");
     assert(await page.locator("#recomendaciones .v30-button").isVisible(),"El CTA del nuevo método debe estar disponible");
     assert((await page.locator("#recomendaciones .v30-further a").getAttribute("href"))==="metodologia.html#investigacion-busquedas","Enlace al protocolo debe funcionar");
     
