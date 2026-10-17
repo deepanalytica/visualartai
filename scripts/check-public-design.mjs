@@ -23,12 +23,12 @@ for (const file of [
   "site/aviso-de-privacidad.html",
 ]) assert.ok(existsSync(join(root,file)), `Falta recurso: ${file}`);
 
-assert.ok(html.includes('href="styles/experience-v1.css?v=11"'), "Falta stylesheet incremental");
+assert.ok(html.includes('href="styles/experience-v1.css?v=12"'), "Falta stylesheet incremental");
 assert.equal((html.match(/vaa-official-brand"/g)||[]).length,2,"Logotipo oficial en cabecera y menú");
-assert.ok(html.includes('src="/brands/visual-art-ai-official-light.svg"'),"Falta versión oficial clara");
-assert.ok(html.includes('src="/brands/visual-art-ai-official-dark.svg"'),"Falta versión oficial sobre fondo oscuro");
-assert.ok(html.includes('srcset="/brands/visual-art-ai-official-compact.svg"'),"Falta variante compacta móvil");
-assert.ok(html.includes('href="/brands/visual-art-ai-logo.svg?v=official-20261017"'),"Favicon debe usar isotipo oficial");
+assert.ok(html.includes('src="/brands/visual-art-ai-official-light.svg?v=2"'),"Falta versión oficial clara");
+assert.ok(html.includes('src="/brands/visual-art-ai-official-dark.svg?v=2"'),"Falta versión oficial sobre fondo oscuro");
+assert.ok(html.includes('srcset="/brands/visual-art-ai-official-compact.svg?v=2"'),"Falta variante compacta móvil");
+assert.ok(html.includes('href="/brands/visual-art-ai-logo.svg?v=20261017v2"'),"Favicon debe usar isotipo oficial");
 const identitySvg=read("site/brands/visual-art-ai-official-light.svg");
 const identityDark=read("site/brands/visual-art-ai-official-dark.svg");
 const iconSvg=read("site/brands/visual-art-ai-logo.svg");
@@ -129,4 +129,25 @@ assert.equal((html.match(/<details>/g)||[]).length>=8,true,"El FAQ debe cubrir o
 assert.ok(html.includes('Respuesta en 24 h hábiles'),"La política comercial de respuesta debe ser visible");
 assert.ok(html.includes('data-whatsapp="quick-hero-desktop"'),"El CTA desktop debe abrir WhatsApp directamente");
 assert.ok(html.includes('class="v27-signal-route"'),"Falta el motivo visual de búsqueda, visibilidad y contacto");
+const resources=read("site/recursos/index.html");
+const resourcesCss=read("site/recursos/recursos.css");
+const resourcesJs=read("site/recursos/recursos.js");
+assert.ok(html.includes('class="v28-resource-teaser"'),"Portada debe anunciar recursos gratuitos");
+assert.ok(html.includes('href="recursos/"'),"Portada necesita enlace al centro de guías");
+assert.ok(resources.includes('href="https://visualartai.cl/recursos/"'),"Falta canonical de recursos");
+assert.equal((resources.match(/class="resource-card"/g)||[]).length,12,"Deben haber 12 recursos no repetidos");
+assert.ok(resources.includes('data-filter="local"')&&resources.includes('data-filter="whatsapp"'),"Filtros de investigación de cliente");
+assert.ok(resourcesJs.includes("aria-pressed"),"Los filtros deben exponer estado accesible");
+assert.ok(resourcesCss.includes("max-width:640px"),"Los recursos necesitan estilo móvil");
+const links=[...resources.matchAll(/href="\.\.\/articulos\/([^"]+\.html)"/g)].map(x=>x[1]);
+assert.equal(links.length,12,"Doce guías navegables");
+assert.equal(new Set(links).size,12,"No repetir los mismos enlaces");
+for(const slug of links)assert.ok(existsSync(join(root,"site/articulos",slug)),"Guía inexistente: "+slug);
+assert.ok(read("site/sitemap.xml").includes("https://visualartai.cl/recursos/"),"El centro de recursos debe estar en sitemap");
+assert.ok(read("site/styles/entity-pages.css").includes(".service-evidence-grid"),"Las seis páginas de servicio necesitan entregables claros");
+for(const slug of ["seo-google-maps","visibilidad-ia","web-landing-pages","google-meta-ads","whatsapp-automatizacion","contenido-analitica"]){
+ const service=read("site/servicios/"+slug+".html");
+ assert.ok(service.includes('class="service-evidence-grid"'),"Faltan entregables en: "+slug);
+ assert.ok(service.includes('href="https://wa.me/56958039450?text='),"CTA directo de servicio: "+slug);
+}
 console.log("✓ Contratos del diseño público validados. Falta QA visual en dispositivos.");
