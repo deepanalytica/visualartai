@@ -25,13 +25,14 @@
   function render(){
     var style=document.createElement("style");
     style.textContent="#vaa-privacy-control{position:fixed;z-index:2147483646;right:16px;bottom:16px;border:1px solid #d5dce7;border-radius:999px;background:#fff;color:#152338;padding:9px 13px;font:600 12px/1.3 system-ui,sans-serif;box-shadow:0 4px 18px #15233822;cursor:pointer}#vaa-consent-panel{position:fixed;z-index:2147483647;left:16px;right:16px;bottom:16px;max-width:540px;margin:auto;box-sizing:border-box;border:1px solid #d5dce7;border-radius:16px;background:#fff;color:#152338;padding:18px;box-shadow:0 12px 42px #15233833;font:14px/1.55 system-ui,sans-serif}#vaa-consent-panel[hidden]{display:none}#vaa-consent-panel p{margin:6px 0 14px}#vaa-consent-panel a{color:#1459a8;text-decoration:underline}#vaa-consent-actions{display:flex;gap:10px;flex-wrap:wrap}#vaa-consent-actions button{border-radius:8px;padding:9px 16px;font:600 14px system-ui,sans-serif;cursor:pointer}#vaa-consent-accept{background:#152338;color:#fff;border:1px solid #152338}#vaa-consent-reject{background:#fff;color:#152338;border:1px solid #aeb8c5}@media(max-width:600px){#vaa-consent-panel{bottom:max(12px,env(safe-area-inset-bottom));padding:16px}#vaa-privacy-control{bottom:max(12px,env(safe-area-inset-bottom))}}";
+    style.textContent+="#vaa-privacy-control:focus-visible{outline:2px solid #2f6bff;outline-offset:3px}.footer #vaa-privacy-control{position:static;right:auto;bottom:auto;display:block;min-height:44px;margin:1rem auto 1.5rem;padding:.5rem .9rem;background:transparent;color:#475569;box-shadow:none;font-size:12px}@media(max-width:600px){.footer #vaa-privacy-control{bottom:auto;margin:1rem auto 1.2rem}}";
     document.head.appendChild(style);
     var control=document.createElement("button");
     control.id="vaa-privacy-control";
     control.type="button";
-    control.textContent="Privacidad";
+    control.textContent="Privacidad y cookies";
     control.setAttribute("aria-label","Privacidad: cambiar preferencias de medición");
-    document.body.appendChild(control);
+    (document.querySelector("footer.footer")||document.body).appendChild(control);
     var panel=document.createElement("section");
     panel.id="vaa-consent-panel";
     panel.setAttribute("role","dialog");
@@ -40,8 +41,8 @@
     panel.hidden=choice!==null;
     document.body.appendChild(panel);
     control.addEventListener("click",function(){panel.hidden=false;panel.querySelector("#vaa-consent-accept").focus()});
-    panel.querySelector("#vaa-consent-accept").addEventListener("click",function(){write("accepted");choice="accepted";panel.hidden=true;loadTagManager();control.focus()});
-    panel.querySelector("#vaa-consent-reject").addEventListener("click",function(){var wasLoaded=loaded;write("rejected");choice="rejected";panel.hidden=true;if(wasLoaded)location.reload();else control.focus()});
+    panel.querySelector("#vaa-consent-accept").addEventListener("click",function(){write("accepted");choice="accepted";panel.hidden=true;loadTagManager();control.focus({preventScroll:true})});
+    panel.querySelector("#vaa-consent-reject").addEventListener("click",function(){var wasLoaded=loaded;write("rejected");choice="rejected";panel.hidden=true;if(wasLoaded)location.reload();else control.focus({preventScroll:true})});
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",render,{once:true});else render();
 })();

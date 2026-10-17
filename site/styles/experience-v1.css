@@ -113,3 +113,68 @@
 @media(max-width:61rem){.v21-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v21-service-card{min-height:15.75rem}}
 @media(max-width:40rem){.v21-service-overview{padding-block:3.5rem}.v21-service-intro{margin-bottom:var(--space-8)}.v21-service-grid{grid-template-columns:minmax(0,1fr);gap:var(--space-3)}.v21-service-card{min-height:0;padding:1.45rem;border-radius:var(--radius-lg)}.v21-service-top{margin-bottom:1.1rem}.v21-service-card h3{font-size:1.24rem}.v21-service-card p{margin-bottom:var(--space-4)}.v21-service-bottom{margin-top:var(--space-6);padding:var(--space-5);align-items:stretch}.v21-service-bottom a{width:100%}}
 @media(prefers-reduced-motion:reduce){.v21-service-card{transition:none}.v21-service-card:hover{transform:none}}
+
+/* v22 — Mobile-first, one-action funnel.
+   Desktop identity and full service catalog remain intact. */
+.v22-mobile-lede,.v22-mobile-primary,.v22-mobile-email,.v22-mobile-services{display:none}
+@media(max-width:45rem){
+  /* Header: navigation only. The contact action is in the hero and in the
+     sticky control AFTER the hero, never three simultaneous CTAs. */
+  .home-v11 .topbar{height:3.65rem}
+  .home-v11 .topbar-actions>.button{display:none}
+  .home-v11 .topbar-inner{justify-content:space-between}
+  .home-v11 .menu-btn{min-width:2.75rem;min-height:2.75rem;border-radius:var(--radius-pill)}
+  .home-v11 .v11-hero{padding-top:1.25rem;padding-bottom:2.25rem}
+  .home-v11 .v11-hero-copy .v11-eyebrow{font-size:.64rem;line-height:1.35;max-width:26rem;letter-spacing:.038em}
+  /* Preserve the APPROVED exact wording, scale the type to the device. */
+  .home-v11 .v11-hero-copy .v19-hero-title{
+    margin-top:1rem;
+    font-size:clamp(2.3rem,10.6vw,3.08rem);
+    line-height:.96;
+    letter-spacing:-.062em;
+  }
+  .home-v11 .v19-hero-title>em{margin-top:.025em;font-size:.72em;line-height:.97}
+  .home-v11 .v19-hero-title>.v19-pain{margin-top:.55em;font-size:.44em;line-height:1.25;max-width:100%}
+  .home-v11 .v19-hero-title>strong{margin-top:.12em;font-size:.47em;line-height:1.16;max-width:100%}
+  .v22-desktop-lede{display:none!important}
+  .v22-mobile-lede{display:block}
+  .home-v11 .v19-hero-lede{margin-top:1.2rem;max-width:38ch;font-size:.93rem;line-height:1.55}
+  .home-v11 .v11-hero-actions{margin-top:1.1rem;gap:.4rem;align-items:center}
+  .home-v11 .v11-hero-actions .v22-desktop-primary{display:none}
+  .home-v11 .v11-hero-actions .v18-whatsapp{display:none}
+  .home-v11 .v11-hero-actions .v22-mobile-primary{display:flex;align-items:center;justify-content:center;gap:.35rem;min-height:3.2rem;font-size:.91rem;font-weight:800;border-radius:var(--radius-md);width:100%;padding:.75rem 1rem}
+  .home-v11 .v11-hero-actions .v22-mobile-email{display:inline-flex;align-items:center;justify-content:center;min-height:2.75rem;padding:.35rem .65rem;font:650 .78rem/1.3 var(--font-sans);color:var(--color-action-primary-hover);text-decoration:underline;text-underline-offset:.22em}
+  .home-v11 .v11-proofline{margin-top:.35rem;font:650 .67rem/1.5 var(--font-sans);gap:.44rem;color:var(--color-text-secondary)}
+  .home-v11 .v11-proofline i{width:3px;height:3px}
+  /* Decorative demos and carousels are not obstacles on the purchase path. */
+  .home-v11 .v16-service-strip,
+  .home-v11 .v11-search-scene,
+  .home-v11 #recorrido{display:none}
+  .home-v11 .v21-service-overview{padding-block:2.75rem}
+  .home-v11 .v21-kicker{font-size:.66rem;margin-bottom:.45rem}
+  .home-v11 .v21-service-intro{margin-bottom:1.1rem}
+  .home-v11 .v21-service-intro h2{font-size:clamp(1.85rem,7.5vw,2.5rem);line-height:1.09;margin-bottom:.55rem}
+  .home-v11 .v21-service-intro p{font-size:.93rem;line-height:1.53}
+  /* Three choices in place of six long cards. Full pages remain accessible. */
+  .home-v11 .v21-service-grid,.home-v11 .v21-service-bottom{display:none}
+  .home-v11 .v22-mobile-services{display:grid;gap:.55rem}
+  .v22-mobile-services>a{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.05rem;min-height:4.4rem;background:var(--color-canvas);border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);color:var(--color-text-primary);text-decoration:none}
+  .v22-mobile-services>a:focus-visible{outline:2px solid var(--color-action-primary);outline-offset:2px}
+  .v22-mobile-services>a>span:first-child{display:grid;gap:.24rem;min-width:0}
+  .v22-mobile-services b{font:800 .95rem/1.3 var(--font-sans)}
+  .v22-mobile-services small{font:500 .79rem/1.35 var(--font-sans);color:var(--color-text-secondary)}
+  .v22-mobile-services>a>span:last-child{font-size:1rem;color:var(--color-action-primary-hover);flex:0 0 auto}
+  .v22-mobile-services .v22-all-services{justify-content:center;background:transparent;border:0;min-height:2.75rem;padding:.45rem;color:var(--color-action-primary-hover);font:750 .82rem var(--font-sans)}
+  /* Sticky appears only after exiting the hero, with exactly ONE action. */
+  .home-v11 .mobile-convert{left:.75rem;right:.75rem;bottom:calc(.65rem + env(safe-area-inset-bottom));display:flex;justify-content:stretch;min-height:0;padding:.42rem;border:1px solid var(--color-border-subtle);border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:var(--shadow-lg);grid-template-columns:none;gap:0}
+  .home-v11 .mobile-convert a.v22-sticky-diagnostic{width:100%;min-height:3rem;padding:.65rem .9rem;display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--button-primary-bg);color:var(--button-primary-text);border-radius:var(--radius-md);font:800 .9rem/1.4 var(--font-sans);text-decoration:none}
+  .home-v11 .mobile-convert a.v22-sticky-diagnostic:hover{background:var(--button-primary-bg-hover)}
+  .home-v11 .footer{padding-bottom:6rem}
+}
+@media(max-width:23.5rem){
+  .home-v11 .v11-hero-copy .v19-hero-title{font-size:clamp(2.16rem,10.35vw,2.4rem)}
+  .home-v11 .v11-eyebrow{font-size:.6rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .home-v11 .mobile-convert{transition:none}
+}

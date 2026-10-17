@@ -23,7 +23,7 @@ for (const file of [
   "site/aviso-de-privacidad.html",
 ]) assert.ok(existsSync(join(root,file)), `Falta recurso: ${file}`);
 
-assert.ok(html.includes('href="styles/experience-v1.css?v=3"'), "Falta stylesheet incremental");
+assert.ok(html.includes('href="styles/experience-v1.css?v=4"'), "Falta stylesheet incremental");
 assert.equal((html.match(/class="vaa-wordmark"/g)||[]).length,2,"Marca tipográfica en desktop y móvil");
 assert.ok(html.includes("<strong>Visual</strong><small>ART AI</small>"), "Visual debe ser protagonista");
 assert.ok(html.includes('id="diagnosticForm"'),"Formulario no encontrado");
@@ -62,4 +62,13 @@ assert.equal((html.match(/<section class="v20-assurance"/g)||[]).length,1,"Dupli
 assert.ok(html.includes("qué corregiríamos primero y por qué"),"La oferta gratuita debe ser específica");
 assert.ok(html.includes("posiciones garantizadas"),"El caso no debe prometer resultados medidos");
 assert.equal((html.match(/<h1\b/g)||[]).length,1,"La portada debe conservar un solo H1");
+const approvedHero="Hay personas buscando lo que vendes en Google y ChatGPT. Y mientras tú no apareces, están llamando a tu competencia.";
+const currentHero=html.match(/<h1 class="v19-hero-title"[\s\S]*?<\/h1>/)?.[0]?.replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+assert.equal(currentHero,approvedHero,"Mantener íntegra la frase del héro");
+assert.ok(html.includes('class="button button-primary v22-mobile-primary"'),"Falta CTA móvil de contacto inmediato");
+assert.ok(html.includes('class="v22-sticky-diagnostic"'),"Falta barra móvil de una sola acción");
+assert.ok(html.includes('class="v22-mobile-services"'),"Falta resumen móvil de servicios");
+assert.ok(style.includes(".home-v11 .v11-search-scene"),"No ocultar demo ornamental en móvil");
+const consent=read("site/analytics-consent.js");
+assert.ok(consent.includes('document.querySelector("footer.footer")||document.body'),"Los ajustes de privacidad deben mantenerse accesibles sin tapar la pantalla");
 console.log("✓ Contratos del diseño público validados. Falta QA visual en dispositivos.");

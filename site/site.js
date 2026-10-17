@@ -7,14 +7,22 @@
   if(reduce||!("IntersectionObserver" in window))reveal.forEach(el=>el.classList.add("in"));else{reveal.forEach(el=>el.classList.add("reveal"));const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)return;entry.target.classList.add("in");io.unobserve(entry.target)}),{threshold:.08,rootMargin:"0px 0px -5% 0px"});reveal.forEach(el=>io.observe(el))}
   const menu=document.getElementById("mobileMenu"),open=document.getElementById("menuBtn"),close=document.getElementById("menuClose");
   if(menu&&open&&close){let lastFocus=null;const focusables=()=>[...menu.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])')].filter(el=>!el.disabled);const setOpen=value=>{menu.classList.toggle("open",value);menu.setAttribute("aria-hidden",String(!value));open.setAttribute("aria-expanded",String(value));document.body.style.overflow=value?"hidden":"";if(value){lastFocus=document.activeElement;setTimeout(()=>close.focus(),0)}else if(lastFocus?.focus)lastFocus.focus()};open.addEventListener("click",()=>setOpen(true));close.addEventListener("click",()=>setOpen(false));menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>setOpen(false)));document.addEventListener("keydown",e=>{if(!menu.classList.contains("open"))return;if(e.key==="Escape"){e.preventDefault();setOpen(false);return}if(e.key!=="Tab")return;const els=focusables();if(!els.length)return;const first=els[0],last=els[els.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}})}
-  const bar=document.getElementById("mobileConvert"),diagnostic=document.getElementById("diagnostico");
-  if(bar&&diagnostic&&"IntersectionObserver" in window){
+  const bar=document.getElementById("mobileConvert"),diagnostic=document.getElementById("diagnostico"),hero=document.getElementById("inicio");
+  if(bar&&diagnostic&&hero&&"IntersectionObserver" in window){
     let diagnosticVisible=true,ticking=false;
-    const update=()=>{const show=scrollY>innerHeight*.72&&!diagnosticVisible;bar.classList.toggle("show",show);bar.inert=!show;ticking=false};
+    const update=()=>{
+      const pastHero=hero.getBoundingClientRect().bottom<=80;
+      const consentOpen=Boolean(document.querySelector("#vaa-consent-panel:not([hidden])"));
+      const show=matchMedia("(max-width:45rem)").matches&&pastHero&&!diagnosticVisible&&!consentOpen;
+      bar.classList.toggle("show",show);bar.inert=!show;bar.setAttribute("aria-hidden",String(!show));ticking=false
+    };
     const schedule=()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}};
-    bar.inert=true;
+    bar.inert=true;bar.setAttribute("aria-hidden","true");
     new IntersectionObserver(entries=>{diagnosticVisible=entries[0].isIntersecting;schedule()}).observe(diagnostic);
     addEventListener("scroll",schedule,{passive:true});addEventListener("resize",schedule,{passive:true});
+    const observeConsent=()=>{const panel=document.getElementById("vaa-consent-panel");if(panel)new MutationObserver(schedule).observe(panel,{attributes:true,attributeFilter:["hidden"]});schedule()};
+    if(document.readyState==="complete")observeConsent();else document.addEventListener("DOMContentLoaded",observeConsent,{once:true});
+    schedule();
   }
   document.querySelectorAll("[data-interest]").forEach(el=>el.addEventListener("click",()=>{const input=document.getElementById("interest");if(input)input.value=el.dataset.interest||"Diagnóstico de presencia digital";track("diagnostic_interest",{interest:el.dataset.interest||"general"})}));
   const form=document.getElementById("diagnosticForm");
