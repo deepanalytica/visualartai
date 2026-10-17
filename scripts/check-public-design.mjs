@@ -25,9 +25,9 @@ for (const file of [
 
 assert.ok(html.includes('href="styles/experience-v1.css?v=12"'), "Falta stylesheet incremental");
 assert.equal((html.match(/vaa-official-brand"/g)||[]).length,2,"Logotipo oficial en cabecera y menú");
-assert.ok(html.includes('src="/brands/visual-art-ai-official-light.svg?v=2"'),"Falta versión oficial clara");
-assert.ok(html.includes('src="/brands/visual-art-ai-official-dark.svg?v=2"'),"Falta versión oficial sobre fondo oscuro");
-assert.ok(html.includes('srcset="/brands/visual-art-ai-official-compact.svg?v=2"'),"Falta variante compacta móvil");
+assert.ok(html.includes('src="/brands/visual-art-ai-official-light.svg?v=3"'),"Falta versión oficial clara");
+assert.ok(html.includes('src="/brands/visual-art-ai-official-dark.svg?v=3"'),"Falta versión oficial sobre fondo oscuro");
+assert.ok(html.includes('srcset="/brands/visual-art-ai-official-compact.svg?v=3"'),"Falta variante compacta móvil");
 assert.ok(html.includes('href="/brands/visual-art-ai-logo.svg?v=20261017v2"'),"Favicon debe usar isotipo oficial");
 const identitySvg=read("site/brands/visual-art-ai-official-light.svg");
 const identityDark=read("site/brands/visual-art-ai-official-dark.svg");
@@ -128,7 +128,7 @@ assert.ok(html.includes('v27-close-cta"'),"Falta el último CTA visible");
 assert.equal((html.match(/<details>/g)||[]).length>=8,true,"El FAQ debe cubrir ocho objeciones");
 assert.ok(html.includes('Respuesta en 24 h hábiles'),"La política comercial de respuesta debe ser visible");
 assert.ok(html.includes('data-whatsapp="quick-hero-desktop"'),"El CTA desktop debe abrir WhatsApp directamente");
-assert.ok(html.includes('class="v27-signal-route"'),"Falta el motivo visual de búsqueda, visibilidad y contacto");
+assert.ok(["v29-float-search","v29-float-visibility","v29-float-clients"].every(x=>html.includes(x)),"El nuevo motivo visual debe conectar búsqueda, visibilidad y contacto");
 const resources=read("site/recursos/index.html");
 const resourcesCss=read("site/recursos/recursos.css");
 const resourcesJs=read("site/recursos/recursos.js");

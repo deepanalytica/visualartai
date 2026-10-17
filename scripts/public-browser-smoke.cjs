@@ -80,7 +80,11 @@ let browser;
       assert((await page.locator(".v22-mobile-services>a").first().innerText()).includes("Me llegan pocas consultas"),"Primero problema real, luego herramienta");
       assert(await page.locator(".v22-mobile-primary").isVisible(),"CTA del héro debe ser visible");
       assert(await page.locator(".v22-desktop-primary").isHidden(),"Evitar CTA duplicado en el héro");
-      assert(await page.locator(".v11-search-scene").isHidden(),"La demostración no puede retrasar la conversión móvil");
+      assert(await page.locator(".v11-search-scene").isVisible(),"La búsqueda visual debe mantenerse en la experiencia móvil");
+      assert.equal(await page.locator(".v29-platform img").count(),5,"Cinco plataformas identificables en el buscador");
+      const heroAction=await page.locator(".v22-mobile-primary").boundingBox();
+      const heroDemo=await page.locator(".v11-search-scene").boundingBox();
+      assert(heroAction&&heroDemo&&heroAction.y<heroDemo.y,"El CTA debe aparecer antes de la demostración móvil");
       assert(await page.locator(".v16-service-strip").isHidden(),"Chips redundantes ocultos en móvil");
       assert(await page.locator("#recorrido").isVisible(),"Los cuatro beneficios deben leerse en móvil");
       assert(await page.locator("#recorrido .v19-service").first().isHidden(),"Las demos largas permanecen ocultas en móvil");
@@ -113,6 +117,9 @@ let browser;
       assert(await page.locator("#mobileConvert a").isVisible(),"CTA fijo debe mostrarse después del héro");
     }
     assert(await page.locator("#sendByEmail").count()===1,"Falta alternativa de correo");
+    if(await page.locator("#vaa-consent-panel").isVisible())await page.locator("#vaa-consent-reject").click();
+    await page.evaluate(()=>window.scrollTo({top:0,behavior:"instant"}));
+    await page.waitForTimeout(200);
     await page.screenshot({path:`qa-screenshots/public-${size.width}.png`,fullPage:true,animations:"disabled"});
     if(size.width===390){
       const menu=page.locator("#menuBtn");
