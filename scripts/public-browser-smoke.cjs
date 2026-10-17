@@ -40,6 +40,17 @@ let browser;
     assert.equal(await page.locator("#problema h2").innerText(),size.width<=720?"¿En qué te ayudamos?":"¿Qué hacemos en Visual Art AI?","Mensaje claro inmediatamente después del héro");
     assert(await page.locator('#problema .v21-service-card a[href^="servicios/"]').count()===6,"Enlaces a los seis servicios");
     assert(await page.locator("#diagnosticForm").count()===1,"Formulario de diagnóstico ausente");
+    assert.equal(await page.locator("#preguntas .v20-assurance-answers details").count(),5,"Cinco dudas respondidas sin formulario");
+    assert.equal(await page.locator("#caso-real .v26-source-link").getAttribute("href"),"https://www.jessicaarriagadapsicologa.cl/","El caso debe permitir comprobar la web real");
+    if(size.width===390){
+      assert(await page.locator(".v26-research-links").isVisible(),"Rutas para visitantes que aún comparan");
+      assert.equal(await page.locator(".v26-research-links a").count(),2,"Dos enlaces discretos a pruebas y FAQ");
+      assert((await page.locator(".v26-research-links a").first().getAttribute("href"))==="#caso-real","El ejemplo debe abrir la prueba");
+      const q=page.locator("#preguntas .v20-assurance-answers details").last();
+      await q.locator("summary").click();
+      assert(await q.getAttribute("open")!==null,"El visitante puede ver cómo se miden resultados");
+      await q.locator("summary").click();
+    }
     assert.equal(await page.locator(".v23-fast-whatsapp").count(),1,"Una salida directa a WhatsApp");
     assert((await page.locator(".v23-fast-whatsapp").getAttribute("href")).startsWith("https://wa.me/"),"Diagnóstico directo con mensaje preparado");
     assert.equal(await page.locator(".v23-optional-brief").count(),1,"Formulario adicional opcional");
