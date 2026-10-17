@@ -40,6 +40,28 @@ let browser;
     assert.equal(await page.locator("#problema h2").innerText(),"¿Qué hacemos en Visual Art AI?","Mensaje claro inmediatamente después del héro");
     assert(await page.locator('#problema .v21-service-card a[href^="servicios/"]').count()===6,"Enlaces a los seis servicios");
     assert(await page.locator("#diagnosticForm").count()===1,"Formulario de diagnóstico ausente");
+    if(size.width===390){
+      assert.equal(await page.locator(".v22-mobile-services>a").count(),4,"Tres servicios rápidos más enlace a catálogo");
+      assert(await page.locator(".v22-mobile-primary").isVisible(),"CTA del héro debe ser visible");
+      assert(await page.locator(".v22-desktop-primary").isHidden(),"Evitar CTA duplicado en el héro");
+      assert(await page.locator(".v11-search-scene").isHidden(),"La demostración no puede retrasar la conversión móvil");
+      assert(await page.locator(".v16-service-strip").isHidden(),"Chips redundantes ocultos en móvil");
+      assert(await page.locator("#recorrido").isHidden(),"No duplicar ejemplos en el embudo móvil");
+      assert(await page.locator(".v21-service-grid").isHidden(),"No cargar seis tarjetas largas en móvil");
+      assert(await page.locator(".topbar-actions>.button").isHidden(),"Un solo CTA a la vez en móvil");
+      assert.equal(await page.locator("#mobileConvert a").count(),1,"La barra fija debe tener una sola acción");
+      assert(await page.locator(".v22-mobile-primary").getAttribute("href").then(u=>u.startsWith("https://wa.me/")),"Ruta móvil directa a WhatsApp");
+      assert(await page.locator("#vaa-privacy-control").evaluate(el=>Boolean(el.closest("footer"))),"Privacidad no debe flotar sobre la pantalla");
+      assert(await page.locator("#vaa-consent-panel").isVisible(),"La opción de consentimiento inicial debe conservarse");
+      await page.locator("#vaa-consent-reject").click();
+      const y=await page.evaluate(()=>scrollY);
+      assert(y<50,"La decisión de privacidad no debe desplazar la pantalla al pie de página");
+      assert(await page.locator("#vaa-consent-panel").isHidden(),"Se respetó la elección de privacidad");
+      await page.locator("#problema").scrollIntoViewIfNeeded();
+      await page.waitForTimeout(450);
+      assert(await page.locator("#mobileConvert").getAttribute("aria-hidden").then(v=>v==="false"),"Un CTA fijo después del héro");
+      assert(await page.locator("#mobileConvert a").isVisible(),"CTA fijo debe mostrarse después del héro");
+    }
     assert(await page.locator("#sendByEmail").count()===1,"Falta alternativa de correo");
     await page.screenshot({path:`qa-screenshots/public-${size.width}.png`,fullPage:true,animations:"disabled"});
     if(size.width===390){
