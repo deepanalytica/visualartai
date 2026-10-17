@@ -33,7 +33,7 @@ assert.ok(html.includes('aviso-de-privacidad.html'),"Falta enlace a privacidad")
 assert.ok(runtime.includes('form?.reportValidity()'),"Falta validación de datos");
 assert.ok(runtime.includes("https://wa.me/56958039450?text="),"Falta salida real a WhatsApp");
 assert.ok(runtime.includes("mailto:contacto@deepanalytica.cl"),"Falta salida por correo");
-assert.ok(runtime.includes("No") || runtime.includes("no se considera"),"Mantener aclaración de no entrega");
+assert.ok(runtime.includes("Debes pulsar Enviar"),"No afirmar entrega automática del mensaje");
 assert.ok(hero.includes("navigator.connection?.saveData"),"Respetar ahorro de datos");
 assert.ok(hero.includes('matchMedia("(max-width: 767px)")'),"No ejecutar canvas pesado en móvil");
 assert.ok(hero.includes("inViewport"),"Pausar campo visual fuera del hero");
