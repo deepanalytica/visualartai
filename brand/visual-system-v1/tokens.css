@@ -1,0 +1,22 @@
+/* Visual Art AI — propuesta identidad v1.0 RC. Sin aplicar a producción. */
+:root {
+--visual-blue:#2F6BFF; --visual-blue-strong:#1E45AD;
+--visual-purple:#713BE8; --visual-coral:#F24D5D;
+--visual-ink:#08111F; --visual-paper:#F8FAFC;
+--visual-muted:#64748B; --visual-success:#167A58;
+--visual-action:var(--visual-blue);
+--visual-text:var(--visual-ink);
+--visual-background:var(--visual-paper);
+--visual-surface:#FFFFFF;
+--visual-border:#DEE5EE;
+--visual-font-ui:Inter,Arial,sans-serif;
+--visual-display:"Inter Display",Inter,Arial,sans-serif;
+--visual-mono:"IBM Plex Mono",monospace;
+--visual-space-1:4px; --visual-space-2:8px;
+--visual-space-3:12px; --visual-space-4:16px;
+--visual-space-6:24px; --visual-space-8:32px;
+--visual-radius-sm:10px;--visual-radius-md:16px;--visual-radius-lg:24px;
+--visual-duration-fast:160ms;--visual-duration-standard:260ms;
+--visual-duration-emphasis:450ms;
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
