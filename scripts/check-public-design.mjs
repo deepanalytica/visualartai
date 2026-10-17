@@ -128,7 +128,7 @@ assert.ok(html.includes('v27-close-cta"'),"Falta el último CTA visible");
 assert.equal((html.match(/<details>/g)||[]).length>=8,true,"El FAQ debe cubrir ocho objeciones");
 assert.ok(html.includes('Respuesta en 24 h hábiles'),"La política comercial de respuesta debe ser visible");
 assert.ok(html.includes('data-whatsapp="quick-hero-desktop"'),"El CTA desktop debe abrir WhatsApp directamente");
-assert.ok(html.includes('class="v27-signal-route"'),"Falta el motivo visual de búsqueda, visibilidad y contacto");
+assert.ok(["v29-float-search","v29-float-visibility","v29-float-clients"].every(x=>html.includes(x)),"El nuevo motivo visual debe conectar búsqueda, visibilidad y contacto");
 const resources=read("site/recursos/index.html");
 const resourcesCss=read("site/recursos/recursos.css");
 const resourcesJs=read("site/recursos/recursos.js");
