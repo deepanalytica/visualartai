@@ -6,6 +6,21 @@ description: Edita copy comercial en español de Chile para Visual Art AI. Audit
 
 **Objetivo:** que cada página responda una pregunta concreta del comprador, use lenguaje natural y tenga una acción real que se pueda completar.
 
+## Titular aprobado: no modificar sin instrucción expresa
+El H1 de la portada debe leerse **exactamente**:
+> Hay personas buscando lo que vendes en Google y ChatGPT. Y mientras tú no apareces, están llamando a tu competencia.
+
+No sustituir este titular por versiones más suaves o preguntas genéricas durante una auditoría de «AI slop». El control `scripts/check-public-copy-es.mjs` comprueba la cadena visible exacta.
+
+## Escritura de respuesta directa inspirada en Gary Halbert
+- **Mercado antes que vocabulario:** investigar qué busca el comprador y qué ha probado, no empezar con «servicios SEO/GEO».
+- **Idea central de venta:** si tu cliente no encuentra, entiende o contacta al negocio, una parte de la demanda puede perderse antes de consultar. No inventar volumen ni asumir que esto ocurre en todos los casos.
+- **Beneficio antes que herramienta:** más posibilidades de consultas reales, con mecanismo visible: información pública, página de servicio y contacto.
+- **Prueba antes que exageración:** enlazar trabajos verificables y distinguir ejemplos ilustrativos de resultados medidos.
+- **Oferta específica y riesgo reducido:** diagnóstico inicial gratuito, una primera recomendación y plazo orientativo de respuesta en 24–48 h. No urgencias falsas ni cupos inventados.
+- **Llamado a actuar:** «Solicitar mi diagnóstico gratuito» debe llevar al formulario, nunca fingir que la solicitud se envió automáticamente.
+- **Sin imitaciones teatrales:** evitar gritos, promesas absolutas, historias ficticias y tono de vendedor insistente. Persuadir con claridad y consecuencias plausibles.
+
 ## Antes de escribir
 1. **Define quién lee:** rubro, ciudad, situación, qué ha intentado, objeción que realmente tiene. No atribuyas frases a compradores si no existen entrevistas o datos.
 2. **Declara la oferta:** qué hacemos, qué entregamos, qué no hacemos, plazo, precio y siguiente paso. Busca evidencia propia antes de escribir una promesa.
