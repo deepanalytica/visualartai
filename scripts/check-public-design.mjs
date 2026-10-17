@@ -23,7 +23,7 @@ for (const file of [
   "site/aviso-de-privacidad.html",
 ]) assert.ok(existsSync(join(root,file)), `Falta recurso: ${file}`);
 
-assert.ok(html.includes('href="styles/experience-v1.css?v=6"'), "Falta stylesheet incremental");
+assert.ok(html.includes('href="styles/experience-v1.css?v=7"'), "Falta stylesheet incremental");
 assert.equal((html.match(/class="vaa-wordmark"/g)||[]).length,2,"Marca tipográfica en desktop y móvil");
 assert.ok(html.includes("<strong>Visual</strong><small>ART AI</small>"), "Visual debe ser protagonista");
 assert.ok(html.includes('id="diagnosticForm"'),"Formulario no encontrado");
@@ -87,4 +87,14 @@ assert.ok(html.includes('class="button button-primary v24-menu-cta"'),"El menú 
 assert.ok(html.includes('data-whatsapp="mobile-menu"'),"CTA del menú debe enlazar directo a WhatsApp");
 assert.ok(style.includes(".home-v11 .mobile-menu-panel")&&style.includes("min-height:0"),"Menú no debe ocupar toda la altura del teléfono");
 assert.ok(runtime.includes('menu.addEventListener("click"'),"El menú debe cerrar al tocar el fondo");
+assert.ok(html.includes('class="v26-research-links"'),"Falta ruta accesible para visitantes que aún comparan");
+assert.ok(html.includes('href="#caso-real">Ver un trabajo publicado'),"Falta enlace a prueba verificable");
+assert.ok(html.includes('href="#preguntas">Resolver mis dudas'),"Falta acceso simple a preguntas frecuentes");
+assert.ok(html.includes('href="https://www.jessicaarriagadapsicologa.cl/"'),"Falta acceso al sitio real del caso");
+assert.ok(html.includes("¿Por qué importan las reseñas y los videos si ya tengo una web?"),"Debe explicar el valor de la prueba multicanal");
+assert.ok(html.includes("¿Cómo sé si los cambios están dando resultado?"),"Debe explicar la diferencia entre clic y consulta");
+assert.ok(style.includes(".v26-research-links a:focus-visible"),"Los enlaces de comprobación necesitan foco visible");
+const buyerArticle=read("site/articulos/contenido-preguntas-clientes-seo-ia.html");
+assert.ok(buyerArticle.includes('id="s9"')&&buyerArticle.includes('id="s10"'),"Faltan las lecciones sobre confianza y datos de producto");
+assert.ok(buyerArticle.includes("no para estimar cuántos clientes"),"No extrapolar retail internacional a servicios chilenos");
 console.log("✓ Contratos del diseño público validados. Falta QA visual en dispositivos.");
