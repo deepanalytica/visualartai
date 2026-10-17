@@ -64,7 +64,7 @@ const home=readFileSync(join(root,"index.html"),"utf8");
 const actualHero=strip(home.match(/<h1 class="v19-hero-title"[\s\S]*?<\/h1>/)?.[0]||"");
 const approvedHero="Hay personas buscando lo que vendes en Google y ChatGPT. Y mientras tú no apareces, están llamando a tu competencia.";
 safe(actualHero===approvedHero,`Se ha alterado el héro aprobado: ${actualHero}`);
-safe(home.includes("No tienes que empezar por el plan más caro."),"Falta contexto persuasivo de los planes");
+safe(home.includes("¿Cuánto cuesta trabajar con nosotros?"),"Falta contexto persuasivo de los planes");
 safe(home.includes("Solicitar mi diagnóstico gratuito"),"Falta CTA principal de respuesta directa");
 safe(home.includes('id="diagnosticForm"'),"El formulario principal desapareció");
 safe(home.includes('id="sendByEmail"'),"Falta alternativa de correo");
@@ -72,4 +72,7 @@ console.log(`Páginas públicas: ${files.length}; servicios: ${services.length};
 console.log(`Introducciones de artículos diferentes: ${countIntros}/${articles.length}`);
 for(const msg of warnings.slice(0,20))console.log("ADVERTENCIA:",msg);
 if(issues.length){issues.forEach(x=>console.error("ERROR:",x));process.exit(1)}
+safe(home.indexOf('id="diagnostico"')<home.indexOf('id="ideas"'),"El blog no debe interrumpir el contacto");
+safe(home.includes('casos/jessica-arriagada-presencia-digital.html'),"El enlace del caso debe llevar al proyecto documentado");
+safe(home.includes("Se abre WhatsApp con el mensaje preparado"),"No afirmar que la solicitud se envía automáticamente");
 console.log("OK: estructura, honestidad editorial, etiquetas y contenido mínimo verificados.");
