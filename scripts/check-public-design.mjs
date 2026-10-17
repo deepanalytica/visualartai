@@ -53,7 +53,7 @@ for (const id of ["inicio","problema","recorrido","caso-real","precios","diagnos
 assert.ok(html.includes('id="preguntas"'),"Falta bloque de objeciones comerciales");
 assert.equal((html.match(/class="v20-assurance-answers"/g)||[]).length,1,"Falta un único bloque de preguntas");
 assert.equal((html.match(/<section class="v20-assurance"/g)||[]).length,1,"Duplicación de módulo comercial");
-assert.ok(html.includes("una primera prioridad razonada"),"La oferta gratuita debe ser específica");
+assert.ok(html.includes("qué corregiríamos primero y por qué"),"La oferta gratuita debe ser específica");
 assert.ok(html.includes("posiciones garantizadas"),"El caso no debe prometer resultados medidos");
 assert.equal((html.match(/<h1\b/g)||[]).length,1,"La portada debe conservar un solo H1");
 console.log("✓ Contratos del diseño público validados. Falta QA visual en dispositivos.");
