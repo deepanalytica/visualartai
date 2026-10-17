@@ -23,7 +23,7 @@ for (const file of [
   "site/aviso-de-privacidad.html",
 ]) assert.ok(existsSync(join(root,file)), `Falta recurso: ${file}`);
 
-assert.ok(html.includes('href="styles/experience-v1.css?v=7"'), "Falta stylesheet incremental");
+assert.ok(html.includes('href="styles/experience-v1.css?v=8"'), "Falta stylesheet incremental");
 assert.equal((html.match(/class="vaa-wordmark"/g)||[]).length,2,"Marca tipográfica en desktop y móvil");
 assert.ok(html.includes("<strong>Visual</strong><small>ART AI</small>"), "Visual debe ser protagonista");
 assert.ok(html.includes('id="diagnosticForm"'),"Formulario no encontrado");
@@ -51,7 +51,7 @@ for (const id of ["inicio","problema","recorrido","caso-real","precios","diagnos
 }
 
 assert.ok(html.includes('id="preguntas"'),"Falta bloque de objeciones comerciales");
-assert.ok(html.includes("¿Qué hacemos en Visual Art AI?"),"La primera sección debe explicar los servicios claramente");
+assert.ok(html.includes("¿Qué necesitas mejorar en tu negocio?"),"La primera sección debe explicar los servicios claramente");
 assert.equal((html.match(/class="v21-service-card"/g)||[]).length,6,"Se esperan seis servicios visibles sin interacción");
 assert.ok(["seo-google-maps","visibilidad-ia","web-landing-pages","google-meta-ads","whatsapp-automatizacion","contenido-analitica"].every(slug=>html.includes(`href="servicios/${slug}.html"`)),"Falta enlace directo a alguno de los seis servicios");
 assert.ok(html.indexOf('v21-service-overview')<html.indexOf('id="recorrido"'),"Los servicios deben preceder a los ejemplos");
@@ -97,4 +97,7 @@ assert.ok(style.includes(".v26-research-links a:focus-visible"),"Los enlaces de 
 const buyerArticle=read("site/articulos/contenido-preguntas-clientes-seo-ia.html");
 assert.ok(buyerArticle.includes('id="s9"')&&buyerArticle.includes('id="s10"'),"Faltan las lecciones sobre confianza y datos de producto");
 assert.ok(buyerArticle.includes("no para estimar cuántos clientes"),"No extrapolar retail internacional a servicios chilenos");
+assert.ok(html.includes("Pago publicidad, pero no sé si vendo más."),"El problema de anuncios sin ventas debe estar descrito para compradores");
+assert.ok(html.includes("Mi web recibe visitas, pero no consultas."),"El problema de conversión debe ser visible");
+assert.ok(html.includes("Me llegan pocas consultas"),"Servicios móviles deben empezar por el problema del comprador");
 console.log("✓ Contratos del diseño público validados. Falta QA visual en dispositivos.");
