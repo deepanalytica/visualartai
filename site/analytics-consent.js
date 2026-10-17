@@ -41,8 +41,8 @@
     panel.hidden=choice!==null;
     document.body.appendChild(panel);
     control.addEventListener("click",function(){panel.hidden=false;panel.querySelector("#vaa-consent-accept").focus()});
-    panel.querySelector("#vaa-consent-accept").addEventListener("click",function(){write("accepted");choice="accepted";panel.hidden=true;loadTagManager();control.focus()});
-    panel.querySelector("#vaa-consent-reject").addEventListener("click",function(){var wasLoaded=loaded;write("rejected");choice="rejected";panel.hidden=true;if(wasLoaded)location.reload();else control.focus()});
+    panel.querySelector("#vaa-consent-accept").addEventListener("click",function(){write("accepted");choice="accepted";panel.hidden=true;loadTagManager();control.focus({preventScroll:true})});
+    panel.querySelector("#vaa-consent-reject").addEventListener("click",function(){var wasLoaded=loaded;write("rejected");choice="rejected";panel.hidden=true;if(wasLoaded)location.reload();else control.focus({preventScroll:true})});
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",render,{once:true});else render();
 })();
