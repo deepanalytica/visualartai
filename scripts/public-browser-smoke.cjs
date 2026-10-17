@@ -117,6 +117,9 @@ let browser;
       assert(await page.locator("#mobileConvert a").isVisible(),"CTA fijo debe mostrarse después del héro");
     }
     assert(await page.locator("#sendByEmail").count()===1,"Falta alternativa de correo");
+    if(await page.locator("#vaa-consent-panel").isVisible())await page.locator("#vaa-consent-reject").click();
+    await page.evaluate(()=>window.scrollTo({top:0,behavior:"instant"}));
+    await page.waitForTimeout(200);
     await page.screenshot({path:`qa-screenshots/public-${size.width}.png`,fullPage:true,animations:"disabled"});
     if(size.width===390){
       const menu=page.locator("#menuBtn");
