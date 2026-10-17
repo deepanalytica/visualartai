@@ -76,5 +76,10 @@ safe(home.includes('casos/jessica-arriagada-presencia-digital.html'),"El enlace 
 safe(home.includes("Se abre WhatsApp con el mensaje preparado"),"No afirmar que la solicitud se envía automáticamente");
 safe(home.includes("¿Qué te está pasando con tu negocio?"),"Falta explicar los problemas del visitante en móvil");
 safe(home.includes("Me llegan pocas consultas"),"Falta mensaje de necesidad real de los clientes");
+safe(home.includes('id="busquedas"')&&home.includes('id="voces"'),"Faltan búsquedas y voz del cliente");
+safe(home.includes('Situaciones ilustrativas'),"Los testimonios ilustrativos requieren señalización");
+safe(home.includes("No necesitas otra web"),"Falta objeción de gasto sin necesidad");
+safe(home.includes("Que te encuentren"),"Falta la lógica de cuatro beneficios");
+safe(home.includes("Respuesta en 24 h hábiles"),"La promesa comercial de contacto debe ser consistente");
 if(issues.length){issues.forEach(x=>console.error("ERROR:",x));process.exit(1)}
 console.log("OK: estructura, honestidad editorial, etiquetas y contenido mínimo verificados.");
