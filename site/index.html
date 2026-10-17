@@ -84,7 +84,7 @@
 </style>
 <!-- Local fonts: end -->
 <link rel="stylesheet" href="home-core.css?v=20">
-<link rel="stylesheet" href="styles/experience-v1.css?v=5">
+<link rel="stylesheet" href="styles/experience-v1.css?v=6">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://visualartai.cl/#organization","name":"Visual Art AI","url":"https://visualartai.cl/","logo":{"@type":"ImageObject","url":"https://visualartai.cl/brands/visual-art-ai-logo.svg"},"email":"contacto@deepanalytica.cl","description":"Agencia chilena de visibilidad y captación digital para pymes y profesionales. Conecta SEO, Google Maps, buscadores de IA, web, landing pages, publicidad, WhatsApp, contenido y analítica.","areaServed":{"@type":"Country","name":"Chile"},"brand":{"@type":"Brand","name":"Visual Art AI"},"contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"contacto@deepanalytica.cl","availableLanguage":"Spanish","areaServed":"CL"},"knowsAbout":["Google Business Profile","Google Maps","SEO local","GEO","AI Search Optimization","Web design","Landing pages","Conversion optimization","Google Ads","Meta Ads","WhatsApp automation","Content strategy","Web analytics"],"subjectOf":{"@type":"WebPage","url":"https://deepanalytica.cl/casos","name":"Visual Art AI en el portafolio público de Deep Analytica"}},{"@type":"WebSite","@id":"https://visualartai.cl/#website","url":"https://visualartai.cl/","name":"Visual Art AI","inLanguage":"es-CL","publisher":{"@id":"https://visualartai.cl/#organization"}},{"@type":"Service","@id":"https://visualartai.cl/#visibility-service","name":"Sistema de presencia y captación digital","provider":{"@id":"https://visualartai.cl/#organization"},"areaServed":{"@type":"Country","name":"Chile"},"description":"Diagnóstico e implementación para mejorar visibilidad, comprensión, confianza y conversión en Google, Maps, web y buscadores de IA.","hasOfferCatalog":{"@id":"https://visualartai.cl/#services"}},{"@type":"OfferCatalog","@id":"https://visualartai.cl/#services","name":"Servicios de Visual Art AI","itemListElement":[{"@type":"Offer","position":1,"itemOffered":{"@type":"Service","name":"SEO + Google Maps","url":"https://visualartai.cl/servicios/seo-google-maps.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":2,"itemOffered":{"@type":"Service","name":"Visibilidad en IA / GEO","url":"https://visualartai.cl/servicios/visibilidad-ia.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":3,"itemOffered":{"@type":"Service","name":"Webs + landing pages","url":"https://visualartai.cl/servicios/web-landing-pages.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":4,"itemOffered":{"@type":"Service","name":"Ads + captación","url":"https://visualartai.cl/servicios/google-meta-ads.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":5,"itemOffered":{"@type":"Service","name":"WhatsApp + automatización","url":"https://visualartai.cl/servicios/whatsapp-automatizacion.html","provider":{"@id":"https://visualartai.cl/#organization"}}},{"@type":"Offer","position":6,"itemOffered":{"@type":"Service","name":"Contenido + analítica","url":"https://visualartai.cl/servicios/contenido-analitica.html","provider":{"@id":"https://visualartai.cl/#organization"}}}]}]}</script>
 <link rel="alternate" type="application/rss+xml" title="Visual Art AI Blog" href="https://visualartai.cl/feed.xml">
 </head>
@@ -115,7 +115,7 @@
   </div>
 </header>
 
-<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menú de navegación" aria-hidden="true" inert>
   <div class="mobile-menu-panel">
     <div class="mobile-menu-head">
       <a class="vaa-brand mobile-menu-brand" href="#inicio" aria-label="Visual Art AI — inicio">
@@ -129,15 +129,17 @@
       </a>
       <button class="menu-close v15-menu-close" id="menuClose" aria-label="Cerrar menú">×</button>
     </div>
-    <nav aria-label="Navegación móvil">
-      <a href="#problema"><span>01</span>Servicios</a>
-      <a href="#caso-real"><span>02</span>Trabajo realizado</a>
-      <a href="#preguntas"><span>03</span>Preguntas frecuentes</a>
-      <a href="#precios"><span>04</span>Precios</a>
-      <a href="blog/index.html"><span>05</span>Blog</a>
-      <a href="#diagnostico"><span>06</span>Diagnóstico</a>
+    <nav aria-label="Secciones de la página">
+      <a href="#problema">Servicios</a>
+      <a href="#caso-real">Caso real</a>
+      <a href="#precios">Precios</a>
+      <a href="#preguntas">Preguntas frecuentes</a>
     </nav>
-    <div class="mobile-menu-foot"><p>Ayudamos a que más personas encuentren tu negocio, entiendan lo que ofreces y tengan una ruta clara para contactarte.</p><a class="button button-primary" href="#diagnostico">Solicitar auditoría gratuita →</a></div>
+    <div class="mobile-menu-foot">
+      <a class="v24-menu-utility" href="blog/index.html">Leer el blog <span aria-hidden="true">↗</span></a>
+      <a class="button button-primary v24-menu-cta" href="https://wa.me/56958039450?text=Hola%2C%20quiero%20solicitar%20el%20diagn%C3%B3stico%20gratuito%20de%20Visual%20Art%20AI.%20Mi%20negocio%20es%3A%20" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" data-whatsapp="mobile-menu" aria-label="Pedir diagnóstico gratis por WhatsApp (abre otra pestaña)">Pedir diagnóstico gratis <span aria-hidden="true">↗</span></a>
+      <p>Gratis · Respuesta orientativa en 24–48 h · Sin compromiso</p>
+    </div>
   </div>
 </div>
 
@@ -435,7 +437,7 @@
 
 <div class="mobile-convert" id="mobileConvert" aria-label="Acceso al diagnóstico gratuito"><a class="v22-sticky-diagnostic" href="https://wa.me/56958039450?text=Hola%2C%20quiero%20solicitar%20el%20diagn%C3%B3stico%20gratuito%20de%20Visual%20Art%20AI%20para%20mi%20negocio.%20%C2%BFQu%C3%A9%20datos%20necesitan%20para%20empezar%3F" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" data-whatsapp="quick-sticky" aria-label="Pedir diagnóstico gratuito por WhatsApp (abre otra pestaña)">Pedir diagnóstico gratis <span aria-hidden="true">→</span></a></div>
 <footer class="footer"><div class="shell footer-grid v17-footer-grid"><div><b>VISUAL ART AI / CHILE</b><span>Visibilidad y captación digital.</span></div><div><b>SERVICIOS</b><a href="servicios/seo-google-maps.html">SEO + Maps</a><a href="servicios/visibilidad-ia.html">IA / GEO</a><a href="servicios/web-landing-pages.html">Web + landing</a></div><div><b>EMPRESA</b><a href="nosotros.html">Nosotros</a><a href="metodologia.html">Metodología</a><a href="casos/">Casos</a></div><div><b>CONTACTO</b><a class="v18-footer-contact" href="https://wa.me/56958039450?text=Hola%2C%20quiero%20cotizar%20servicios%20de%20Visual%20Art%20AI%20para%20mi%20negocio." target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" data-whatsapp="footer" aria-label="Hablar por WhatsApp (abre otra pestaña)"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.7 7.4L3 21l2.1-5.3A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8.5 8c-.6 1.9 2.7 5.2 4.6 5.7.8.2 1.5-.6 1.9-1.3l-1.7-1-1 .8a7.4 7.4 0 0 1-2.8-2.8l.8-1L9.3 7c-.4.2-.7.6-.8 1Z"/></svg><span>Hablar por WhatsApp</span></a><a href="mailto:contacto@deepanalytica.cl">Cotizar por correo</a></div><div><b>RECURSOS</b><a href="blog/">Blog</a><a href="auditoria-presencia-digital.html">Auditoría gratis</a></div></div></footer>
-<script src="site.js?v=15" defer></script>
+<script src="site.js?v=16" defer></script>
 <script src="home-v11.js?v=22" defer></script>
 </body>
 </html>
