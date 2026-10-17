@@ -23,7 +23,7 @@ for (const file of [
   "site/aviso-de-privacidad.html",
 ]) assert.ok(existsSync(join(root,file)), `Falta recurso: ${file}`);
 
-assert.ok(html.includes('href="styles/experience-v1.css?v=1"'), "Falta stylesheet incremental");
+assert.ok(html.includes('href="styles/experience-v1.css?v=2"'), "Falta stylesheet incremental");
 assert.equal((html.match(/class="vaa-wordmark"/g)||[]).length,2,"Marca tipográfica en desktop y móvil");
 assert.ok(html.includes("<strong>Visual</strong><small>ART AI</small>"), "Visual debe ser protagonista");
 assert.ok(html.includes('id="diagnosticForm"'),"Formulario no encontrado");
@@ -50,4 +50,10 @@ for (const id of ["inicio","problema","recorrido","caso-real","precios","diagnos
   assert.ok(html.includes(`id="${id}"`),`Falta sección ${id}`);
 }
 
+assert.ok(html.includes('id="preguntas"'),"Falta bloque de objeciones comerciales");
+assert.equal((html.match(/class="v20-assurance-answers"/g)||[]).length,1,"Falta un único bloque de preguntas");
+assert.equal((html.match(/<section class="v20-assurance"/g)||[]).length,1,"Duplicación de módulo comercial");
+assert.ok(html.includes("una primera prioridad razonada"),"La oferta gratuita debe ser específica");
+assert.ok(html.includes("posiciones garantizadas"),"El caso no debe prometer resultados medidos");
+assert.equal((html.match(/<h1\b/g)||[]).length,1,"La portada debe conservar un solo H1");
 console.log("✓ Contratos del diseño público validados. Falta QA visual en dispositivos.");
