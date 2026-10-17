@@ -129,3 +129,10 @@
  .v29-platform{transition:none!important}
  .v29-platform:hover{transform:none}
 }
+
+/* Final visual QA: keep the search flow unobstructed at desktop widths. */
+@media(min-width:45.01rem){
+ .home-v11 .v29-float-search{display:none}
+ .home-v11 .v29-query-controls{margin-top:1.35rem}
+ .home-v11 .v29-caption{margin-top:.6rem}
+}
