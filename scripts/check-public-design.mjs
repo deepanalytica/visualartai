@@ -23,7 +23,7 @@ for (const file of [
   "site/aviso-de-privacidad.html",
 ]) assert.ok(existsSync(join(root,file)), `Falta recurso: ${file}`);
 
-assert.ok(html.includes('href="styles/experience-v1.css?v=8"'), "Falta stylesheet incremental");
+assert.ok(html.includes('href="styles/experience-v1.css?v=10"'), "Falta stylesheet incremental");
 assert.equal((html.match(/class="vaa-wordmark"/g)||[]).length,2,"Marca tipográfica en desktop y móvil");
 assert.ok(html.includes("<strong>Visual</strong><small>ART AI</small>"), "Visual debe ser protagonista");
 assert.ok(html.includes('id="diagnosticForm"'),"Formulario no encontrado");
@@ -100,4 +100,19 @@ assert.ok(buyerArticle.includes("no para estimar cuántos clientes"),"No extrapo
 assert.ok(html.includes("Pago publicidad, pero no sé si vendo más."),"El problema de anuncios sin ventas debe estar descrito para compradores");
 assert.ok(html.includes("Mi web recibe visitas, pero no consultas."),"El problema de conversión debe ser visible");
 assert.ok(html.includes("Me llegan pocas consultas"),"Servicios móviles deben empezar por el problema del comprador");
+for(const id of ["busquedas","voces","por-que","empezar"]){
+  assert.ok(html.includes('id="'+id+'"'),"Falta capítulo "+id);
+}
+assert.ok(html.includes("Ejemplos ilustrativos de preguntas"),"Las búsquedas no se pueden presentar como resultados reales");
+assert.ok(html.includes("no son testimonios reales"),"Las voces ficticias deben estar claramente identificadas");
+assert.ok(html.includes('class="v27-mobile-search-details"'),"En móvil los ejemplos se deben mostrar bajo demanda");
+assert.ok(html.includes('class="v27-mobile-voice-details"'),"En móvil las voces se deben mostrar bajo demanda");
+assert.equal((html.match(/class="v27-method-grid"/g)||[]).length,1,"Debe haber cuatro resultados conectados");
+assert.ok(html.includes('Que sepas qué funciona.'),"Debe hablar de consultas verificables");
+assert.ok(html.includes('class="v27-start-steps"'),"Faltan los tres pasos del diagnóstico");
+assert.ok(html.includes('class="v27-close-cta"'),"Falta el último CTA visible");
+assert.equal((html.match(/<details>/g)||[]).length>=8,true,"El FAQ debe cubrir ocho objeciones");
+assert.ok(html.includes('Respuesta en 24 h hábiles'),"La política comercial de respuesta debe ser visible");
+assert.ok(html.includes('data-whatsapp="quick-hero-desktop"'),"El CTA desktop debe abrir WhatsApp directamente");
+assert.ok(html.includes('class="v27-signal-route"'),"Falta el motivo visual de búsqueda, visibilidad y contacto");
 console.log("✓ Contratos del diseño público validados. Falta QA visual en dispositivos.");
