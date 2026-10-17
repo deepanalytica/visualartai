@@ -542,3 +542,22 @@
  .home-v11 .v26-research-links a:last-child{border-bottom:0}
  .home-v11 .v27-voices-heading em{margin-left:.05em}
 }
+
+/* Brandboard 2026: real vector logo, no substitute orbit icon or repeated text. */
+.home-v11 .vaa-official-brand{display:inline-flex;align-items:center;flex-shrink:0;min-width:0;line-height:0;text-decoration:none}
+.home-v11 .vaa-official-brand picture{display:block;line-height:0}
+.home-v11 .vaa-official-brand img{display:block;width:185px;height:auto;max-height:4.05rem;object-fit:contain;object-position:left center}
+.home-v11 .vaa-official-brand:focus-visible{outline:2px solid var(--color-action-primary);outline-offset:3px;border-radius:var(--radius-sm)}
+.home-v11 .mobile-menu-brand.vaa-official-brand img{width:116px;max-height:3.1rem;object-fit:contain}
+.home-v11 .vaa-footer-identity{display:grid;align-content:start;gap:.6rem;max-width:19rem}
+.home-v11 .vaa-footer-identity>a{display:block;line-height:0;max-width:max-content}
+.home-v11 .vaa-footer-identity img{width:min(100%,220px);height:auto;display:block}
+.home-v11 .vaa-footer-identity span{max-width:30ch;font-size:.67rem;line-height:1.55;letter-spacing:0}
+@media(max-width:45rem){
+ .home-v11 .topbar{height:4.2rem}
+ .home-v11 .topbar .vaa-official-brand img{width:116px;height:auto;max-height:3.7rem}
+ .home-v11 .mobile-menu-brand.vaa-official-brand img{width:116px;max-height:3.1rem}
+ .home-v11 .mobile-menu-head{min-height:3.6rem}
+ .home-v11 .vaa-footer-identity img{width:min(100%,205px)}
+}
+@media(max-width:22rem){.home-v11 .topbar .vaa-official-brand img{width:103px}}
