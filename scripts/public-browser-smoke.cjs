@@ -37,7 +37,7 @@ let browser;
     assert(info.fullWidth<=info.viewport+5,`Overflow horizontal a ${size.width}px: ${info.fullWidth}px`);
     assert.equal(errors.length,0,`Errores JS en ${size.width}px: ${errors.join("; ")}`);
     assert.equal(await page.locator("#problema .v21-service-card").count(),6,"La primera sección debe contener seis servicios legibles");
-    assert.equal(await page.locator("#problema h2").innerText(),size.width<=720?"¿En qué te ayudamos?":"¿Qué hacemos en Visual Art AI?","Mensaje claro inmediatamente después del héro");
+    assert.equal(await page.locator("#problema h2").innerText(),size.width<=720?"¿Qué te está pasando con tu negocio?":"¿Qué necesitas mejorar en tu negocio?","Mensaje claro inmediatamente después del héro");
     assert(await page.locator('#problema .v21-service-card a[href^="servicios/"]').count()===6,"Enlaces a los seis servicios");
     assert(await page.locator("#diagnosticForm").count()===1,"Formulario de diagnóstico ausente");
     assert.equal(await page.locator("#preguntas .v20-assurance-answers details").count(),5,"Cinco dudas respondidas sin formulario");
@@ -55,6 +55,7 @@ let browser;
     assert(await page.locator("#diagnostico").evaluate(el=>Boolean(el.compareDocumentPosition(document.getElementById("ideas")) & Node.DOCUMENT_POSITION_FOLLOWING)),"El blog debe aparecer después de la solicitud");
     if(size.width===390){
       assert.equal(await page.locator(".v22-mobile-services>a").count(),4,"Tres servicios rápidos más enlace a catálogo");
+      assert((await page.locator(".v22-mobile-services>a").first().innerText()).includes("Me llegan pocas consultas"),"Primero problema real, luego herramienta");
       assert(await page.locator(".v22-mobile-primary").isVisible(),"CTA del héro debe ser visible");
       assert(await page.locator(".v22-desktop-primary").isHidden(),"Evitar CTA duplicado en el héro");
       assert(await page.locator(".v11-search-scene").isHidden(),"La demostración no puede retrasar la conversión móvil");
