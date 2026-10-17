@@ -39,8 +39,23 @@ let browser;
     assert.equal(await page.locator("#problema .v21-service-card").count(),6,"La primera sección debe contener seis servicios legibles");
     assert.equal(await page.locator("#problema h2").innerText(),size.width<=720?"¿Qué te está pasando con tu negocio?":"¿Qué necesitas mejorar en tu negocio?","Mensaje claro inmediatamente después del héro");
     assert(await page.locator('#problema .v21-service-card a[href^="servicios/"]').count()===6,"Enlaces a los seis servicios");
+    for(const id of ["busquedas","voces","por-que","empezar"])assert.equal(await page.locator("#"+id).count(),1,"Sección faltante: "+id);
+    assert.equal(await page.locator(".v27-voices-grid blockquote").count(),5,"Cinco situaciones del comprador");
+    assert.equal(await page.locator(".v27-search-grid .v27-search-panel").count(),2,"Búsqueda e IA explicadas por separado");
+    assert.equal(await page.locator(".v27-start-steps li").count(),3,"Tres pasos de diagnóstico");
+    assert.equal(await page.locator(".v27-close-cta").count(),1,"Solo un CTA final");
+    assert((await page.locator(".v27-close-cta").getAttribute("href")).startsWith("https://wa.me/"),"El cierre debe abrir contacto directo");
+    if(size.width===390){
+      assert(await page.locator(".v27-search-grid").isHidden(),"No presentar grandes ejemplos antes de la venta móvil");
+      assert(await page.locator(".v27-voices-grid").isHidden(),"Las voces no pueden sobrecargar la pantalla");
+      const disclosure=page.locator(".v27-mobile-search-details");
+      assert(await disclosure.isVisible(),"Las búsquedas deben poder consultarse en móvil");
+      await disclosure.locator("summary").click();
+      assert(await disclosure.getAttribute("open")!==null,"Los ejemplos se expanden de forma accesible");
+      await disclosure.locator("summary").click();
+    }
     assert(await page.locator("#diagnosticForm").count()===1,"Formulario de diagnóstico ausente");
-    assert.equal(await page.locator("#preguntas .v20-assurance-answers details").count(),5,"Cinco dudas respondidas sin formulario");
+    assert.equal(await page.locator("#preguntas .v20-assurance-answers details").count(),8,"Ocho dudas respondidas sin formulario");
     assert.equal(await page.locator("#caso-real .v26-source-link").getAttribute("href"),"https://www.jessicaarriagadapsicologa.cl/","El caso debe permitir comprobar la web real");
     if(size.width===390){
       assert(await page.locator(".v26-research-links").isVisible(),"Rutas para visitantes que aún comparan");
@@ -60,7 +75,9 @@ let browser;
       assert(await page.locator(".v22-desktop-primary").isHidden(),"Evitar CTA duplicado en el héro");
       assert(await page.locator(".v11-search-scene").isHidden(),"La demostración no puede retrasar la conversión móvil");
       assert(await page.locator(".v16-service-strip").isHidden(),"Chips redundantes ocultos en móvil");
-      assert(await page.locator("#recorrido").isHidden(),"No duplicar ejemplos en el embudo móvil");
+      assert(await page.locator("#recorrido").isVisible(),"Los cuatro beneficios deben leerse en móvil");
+      assert(await page.locator("#recorrido .v19-service").first().isHidden(),"Las demos largas permanecen ocultas en móvil");
+      assert.equal(await page.locator(".v27-method-grid>div").count(),4,"Cuatro resultados de búsqueda a consulta");
       assert(await page.locator(".v21-service-grid").isHidden(),"No cargar seis tarjetas largas en móvil");
       assert(await page.locator(".topbar-actions>.button").isHidden(),"Un solo CTA a la vez en móvil");
       assert.equal(await page.locator("#mobileConvert a").count(),1,"La barra fija debe tener una sola acción");
