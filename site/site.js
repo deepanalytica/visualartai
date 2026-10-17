@@ -17,8 +17,40 @@
     addEventListener("scroll",schedule,{passive:true});addEventListener("resize",schedule,{passive:true});
   }
   document.querySelectorAll("[data-interest]").forEach(el=>el.addEventListener("click",()=>{const input=document.getElementById("interest");if(input)input.value=el.dataset.interest||"Diagnóstico de presencia digital";track("diagnostic_interest",{interest:el.dataset.interest||"general"})}));
-  const form=document.getElementById("diagnosticForm");form?.addEventListener("focusin",()=>{if(!form.dataset.started){form.dataset.started="1";track("form_start")}});
-  form?.addEventListener("submit",e=>{e.preventDefault();const goal=document.getElementById("goal")?.value.trim(),situation=document.getElementById("situation")?.value.trim(),email=document.getElementById("email")?.value.trim(),interest=document.getElementById("interest")?.value||"Diagnóstico de presencia digital";if(!goal||!situation||!email)return;const status=document.getElementById("formStatus");if(status)status.textContent="Solicitud preparada. Abriremos tu aplicación de correo para enviarla.";track("lead_intent",{interest,goal});const subject=encodeURIComponent("Solicitud de diagnóstico — Visual Art AI");const body=encodeURIComponent("Interés: "+interest+"\n\nSituación principal: "+goal+"\n\nNegocio / contexto: "+situation+"\n\nEmail de contacto: "+email+"\n\nOrigen: "+location.href);setTimeout(()=>{location.href="mailto:contacto@deepanalytica.cl?subject="+subject+"&body="+body},120)});
+  const form=document.getElementById("diagnosticForm");
+  const emailButton=document.getElementById("sendByEmail");
+  const status=document.getElementById("formStatus");
+  form?.addEventListener("focusin",()=>{if(!form.dataset.started){form.dataset.started="1";track("form_start")}});
+  // GitHub Pages does not have a form backend. We only prepare a message for the
+  // visitor's chosen application; never claim that the enquiry was delivered.
+  const composeRequest=()=>{
+    if(!form?.reportValidity())return null;
+    const goal=document.getElementById("goal")?.value.trim();
+    const situation=document.getElementById("situation")?.value.trim();
+    const email=document.getElementById("email")?.value.trim();
+    const interest=document.getElementById("interest")?.value||"Diagnóstico de presencia digital";
+    if(!goal||!situation||!email)return null;
+    const message="Hola, quiero solicitar mi diagnóstico gratuito de Visual Art AI.\n\n"+
+      "Interés: "+interest+"\n"+
+      "Situación principal: "+goal+"\n"+
+      "Negocio / contexto: "+situation+"\n"+
+      "Email de contacto: "+email+"\n"+
+      "Origen: "+location.href;
+    return {goal,interest,message};
+  };
+  form?.addEventListener("submit",e=>{
+    e.preventDefault();
+    const data=composeRequest();if(!data)return;
+    track("lead_intent",{interest:data.interest,goal:data.goal,channel:"whatsapp"});
+    if(status)status.textContent="Abriendo WhatsApp con tu solicitud preparada. Debes pulsar Enviar en WhatsApp para completarla.";
+    location.assign("https://wa.me/56958039450?text="+encodeURIComponent(data.message));
+  });
+  emailButton?.addEventListener("click",()=>{
+    const data=composeRequest();if(!data)return;
+    track("lead_intent",{interest:data.interest,goal:data.goal,channel:"email"});
+    if(status)status.textContent="Abriendo tu aplicación de correo. Revisa el mensaje y pulsa Enviar para completar tu solicitud.";
+    location.href="mailto:contacto@deepanalytica.cl?subject="+encodeURIComponent("Solicitud de diagnóstico — Visual Art AI")+"&body="+encodeURIComponent(data.message);
+  });
   const article=document.querySelector(".article-page article");if(article){const progress=()=>{const r=article.getBoundingClientRect(),total=Math.max(1,article.offsetHeight-innerHeight),done=Math.min(total,Math.max(0,-r.top));document.documentElement.style.setProperty("--article-progress-scale",String(done/total))};let ticking=false;addEventListener("scroll",()=>{if(!ticking){requestAnimationFrame(()=>{progress();ticking=false});ticking=true}},{passive:true});progress();const aside=document.querySelector(".article-aside"),copy=document.querySelector(".article-copy"),toc=aside?.querySelector(".article-toc");if(copy&&toc){const details=document.createElement("details");details.className="article-mobile-nav";const links=[...toc.querySelectorAll("a")].map(a=>'<a href="'+a.getAttribute("href")+'">'+a.textContent+"</a>").join("");details.innerHTML='<summary><span>EN ESTE ARTÍCULO</span><b>Ver índice</b></summary><nav>'+links+"</nav>";const note=copy.querySelector(".article-note"),firstH2=copy.querySelector("h2");if(note)note.insertAdjacentElement("afterend",details);else if(firstH2)firstH2.insertAdjacentElement("beforebegin",details);else copy.prepend(details)}}
   const filters=[...document.querySelectorAll("[data-blog-filter]")];if(filters.length){const cards=[...document.querySelectorAll(".blog-card[data-category]")];filters.forEach(btn=>btn.addEventListener("click",()=>{const filter=btn.dataset.blogFilter;filters.forEach(b=>b.classList.toggle("is-active",b===btn));cards.forEach(card=>{card.hidden=filter!=="all"&&card.dataset.category!==filter});track("blog_filter",{filter})}))}
 })();
