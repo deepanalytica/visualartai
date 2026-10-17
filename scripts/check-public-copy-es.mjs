@@ -61,8 +61,11 @@ safe(services.length===6,`Se esperaban 6 páginas de servicio; hay ${services.le
 const countIntros=new Set(intros.map(x=>x.intro)).size;
 safe(countIntros===articles.length,`Introducciones repetidas: ${articles.length-countIntros}`);
 const home=readFileSync(join(root,"index.html"),"utf8");
-safe(home.includes("¿Es fácil escribirte y pedirte una cotización?"),"El titular del inicio no fue actualizado");
-safe(home.includes("¿Cuánto cuesta mejorar tu presencia digital?"),"Falta encabezado claro de precios");
+const actualHero=strip(home.match(/<h1 class="v19-hero-title"[\\s\\S]*?<\\/h1>/)?.[0]||"");
+const approvedHero="Hay personas buscando lo que vendes en Google y ChatGPT. Y mientras tú no apareces, están llamando a tu competencia.";
+safe(actualHero===approvedHero,`Se ha alterado el héro aprobado: ${actualHero}`);
+safe(home.includes("No tienes que empezar por el plan más caro."),"Falta contexto persuasivo de los planes");
+safe(home.includes("Solicitar mi diagnóstico gratuito"),"Falta CTA principal de respuesta directa");
 safe(home.includes('id="diagnosticForm"'),"El formulario principal desapareció");
 safe(home.includes('id="sendByEmail"'),"Falta alternativa de correo");
 console.log(`Páginas públicas: ${files.length}; servicios: ${services.length}; artículos: ${articles.length}`);
