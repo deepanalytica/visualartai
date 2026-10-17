@@ -518,3 +518,16 @@
 .home-v11 .v27-hero-learn{display:inline-flex;align-items:center;justify-content:center;min-height:2.75rem;gap:.45rem;padding:.35rem .7rem;color:var(--color-action-primary-hover);font:750 .82rem/1.5 var(--font-sans);text-decoration:underline;text-underline-offset:.23em}
 .home-v11 .v27-hero-learn:hover{color:var(--color-action-primary-pressed)}
 @media(max-width:45rem){.home-v11 .v27-hero-learn{display:none}.home-v11 .v27-close-cta{box-shadow:var(--shadow-brand)}}
+
+/* Balance mobile editorial rhythm: brief bright customer voice before dark method. */
+@media(max-width:45rem){
+ .home-v11 .v27-voices{background:var(--color-surface);color:var(--color-text-primary);border-bottom:1px solid var(--color-border-subtle)}
+ .home-v11 .v27-voices-heading h2{color:var(--color-text-primary)}
+ .home-v11 .v27-voices-heading h2 em{color:var(--color-action-primary)}
+ .home-v11 .v27-voices-heading p,.home-v11 .v27-voices-bottom{color:var(--color-text-secondary)}
+ .home-v11 .v27-voices .v27-kicker{color:var(--color-action-primary-hover)}
+ .home-v11 .v27-voices .v27-mobile-voice-details{background:var(--color-canvas);border-color:var(--color-border-subtle)}
+ .home-v11 .v27-voices .v27-mobile-voice-details summary{color:var(--color-text-primary)}
+ .home-v11 .v27-voices .v27-mobile-voice-details>p{color:var(--color-text-secondary)}
+ .home-v11 .v27-voices-bottom strong{color:var(--color-text-primary)}
+}
