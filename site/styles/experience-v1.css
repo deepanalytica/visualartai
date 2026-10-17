@@ -512,3 +512,9 @@
 }
 @media(max-width:23rem){.v27-method-grid{grid-template-columns:1fr}.v27-method-grid>div{min-height:0}.v27-close-cta{font-size:.79rem}}
 @media(prefers-reduced-motion:reduce){.v27-close-cta,.v27-mobile-search-details summary span,.v27-mobile-voice-details summary span{transition:none!important;transform:none!important}}
+
+/* v27.1 · Correct primary/secondary hierarchy above the fold. */
+.home-v11 .v11-hero-actions .v22-desktop-primary{border-radius:var(--radius-pill);box-shadow:var(--shadow-brand);min-height:3.5rem;padding-inline:1.4rem}
+.home-v11 .v27-hero-learn{display:inline-flex;align-items:center;justify-content:center;min-height:2.75rem;gap:.45rem;padding:.35rem .7rem;color:var(--color-action-primary-hover);font:750 .82rem/1.5 var(--font-sans);text-decoration:underline;text-underline-offset:.23em}
+.home-v11 .v27-hero-learn:hover{color:var(--color-action-primary-pressed)}
+@media(max-width:45rem){.home-v11 .v27-hero-learn{display:none}.home-v11 .v27-close-cta{box-shadow:var(--shadow-brand)}}
