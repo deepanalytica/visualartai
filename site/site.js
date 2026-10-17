@@ -24,7 +24,14 @@
     if(document.readyState==="complete")observeConsent();else document.addEventListener("DOMContentLoaded",observeConsent,{once:true});
     schedule();
   }
-  document.querySelectorAll("[data-interest]").forEach(el=>el.addEventListener("click",()=>{const input=document.getElementById("interest");if(input)input.value=el.dataset.interest||"Diagnóstico de presencia digital";track("diagnostic_interest",{interest:el.dataset.interest||"general"})}));
+  document.querySelectorAll("[data-interest]").forEach(el=>el.addEventListener("click",()=>{
+    const interest=el.dataset.interest||"Diagnóstico de presencia digital";
+    const input=document.getElementById("interest");
+    if(input)input.value=interest;
+    const fast=document.querySelector(".v23-fast-whatsapp");
+    if(fast)fast.href="https://wa.me/56958039450?text="+encodeURIComponent("Hola, quiero solicitar mi diagnóstico gratuito de Visual Art AI. Estoy consultando por: "+interest+". Mi negocio es: ");
+    track("diagnostic_interest",{interest})
+  }));
   const form=document.getElementById("diagnosticForm");
   const emailButton=document.getElementById("sendByEmail");
   const status=document.getElementById("formStatus");
