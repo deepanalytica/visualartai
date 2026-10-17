@@ -23,8 +23,22 @@ for (const file of [
   "site/aviso-de-privacidad.html",
 ]) assert.ok(existsSync(join(root,file)), `Falta recurso: ${file}`);
 
-assert.ok(html.includes('href="styles/experience-v1.css?v=10"'), "Falta stylesheet incremental");
-assert.equal((html.match(/class="vaa-wordmark"/g)||[]).length,2,"Marca tipográfica en desktop y móvil");
+assert.ok(html.includes('href="styles/experience-v1.css?v=11"'), "Falta stylesheet incremental");
+assert.equal((html.match(/vaa-official-brand"/g)||[]).length,2,"Logotipo oficial en cabecera y menú");
+assert.ok(html.includes('src="/brands/visual-art-ai-official-light.svg"'),"Falta versión oficial clara");
+assert.ok(html.includes('src="/brands/visual-art-ai-official-dark.svg"'),"Falta versión oficial sobre fondo oscuro");
+assert.ok(html.includes('srcset="/brands/visual-art-ai-official-compact.svg"'),"Falta variante compacta móvil");
+assert.ok(html.includes('href="/brands/visual-art-ai-logo.svg?v=official-20261017"'),"Favicon debe usar isotipo oficial");
+const identitySvg=read("site/brands/visual-art-ai-official-light.svg");
+const identityDark=read("site/brands/visual-art-ai-official-dark.svg");
+const iconSvg=read("site/brands/visual-art-ai-logo.svg");
+const serviceBrand=read("site/brands/visual-art-ai-brand.svg");
+for(const [label,asset] of [["claro",identitySvg],["oscuro",identityDark],["isotipo",iconSvg],["secundarias",serviceBrand]]) {
+ assert.ok(asset.includes("<svg")&&asset.includes('fill="#2563FF"'),"SVG oficial inconsistente: "+label);
+ assert.ok(!asset.includes("vaa-signal-arc")&&!asset.includes("circle cx=\"18\""),"Marca circular antigua en: "+label);
+}
+assert.ok(identitySvg.includes("VISIBILIDAD")&&identityDark.includes("QUE GENERA"),"Falta lema del manual");
+assert.ok(style.includes(".vaa-footer-identity"),"La versión oscura debe tener reglas de pie");
 assert.ok(html.includes("<strong>Visual</strong><small>ART AI</small>"), "Visual debe ser protagonista");
 assert.ok(html.includes('id="diagnosticForm"'),"Formulario no encontrado");
 assert.ok(html.includes('id="sendByEmail"'),"Falta alternativa de email");
