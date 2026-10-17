@@ -57,8 +57,15 @@ let browser;
       const y=await page.evaluate(()=>scrollY);
       assert(y<50,"La decisión de privacidad no debe desplazar la pantalla al pie de página");
       assert(await page.locator("#vaa-consent-panel").isHidden(),"Se respetó la elección de privacidad");
-      await page.locator("#problema").scrollIntoViewIfNeeded();
-      await page.waitForTimeout(450);
+      await page.locator("#caso-real").scrollIntoViewIfNeeded();
+      await page.waitForTimeout(550);
+      const funnelState=await page.evaluate(()=>({
+        heroBottom:document.getElementById("inicio").getBoundingClientRect().bottom,
+        consentHidden:document.getElementById("vaa-consent-panel").hidden,
+        diagnosticTop:document.getElementById("diagnostico").getBoundingClientRect().top,
+        scroll:window.scrollY,barHidden:document.getElementById("mobileConvert").getAttribute("aria-hidden"),
+      }));
+      console.log("Mobile funnel state",funnelState);
       assert(await page.locator("#mobileConvert").getAttribute("aria-hidden").then(v=>v==="false"),"Un CTA fijo después del héro");
       assert(await page.locator("#mobileConvert a").isVisible(),"CTA fijo debe mostrarse después del héro");
     }
