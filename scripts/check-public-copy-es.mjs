@@ -56,7 +56,7 @@ for(const path of files){
   }
 }
 safe(files.length>=35,`El inventario público bajó de 35 páginas a ${files.length}`);
-safe(articles.length===20,`Se esperaban 20 artículos; hay ${articles.length}`);
+safe(articles.length===26,`Se esperaban 26 artículos; hay ${articles.length}`);
 safe(services.length===6,`Se esperaban 6 páginas de servicio; hay ${services.length}`);
 const countIntros=new Set(intros.map(x=>x.intro)).size;
 safe(countIntros===articles.length,`Introducciones repetidas: ${articles.length-countIntros}`);
@@ -71,10 +71,10 @@ safe(home.includes('id="sendByEmail"'),"Falta alternativa de correo");
 console.log(`Páginas públicas: ${files.length}; servicios: ${services.length}; artículos: ${articles.length}`);
 console.log(`Introducciones de artículos diferentes: ${countIntros}/${articles.length}`);
 for(const msg of warnings.slice(0,20))console.log("ADVERTENCIA:",msg);
-if(issues.length){issues.forEach(x=>console.error("ERROR:",x));process.exit(1)}
 safe(home.indexOf('id="diagnostico"')<home.indexOf('id="ideas"'),"El blog no debe interrumpir el contacto");
 safe(home.includes('casos/jessica-arriagada-presencia-digital.html'),"El enlace del caso debe llevar al proyecto documentado");
 safe(home.includes("Se abre WhatsApp con el mensaje preparado"),"No afirmar que la solicitud se envía automáticamente");
 safe(home.includes("¿Qué te está pasando con tu negocio?"),"Falta explicar los problemas del visitante en móvil");
 safe(home.includes("Me llegan pocas consultas"),"Falta mensaje de necesidad real de los clientes");
+if(issues.length){issues.forEach(x=>console.error("ERROR:",x));process.exit(1)}
 console.log("OK: estructura, honestidad editorial, etiquetas y contenido mínimo verificados.");
