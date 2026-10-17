@@ -5,12 +5,14 @@
 
   // Lightweight Canvas2D signal field. No GSAP / no Three.js / no external payload.
   const canvas=document.getElementById("v14SignalField");
-  if(canvas&&!reduce&&"ResizeObserver" in window){
+  const lowPower=reduce||Boolean(navigator.connection?.saveData)||matchMedia("(max-width: 767px)").matches;
+  if(canvas&&!lowPower&&"ResizeObserver" in window){
     const ctx=canvas.getContext("2d",{alpha:true});
-    let w=0,h=0,dpr=1,raf=0,pointer={x:.72,y:.34,active:false},particles=[];
+    let w=0,h=0,dpr=1,raf=0,inViewport=true,pointer={x:.72,y:.34,active:false},particles=[];
     const make=()=>Array.from({length:innerWidth<700?18:32},(_,i)=>({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.00012,vy:(Math.random()-.5)*.00012,r:Math.random()*1.7+1,a:Math.random()*.45+.15,phase:Math.random()*6.28}));
     const resize=r=>{dpr=Math.min(devicePixelRatio||1,1.75);w=Math.max(1,r.width);h=Math.max(1,r.height);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);particles=make()};
     const draw=t=>{
+      if(!inViewport||document.hidden){raf=0;return}
       ctx.clearRect(0,0,w,h);
       const time=t*.001;
       for(const p of particles){
@@ -32,11 +34,12 @@
     const hero=document.querySelector(".v11-hero");
     hero?.addEventListener("pointermove",e=>{const r=hero.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width;pointer.y=(e.clientY-r.top)/r.height;pointer.active=true});
     hero?.addEventListener("pointerleave",()=>pointer.active=false);
-    new ResizeObserver(entries=>{resize(entries[0].contentRect);if(!raf&&!document.hidden)raf=requestAnimationFrame(draw)}).observe(canvas);
-    document.addEventListener("visibilitychange",()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(w&&h&&!raf){raf=requestAnimationFrame(draw)}});
+    new ResizeObserver(entries=>{resize(entries[0].contentRect);if(!raf&&!document.hidden&&inViewport)raf=requestAnimationFrame(draw)}).observe(canvas);
+    if(hero&&"IntersectionObserver" in window)new IntersectionObserver(entries=>{inViewport=entries[0].isIntersecting;if(!inViewport){cancelAnimationFrame(raf);raf=0}else if(w&&h&&!raf&&!document.hidden){raf=requestAnimationFrame(draw)}},{threshold:0}).observe(hero);
+    document.addEventListener("visibilitychange",()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(w&&h&&!raf&&inViewport){raf=requestAnimationFrame(draw)}});
   }
 
-  // Search stories: autoplay on normal motion, explicit pause control always available.
+  // Search stories: user-directed by default. Autoplay is strictly opt-in.
   const queryData=[
     {logo:"brands/google.svg",query:"psicóloga trauma online en Maule",entity:"Psicología · Trauma · Online",label:"QUÉ QUEREMOS LOGRAR",result:"Que una búsqueda correcta termine en una consulta."},
     {logo:"brands/google-maps.svg",query:"kinesiólogo deportivo cerca de mí",entity:"Kinesiología · Deporte · Cercanía",label:"QUÉ QUEREMOS LOGRAR",result:"Que te encuentren por servicio y cercanía y puedan agendar."},
@@ -59,7 +62,7 @@
   const start=()=>{if(reduce)return;playing=true;clearInterval(timer);timer=setInterval(()=>showQuery((qi+1)%queryData.length),5200);syncPlay()};
   queryButtons.forEach((b,i)=>b.addEventListener("click",()=>{showQuery(i);if(playing)start()}));
   play?.addEventListener("click",()=>playing?stop():start());
-  if(!reduce)start();else syncPlay();
+  syncPlay();
 
   // Three problems map to a concrete service and inquiry context.
   const problemData={"invisible":{"code":"VISIBILIDAD","title":"SEO local y Google Maps","text":"Ordenamos tu perfil y tus páginas para que expliquen qué haces y dónde atiendes.","layers":[["Perfil de Google optimizado"],["Páginas de servicio claras"],["Contacto fácil de encontrar"]],"interest":"SEO local y Google Maps","goal":"No aparezco cuando buscan mis servicios"},"traffic":{"code":"DISEÑO WEB","title":"Una web que facilita la consulta","text":"Diseñamos o mejoramos tu página para presentar tu servicio y llevar a la persona al contacto.","layers":[["Oferta y textos claros"],["Diseño adaptable a móviles"],["WhatsApp o formulario visible"]],"interest":"Web y conversión","goal":"Aparezco, pero recibo pocas consultas"},"messages":{"code":"WHATSAPP","title":"Atención y seguimiento ordenados","text":"Preparamos respuestas y un recorrido de atención para que cada consulta tenga un siguiente paso.","layers":[["Preguntas y respuestas frecuentes"],["Contexto antes de cotizar"],["Seguimiento de oportunidades"]],"interest":"WhatsApp y automatización","goal":"Quiero saber qué debería mejorar primero"}};
