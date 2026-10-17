@@ -14,6 +14,8 @@ const style = read("site/styles/experience-v1.css");
 const tokens = read("site/styles/tokens.css");
 const runtime = read("site/site.js");
 const hero = read("site/home-v11.js");
+const recommendation = read("site/styles/recommendation-method.css");
+const methodPage = read("site/metodologia.html");
 
 for (const file of [
   "site/home-core.css",
@@ -64,6 +66,12 @@ for (const id of ["inicio","problema","recorrido","caso-real","precios","diagnos
   assert.ok(html.includes(`id="${id}"`),`Falta sección ${id}`);
 }
 
+assert.ok(html.includes('id="recomendaciones"')&&html.includes('aria-labelledby="v30-recommendation-title"'),"Falta relato sobre recomendaciones y criterio humano");
+assert.equal((html.match(/class="v30-process"/g)||[]).length,1,"El método de cuatro fases debe mostrarse una sola vez");
+assert.ok(html.includes('metodologia.html#investigacion-busquedas'),"La sección debe enlazar al método ampliado");
+assert.ok(methodPage.includes('id="investigacion-busquedas"')&&methodPage.includes('30 escenarios de búsqueda'),"El protocolo ampliado debe ser rastreable");
+assert.ok(methodPage.includes('no incluye automáticamente el estudio completo'),"Diferenciar diagnóstico gratuito del estudio completo");
+assert.ok(recommendation.includes("@media(max-width:45rem)")&&recommendation.includes(".v30-process"),"La nueva sección requiere layout responsive");
 assert.ok(html.includes('id="preguntas"'),"Falta bloque de objeciones comerciales");
 assert.ok(html.includes("¿Qué necesitas mejorar en tu negocio?"),"La primera sección debe explicar los servicios claramente");
 assert.equal((html.match(/class="v21-service-card"/g)||[]).length,6,"Se esperan seis servicios visibles sin interacción");
