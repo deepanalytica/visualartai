@@ -82,6 +82,10 @@
 .v30-protocol strong{color:#fff}
 .v30-protocol .v30-example-queries{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin-top:1.4rem}
 .v30-example-queries>div{border:1px solid rgba(164,197,249,.23);border-radius:.9rem;padding:1rem;background:rgba(255,255,255,.06);font:600 .89rem/1.5 var(--font-sans,Arial,sans-serif);color:#ecf4ff}
+.v30-validation{padding:1.15rem 1.2rem;margin:1.4rem 0;border:1px solid rgba(168,205,254,.25);border-radius:1.1rem;background:rgba(255,255,255,.07)}
+.v30-validation h3{font:800 1.13rem/1.4 var(--font-sans,Arial,sans-serif);color:white;margin:0 0 .65rem}
+.v30-validation p{font:500 .86rem/1.68 var(--font-sans,Arial,sans-serif);color:#d9e6fa;margin:.55rem 0}
+.v30-validation p strong{color:#fff}
 .v30-protocol .v30-method-caution{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(164,197,249,.28);font-size:.82rem;color:#b4ccea}
 @media(max-width:65rem){.v30-integrity{grid-template-columns:minmax(0,1fr)} }
 @media(max-width:65rem){
