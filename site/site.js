@@ -6,7 +6,47 @@
   const reveal=[...document.querySelectorAll(".section,.final-cta,[data-motion-reveal]")];
   if(reduce||!("IntersectionObserver" in window))reveal.forEach(el=>el.classList.add("in"));else{reveal.forEach(el=>el.classList.add("reveal"));const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)return;entry.target.classList.add("in");io.unobserve(entry.target)}),{threshold:.08,rootMargin:"0px 0px -5% 0px"});reveal.forEach(el=>io.observe(el))}
   const menu=document.getElementById("mobileMenu"),open=document.getElementById("menuBtn"),close=document.getElementById("menuClose");
-  if(menu&&open&&close){let lastFocus=null;const focusables=()=>[...menu.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])')].filter(el=>!el.disabled);const setOpen=value=>{menu.classList.toggle("open",value);menu.setAttribute("aria-hidden",String(!value));open.setAttribute("aria-expanded",String(value));document.body.style.overflow=value?"hidden":"";if(value){lastFocus=document.activeElement;setTimeout(()=>close.focus(),0)}else if(lastFocus?.focus)lastFocus.focus()};open.addEventListener("click",()=>setOpen(true));close.addEventListener("click",()=>setOpen(false));menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>setOpen(false)));document.addEventListener("keydown",e=>{if(!menu.classList.contains("open"))return;if(e.key==="Escape"){e.preventDefault();setOpen(false);return}if(e.key!=="Tab")return;const els=focusables();if(!els.length)return;const first=els[0],last=els[els.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}})}
+  if(menu&&open&&close){
+    let lastFocus=null;
+    const focusables=()=>[...menu.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])')].filter(el=>!el.disabled);
+    const setOpen=(value,restoreFocus=true)=>{
+      menu.classList.toggle("open",value);
+      menu.inert=!value;
+      menu.setAttribute("aria-hidden",String(!value));
+      open.setAttribute("aria-expanded",String(value));
+      document.body.style.overflow=value?"hidden":"";
+      if(value){
+        lastFocus=document.activeElement;
+        close.focus({preventScroll:true});
+      }else if(restoreFocus&&lastFocus?.focus)lastFocus.focus({preventScroll:true});
+    };
+    open.addEventListener("click",()=>setOpen(true));
+    close.addEventListener("click",()=>setOpen(false));
+    menu.addEventListener("click",e=>{if(e.target===menu)setOpen(false)});
+    menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
+      const href=a.getAttribute("href")||"";
+      if(href.startsWith("#")){
+        setOpen(false,false);
+        const target=document.querySelector(href);
+        if(target){
+          target.setAttribute("tabindex","-1");
+          requestAnimationFrame(()=>target.focus({preventScroll:true}));
+        }
+      }else{
+        setOpen(false);
+      }
+    }));
+    document.addEventListener("keydown",e=>{
+      if(!menu.classList.contains("open"))return;
+      if(e.key==="Escape"){e.preventDefault();setOpen(false);return}
+      if(e.key!=="Tab")return;
+      const els=focusables();
+      if(!els.length)return;
+      const first=els[0],last=els[els.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+    });
+  }
   const bar=document.getElementById("mobileConvert"),diagnostic=document.getElementById("diagnostico"),hero=document.getElementById("inicio");
   if(bar&&diagnostic&&hero&&"IntersectionObserver" in window){
     let diagnosticVisible=true,ticking=false;
