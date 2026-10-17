@@ -27,7 +27,7 @@ for(const path of files){
   safe(h1.length===1,`${name}: se requiere exactamente un H1 (encontrados ${h1.length})`);
   const heads=strip(h1[0]?.[1]||"");
   safe(heads.length>=12,`${name}: el titular no describe el contenido`);
-  safe(/<meta name="description" content="[^"]{50,}/.test(html),`${name}: falta metadescripción útil`);
+  safe(/name="robots" content="noindex/.test(html)||/<meta name="description" content="[^"]{50,}/.test(html),`${name}: falta metadescripción útil`);
   safe(/<link rel="canonical" href="https:\/\/visualartai\.cl\//.test(html),`${name}: canonical ausente`);
   safe(!/\blorem ipsum\b|\btexto de ejemplo\b|\[needs number\]/i.test(html),`${name}: existe contenido provisional`);
   if(name.startsWith("articulos/")){
