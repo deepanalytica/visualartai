@@ -20,8 +20,8 @@
     bar.inert=true;bar.setAttribute("aria-hidden","true");
     new IntersectionObserver(entries=>{diagnosticVisible=entries[0].isIntersecting;schedule()}).observe(diagnostic);
     addEventListener("scroll",schedule,{passive:true});addEventListener("resize",schedule,{passive:true});
-    const consentPanel=document.getElementById("vaa-consent-panel");
-    if(consentPanel)new MutationObserver(schedule).observe(consentPanel,{attributes:true,attributeFilter:["hidden"]});
+    const observeConsent=()=>{const panel=document.getElementById("vaa-consent-panel");if(panel)new MutationObserver(schedule).observe(panel,{attributes:true,attributeFilter:["hidden"]});schedule()};
+    if(document.readyState==="complete")observeConsent();else document.addEventListener("DOMContentLoaded",observeConsent,{once:true});
     schedule();
   }
   document.querySelectorAll("[data-interest]").forEach(el=>el.addEventListener("click",()=>{const input=document.getElementById("interest");if(input)input.value=el.dataset.interest||"Diagnóstico de presencia digital";track("diagnostic_interest",{interest:el.dataset.interest||"general"})}));
