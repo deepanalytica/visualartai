@@ -41,11 +41,11 @@
 
   // Search stories: user-directed by default. Autoplay is strictly opt-in.
   const queryData=[
-    {logo:"brands/google.svg",query:"psicóloga trauma online en Maule",entity:"Psicología · Trauma · Online",label:"QUÉ QUEREMOS LOGRAR",result:"Mostrar especialidad, atención online y acceso a agenda."},
-    {logo:"brands/google-maps.svg",query:"kinesiólogo deportivo cerca de mí",entity:"Kinesiología · Deporte · Cercanía",label:"QUÉ QUEREMOS LOGRAR",result:"Indicar dónde atiende y cómo pedir una evaluación."},
-    {logo:"brands/google.svg",query:"clínica estética Talca",entity:"Clínica estética · Talca",label:"QUÉ QUEREMOS LOGRAR",result:"Explicar tratamientos, profesionales y cómo reservar."},
-    {logo:"brands/google-maps.svg",query:"almuerzo casero cerca",entity:"Gastronomía · Menú · Ubicación",label:"QUÉ QUEREMOS LOGRAR",result:"Mostrar el menú de hoy, horario y número para hacer un pedido."},
-    {logo:"brands/chatgpt.svg",query:"arriendo amoblado mensual en Iquique",entity:"Arriendo · Mensual · Iquique",label:"QUÉ QUEREMOS LOGRAR",result:"Indicar fechas disponibles, precio y condiciones antes de preguntar."}
+    {logo:"brands/google.svg",query:"psicóloga trauma online en Maule",entity:"Psicología · Trauma · Online",label:"INFORMACIÓN QUE DEBE SER VISIBLE",result:"Mostrar especialidad, atención online y acceso a agenda."},
+    {logo:"brands/google-maps.svg",query:"kinesiólogo deportivo cerca de mí",entity:"Kinesiología · Deporte · Cercanía",label:"INFORMACIÓN QUE DEBE SER VISIBLE",result:"Indicar dónde atiende y cómo pedir una evaluación."},
+    {logo:"brands/google.svg",query:"clínica estética Talca",entity:"Clínica estética · Talca",label:"INFORMACIÓN QUE DEBE SER VISIBLE",result:"Explicar tratamientos, profesionales y cómo reservar."},
+    {logo:"brands/google-maps.svg",query:"almuerzo casero cerca",entity:"Gastronomía · Menú · Ubicación",label:"INFORMACIÓN QUE DEBE SER VISIBLE",result:"Mostrar el menú de hoy, horario y número para hacer un pedido."},
+    {logo:"brands/chatgpt.svg",query:"arriendo amoblado mensual en Iquique",entity:"Arriendo · Mensual · Iquique",label:"INFORMACIÓN QUE DEBE SER VISIBLE",result:"Indicar fechas disponibles, precio y condiciones antes de preguntar."}
   ];
   const queryButtons=[...document.querySelectorAll("[data-query-index]")],play=document.getElementById("v11QueryPlay");
   let qi=0,timer=null,playing=false;
