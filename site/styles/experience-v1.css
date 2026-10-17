@@ -1,0 +1,66 @@
+/* Visual Art AI · Sistema de experiencia v1
+   Solo consume tokens semánticos definidos en styles/tokens.css.
+   Capa incremental de la web pública: no reemplaza home-core.css. */
+
+/* Marca tipográfica: Visual es el elemento protagonista. */
+.vaa-brand{gap:var(--space-2);min-width:0}
+.vaa-wordmark{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:.12rem;font-family:var(--font-sans);letter-spacing:0;text-transform:none;line-height:1}
+.vaa-wordmark strong{display:block;font-size:1.32rem;line-height:.98;font-weight:800;letter-spacing:-.075em;color:var(--color-text-primary)}
+.vaa-wordmark small{display:block;padding-left:.08rem;font-size:.55rem;line-height:1.15;font-weight:750;letter-spacing:.18em;color:var(--color-action-primary-hover)}
+.vaa-symbol{color:var(--color-action-primary);flex-shrink:0}
+.vaa-brand:hover .vaa-wordmark strong{color:var(--color-action-primary-hover)}
+
+/* Contratos transversales de componentes. */
+.button,.v18-whatsapp,.v11-query-tabs button,.v11-query-play,.menu-btn,.menu-close{
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+.button{font-family:var(--font-sans);font-size:.78rem;font-weight:750;letter-spacing:0;text-transform:none;line-height:1.25;text-align:center}
+.button:active{transform:translateY(0) scale(.99)}
+.button[disabled],.button[aria-disabled="true"]{opacity:.52;cursor:not-allowed;box-shadow:none;transform:none;pointer-events:none}
+:where(a,button,input,select,textarea,summary):focus-visible{outline:2px solid var(--color-action-primary);outline-offset:3px;box-shadow:var(--focus-ring)}
+:where(a,button,input,select,textarea,summary):not(:focus-visible){outline-offset:0}
+:where(a,button):focus:not(:focus-visible){outline:none}
+.v11-query-tabs button,.v11-query-play{min-height:2.75rem}
+.v11-query-tabs button[aria-pressed="true"]{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--color-action-primary) 22%,transparent)}
+.v11-search-scene{isolation:isolate}
+.v11-search-result small{line-height:1.45}
+.v11-proofline{font-variant-numeric:tabular-nums}
+
+/* La tarjeta comercial tiene estados reconocibles, no solo hover. */
+.v11-pricing article{transition:transform var(--duration-normal) var(--ease-emphasized),box-shadow var(--duration-normal),border-color var(--duration-normal)}
+@media(hover:hover) and (pointer:fine){
+  .v11-pricing article:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+}
+.v11-pricing article:focus-within{border-color:var(--color-action-primary);box-shadow:var(--focus-ring)}
+.v11-price-details summary{cursor:pointer}
+.v11-price-details summary:hover{color:var(--color-action-primary-hover)}
+
+/* Formulario: el envío es una acción explícita, nunca una promesa falsa. */
+.v11-form .diagnostic-form{gap:var(--space-4)}
+.v11-form .diagnostic-form :is(input,select,textarea){min-height:var(--control-height-lg);border-radius:var(--control-radius);transition:border-color var(--duration-fast),box-shadow var(--duration-fast),background var(--duration-fast)}
+.v11-form .diagnostic-form :is(input,select,textarea):focus-visible{border-color:var(--color-action-primary);box-shadow:var(--focus-ring)}
+.v11-form .diagnostic-form input[type="email"]:not(:placeholder-shown):invalid{border-color:var(--color-accent)}
+.v11-form .diagnostic-form button[type="submit"]{width:100%;min-height:3.35rem}
+.v11-form .vaa-email-option{justify-self:center;display:inline-flex;align-items:center;justify-content:center;min-height:2.75rem;padding:var(--space-2) var(--space-3);border:0;background:transparent;color:var(--color-action-primary-hover);font:700 .8rem var(--font-sans);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.25em;cursor:pointer}
+.v11-form .vaa-email-option:hover{color:var(--color-action-primary-pressed)}
+.v11-form .form-note{line-height:1.65;font-size:.75rem}
+.v11-form .form-note a{color:var(--color-action-primary-hover);text-decoration:underline;text-underline-offset:.18em}
+.v11-form .form-status:not(:empty){margin-top:var(--space-2);padding:var(--space-3);background:var(--color-action-soft);border:1px solid var(--color-border-default);border-radius:var(--radius-sm);font-size:.8rem;line-height:1.5;color:var(--color-text-primary)}
+.v11-form .form-status a{color:var(--color-action-primary-hover);text-decoration:underline}
+.v11-problem-list button:focus-visible,.v11-query-tabs button:focus-visible{outline:2px solid var(--color-action-primary);outline-offset:3px}
+
+/* El contenido aparece desde la jerarquía tipográfica, no desde efectos decorativos. */
+.v11-section-intro h2,.v11-offer-head h2,.v11-diagnostic-copy h2{letter-spacing:var(--tracking-heading);text-wrap:balance}
+.v11-hero-lede,.v11-diagnostic-copy>p{max-width:65ch}
+@media(max-width:45rem){
+  .vaa-wordmark strong{font-size:1.18rem}
+  .vaa-wordmark small{font-size:.49rem}
+  .vaa-brand{gap:.38rem}
+  .topbar-actions>.button{font-size:.66rem;min-height:2.75rem;padding-inline:.7rem}
+  .v11-form .vaa-email-option{font-size:.78rem}
+  .v11-search-scene{transform:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .v11-pricing article,.button{transition:none!important;transform:none!important}
+}
