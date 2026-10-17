@@ -61,7 +61,7 @@ safe(services.length===6,`Se esperaban 6 páginas de servicio; hay ${services.le
 const countIntros=new Set(intros.map(x=>x.intro)).size;
 safe(countIntros===articles.length,`Introducciones repetidas: ${articles.length-countIntros}`);
 const home=readFileSync(join(root,"index.html"),"utf8");
-const actualHero=strip(home.match(/<h1 class="v19-hero-title"[\\s\\S]*?<\\/h1>/)?.[0]||"");
+const actualHero=strip(home.match(/<h1 class="v19-hero-title"[\s\S]*?<\/h1>/)?.[0]||"");
 const approvedHero="Hay personas buscando lo que vendes en Google y ChatGPT. Y mientras tú no apareces, están llamando a tu competencia.";
 safe(actualHero===approvedHero,`Se ha alterado el héro aprobado: ${actualHero}`);
 safe(home.includes("No tienes que empezar por el plan más caro."),"Falta contexto persuasivo de los planes");
