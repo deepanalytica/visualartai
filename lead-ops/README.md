@@ -10,6 +10,7 @@
 - Cloudflare D1 con consentimiento, datos mínimos, puntuación heurística, etapas y eventos.
 - Deduplicación diaria por correo + negocio, con hash y sal secreta.
 - Cron cada 5 minutos que notifica por Resend al operador, prepara una pauta de revisión y envía hasta dos recordatorios INTERNOS de expedientes sin actividad durante 48 horas.
+- API de métricas GET /v1/internal/metrics y borrador de propuesta GET /v1/internal/leads/{id}/proposal?tier=sprint (sin envío automático).
 - API interna GET /v1/internal/leads, PATCH /v1/internal/leads/{id} y DELETE /v1/internal/leads/{id}, con token secreto. No es una interfaz de administración para navegador.
 - Retención por defecto de 90 días (revisar requisitos legales antes de operar).
 - CI y pruebas automatizadas para la lógica de negocio, recepción desactivada y restricciones CORS.
