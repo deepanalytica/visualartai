@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Solicita una revisión inicial gratuita de cómo los clientes encuentran y contactan tu negocio en Google y la web.">
+  <title>Solicitar diagnóstico gratuito | Visual Art AI</title>
+  <meta name="robots" content="index,follow">
+  <style>
+    :root{font-family:Manrope,Inter,system-ui,-apple-system,sans-serif;color:#08111f;background:#f7f9fd;font-synthesis:none}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:radial-gradient(ellipse 58% 40% at 92% 4%,#dce7ff 0,transparent 100%),#f7f9fd}
+    a{color:#2454d8;text-underline-offset:3px}
+    header{max-width:1120px;margin:0 auto;padding:23px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    header a{font-weight:750;text-decoration:none;color:#08111f}
+    .wordmark{display:inline-flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.045em}
+    .brand-dot{width:17px;height:17px;border:4px solid #2f6bff;border-right-color:#f24d5d;display:inline-block;border-radius:50%}
+    main{max-width:1120px;margin:28px auto 80px;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,5vw,80px);align-items:start}
+    .eyebrow{font-size:12px;font-weight:800;letter-spacing:.13em;color:#2454d8;text-transform:uppercase}
+    h1{font-size:clamp(2.7rem,5.2vw,4.8rem);letter-spacing:-.068em;line-height:1.02;margin:20px 0 24px}
+    h1 em{font-family:Georgia,serif;color:#2f6bff;font-weight:400}
+    .intro{font-size:1.13rem;line-height:1.7;color:#334155;max-width:48ch}
+    .checks{padding:20px 0 0;display:grid;gap:16px;list-style:none}
+    .checks li{display:flex;gap:12px;align-items:flex-start;line-height:1.5}
+    .checks li:before{content:"✓";display:grid;place-items:center;flex-shrink:0;width:25px;height:25px;background:#e1f8ef;color:#15775d;border-radius:50%;font-weight:800}
+    .box{background:#fff;border:1px solid #dce4f1;box-shadow:0 30px 80px #203a6220;border-radius:25px;padding:clamp(20px,4vw,38px)}
+    .boxhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}
+    .boxhead strong{font-weight:800;font-size:15px}.price{font-size:15px;color:#15775d;font-weight:800}
+    form{display:grid;gap:16px}
+    label{display:grid;gap:7px;font-size:13px;font-weight:700;color:#334155}
+    input,textarea{width:100%;border:1px solid #bfcde1;border-radius:11px;font:inherit;font-weight:400;font-size:15px;padding:13px 14px;color:#08111f;background:#fff;min-height:46px}
+    textarea{min-height:110px;resize:vertical;line-height:1.5}
+    input:focus,textarea:focus,button:focus-visible{outline:3px solid #9fbcff;outline-offset:2px;border-color:#2f6bff}
+    .consent{display:flex;align-items:start;gap:11px;font-weight:400;line-height:1.6;font-size:13px;color:#334155}
+    .consent input{width:18px;min-height:18px;accent-color:#2f6bff;margin-top:2px}
+    button,.fallback{border:0;border-radius:12px;padding:15px 18px;min-height:52px;font-weight:800;font-size:15px;cursor:pointer;text-align:center}
+    button{background:#2f6bff;color:#fff}button:hover{background:#2454d8}button:disabled{opacity:.5;cursor:wait}
+    .fallback{display:block;background:#e9f7f0;color:#116c50;text-decoration:none;font-size:14px}
+    .fallback[hidden]{display:none}
+    #leadOpsFeedback{min-height:22px;font-size:13px;color:#334155;line-height:1.5}
+    .tiny{color:#64748b;font-size:12px;line-height:1.6}
+    .trap{position:absolute;left:-9999px;opacity:0;pointer-events:none}
+    @media(max-width:800px){main{grid-template-columns:1fr;margin-top:16px}.box{order:0}header{padding:18px 20px}main{padding:0 20px;margin-bottom:50px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+<header><a class="wordmark" href="/"><span class="brand-dot" aria-hidden="true"></span>Visual Art AI</a><a href="/">Volver al sitio</a></header>
+<main>
+  <section aria-labelledby="title">
+    <span class="eyebrow">Diagnóstico inicial · gratuito</span>
+    <h1>¿Te encuentran, <em>te entienden</em> y te contactan?</h1>
+    <p class="intro">Cuéntanos qué vendes y en qué ciudad. Revisaremos la información disponible y te diremos qué conviene verificar o mejorar primero. Sin obligación de contratar.</p>
+    <ul class="checks">
+      <li>Investigación de tu presencia digital pública.</li>
+      <li>Una prioridad concreta, explicada en lenguaje sencillo.</li>
+      <li>Recomendaciones basadas en evidencia, sin promesas de ventas.</li>
+    </ul>
+    <p class="tiny">La evaluación inicial no equivale a una auditoría técnica integral ni garantiza resultados comerciales.</p>
+  </section>
+  <section class="box" aria-label="Formulario de solicitud">
+    <div class="boxhead"><strong>Solicitar mi revisión</strong><span class="price">$0 CLP</span></div>
+    <form id="leadOpsForm">
+      <label>Nombre del negocio<input name="business" required minlength="2" maxlength="120" autocomplete="organization" placeholder="Ej.: Centro de Kinesiología"></label>
+      <label>Ciudad<input name="city" required minlength="2" maxlength="90" autocomplete="address-level2" placeholder="Ej.: Curicó"></label>
+      <label>Correo para responder<input name="email" required type="email" maxlength="254" autocomplete="email" placeholder="correo@negocio.cl"></label>
+      <label>Web o página pública (opcional)<input name="website" type="url" maxlength="240" placeholder="https://ejemplo.cl"></label>
+      <label>¿Qué quieres mejorar?<textarea name="goal" required minlength="8" maxlength="240" placeholder="Ej.: aparecemos en Google, pero recibimos pocas consultas"></textarea></label>
+      <label class="trap" aria-hidden="true">No completar<input name="company_url" autocomplete="off" tabindex="-1"></label>
+      <label class="consent"><input type="checkbox" name="consent" required><span>Autorizo el tratamiento de estos datos para evaluar y responder mi solicitud, según el <a href="/aviso-de-privacidad.html" target="_blank" rel="noopener noreferrer">aviso de privacidad</a>. No acepto por ello comunicaciones publicitarias.</span></label>
+      <div id="leadOpsTurnstile"></div>
+      <button type="submit">Enviar solicitud gratuita</button>
+      <div id="leadOpsFeedback" role="status" aria-live="polite"></div>
+      <a id="leadOpsFallback" class="fallback" href="https://wa.me/56958039450" target="_blank" rel="noopener noreferrer" hidden>Enviar solicitud por WhatsApp ↗</a>
+      <div class="tiny">Nunca pedimos contraseñas ni claves de Google o Meta por este formulario.</div>
+    </form>
+  </section>
+</main>
+<script src="/lead-ops-config.js" defer></script>
+<script src="/lead-ops-form.js" defer></script>
+</body>
+</html>
