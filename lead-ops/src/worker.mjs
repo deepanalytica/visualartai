@@ -1,4 +1,5 @@
 import { validateLead, priorityScore, diagnosisDraft, mayTransition } from "./domain.mjs";
+import { generateProposal } from "./proposal.mjs";
 
 const encoder = new TextEncoder();
 const asJson = (data, status = 200, extra = {}) => new Response(JSON.stringify(data), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", ...extra } });
@@ -138,6 +139,22 @@ async function internalRequest(request, env, pathname) {
     const items = await env.DB.prepare("SELECT id,created_at,updated_at,business,city,email,website,goal,score,stage,notification_status,reminders_sent FROM leads ORDER BY created_at DESC LIMIT ?").bind(limit).all();
     return asJson({ leads: items.results || [] });
   }
+  if (request.method === "GET" && pathname === "/v1/internal/metrics") {
+    const byStage = await env.DB.prepare("SELECT stage, COUNT(*) AS count FROM leads GROUP BY stage").all();
+    const last7 = new Date(Date.now() - 7 * 86400000).toISOString();
+    const count7 = await env.DB.prepare("SELECT COUNT(*) AS n FROM leads WHERE created_at>=?").bind(last7).first();
+    const pending = await env.DB.prepare("SELECT COUNT(*) AS n FROM leads WHERE notification_status='pending'").first();
+    return asJson({ last7Days: Number(count7?.n || 0), pendingNotifications: Number(pending?.n || 0), stages: byStage.results || [] });
+  }
+  const proposalMatch = pathname.match(/^\/v1\/internal\/leads\/([0-9a-f-]{36})\/proposal$/i);
+  if (request.method === "GET" && proposalMatch) {
+    const lead = await env.DB.prepare("SELECT business,city,goal FROM leads WHERE id=?").bind(proposalMatch[1]).first();
+    if (!lead) return asJson({ error: "No encontrado" }, 404);
+    const tier = new URL(request.url).searchParams.get("tier") || "sprint";
+    try { return asJson({ draft: true, proposal: generateProposal(lead, tier), tier }); }
+    catch { return asJson({ error: "Plan desconocido" }, 400); }
+  }
+
   const match = pathname.match(/^\/v1\/internal\/leads\/([0-9a-f-]{36})$/i);
   if (!match) return asJson({ error: "Ruta no encontrada" }, 404);
   const id = match[1];
