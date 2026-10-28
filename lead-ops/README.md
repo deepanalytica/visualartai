@@ -15,6 +15,10 @@
 - Retención por defecto de 90 días (revisar requisitos legales antes de operar).
 - CI y pruebas automatizadas para la lógica de negocio, recepción desactivada y restricciones CORS.
 
+La consola interna se utiliza con LEAD_OPS_URL y ADMIN_API_TOKEN en el entorno: node lead-ops/bin/ops-cli.mjs list | metrics | proposal <id> sprint | stage <id> qualified. La eliminación requiere --confirm. Nunca copiar tokens a la web.
+
+Hay un despliegue desde GitHub Actions, manual y protegido, en .github/workflows/lead-ops-deploy.yml. Exige CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID y el ID real de D1. No habilita ingreso público por defecto.
+
 ## Activación paso a paso
 
 1. Crear base D1: npx wrangler d1 create visualartai-leads
