@@ -28,6 +28,7 @@ jobs:
         run: |
           node --check lead-ops/src/domain.mjs
           node --check lead-ops/src/worker.mjs
+          node --check lead-ops/src/proposal.mjs
           node --check site/lead-ops-form.js
           node --check site/lead-ops-config.js
       - name: Unit and smoke tests
