@@ -1,0 +1,46 @@
+name: Deploy Visual Art AI Lead Ops (manual and safe)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: visualartai-lead-ops
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    environment: lead-ops-production
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify code before deployment
+        run: |
+          node --check lead-ops/src/worker.mjs
+          node --check lead-ops/src/domain.mjs
+          node --check lead-ops/src/proposal.mjs
+          node --test lead-ops/tests/*.test.mjs
+      - name: Validate controlled deployment configuration
+        shell: bash
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || (echo "::error::Missing CLOUDFLARE_API_TOKEN" && exit 1)
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || (echo "::error::Missing CLOUDFLARE_ACCOUNT_ID" && exit 1)
+          if grep -q 'REPLACE_WITH_D1_DATABASE_ID' lead-ops/wrangler.toml; then
+            echo "::error::Create D1 and set its database_id before deploying"
+            exit 1
+          fi
+      - name: Install Cloudflare CLI
+        run: npm install --no-save --package-lock=false wrangler@4
+      - name: Apply idempotent D1 schema
+        working-directory: lead-ops
+        run: npx wrangler d1 execute visualartai-leads --remote --file=./schema.sql
+      - name: Deploy Worker
+        working-directory: lead-ops
+        run: npx wrangler deploy
+      - name: Note release guard
+        run: echo "Worker deployed; public reception remains disabled until ENABLE_PUBLIC_INGEST, Turnstile, D1 and Resend are verified."
