@@ -24,7 +24,7 @@ function Gallery(){const [id,setId]=useState('web');const item=items.find(i=>i.i
 React.createElement('div',{className:'brand-tabs',role:'tablist','aria-label':'Aplicaciones del estudio'},items.map(i=>React.createElement('button',{key:i.id,id:'brand-tab-'+i.id,role:'tab',type:'button',className:'brand-tab','aria-selected':id===i.id,'aria-controls':'brand-preview',onClick:()=>setId(i.id)},i.label))),
 React.createElement('div',{id:'brand-preview',className:'brand-preview',role:'tabpanel','aria-labelledby':'brand-tab-'+item.id},
 React.createElement('div',{className:'preview-canvas',dangerouslySetInnerHTML:{__html:item.mock}}),
-React.createElement('div',{className:'preview-info'},React.createElement('span',null,item.type),React.createElement('h3',null,item.title),React.createElement('p',null,item.copy),React.createElement('p',{className:'small-hint'},'Demostración conceptual. No representa una publicación aprobada por el estudio.')))));
+React.createElement('div',{className:'preview-info'},React.createElement('span',null,item.type),React.createElement('h3',null,item.title),React.createElement('p',null,item.copy),React.createElement('p',{className:'small-hint'},'Demostración conceptual. No representa una publicación aprobada por el estudio.'))));
 }
 const root=document.getElementById('brand-tabs-root');if(root)createRoot(root).render(React.createElement(Gallery));
 
