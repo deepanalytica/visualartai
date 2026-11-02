@@ -26,6 +26,8 @@ jobs:
           /tmp/vaa-browser/node_modules/.bin/playwright install --with-deps chromium
       - name: Browser QA (320, 390, 768, 1024, 1440px)
         run: NODE_PATH=/tmp/vaa-browser/node_modules node scripts/public-browser-smoke.cjs
+      - name: Browser QA — Lara y Valdivia (mobile, charts, React, reports)
+        run: NODE_PATH=/tmp/vaa-browser/node_modules node scripts/lara-valdivia-browser-smoke.cjs
       - name: Save viewport screenshots
         if: always()
         uses: actions/upload-artifact@v4

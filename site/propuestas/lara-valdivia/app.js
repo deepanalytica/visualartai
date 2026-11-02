@@ -1,75 +1,50 @@
 import React,{useState} from 'react';
 import {createRoot} from 'react-dom/client';
+const sources={
+familia:{term:'abogado de familia en Talca',pain:'Una persona con un conflicto familiar puede conocer a otros estudios antes de llegar a Lara & Valdivia.',action:'Explicar servicios y procesos familiares y dirigir a una consulta accesible.',next:'Página de familia + contacto inmediato.',results:[['Abogadas Talca','https://www.abogadastalca.cl/','abogadastalca.cl','Familia, divorcio, cuidado personal y contacto directo.'],['Alto Maule Abogados','https://altomauleabogados.cl/','altomauleabogados.cl','Familia, civil y laboral con profesionales presentados.'],['Méndez & Asociados','https://www.mendezyasociados.cl/','mendezyasociados.cl','Divorcio, alimentos y régimen comunicacional.']]},
+laboral:{term:'abogado laboral despido en Talca',pain:'La persona que fue despedida busca especialización y un primer contacto rápido.',action:'Publicar información sobre despidos y finiquitos, con servicio y CTA claros.',next:'Landing laboral + preguntas frecuentes.',results:[['Méndez & Asociados','https://www.mendezyasociados.cl/','mendezyasociados.cl','Despido injustificado, nulidad y tutela laboral.'],['Defensa Abogados','https://defensa-abogados.cl/','defensa-abogados.cl','Servicios laborales descritos y botón de consulta.'],['Alto Maule Abogados','https://altomauleabogados.cl/','altomauleabogados.cl','Derecho laboral y presentación profesional.']]},
+deudas:{term:'abogado defensa de deudores Talca',pain:'Ante una cobranza urgente, el usuario necesita reconocer qué estudio atiende su caso.',action:'Publicar servicios de deudas, juicios ejecutivos y orientación general sin falsas promesas.',next:'Página de defensa de deudores + guía de cobranza.',results:[['GrupoDefensa.cl · Talca','https://www.grupodefensa.cl/sucursales/talca','grupodefensa.cl','Servicios de deudas y ubicación de Talca.'],['Abogados en Talca','https://www.abogadosentalca.cl/','abogadosentalca.cl','Derecho civil, trabajo, familia y deudas.'],['Abogadas Talca','https://www.abogadastalca.cl/','abogadastalca.cl','Defensa de deudores y cobranza judicial.']]}
+};
+function querySelect(name){
+const data=sources[name];if(!data)return;
+for(const [id,value] of [['query-text',data.term],['query-pain',data.pain],['query-action',data.action],['query-next',data.next]])document.getElementById(id).textContent=value;
+const cards=data.results.map(([title,url,domain,description])=>{const a=document.createElement('a');a.className='search-result';a.href=url;a.target='_blank';a.rel='noopener noreferrer';const b=document.createElement('strong');b.textContent=title+' ↗';const small=document.createElement('small');small.textContent=domain;const p=document.createElement('p');p.textContent=description;a.append(b,small,p);return a;});
+document.getElementById('query-results').replaceChildren(...cards);
+document.querySelectorAll('.query-tab').forEach(b=>{const selected=b.dataset.query===name;b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected));});
+}
+document.querySelectorAll('.query-tab').forEach(b=>b.addEventListener('click',()=>querySelect(b.dataset.query)));querySelect('familia');
 
-const h=React.createElement;
-const mockups=[
- {id:'web',label:'Landing web',category:'WEB · CAPTACIÓN',title:'Una portada preparada para inspirar confianza.',description:'Jerarquía clara, especialistas identificables, servicios explicados y llamadas a la acción. El objetivo no es impresionar con efectos: es facilitar la decisión de consultar.',markup:'<div class="mock-browser"><div class="mock-toolbar"><i></i><i></i><i></i></div><div class="mock-web"><header><span>⚖ LARA & VALDIVIA · ABOGADOS</span><small>Inicio &nbsp; Servicios &nbsp; Equipo &nbsp; Contacto</small></header><h3>Su tranquilidad merece una buena defensa.</h3><p>Derecho de familia · Civil · Laboral<br>Talca y atención remota según el caso.</p><span class="mock-cta">Solicitar orientación jurídica ↗</span></div></div>'},
- {id:'redes',label:'Redes sociales',category:'SOCIAL · CONTENIDO',title:'Piezas que educan antes de vender.',description:'Portadas por especialidad, preguntas frecuentes, carruseles y una estructura editorial repetible. El contenido se revisa con los abogados antes de publicar.',markup:'<div class="social-mock"><header>⚖ LARA & VALDIVIA / ABOGADOS</header><div><span style="color:#d0ab6a;font-size:11px;letter-spacing:.15em">DERECHO DE FAMILIA</span><h3>¿Qué considerar antes de iniciar un divorcio?</h3><p>Información general y pasos para preparar una consulta informada.</p></div><footer>GUÍA BREVE · PUBLICACIÓN CONCEPTUAL</footer></div>'},
- {id:'tarjeta',label:'Tarjeta profesional',category:'IDENTIDAD · PAPELERÍA',title:'La misma marca, fuera de la pantalla.',description:'Tarjetas de presentación, credenciales y papelería con especificaciones de impresión, legibilidad y versiones para soportes físicos y digitales.',markup:'<div class="business-card-demo"><div class="biz-card biz-front"><strong>⚖ LARA & VALDIVIA</strong><small>A B O G A D O S</small></div><div class="biz-card biz-back"><strong>Lara & Valdivia</strong><small>Asesoría y representación legal</small><small>Edificio Espacio Talca · Of. 1102</small><small>Talca, Chile</small></div></div>'},
- {id:'documento',label:'Informe jurídico',category:'DOCUMENTOS · IDENTIDAD',title:'Documentos que también transmiten rigor.',description:'Portadas de informes, propuesta de honorarios, hoja membretada, presentación institucional y firmas de correo; plantillas editables sujetas a revisión jurídica.',markup:'<div class="document-mock"><div class="document-head">⚖ Lara & Valdivia<br><small style="font-size:9px">ABOGADOS</small></div><h3>Informe jurídico ejecutivo</h3><p>Antecedentes, análisis y conclusiones.</p><div class="document-lines"><span></span><span></span><span></span><span></span></div><p style="margin-top:30px;color:#957443">TALCA · MODELO CONCEPTUAL</p></div>'}
+const items=[
+{id:'web',label:'Landing web',type:'DISEÑO / WEB',title:'Un sitio que explique, convenza y facilite el contacto.',copy:'Una landing profesional con información clara sobre la atención en Talca, servicios, equipo autorizado y formularios. Su logotipo se conserva.',mock:'<div class="mock-web"><div class="mock-web-bar"><i></i><i></i><i></i></div><div class="mock-web-body"><div class="mock-brand-row"><img class="brand-logo" src="./logo-original.webp" alt="Logotipo real de Lara y Valdivia"><small>Lara & Valdivia Abogados</small></div><h4>Asesoría legal con claridad y cercanía.</h4><p>Familia · Civil · Laboral · Talca</p><span class="mock-web-cta">Solicitar una consulta ↗</span></div></div>'},
+{id:'social',label:'Redes sociales',type:'DISEÑO / REDES',title:'Contenido que responda dudas, no publicaciones decorativas.',copy:'Plantillas educativas para preguntas frecuentes, carruseles por especialidad y publicaciones de presentación profesional, con revisión legal.',mock:'<div class="mock-social"><div class="mock-brand-row"><img class="brand-logo" src="./logo-original.webp" alt="Logotipo real"><small>Lara & Valdivia</small></div><div><small>ORIENTACIÓN JURÍDICA · FAMILIA</small><h4>Divorcio: ¿por dónde empezar?</h4><p>Preguntas para preparar una consulta informada.</p></div><small>CONTENIDO EDUCATIVO / BOCETO</small></div>'},
+{id:'tarjetas',label:'Tarjetas',type:'IDENTIDAD / PAPELERÍA',title:'La misma identidad en cada contacto profesional.',copy:'Tarjetas y firma de correo que reutilizan el logo auténtico, evitando inventar nombres, teléfonos o acreditaciones.',mock:'<div class="mock-card-set"><div class="mock-business dark"><img class="brand-logo" src="./logo-original.webp" alt="Logotipo real"><strong>Lara & Valdivia Abogados</strong></div><div class="mock-business light"><img class="brand-logo" src="./logo-original.webp" alt="Logotipo real"><strong>Asesoría y representación legal</strong><small>Espacio Talca · Of. 1102</small></div></div>'},
+{id:'documento',label:'Documentos',type:'IDENTIDAD / INFORMES',title:'Informes y documentos que comuniquen rigor.',copy:'Portadas, hoja membretada, presentación y plantilla de informe ejecutivo. Contenidos legales sujetos a aprobación del estudio.',mock:'<div class="mock-doc"><div class="mock-brand-row"><img class="brand-logo" src="./logo-original.webp" alt="Logotipo real"><small>Lara & Valdivia</small></div><h4>Informe jurídico ejecutivo</h4><small>Antecedentes · Análisis · Conclusiones</small><div style="margin-top:35px"><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div></div><small>DOCUMENTO INSTITUCIONAL / MUESTRA</small></div>'}
 ];
-function Gallery(){
- const [active,setActive]=useState(mockups[0].id);
- const item=mockups.find(x=>x.id===active)||mockups[0];
- return h(React.Fragment,null,
-   h('div',{className:'tabs',role:'tablist','aria-label':'Aplicaciones del sistema de marca'},mockups.map(m=>h('button',{key:m.id,id:'tab-'+m.id,className:'tab',role:'tab','aria-selected':active===m.id,'aria-controls':'preview-panel',tabIndex:active===m.id?0:-1,onClick:()=>setActive(m.id)},m.label))),
-   h('div',{id:'preview-panel',className:'preview-panel',role:'tabpanel','aria-labelledby':'tab-'+item.id},
-     h('div',{className:'preview-stage',dangerouslySetInnerHTML:{__html:item.markup}}),
-     h('div',{className:'preview-comment'},h('span',null,item.category),h('h4',null,item.title),h('p',null,item.description),h('p',{style:{fontSize:'11px',marginTop:'20px',color:'#7b8590'}},'Boceto de dirección artística. No representa un sitio ya publicado ni fotografías oficiales del equipo.'))
-   )
- );
+function Gallery(){const [id,setId]=useState('web');const item=items.find(i=>i.id===id)||items[0];return React.createElement(React.Fragment,null,
+React.createElement('div',{className:'brand-tabs',role:'tablist','aria-label':'Aplicaciones del estudio'},items.map(i=>React.createElement('button',{key:i.id,id:'brand-tab-'+i.id,role:'tab',type:'button',className:'brand-tab','aria-selected':id===i.id,'aria-controls':'brand-preview',onClick:()=>setId(i.id)},i.label))),
+React.createElement('div',{id:'brand-preview',className:'brand-preview',role:'tabpanel','aria-labelledby':'brand-tab-'+item.id},
+React.createElement('div',{className:'preview-canvas',dangerouslySetInnerHTML:{__html:item.mock}}),
+React.createElement('div',{className:'preview-info'},React.createElement('span',null,item.type),React.createElement('h3',null,item.title),React.createElement('p',null,item.copy),React.createElement('p',{className:'small-hint'},'Demostración conceptual. No representa una publicación aprobada por el estudio.'))));
 }
-const mount=document.getElementById('brand-tabs-root');
-if(mount){createRoot(mount).render(h(Gallery));}
+const root=document.getElementById('brand-tabs-root');if(root)createRoot(root).render(React.createElement(Gallery));
 
-function setupCharts(){
- if(!window.Chart){const charts=document.querySelectorAll('.chart-box');charts.forEach(e=>{const p=document.createElement('p');p.textContent='Datos: 218 seguidores, 420 seguidos y 1 publicación. Señales auditadas: 3 verificadas y 3 pendientes.';p.className='chart-footnote';e.appendChild(p)});return;}
- const common={responsive:true,maintainAspectRatio:false,animation:{duration:850},plugins:{legend:{display:false},tooltip:{backgroundColor:'#0b1f39',padding:13,bodyFont:{family:'Manrope'},titleFont:{family:'Manrope',weight:'bold'}}}};
- const social=document.getElementById('chart-social');
- if(social)new window.Chart(social,{type:'bar',data:{labels:['Seguidores','Seguidos','Publicaciones'],datasets:[{label:'Conteo verificado',data:[218,420,1],backgroundColor:['#16314f','#b89561','#798897'],borderRadius:8,maxBarThickness:75}]},options:{...common,scales:{y:{beginAtZero:true,suggestedMax:450,grid:{color:'#e9e8e5'},ticks:{color:'#78818a'}},x:{grid:{display:false},ticks:{color:'#53606b',font:{size:11}}}}}});
- const evidence=document.getElementById('chart-evidence');
- if(evidence)new window.Chart(evidence,{type:'doughnut',data:{labels:['Señales verificadas','Pendientes de validación'],datasets:[{data:[3,3],backgroundColor:['#0b1f39','#d2b17a'],borderColor:['#fff','#fff'],borderWidth:5,hoverOffset:7}]},options:{...common,cutout:'73%',plugins:{...common.plugins,legend:{display:true,position:'bottom',labels:{color:'#525e69',font:{family:'Manrope',size:11},padding:20,usePointStyle:true}}}}});
+const charts=[];
+function initCharts(){
+const Chart=window.Chart;
+if(!Chart){document.querySelectorAll('.chart-area').forEach(n=>{const fallback=document.createElement('p');fallback.textContent='Gráfico no disponible. Datos: Instagram 218 seguidores, 420 seguidos y 1 publicación; reseñas de competidores 14, 38 y 42; señales verificadas Lara 2/4, competidores 4/4.';fallback.style.padding='20px';n.append(fallback)});return;}
+Chart.defaults.font.family='Manrope, sans-serif';Chart.defaults.color='#64748b';
+const base={responsive:true,maintainAspectRatio:false,animation:{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:700},plugins:{legend:{display:false},tooltip:{backgroundColor:'#081220',padding:12}}};
+const s=document.getElementById('chart-social');
+if(s)charts.push(new Chart(s,{type:'bar',data:{labels:['Seguidores','Seguidos','Publicaciones'],datasets:[{label:'Cuentas observadas',data:[218,420,1],backgroundColor:['#2563FF','#a0baff','#FF4F6D'],borderRadius:7,maxBarThickness:75}]},options:{...base,scales:{y:{beginAtZero:true,grid:{color:'#e9eef5'}},x:{grid:{display:false}}}}}));
+const r=document.getElementById('chart-reviews');
+if(r)charts.push(new Chart(r,{type:'bar',data:{labels:['Legalistas','San Martín y Carrasco','Abogadas Talca','Lara & Valdivia (N/D)'],datasets:[{label:'Reseñas públicas localizadas',data:[14,38,42,null],backgroundColor:['#2563FF','#759afe','#b0c5ff','#FF4F6D'],borderRadius:7,maxBarThickness:42}]},options:{...base,indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:'#e9eef5'}},y:{grid:{display:false},ticks:{font:{size:10}}}}}}));
+const c=document.getElementById('chart-coverage');
+if(c)charts.push(new Chart(c,{type:'bar',data:{labels:['Lara & Valdivia','Abogadas Talca','Alto Maule','Méndez & Asoc.'],datasets:[{label:'Señales web/contacto verificadas sobre 4',data:[2,4,4,4],backgroundColor:['#FF4F6D','#2563FF','#759afe','#9cb9ff'],borderRadius:7,maxBarThickness:52}]},options:{...base,scales:{y:{beginAtZero:true,max:4,ticks:{stepSize:1},grid:{color:'#e9eef5'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}}));
 }
-if(document.readyState==='complete'){setupCharts()}else{window.addEventListener('load',setupCharts,{once:true})}
-
-const menu=document.getElementById('menu-toggle'),mobileNav=document.getElementById('mobile-nav');
-if(menu&&mobileNav){
- menu.addEventListener('click',()=>{const expanded=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!expanded));mobileNav.hidden=expanded;});
- mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileNav.hidden=true;menu.setAttribute('aria-expanded','false')}));
-}
-const progress=document.getElementById('reading-progress');
-function updateProgress(){if(!progress)return;const max=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(max>0?100*window.scrollY/max:0)+'%'}
-window.addEventListener('scroll',updateProgress,{passive:true});updateProgress();
-
-if(!matchMedia('(prefers-reduced-motion: reduce)').matches && window.gsap){
- try{
-  window.gsap.registerPlugin(window.ScrollTrigger);
-  document.body.classList.add('motion-ready');
-  window.gsap.utils.toArray('.reveal').forEach(el=>{
-   window.gsap.fromTo(el,{opacity:0,y:18},{opacity:1,y:0,duration:.8,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 95%',once:true}});
-  });
- }catch(e){document.body.classList.remove('motion-ready')}
-}
-
-async function initThree(){
- const canvas=document.getElementById('three-canvas');
- if(!canvas || matchMedia('(prefers-reduced-motion: reduce)').matches || innerWidth<760)return;
- let THREE,renderer;
- try{
-  THREE=await import('https://esm.sh/three@0.170.0');
-  renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
-  const parent=canvas.parentElement,scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(42,1,.1,100);camera.position.z=10;
-  const group=new THREE.Group();
-  const geometry=new THREE.TorusGeometry(3.3,.012,5,150),material=new THREE.MeshBasicMaterial({color:0xdbbb81,transparent:true,opacity:.4});
-  for(let i=0;i<4;i++){const mesh=new THREE.Mesh(geometry,material);mesh.rotation.x=i*.38+.6;mesh.rotation.y=i*.48;group.add(mesh)}
-  const points=new THREE.Points(new THREE.BufferGeometry(),new THREE.PointsMaterial({color:0xd6b47b,size:.065,transparent:true,opacity:.72}));
-  const coords=[];for(let i=0;i<65;i++){const a=i*2.39996;const radius=2.1+Math.sqrt(i/65)*2.1;coords.push(Math.cos(a)*radius,Math.sin(a)*radius,Math.sin(i*2.7)*.8)}
-  points.geometry.setAttribute('position',new THREE.Float32BufferAttribute(coords,3));group.add(points);scene.add(group);
-  function resize(){const w=parent.clientWidth,h=parent.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}resize();
-  const observer=new ResizeObserver(resize);observer.observe(parent);
-  let raf=0;const render=()=>{if(document.hidden){raf=requestAnimationFrame(render);return;}group.rotation.y+=.0006;group.rotation.z+=.00025;renderer.render(scene,camera);raf=requestAnimationFrame(render)};render();
-  window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);observer.disconnect();renderer.dispose()},{once:true});
- }catch(e){if(renderer)renderer.dispose();}
-}
-if('requestIdleCallback' in window){window.requestIdleCallback(initThree,{timeout:1400})}else{setTimeout(initThree,1000)}
+if(document.readyState==='complete')initCharts();else window.addEventListener('load',initCharts,{once:true});
+document.querySelectorAll('.dash-tab').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.dash-tab').forEach(x=>{const a=x===button;x.classList.toggle('active',a);x.setAttribute('aria-selected',String(a))});document.querySelectorAll('.dash-pane').forEach(x=>{const a=x.id===button.dataset.target;x.hidden=!a;x.classList.toggle('active',a)});requestAnimationFrame(()=>charts.forEach(x=>x.resize()))}));
+const menu=document.getElementById('menu-toggle'),mobile=document.getElementById('nav-mobile');
+if(menu&&mobile){menu.addEventListener('click',()=>{const x=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!x));mobile.hidden=x});mobile.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.setAttribute('aria-expanded','false');mobile.hidden=true}))}
+const progress=document.getElementById('progress');
+window.addEventListener('scroll',()=>{const total=document.documentElement.scrollHeight-innerHeight;progress.style.width=(total?scrollY/total*100:0)+'%'},{passive:true});
+if(window.gsap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){try{window.gsap.registerPlugin(window.ScrollTrigger);document.body.classList.add('reveal-when-ready');window.gsap.utils.toArray('[data-reveal]').forEach(el=>window.gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:.75,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 98%',once:true}}))}catch(e){document.body.classList.remove('reveal-when-ready')}}
