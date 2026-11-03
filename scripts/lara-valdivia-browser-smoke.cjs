@@ -21,18 +21,17 @@ let browser;
   assert(await page.locator('link[href="/styles/tokens.css?v=10"]').count()===1,'Uses production VA semantic tokens');
   assert.equal(await page.locator('.plans .plan').count(),3,'Three commercial plans');
   assert(await page.locator('body').innerText().then(t=>t.includes('$99.000')&&t.includes('$199.000')&&t.includes('$499.000')),'Affordable plans visible');
-  const img=page.locator('.case-brand img');
+  const img=page.locator('.va-brand img');
   await img.scrollIntoViewIfNeeded();
   assert(await img.evaluate(x=>x.complete&&x.naturalWidth>0),'Visual Art AI logo loaded');
-  await page.locator('.query-tab[data-query="laboral"]').click();
-  assert((await page.locator('#query-text').innerText()).includes('laboral'),'Search query switches');
-  assert.equal(await page.locator('#dashboards .consulting-grid article').count(),3,'Evidence separates observations, unknowns, and hypotheses');
-  assert.equal(await page.locator('#metodo .consulting-flow article').count(),4,'Process and deliverables are visible');
+  assert.equal(await page.locator('#diagnostico .evidence-table tbody tr').count(),3,'Three referenced websites');
+  assert.equal(await page.locator('#trabajo .asset-list a').count(),4,'Prepared assets are visible');
+  assert.equal(await page.locator('#metodo .timeline article').count(),4,'Implementation process is visible');
   try{
    await page.locator('#brand-tabs-root .brand-tab').first().waitFor({timeout:14000});
    await page.locator('#brand-tabs-root .brand-tab').nth(1).click();
-   assert((await page.locator('.preview-info h3').innerText()).includes('Contenido'),'React gallery works');
-  }catch(e){throw new Error('React brand gallery not available: '+e.message)}
+   assert((await page.locator('.preview-info h3').innerText()).includes('redes'),'Gallery switches applications');
+  }catch(e){throw new Error('Brand gallery not available: '+e.message)}
   const overflow=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,viewport:innerWidth}));
   assert(overflow.scroll<=overflow.viewport+5,'Horizontal overflow '+JSON.stringify(overflow));
   assert.equal(errors.length,0,'Page JS errors: '+errors.join(','));
