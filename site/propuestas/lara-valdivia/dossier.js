@@ -37,3 +37,22 @@ if (menu && mobile) {
 }
 const progress = document.getElementById('progress');
 window.addEventListener('scroll', () => { const total = document.documentElement.scrollHeight - innerHeight; progress.style.width = `${total ? scrollY / total * 100 : 0}%`; }, { passive: true });
+
+const offerTabs = [...document.querySelectorAll('[data-offer]')];
+function selectOffer(button) {
+  offerTabs.forEach(tab => {
+    const selected = tab === button;
+    tab.setAttribute('aria-selected', String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+    document.getElementById(tab.getAttribute('aria-controls')).hidden = !selected;
+  });
+}
+offerTabs.forEach((button, index) => {
+  button.addEventListener('click', () => selectOffer(button));
+  button.addEventListener('keydown', event => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? offerTabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + offerTabs.length) % offerTabs.length;
+    selectOffer(offerTabs[next]); offerTabs[next].focus();
+  });
+});
