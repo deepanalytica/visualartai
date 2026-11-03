@@ -43,7 +43,7 @@ let browser;
  assert(await report.locator('#download').count()===1,'Download button');
  assert((await report.locator('#report').innerText()).includes('$99.000'),'New prices in downloadable report');
  assert(await report.locator('.bar img[src="/brands/visual-art-ai-official-light.svg"]').count()===1,'Visual Art AI logo in report');
- for(const section of ['resumen','introduccion','metodologia','diagnostico','competencia','proceso','medicion','plan','conclusiones']) assert.equal(await report.locator('#'+section).count(),1,'Report section '+section);
+ for(const section of ['resumen','introduccion','metodologia','diagnostico','competencia','maps','ia','confianza','marca','recomendaciones','implementacion','medicion','conclusiones','fuentes']) assert.equal(await report.locator('#'+section).count(),1,'Report section '+section);
  await report.close();
  await browser.close();server.kill();
 })().catch(e=>{console.error(e);server.kill();if(browser)browser.close().catch(()=>{});process.exit(1)});
