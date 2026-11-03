@@ -47,7 +47,7 @@ let browser;
  await report.goto(origin+'/propuestas/lara-valdivia/informe.html',{waitUntil:'domcontentloaded'});
  assert(await report.locator('#download').count()===1,'Download button');
  assert((await report.locator('#report').innerText()).includes('$99.000'),'New prices in downloadable report');
- assert(await report.locator('#report img[src="/brands/visual-art-ai-official-light.svg"]').count()===1,'Visual Art AI logo in report');
+ assert(await report.locator('.bar img[src="/brands/visual-art-ai-official-light.svg"]').count()===1,'Visual Art AI logo in report');
  await report.close();
  await browser.close();server.kill();
 })().catch(e=>{console.error(e);server.kill();if(browser)browser.close().catch(()=>{});process.exit(1)});
