@@ -1,0 +1,18 @@
+/* Visual Art AI, sistema semántico de marca v22. Sin degradados. */
+:root {
+--vaa-brand-blue:#2F6BFF;
+--vaa-brand-blue-strong:#1E45AD;
+--vaa-brand-coral:#F24D5D;
+--vaa-ink:#08111F;
+--vaa-paper:#F8FAFC;
+--vaa-surface:#FFFFFF;
+--vaa-muted:#64748B;
+--vaa-line:#DCE5F1;
+--vaa-positive:#23B98E;
+--vaa-font-brand:'Inter Display','Manrope',sans-serif;
+--vaa-font-interface:'Manrope','Inter',sans-serif;
+--vaa-font-editorial:'Instrument Serif',Georgia,serif;
+--vaa-font-technical:'IBM Plex Mono',ui-monospace,monospace;
+--vaa-space-unit:4px;
+--vaa-button-radius:12px;
+}
