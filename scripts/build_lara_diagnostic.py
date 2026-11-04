@@ -18,8 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / 'site/propuestas/lara-valdivia'
 OUTPUT = SITE / 'informe-visual-art-ai.pdf'
 FONT = Path('C:/Windows/Fonts')
-pdfmetrics.registerFont(TTFont('ReportSans', str(FONT / 'arial.ttf')))
-pdfmetrics.registerFont(TTFont('ReportBold', str(FONT / 'arialbd.ttf')))
+pdfmetrics.registerFont(TTFont('ReportSans', str(FONT / 'segoeui.ttf')))
+pdfmetrics.registerFont(TTFont('ReportBold', str(FONT / 'segoeuib.ttf')))
 pdfmetrics.registerFont(TTFont('ReportSerif', str(FONT / 'georgia.ttf')))
 pdfmetrics.registerFontFamily('ReportSans', normal='ReportSans', bold='ReportBold', italic='ReportSans', boldItalic='ReportBold')
 NAVY=colors.HexColor('#0b1931'); BLUE=colors.HexColor('#245cff')
@@ -27,14 +27,15 @@ INK=colors.HexColor('#14243a'); MUTED=colors.HexColor('#52647a'); CORAL=colors.H
 PALE=colors.HexColor('#eef4ff'); LINE=colors.HexColor('#dce5f1')
 W,H=A4
 styles={
- 'label':ParagraphStyle('label',fontName='ReportBold',fontSize=8,leading=11,textColor=BLUE,spaceBefore=13,spaceAfter=7,keepWithNext=True),
- 'h2':ParagraphStyle('heading',fontName='ReportSans',fontSize=21,leading=25,textColor=NAVY,spaceAfter=12,keepWithNext=True),
- 'h3':ParagraphStyle('subheading',fontName='ReportBold',fontSize=11,leading=15,textColor=INK,spaceBefore=9,spaceAfter=5,keepWithNext=True),
- 'body':ParagraphStyle('body',fontName='ReportSans',fontSize=9.4,leading=14.2,textColor=INK,spaceAfter=8,allowWidows=0,allowOrphans=0),
- 'small':ParagraphStyle('small',fontName='ReportSans',fontSize=8,leading=12,textColor=MUTED,spaceAfter=8),
- 'bullet':ParagraphStyle('bullet',fontName='ReportSans',fontSize=9.2,leading=14,textColor=INK,leftIndent=13,firstLineIndent=-9,spaceAfter=5),
- 'cell':ParagraphStyle('cell',fontName='ReportSans',fontSize=8.2,leading=11.8,textColor=INK),
- 'cellhead':ParagraphStyle('cellhead',fontName='ReportBold',fontSize=8,leading=11,textColor=colors.white),
+ 'label':ParagraphStyle('label',fontName='ReportBold',fontSize=8.5,leading=12,textColor=BLUE,spaceBefore=20,spaceAfter=8,keepWithNext=True),
+ 'h2':ParagraphStyle('heading',fontName='ReportBold',fontSize=22,leading=27,textColor=NAVY,spaceAfter=16,keepWithNext=True),
+ 'h3':ParagraphStyle('subheading',fontName='ReportBold',fontSize=13,leading=17,textColor=INK,spaceBefore=14,spaceAfter=8,keepWithNext=True),
+ 'body':ParagraphStyle('body',fontName='ReportSans',fontSize=10.5,leading=16,textColor=INK,spaceAfter=10,allowWidows=0,allowOrphans=0),
+ 'lead':ParagraphStyle('lead',fontName='ReportSans',fontSize=10.5,leading=16,textColor=INK,spaceAfter=10,keepWithNext=True),
+ 'small':ParagraphStyle('small',fontName='ReportSans',fontSize=9,leading=13,textColor=MUTED,spaceAfter=10),
+ 'bullet':ParagraphStyle('bullet',fontName='ReportSans',fontSize=10.3,leading=15.5,textColor=INK,leftIndent=15,firstLineIndent=-10,spaceAfter=7),
+ 'cell':ParagraphStyle('cell',fontName='ReportSans',fontSize=9.4,leading=13.5,textColor=INK),
+ 'cellhead':ParagraphStyle('cellhead',fontName='ReportBold',fontSize=9,leading=13,textColor=INK),
 }
 
 def rich(node):
@@ -58,30 +59,36 @@ def table_from(node):
     for index,row in enumerate(rows):
         cells=row.find_all(['th','td'],recursive=False)
         data.append([Paragraph(rich(c),styles['cellhead' if index==0 else 'cell']) for c in cells]+['']*(count-len(cells)))
-    ratios={2:[.3,.7],3:[.23,.22,.55],4:[.4,.2,.2,.2]}.get(count,[1/count]*count)
+    headings=' '.join(c.get_text(' ',strip=True) for c in rows[0].find_all(['th','td']))
+    ratios=([.24,.19,.57] if 'Pago único' in headings else [.25,.46,.29]) if count==3 else {2:[.32,.68],4:[.4,.2,.2,.2]}.get(count,[1/count]*count)
     t=Table(data,colWidths=[(W-94)*v for v in ratios],repeatRows=1,hAlign='LEFT')
-    t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),NAVY),('BACKGROUND',(0,1),(-1,-1),colors.HexColor('#f5f8fc')),('VALIGN',(0,0),(-1,-1),'TOP'),('LINEBELOW',(0,0),(-1,-1),.4,LINE),('LEFTPADDING',(0,0),(-1,-1),8),('RIGHTPADDING',(0,0),(-1,-1),8),('TOPPADDING',(0,0),(-1,-1),8),('BOTTOMPADDING',(0,0),(-1,-1),8)]))
-    return [t,Spacer(1,11)]
+    t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.HexColor('#edf3fb')),('VALIGN',(0,0),(-1,-1),'TOP'),('LINEBELOW',(0,0),(-1,-1),.5,LINE),('LEFTPADDING',(0,0),(-1,-1),10),('RIGHTPADDING',(0,0),(-1,-1),10),('TOPPADDING',(0,0),(-1,-1),10),('BOTTOMPADDING',(0,0),(-1,-1),10)]))
+    return [KeepTogether([t,Spacer(1,16)])] if len(rows) <= 5 else [t,Spacer(1,16)]
 
 def cover(c, doc):
-    c.setFillColor(NAVY); c.rect(0,0,W,H,fill=1,stroke=0)
-    c.setFillColor(CORAL); c.roundRect(48,H-84,6,6,3,fill=1,stroke=0)
-    c.setFont('ReportBold',10); c.setFillColor(colors.white); c.drawString(63,H-82,'VISUAL ART AI  /  INFORME PRELIMINAR')
-    c.setFont('ReportSans',9); c.setFillColor(colors.HexColor('#aebfd8')); c.drawString(48,H-137,'DIAGNÓSTICO DE PRESENCIA DIGITAL  ·  TALCA')
-    c.setFillColor(colors.white); c.setFont('ReportSerif',34)
-    c.drawString(48,H-196,'Una presencia que')
-    c.drawString(48,H-239,'puedan encontrar,')
-    c.setFillColor(colors.HexColor('#a8beff')); c.drawString(48,H-282,'reconocer y contactar.')
-    c.setFillColor(colors.HexColor('#d0dced')); c.setFont('ReportSans',11)
-    c.drawString(48,H-323,'Diagnóstico exploratorio y recomendaciones para')
-    c.setFont('ReportBold',11); c.drawString(48,H-342,'Lara & Valdivia Abogados')
-    c.setFillColor(colors.HexColor('#172c4c')); c.roundRect(48,100,W-96,300,12,fill=1,stroke=0)
-    c.drawImage(str(SITE/'web-desktop.png'),67,132,width=W-134,height=239,mask='auto',preserveAspectRatio=True,anchor='c')
-    c.setFillColor(colors.HexColor('#b6c7dc')); c.setFont('ReportSans',8)
-    c.drawString(67,112,'VISTA CONCEPTUAL  /  DISEÑO PREPARADO PARA EL ESTUDIO')
-    c.setFillColor(colors.HexColor('#9cb0c9')); c.setFont('ReportSans',8)
-    c.drawString(48,55,'Fuentes consultadas: 3 de noviembre de 2026')
-    c.drawRightString(W-48,55,'DOCUMENTO DE CORTESÍA  /  VERSIÓN PRELIMINAR')
+    c.setFillColor(colors.white); c.rect(0,0,W,H,fill=1,stroke=0)
+    # Crop the supplied official logo with a clipping path; the source image is unchanged.
+    scale=118/1150; x=48; y=H-98
+    c.saveState(); clip=c.beginPath();clip.rect(x,y,118,65);c.clipPath(clip,stroke=0,fill=0)
+    c.drawImage(str(SITE/'visual-logo-claro.png'),x-190*scale,y-174*scale,width=1536*scale,height=1024*scale,mask='auto');c.restoreState()
+    c.setFont('ReportBold',9); c.setFillColor(BLUE); c.drawString(48,H-143,'INFORME DE DIAGNÓSTICO  /  NOVIEMBRE 2026')
+    c.setFillColor(NAVY); c.setFont('ReportBold',32)
+    c.drawString(48,H-198,'Cómo encuentran')
+    c.drawString(48,H-239,'hoy a su estudio.')
+    c.setFillColor(MUTED); c.setFont('ReportSans',12)
+    c.drawString(48,H-275,'Una revisión de presencia digital y una ruta de mejora')
+    c.setFont('ReportBold',12); c.setFillColor(INK); c.drawString(48,H-296,'para Lara & Valdivia Abogados.')
+    c.setStrokeColor(LINE); c.line(48,H-320,W-48,H-320)
+    c.setFont('ReportSans',9); c.setFillColor(MUTED)
+    c.drawString(48,H-343,'Talca, Chile  ·  Versión preliminar')
+    c.drawRightString(W-48,H-343,'Documento de cortesía')
+    c.setFillColor(colors.HexColor('#eaf0f8')); c.roundRect(48,113,W-96,254,12,fill=1,stroke=0)
+    c.drawImage(str(SITE/'web-desktop.png'),64,138,width=W-128,height=215,mask='auto',preserveAspectRatio=True,anchor='c')
+    c.setFillColor(MUTED); c.setFont('ReportSans',8.5)
+    c.drawString(64,122,'Vista conceptual de la web preparada para el estudio')
+    c.setFillColor(MUTED); c.setFont('ReportSans',8.5)
+    c.drawString(48,62,'Fuentes consultadas el 3 de noviembre de 2026')
+    c.drawRightString(W-48,62,'VISUAL ART AI  /  DIAGNÓSTICO')
 
 def running(c,doc):
     c.setStrokeColor(LINE); c.line(47,H-43,W-47,H-43)
@@ -102,15 +109,18 @@ story=[Spacer(1,1),PageBreak(),Paragraph('EL RECORRIDO PROPUESTO',styles['label'
 for section in soup.select('.report-content > section[id]'):
     for child in section.children:
         if not getattr(child,'name',None): continue
-        if child.name=='p': story.append(text(child,'label' if 'section-label' in child.get('class',[]) else 'small' if set(child.get('class',[])) & {'small','citations'} else 'body'))
+        if child.name=='p':
+            following=child.find_next_sibling()
+            is_table_lead=following and following.name=='div' and 'table-wrap' in following.get('class',[])
+            story.append(text(child,'label' if 'section-label' in child.get('class',[]) else 'small' if set(child.get('class',[])) & {'small','citations'} else 'lead' if is_table_lead else 'body'))
         elif child.name in ('h2','h3'): story.append(text(child,child.name))
         elif child.name in ('ul','ol'):
-            story.extend(Paragraph('•  '+rich(li),styles['bullet']) for li in child.find_all('li',recursive=False)); story.append(Spacer(1,5))
+            story.extend(Paragraph((f'{i}.  ' if child.name=='ol' else '•  ')+rich(li),styles['bullet']) for i,li in enumerate(child.find_all('li',recursive=False),1)); story.append(Spacer(1,5))
         elif child.name=='div' and 'table-wrap' in child.get('class',[]): story.extend(table_from(child))
         elif child.name=='div' and 'insight-band' in child.get('class',[]):
-            box=Table([[Paragraph(rich(child).replace('</b>','</b>  '),styles['cell'])]],colWidths=[W-94]);box.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),PALE),('LINEBEFORE',(0,0),(0,0),3,BLUE),('LEFTPADDING',(0,0),(-1,-1),12),('RIGHTPADDING',(0,0),(-1,-1),12),('TOPPADDING',(0,0),(-1,-1),10),('BOTTOMPADDING',(0,0),(-1,-1),10)]));story += [box,Spacer(1,10)]
+            box=Table([[Paragraph(rich(child).replace('</b>','</b><br/>'),styles['cell'])]],colWidths=[W-94]);box.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),PALE),('LEFTPADDING',(0,0),(-1,-1),16),('RIGHTPADDING',(0,0),(-1,-1),16),('TOPPADDING',(0,0),(-1,-1),12),('BOTTOMPADDING',(0,0),(-1,-1),12)]));story += [box,Spacer(1,12)]
     if section.get('id')=='marca':
-        img=Image(str(SITE/'imagenes/documentos.webp'),width=300,height=200,kind='proportional');img.hAlign='LEFT'
+        img=Image(str(SITE/'imagenes/documentos.webp'),width=390,height=260,kind='proportional');img.hAlign='LEFT'
         story += [KeepTogether([Paragraph('APLICACIÓN VISUAL / MUESTRA CONCEPTUAL',styles['label']),img,Spacer(1,5),Paragraph('Diseños digitales propuestos; impresión y fabricación no incluidas.',styles['small'])])]
     story.append(Spacer(1,6))
 doc=SimpleDocTemplate(str(OUTPUT),pagesize=A4,leftMargin=47,rightMargin=47,topMargin=57,bottomMargin=52,title='Diagnóstico exploratorio | Lara & Valdivia',author='Visual Art AI',pageCompression=1)
