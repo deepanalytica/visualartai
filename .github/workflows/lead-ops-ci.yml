@@ -1,0 +1,40 @@
+name: Lead Ops safety and tests
+on:
+  pull_request:
+    paths:
+      - "lead-ops/**"
+      - "site/lead-ops-*.js"
+      - "site/diagnostico-automatico.html"
+      - ".github/workflows/lead-ops-ci.yml"
+  push:
+    paths:
+      - "lead-ops/**"
+      - "site/lead-ops-*.js"
+      - "site/diagnostico-automatico.html"
+      - ".github/workflows/lead-ops-ci.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax checks
+        run: |
+          node --check lead-ops/src/domain.mjs
+          node --check lead-ops/src/worker.mjs
+          node --check lead-ops/src/proposal.mjs
+          node --check lead-ops/bin/ops-cli.mjs
+          node --check site/lead-ops-form.js
+          node --check site/lead-ops-config.js
+      - name: Unit and smoke tests
+        run: node --test lead-ops/tests/*.test.mjs
+      - name: Ensure ingestion stays opt-in before operational launch
+        run: |
+          grep -q 'ENABLE_PUBLIC_INGEST = "false"' lead-ops/wrangler.toml
+          grep -q 'endpoint: ""' site/lead-ops-config.js

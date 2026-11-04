@@ -1,0 +1,20 @@
+name = "visualartai-lead-ops"
+main = "src/worker.mjs"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+# Crear D1: npx wrangler d1 create visualartai-leads
+# Reemplazar el ID de abajo antes de desplegar; nunca subir credenciales.
+[[d1_databases]]
+binding = "DB"
+database_name = "visualartai-leads"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[vars]
+ALLOWED_ORIGINS = "https://visualartai.cl,https://www.visualartai.cl,https://deepanalytica.github.io"
+TURNSTILE_HOSTNAMES = "visualartai.cl,www.visualartai.cl,deepanalytica.github.io"
+# ENABLE_PUBLIC_INGEST se configura solo cuando D1, Turnstile y Resend están validados.
+ENABLE_PUBLIC_INGEST = "false"
+
+[triggers]
+crons = ["*/5 * * * *"]
