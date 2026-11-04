@@ -34,6 +34,14 @@ const menu = document.getElementById('menu-toggle'), mobile = document.getElemen
 if (menu && mobile) {
   menu.addEventListener('click', () => { const open = menu.getAttribute('aria-expanded') === 'true'; menu.setAttribute('aria-expanded', String(!open)); menu.setAttribute('aria-label', open ? 'Abrir menú' : 'Cerrar menú'); mobile.hidden = open; });
   mobile.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { menu.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-label', 'Abrir menú'); mobile.hidden = true; }));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !mobile.hidden) {
+      mobile.hidden = true;
+      menu.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-label', 'Abrir menú');
+      menu.focus();
+    }
+  });
 }
 const progress = document.getElementById('progress');
 window.addEventListener('scroll', () => { const total = document.documentElement.scrollHeight - innerHeight; progress.style.width = `${total ? scrollY / total * 100 : 0}%`; }, { passive: true });
